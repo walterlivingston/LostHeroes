@@ -14,9 +14,9 @@ public class ArtemisAbilities extends AbstractAbility{
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(LHUtils.getLookingAt(player, 5)!=null && playerCap.consumeMana(playerCap.getMaxMana())){
             Vector3d spawnVec = LHUtils.getLookingAt(player, 5);
-            WolfEntity wolf = new WolfEntity(EntityType.WOLF, player.getCommandSenderWorld());
+            WolfEntity wolf = new WolfEntity(EntityType.WOLF, player.level);
             wolf.tame(player);
-            player.getCommandSenderWorld().addFreshEntity(wolf);
+            player.level.addFreshEntity(wolf);
             wolf.setPos(spawnVec.x, spawnVec.y, spawnVec.z);
         }
     }

@@ -29,7 +29,7 @@ public class HadesAbilities extends AbstractAbility{
     }
 
     private void callMinerals(PlayerEntity player) {
-        World world = player.getCommandSenderWorld();
+        World world = player.level;
         List<OreBlock> oreList = new ArrayList<>();
         double maxY = player.getY();
         double minX = player.getX()-1;
@@ -41,7 +41,7 @@ public class HadesAbilities extends AbstractAbility{
             for(int x=(int)minX; x<=maxX; x++){
                 for(int z=(int)minZ; z<=maxZ; z++){
                     BlockPos pos = new BlockPos(x, y, z);
-                    Block block = player.getCommandSenderWorld().getBlockState(pos).getBlock();
+                    Block block = player.level.getBlockState(pos).getBlock();
                     if(block instanceof OreBlock){
                         oreList.add((OreBlock) block);
                         world.removeBlock(pos, false);
@@ -51,8 +51,8 @@ public class HadesAbilities extends AbstractAbility{
         }
 
         for(OreBlock block : oreList){
-            ItemEntity entity = new ItemEntity(player.getCommandSenderWorld(), player.getX(), player.getY(), player.getZ(), new ItemStack(block.asItem()));
-            player.getCommandSenderWorld().addFreshEntity(entity);
+            ItemEntity entity = new ItemEntity(player.level, player.getX(), player.getY(), player.getZ(), new ItemStack(block.asItem()));
+            player.level.addFreshEntity(entity);
         }
     }
 }

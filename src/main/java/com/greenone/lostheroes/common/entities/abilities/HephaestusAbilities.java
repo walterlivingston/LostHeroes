@@ -30,7 +30,7 @@ public class HephaestusAbilities extends AbstractAbility{
         double d3 = vector3d1.x - (player.getX() + vector3d.x * 4.0D);
         double d4 = vector3d1.y - (1.0D + player.getY());
         double d5 = vector3d1.z - (player.getZ() + vector3d.z * 4.0D);
-        player.getCommandSenderWorld().addFreshEntity(Util.make(new SmallFireballEntity(player.getCommandSenderWorld(), player.getX(), player.getY() + 1.0D, player.getZ(), d3, d4, d5), (i) -> {
+        player.level.addFreshEntity(Util.make(new SmallFireballEntity(player.level, player.getX(), player.getY() + 1.0D, player.getZ(), d3, d4, d5), (i) -> {
             i.setItem(new ItemStack(Items.AIR));
         }));
     }

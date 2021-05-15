@@ -17,13 +17,13 @@ public class ZeusAbilities extends AbstractAbility{
     public void mainAbility(PlayerEntity player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
-        if(player.getCommandSenderWorld().canSeeSky(pos) && (player.isCreative() || playerCap.consumeMana(5))){
-            LightningBoltEntity lightningBoltEntity = EntityType.LIGHTNING_BOLT.create(player.getCommandSenderWorld());
+        if(player.level.canSeeSky(pos) && (player.isCreative() || playerCap.consumeMana(5))){
+            LightningBoltEntity lightningBoltEntity = EntityType.LIGHTNING_BOLT.create(player.level);
             lightningBoltEntity.moveTo(LHUtils.getLookingAt(player, 64));
             lightningBoltEntity.setCause(player instanceof ServerPlayerEntity ? (ServerPlayerEntity) player : null);
-            player.getCommandSenderWorld().addFreshEntity(lightningBoltEntity);
+            player.level.addFreshEntity(lightningBoltEntity);
             SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER;
-            player.getCommandSenderWorld().playSound(player, pos, soundEvent, SoundCategory.WEATHER, 5.0F, 1.0F);
+            player.level.playSound(player, pos, soundEvent, SoundCategory.WEATHER, 5.0F, 1.0F);
         }
     }
 

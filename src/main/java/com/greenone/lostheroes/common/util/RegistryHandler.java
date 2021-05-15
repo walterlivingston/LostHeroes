@@ -2,6 +2,7 @@ package com.greenone.lostheroes.common.util;
 
 import com.greenone.lostheroes.common.blocks.LHBlocks;
 import com.greenone.lostheroes.common.init.Deities;
+import com.greenone.lostheroes.common.inventory.container.LHContainers;
 import com.greenone.lostheroes.common.items.LHItems;
 import com.greenone.lostheroes.common.potions.LHPotions;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -14,6 +15,7 @@ public class RegistryHandler {
 
         LHBlocks.register(eventBus);
         LHItems.register(eventBus);
+        LHContainers.register(eventBus);
         LHPotions.register(eventBus);
         Deities.init();
     }

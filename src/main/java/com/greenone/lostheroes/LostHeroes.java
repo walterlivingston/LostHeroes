@@ -3,6 +3,7 @@ package com.greenone.lostheroes;
 import com.greenone.lostheroes.client.utils.LHClientUtils;
 import com.greenone.lostheroes.client.utils.LHKeybinds;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
+import com.greenone.lostheroes.common.inventory.container.LHContainers;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.util.LHEventHandler;
 import com.greenone.lostheroes.common.util.RegistryHandler;

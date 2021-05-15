@@ -31,7 +31,7 @@ public class Blessing extends LHEffect {
                     player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 50, 1, false, false, false, new EffectInstance(Effects.WATER_BREATHING)));
                 }
                 if(this == Blessings.APHRODITE){
-                    List<AgeableEntity> mobs = player.getCommandSenderWorld().getNearbyEntities(AgeableEntity.class, new EntityPredicate().range(10.0D), player, new AxisAlignedBB(player.blockPosition()).inflate(10));
+                    List<AgeableEntity> mobs = player.level.getNearbyEntities(AgeableEntity.class, new EntityPredicate().range(10.0D), player, new AxisAlignedBB(player.blockPosition()).inflate(10));
                     if(!mobs.isEmpty()){
                         mobs.forEach(mob -> {
                             mob.getLookControl().setLookAt(player, mob.getHeadRotSpeed()+20, mob.getHeadRotSpeed()+20);
@@ -49,10 +49,10 @@ public class Blessing extends LHEffect {
                             for(int x = (int)(player.getX()-4); x < (player.getX()+4); x++){
                                 for(int z = (int)(player.getZ()-4); z < (player.getZ()+4); z++){
                                     BlockPos pos = new BlockPos(x,y,z);
-                                    Block block = player.getCommandSenderWorld().getBlockState(pos).getBlock();
+                                    Block block = player.level.getBlockState(pos).getBlock();
                                     if(block instanceof CropsBlock){
                                         CropsBlock crop = (CropsBlock) block;
-                                        crop.growCrops(player.getCommandSenderWorld(), pos, player.getCommandSenderWorld().getBlockState(pos));
+                                        crop.growCrops(player.level, pos, player.level.getBlockState(pos));
                                         d=0;
                                     }
                                 }

@@ -27,7 +27,7 @@ public class ApolloAbilities extends AbstractAbility{
         }else if(playerCap.getMana()>0){
             Vector3d entityVec = LHUtils.getLookingAt(player, 0);
             BlockPos entityPos = new BlockPos(entityVec.x, entityVec.y, entityVec.z);
-            List<LivingEntity> list = player.getCommandSenderWorld().getNearbyEntities(LivingEntity.class, new EntityPredicate().range(2), player, new AxisAlignedBB(entityPos).inflate(2));
+            List<LivingEntity> list = player.level.getNearbyEntities(LivingEntity.class, new EntityPredicate().range(2), player, new AxisAlignedBB(entityPos).inflate(2));
             if(!list.isEmpty()){
                 LivingEntity entity = list.get(0);
                 float healthDiff = entity.getMaxHealth() - entity.getHealth();

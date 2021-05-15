@@ -25,13 +25,13 @@ public class DemeterAbilities extends AbstractAbility{
             for(int x = (int)(player.getX()-4); x < (player.getX()+4); x++){
                 for(int z = (int)(player.getZ()-4); z < (player.getZ()+4); z++){
                     BlockPos pos = new BlockPos(x,y,z);
-                    Block block = player.getCommandSenderWorld().getBlockState(pos).getBlock();
+                    Block block = player.level.getBlockState(pos).getBlock();
                     if(block instanceof CropsBlock){
                         CropsBlock crop = (CropsBlock) block;
-                        if(crop.isMaxAge(player.getCommandSenderWorld().getBlockState(pos))){
-                            player.getCommandSenderWorld().destroyBlock(pos, true);
-                            if(LHUtils.isItemInInventory(player, crop.getPlant(player.getCommandSenderWorld(), pos).getBlock().asItem())){
-                                player.getCommandSenderWorld().setBlock(pos, crop.defaultBlockState(), 0);
+                        if(crop.isMaxAge(player.level.getBlockState(pos))){
+                            player.level.destroyBlock(pos, true);
+                            if(LHUtils.isItemInInventory(player, crop.getPlant(player.level, pos).getBlock().asItem())){
+                                player.level.setBlock(pos, crop.defaultBlockState(), 0);
                             }
                         }
                     }

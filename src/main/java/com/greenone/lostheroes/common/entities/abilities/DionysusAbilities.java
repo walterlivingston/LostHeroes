@@ -17,7 +17,7 @@ public class DionysusAbilities extends AbstractAbility{
     public void mainAbility(PlayerEntity player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(player.isCreative() || playerCap.consumeMana(2.5F)){
-            List<LivingEntity> list = player.getCommandSenderWorld().getNearbyEntities(LivingEntity.class, new EntityPredicate().range(5), player, new AxisAlignedBB(player.blockPosition()).inflate(5));
+            List<LivingEntity> list = player.level.getNearbyEntities(LivingEntity.class, new EntityPredicate().range(5), player, new AxisAlignedBB(player.blockPosition()).inflate(5));
             list.forEach(e -> {
                 if(!e.equals(player)){
                     e.addEffect(new EffectInstance(Effects.CONFUSION, 200));

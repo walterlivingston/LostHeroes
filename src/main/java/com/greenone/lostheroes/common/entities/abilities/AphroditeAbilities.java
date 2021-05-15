@@ -17,7 +17,7 @@ public class AphroditeAbilities extends AbstractAbility{
     @Override
     public void mainAbility(PlayerEntity player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        List<MonsterEntity> list = player.getCommandSenderWorld().getNearbyEntities(MonsterEntity.class, new EntityPredicate().range(10), player, new AxisAlignedBB(player.blockPosition()).inflate(10));
+        List<MonsterEntity> list = player.level.getNearbyEntities(MonsterEntity.class, new EntityPredicate().range(10), player, new AxisAlignedBB(player.blockPosition()).inflate(10));
         if(!list.isEmpty() && (player.isCreative() || playerCap.consumeMana(10))){
             List<PrioritizedGoal> meleeGoal = new ArrayList<>();
             List<PrioritizedGoal> natGoal = new ArrayList<>();

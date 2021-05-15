@@ -9,8 +9,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;
 
-public class ModItemModelProvider extends ItemModelProvider {
-    public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
+public class LHItemModelProvider extends ItemModelProvider {
+    public LHItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
         super(generator, LostHeroes.MOD_ID, existingFileHelper);
     }
 
@@ -26,7 +26,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
 
-        builder(itemGenerated, "test_item");
+        //builder(itemGenerated, "test_item");
     }
 
     private ItemModelBuilder builder(ModelFile itemGenerated, String name) {

@@ -1,8 +1,9 @@
 package com.greenone.lostheroes.data;
 
 import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.data.client.ModBlockStateProvider;
-import com.greenone.lostheroes.data.client.ModItemModelProvider;
+import com.greenone.lostheroes.data.client.LHBlockStateProvider;
+import com.greenone.lostheroes.data.client.LHItemModelProvider;
+import com.greenone.lostheroes.data.client.LHLangProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,10 +19,12 @@ public final class DataGenerators {
         DataGenerator gen = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        gen.addProvider(new ModItemModelProvider(gen, existingFileHelper));
-        gen.addProvider(new ModBlockStateProvider(gen, existingFileHelper));
+        gen.addProvider(new LHItemModelProvider(gen, existingFileHelper));
+        gen.addProvider(new LHBlockStateProvider(gen, existingFileHelper));
 
-        ModBlockTagsProvider blockTags = new ModBlockTagsProvider(gen, existingFileHelper);
-        gen.addProvider(new ModItemTagsProvider(gen, blockTags, existingFileHelper));
+        LHBlockTagsProvider blockTags = new LHBlockTagsProvider(gen, existingFileHelper);
+        gen.addProvider(new LHItemTagsProvider(gen, blockTags, existingFileHelper));
+
+        gen.addProvider(new LHLangProvider(gen, "en_us"));
     }
 }

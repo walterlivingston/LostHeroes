@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.data;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.init.LHTags;
 import com.greenone.lostheroes.common.items.LHItems;
 import net.minecraft.data.BlockTagsProvider;
@@ -19,6 +20,13 @@ public class LHItemTagsProvider extends ItemTagsProvider {
     protected void addTags() {
         //copy(LHTags.Blocks.STORAGE_BLOCK_TEST, LHTags.Items.STORAGE_BLOCK_TEST);
 
-        //tag(LHTags.Items.TEST_ITEM).add(LHItems.TEST_ITEM.get());
+        for(Metal m : Metal.values()) {
+            if(m.isVanilla()){
+
+            }else{
+                tag(LHTags.Items.INGOTS.get(m)).add(LHItems.ingots.get(m));
+                tag(LHTags.Items.NUGGETS.get(m)).add(LHItems.nuggets.get(m));
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.data.client;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.enums.Metal;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -26,7 +27,14 @@ public class LHItemModelProvider extends ItemModelProvider {
 
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
 
-        //builder(itemGenerated, "test_item");
+        for(Metal m : Metal.values()) {
+            if(m.isVanilla()){
+
+            }else{
+                builder(itemGenerated, m.tagName()+"_ingot");
+                builder(itemGenerated, m.tagName()+"_nugget");
+            }
+        }
     }
 
     private ItemModelBuilder builder(ModelFile itemGenerated, String name) {

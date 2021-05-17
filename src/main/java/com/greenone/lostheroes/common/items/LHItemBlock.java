@@ -33,7 +33,6 @@ public class LHItemBlock extends BlockItem {
         return super.isEnchantable(p_77616_1_);
     }
 
-    //TODO Add adamantine_ingot_dull condition
     @Override
     public int getItemEnchantability(ItemStack stack) {
         if(metal != null && (metal.canEnchant())){

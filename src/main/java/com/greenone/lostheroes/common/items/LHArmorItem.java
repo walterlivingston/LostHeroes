@@ -6,6 +6,8 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 
 public class LHArmorItem extends ArmorItem {
@@ -28,9 +30,16 @@ public class LHArmorItem extends ArmorItem {
         return super.isFoil(p_77636_1_);
     }
 
-    //TODO Add invisibility cap functionality
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+        if(stack.getItem() == LHItems.invisibility_cap){
+            if(!player.isCreative()){
+                stack.hurtAndBreak(1, player, (playerEntity) -> {
+                    playerEntity.broadcastBreakEvent(EquipmentSlotType.HEAD);
+                });
+            }
+            player.addEffect(new EffectInstance(Effects.INVISIBILITY, 10, 0, false, false, false));
+        }
         super.onArmorTick(stack, world, player);
     }
 }

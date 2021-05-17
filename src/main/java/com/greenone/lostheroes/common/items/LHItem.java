@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.common.enums.Metal;
+import com.greenone.lostheroes.common.util.LHUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,8 +22,16 @@ public class LHItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World p_77659_1_, PlayerEntity p_77659_2_, Hand p_77659_3_) {
-        return super.use(p_77659_1_, p_77659_2_, p_77659_3_);
+    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+        if(this == LHItems.ivlivs_coin){
+            int rand = (int) Math.round(Math.random());
+            if(rand==1) player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.ivlivs_sword));
+            else player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.ivlivs_spear));
+            return ActionResult.pass(player.getItemInHand(hand));
+        }
+        if(this == LHItems.anaklusmos_pen) player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.anaklusmos_sword));
+        if(this == LHItems.pearl_of_persephone) LHUtils.pearlTP(world, player, hand);
+        return super.use(world, player, hand);
     }
 
     @Override
@@ -43,7 +52,7 @@ public class LHItem extends Item {
 
     @Override
     public int getItemEnchantability(ItemStack stack) {
-        if(metal != null && metal.canEnchant()){
+        if((metal != null && metal.canEnchant()) || this == LHItems.adamantine_ingot_dull){
             return 5;
         }
         return super.getItemEnchantability(stack);

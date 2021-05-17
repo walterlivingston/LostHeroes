@@ -2,6 +2,7 @@ package com.greenone.lostheroes.common.items.tools;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
+import com.greenone.lostheroes.common.items.LHItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.IItemTier;
@@ -23,10 +24,13 @@ public class LHSword extends SwordItem {
         this.metal = metalIn;
     }
 
-    //TODO Add anaklusmos and ivlivs functionality
     @Override
-    public ActionResult<ItemStack> use(World p_77659_1_, PlayerEntity p_77659_2_, Hand p_77659_3_) {
-        return super.use(p_77659_1_, p_77659_2_, p_77659_3_);
+    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+        if(player.isSteppingCarefully()){
+            if(this== LHItems.ivlivs_sword) player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.ivlivs_coin));
+            if(this== LHItems.anaklusmos_sword) player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.anaklusmos_pen));
+        }
+        return super.use(world, player, hand);
     }
 
     @Override

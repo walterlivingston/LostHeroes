@@ -15,13 +15,17 @@ import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.Dimension;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.List;
 
@@ -93,8 +97,8 @@ public class LHUtils {
     public static Vector3d getLookingAt(PlayerEntity player, int distance) {
         Vector3d output;
         World world = player.level;
-        float f = player.xRot;
-        float f1 = player.yRot;
+        float f = player.xRot; // Pitch
+        float f1 = player.yRot; // Yaw
         Vector3d vec3d = player.getEyePosition(1.0F);
         float f2 = MathHelper.cos(-f1 *((float) Math.PI / 180F) - (float) Math.PI);
         float f3 = MathHelper.sin(-f1 *((float) Math.PI / 180F) - (float) Math.PI);
@@ -140,5 +144,20 @@ public class LHUtils {
         RenderSystem.enableDepthTest();
         RenderSystem.enableAlphaTest();
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+
+    public static void pearlTP(World world, PlayerEntity player, Hand hand) {
+        if(!world.isClientSide()){
+            if(player instanceof ServerPlayerEntity){
+                if(player.getCommandSenderWorld().dimension() == World.NETHER){
+                    ServerPlayerEntity sPlayer = (ServerPlayerEntity) player;
+                    BlockPos spawnPos = sPlayer.getRespawnPosition();
+                    ServerWorld sWorld = sPlayer.server.overworld();
+                    sPlayer.changeDimension(sWorld, sWorld.getPortalForcer());
+                    sPlayer.teleportTo(sWorld, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), sPlayer.yRot, sPlayer.xRot);
+                    if(!player.isCreative()) player.getItemInHand(hand).shrink(1);
+                }
+            }
+        }
     }
 }

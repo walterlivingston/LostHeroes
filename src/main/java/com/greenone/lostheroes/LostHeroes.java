@@ -3,7 +3,9 @@ package com.greenone.lostheroes;
 import com.greenone.lostheroes.client.utils.LHClientUtils;
 import com.greenone.lostheroes.client.utils.LHKeybinds;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
+import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.inventory.container.LHContainers;
+import com.greenone.lostheroes.common.items.LHItems;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.util.LHEventHandler;
 import com.greenone.lostheroes.common.util.RegistryHandler;
@@ -29,10 +31,10 @@ import org.apache.logging.log4j.Logger;
 public class LostHeroes
 {
     public static final String MOD_ID = "lostheroes";
-    public static final ItemGroup lh_group = new ItemGroup(11, LostHeroes.MOD_ID) {
+    public static final ItemGroup lh_group = new ItemGroup(12, LostHeroes.MOD_ID) {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(Blocks.PUMPKIN.asItem());
+        return new ItemStack(LHItems.ingots.get(Metal.CELESTIAL_BRONZE));
         }
     };
     // Directly reference a log4j logger.

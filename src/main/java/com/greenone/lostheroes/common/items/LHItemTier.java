@@ -6,6 +6,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.LazyValue;
 
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 public enum LHItemTier implements IItemTier {
@@ -85,5 +86,9 @@ public enum LHItemTier implements IItemTier {
     @Override
     public Ingredient getRepairIngredient() {
         return repairIngredient.get();
+    }
+
+    public boolean hasEffect(){
+        return Arrays.stream(this.getRepairIngredient().getItems()).anyMatch((stack) -> stack.getItem().isFoil(stack));
     }
 }

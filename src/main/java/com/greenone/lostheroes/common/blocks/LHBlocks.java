@@ -1,6 +1,8 @@
 package com.greenone.lostheroes.common.blocks;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.enums.Metal;
+import com.greenone.lostheroes.common.items.LHItemBlock;
 import com.greenone.lostheroes.common.items.LHItems;
 import com.greenone.lostheroes.common.util.RegistryHandler;
 import net.minecraft.block.AbstractBlock;
@@ -19,9 +21,6 @@ import java.util.function.Supplier;
 public class LHBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, LostHeroes.MOD_ID);
 
-    public static final RegistryObject<Block> TEST_BLOCK = register("test_block", () ->
-            new Block(AbstractBlock.Properties.of(Material.STONE)));
-
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }
@@ -32,7 +31,13 @@ public class LHBlocks {
 
     public static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block){
         RegistryObject<T> ret = registerNoItem(name, block);
-        LHItems.ITEMS.register(name, () -> new BlockItem(ret.get(), new Item.Properties().tab(LostHeroes.lh_group)));
+        LHItems.ITEMS.register(name, () -> new LHItemBlock(ret.get(), new Item.Properties().tab(LostHeroes.lh_group)));
+        return ret;
+    }
+
+    public static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block, Metal metal){
+        RegistryObject<T> ret = registerNoItem(name, block);
+        LHItems.ITEMS.register(name, () -> new LHItemBlock(ret.get(), new Item.Properties().tab(LostHeroes.lh_group), metal));
         return ret;
     }
 }

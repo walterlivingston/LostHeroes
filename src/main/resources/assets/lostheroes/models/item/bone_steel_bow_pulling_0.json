@@ -1,0 +1,6 @@
+{
+  "parent": "lostheroes:item/bone_steel_bow",
+  "textures": {
+    "layer0": "lostheroes:item/bone_steel_bow_pulling_0"
+  }
+}

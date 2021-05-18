@@ -3,11 +3,9 @@ package com.greenone.lostheroes.common.items;
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.items.tools.*;
-import com.greenone.lostheroes.common.util.RegistryHandler;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

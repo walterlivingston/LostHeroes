@@ -1,0 +1,6 @@
+{
+  "parent": "lostheroes:item/adamantine_bow",
+  "textures": {
+    "layer0": "lostheroes:item/adamantine_bow_pulling_2"
+  }
+}

@@ -43,7 +43,7 @@ public class LHEventHandler {
     }
 
     @SubscribeEvent
-    public void registerCommands(final RegisterCommandsEvent event){
+    public static void registerCommands(final RegisterCommandsEvent event){
         LHCommands.register(event.getDispatcher());
     }
 

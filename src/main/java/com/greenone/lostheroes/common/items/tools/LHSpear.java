@@ -2,6 +2,7 @@ package com.greenone.lostheroes.common.items.tools;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.greenone.lostheroes.common.entities.SpearEntity;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.items.LHItemTier;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -55,14 +56,14 @@ public class LHSpear extends TridentItem {
                             p_220047_1_.broadcastBreakEvent(entityLiving.getUsedItemHand());
                         });
                         if (j == 0) {
-                            TridentEntity tridententity = new TridentEntity(world, playerentity, stack);
-                            tridententity.shootFromRotation(playerentity, playerentity.xRot, playerentity.yRot, 0.0F, 2.5F + (float)j * 0.5F, 1.0F);
+                            SpearEntity spearEntity = new SpearEntity(world, playerentity, stack);
+                            spearEntity.shootFromRotation(playerentity, playerentity.xRot, playerentity.yRot, 0.0F, 2.5F + (float)j * 0.5F, 1.0F);
                             if (playerentity.abilities.instabuild) {
-                                tridententity.pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
+                                spearEntity.pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
                             }
 
-                            world.addFreshEntity(tridententity);
-                            world.playSound((PlayerEntity)null, tridententity, SoundEvents.TRIDENT_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                            world.addFreshEntity(spearEntity);
+                            world.playSound((PlayerEntity)null, spearEntity, SoundEvents.TRIDENT_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
                             if (!playerentity.abilities.instabuild) {
                                 playerentity.inventory.removeItem(stack);
                             }

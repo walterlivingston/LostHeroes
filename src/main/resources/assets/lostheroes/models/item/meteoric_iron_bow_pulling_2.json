@@ -1,0 +1,6 @@
+{
+  "parent": "lostheroes:item/meteoric_iron_bow",
+  "textures": {
+    "layer0": "lostheroes:item/meteoric_iron_bow_pulling_2"
+  }
+}

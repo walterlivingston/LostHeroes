@@ -1,0 +1,6 @@
+{
+  "parent": "lostheroes:item/imperial_gold_bow",
+  "textures": {
+    "layer0": "lostheroes:item/imperial_gold_bow_pulling_2"
+  }
+}

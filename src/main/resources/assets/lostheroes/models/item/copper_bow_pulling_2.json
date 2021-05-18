@@ -1,0 +1,6 @@
+{
+  "parent": "lostheroes:item/copper_bow",
+  "textures": {
+    "layer0": "lostheroes:item/copper_bow_pulling_2"
+  }
+}

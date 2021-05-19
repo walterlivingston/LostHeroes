@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "lostheroes:block/black_marble_slab_top"
+    },
+    "type=bottom": {
+      "model": "lostheroes:block/black_marble_slab"
+    },
+    "type=double": {
+      "model": "lostheroes:block/black_marble"
+    }
+  }
+}

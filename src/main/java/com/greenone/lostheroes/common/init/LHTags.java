@@ -20,24 +20,35 @@ public class LHTags {
     }
 
     public static final class Blocks {
-        //public static final ITag.INamedTag<Block> STORAGE_BLOCK_TEST = forge("storage_blocks/test");
+        public static final Map<Metal, ITag.INamedTag<Block>> STORAGE_BLOCKS = new HashMap<>();
+        public static final Map<Metal, ITag.INamedTag<Block>> ORES = new HashMap<>();
 
         public static void register() {
+            for(Metal m : Metal.values()){
+                if(m.isVanilla()){
 
+                }else {
+                    STORAGE_BLOCKS.put(m, forge("storage_blocks/" + m.tagName()));
+                    if (m.generateOre()) {
+                        ORES.put(m, forge("ores/" + m.tagName()));
+                    }
+                }
+            }
         }
 
-        private static ITag.INamedTag<Block> forge(String path){
+        private static ITag.INamedTag<Block> forge(String path) {
             return BlockTags.createOptional(new ResourceLocation("forge", path));
         }
 
-        private static ITag.INamedTag<Block> mod(String path){
+        private static ITag.INamedTag<Block> mod(String path) {
             return BlockTags.createOptional(new ResourceLocation(LostHeroes.MOD_ID, path));
         }
     }
 
     public static final class Items {
-        //public static final ITag.INamedTag<Item> STORAGE_BLOCK_TEST = forge("storage_blocks/test");
-        //public static final ITag.INamedTag<Item> TEST_ITEM = forge("ingots/test");
+        public static final Map<Metal, ITag.INamedTag<Item>> STORAGE_BLOCKS = new HashMap<>();
+        public static final Map<Metal, ITag.INamedTag<Item>> ORES = new HashMap<>();
+
         public static final Map<Metal, ITag.INamedTag<Item>> INGOTS = new HashMap<>();
         public static final Map<Metal, ITag.INamedTag<Item>> NUGGETS = new HashMap<>();
         public static final ITag.INamedTag<Item> SWORDS = forge("swords");
@@ -57,18 +68,23 @@ public class LHTags {
             for(Metal m : Metal.values()){
                 if(m.isVanilla()){
 
-                }else{
+                }else {
+                    STORAGE_BLOCKS.put(m, forge("storage_blocks/" + m.tagName()));
+                    if (m.generateOre()) {
+                        ORES.put(m, forge("ores/" + m.tagName()));
+                    }
+
                     INGOTS.put(m, forge("ingots/" + m.tagName()));
                     NUGGETS.put(m, forge("nuggets/" + m.tagName()));
                 }
             }
         }
 
-        private static ITag.INamedTag<Item> forge(String path){
+        private static ITag.INamedTag<Item> forge(String path) {
             return ItemTags.createOptional(new ResourceLocation("forge", path));
         }
 
-        private static ITag.INamedTag<Item> mod(String path){
+        private static ITag.INamedTag<Item> mod(String path) {
             return ItemTags.createOptional(new ResourceLocation(LostHeroes.MOD_ID, path));
         }
     }

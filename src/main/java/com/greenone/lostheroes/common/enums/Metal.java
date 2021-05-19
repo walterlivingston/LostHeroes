@@ -47,7 +47,7 @@ public enum Metal {
     }
 
     public boolean generateOre(){
-        return this.type == Type.PURE; //&& this != METEORIC_IRON;
+        return this.type == Type.PURE && this != METEORIC_IRON;
     }
 
     public boolean canEnchant(){

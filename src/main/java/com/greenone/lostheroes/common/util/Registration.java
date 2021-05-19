@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.util;
 
 import com.greenone.lostheroes.common.blocks.LHBlocks;
+import com.greenone.lostheroes.common.blocks.tiles.LHTileEntities;
 import com.greenone.lostheroes.common.entities.LHEntities;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.init.LHTags;
@@ -18,6 +19,7 @@ public class Registration {
         LHItems.register(eventBus);
         LHBlocks.register(eventBus);
         LHEntities.register(eventBus);
+        LHTileEntities.register(eventBus);
         LHContainers.register(eventBus);
         LHPotions.register(eventBus);
         Deities.init();

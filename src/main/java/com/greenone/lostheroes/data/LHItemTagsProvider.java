@@ -19,12 +19,15 @@ public class LHItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags() {
-        //copy(LHTags.Blocks.STORAGE_BLOCK_TEST, LHTags.Items.STORAGE_BLOCK_TEST);
-
-        for(Metal m : Metal.values()) {
+        for(Metal m : Metal.values()){
             if(m.isVanilla()){
 
-            }else{
+            }else {
+                copy(LHTags.Blocks.STORAGE_BLOCKS.get(m), LHTags.Items.STORAGE_BLOCKS.get(m));
+                if (m.generateOre()) {
+                    copy(LHTags.Blocks.ORES.get(m), LHTags.Items.ORES.get(m));
+                }
+
                 tag(LHTags.Items.INGOTS.get(m)).add(LHItems.ingots.get(m));
                 tag(Tags.Items.INGOTS).add(LHItems.ingots.get(m));
                 tag(LHTags.Items.NUGGETS.get(m)).add(LHItems.nuggets.get(m));
@@ -43,5 +46,7 @@ public class LHItemTagsProvider extends ItemTagsProvider {
                 tag(LHTags.Items.BOOTS).add(LHItems.boots.get(m));
             }
         }
+        copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
+        copy(Tags.Blocks.ORES, Tags.Items.ORES);
     }
 }

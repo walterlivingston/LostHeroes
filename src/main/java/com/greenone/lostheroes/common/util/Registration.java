@@ -15,8 +15,8 @@ public class Registration {
     public static void register(){
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        LHBlocks.register(eventBus);
         LHItems.register(eventBus);
+        LHBlocks.register(eventBus);
         LHEntities.register(eventBus);
         LHContainers.register(eventBus);
         LHPotions.register(eventBus);

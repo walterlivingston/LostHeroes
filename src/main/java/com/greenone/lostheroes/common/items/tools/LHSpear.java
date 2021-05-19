@@ -42,7 +42,6 @@ public class LHSpear extends TridentItem {
         this.spearAttributes = builder.build();
     }
 
-    //TODO Change the TridentEntity to SpearEntity
     @Override
     public void releaseUsing(ItemStack stack, World world, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof PlayerEntity) {

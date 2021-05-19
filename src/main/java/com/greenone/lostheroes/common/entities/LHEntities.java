@@ -11,9 +11,11 @@ public class LHEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, LostHeroes.MOD_ID);
 
     public static final EntityType<SpearEntity> SPEAR = EntityType.Builder.<SpearEntity>of(SpearEntity::new, EntityClassification.MISC).build(LostHeroes.MOD_ID+":spear");
+    public static final EntityType<GreekFireEntity> GREEK_FIRE = EntityType.Builder.<GreekFireEntity>of(GreekFireEntity::new, EntityClassification.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("greek_fire");
 
     public static void register(IEventBus eventBus){
         ENTITIES.register("spear", () -> SPEAR);
+        ENTITIES.register("greek_fire", () -> GREEK_FIRE);
 
         ENTITIES.register(eventBus);
     }

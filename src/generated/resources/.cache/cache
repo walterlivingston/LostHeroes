@@ -1,4 +1,4 @@
-bf938d8a996186848b988620f2d4c7b74e1e5475 assets/lostheroes/lang/en_us.json
+c44b9746a462a84a221cb6a93a46b9cf64732c20 assets/lostheroes/lang/en_us.json
 8756663c1cab7a04b14ed69470f44c1969d6b357 assets/lostheroes/models/item/adamantine_axe.json
 37025be93a1d35883fcae3973adb1a0507662821 assets/lostheroes/models/item/adamantine_boots.json
 01c387cd52147c365d6fbf7cf1f002d4de67eb3f assets/lostheroes/models/item/adamantine_chestplate.json
@@ -64,6 +64,7 @@ b680ce3372882ec0a85b4aa45950aeafafbb8bb3 assets/lostheroes/models/item/copper_le
 fd62b30148ce8bef8f60db37e7327a1179382662 assets/lostheroes/models/item/copper_shovel.json
 db20238f207cc2b4302811c0fa0010eebac1322a assets/lostheroes/models/item/copper_spear.json
 77428f283c83d881f0520b9301c95e2584728552 assets/lostheroes/models/item/copper_sword.json
+6cc3667133f8719ee1ea18e79fd9e1601ff8d614 assets/lostheroes/models/item/greek_fire.json
 797ad14db0690c0b8154633f5bebef89e6036dc3 assets/lostheroes/models/item/imperial_gold_axe.json
 5dc25001dddbcf67e9335ae20d447d3bdcb00808 assets/lostheroes/models/item/imperial_gold_boots.json
 86c80c8c55756c0e72c6672af209dae86c2da0cf assets/lostheroes/models/item/imperial_gold_chestplate.json

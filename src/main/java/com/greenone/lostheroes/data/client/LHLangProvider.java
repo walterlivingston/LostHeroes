@@ -55,6 +55,7 @@ public class LHLangProvider extends LanguageProvider {
             addItem(() -> LHItems.ambrosia, "Ambrosia");
             addItem(() -> LHItems.nectar, "Nectar");
             addItem(() -> LHItems.pearl_of_persephone, "Pearl of Persephone");
+            addItem(() -> LHItems.greek_fire, "Greek Fire");
 
             add("key.categories.lostheroes", "LostHeroes");
             add("lostheroes.key.main_ability", "Main Ability");

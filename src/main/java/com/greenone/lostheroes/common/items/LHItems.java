@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.client.render.ShieldRenderer;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.items.tools.*;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -48,7 +49,7 @@ public class LHItems {
     public static Item ambrosia = registerFood("ambrosia", LHFoods.AMBROSIA, true);
     public static Item nectar = registerItem("nectar", new LHFood(new Item.Properties().tab(LostHeroes.lh_group).food(LHFoods.NECTAR), true));
 
-    //TODO Add GreekFire
+    public static Item greek_fire = registerItem("greek_fire", new GreekFireItem(new Item.Properties().tab(LostHeroes.lh_group).stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         for(Metal m : Metal.values()){
@@ -140,9 +141,8 @@ public class LHItems {
         ITEMS.register(name, () -> item);
         return item;
     }
-    //TODO add ISTER ShieldRenderer
     private static Item registerShield(String name, Metal metal) {
-        Item item = new LHShield(metal, new Item.Properties().tab(LostHeroes.lh_group));
+        Item item = new LHShield(metal, new Item.Properties().tab(LostHeroes.lh_group).setISTER(()-> ShieldRenderer::new));
         ITEMS.register(name, () -> item);
         return item;
     }

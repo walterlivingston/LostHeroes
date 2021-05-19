@@ -49,7 +49,7 @@ public class LHItems {
     public static Item ambrosia = registerFood("ambrosia", LHFoods.AMBROSIA, true);
     public static Item nectar = registerItem("nectar", new LHFood(new Item.Properties().tab(LostHeroes.lh_group).food(LHFoods.NECTAR), true));
 
-    public static Item greek_fire = registerItem("greek_fire", new GreekFireItem(new Item.Properties().tab(LostHeroes.lh_group).stacksTo(1)));
+    //public static Item greek_fire = registerItem("greek_fire", new GreekFireItem(new Item.Properties().tab(LostHeroes.lh_group).stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         for(Metal m : Metal.values()){

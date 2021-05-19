@@ -4,6 +4,7 @@ import com.greenone.lostheroes.client.render.SpearRenderer;
 import com.greenone.lostheroes.client.utils.LHClientUtils;
 import com.greenone.lostheroes.client.utils.LHKeybinds;
 import com.greenone.lostheroes.common.IProxy;
+import com.greenone.lostheroes.common.blocks.LHBlocks;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.entities.LHEntities;
 import com.greenone.lostheroes.common.items.LHItemModelProperties;
@@ -12,6 +13,8 @@ import com.greenone.lostheroes.common.util.LHEventHandler;
 import com.greenone.lostheroes.common.util.Registration;
 import com.greenone.lostheroes.data.DataGenerators;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
@@ -77,7 +80,7 @@ public class SideProxy implements IProxy {
         private static void clientSetup(FMLClientSetupEvent event){
             //ClientRegistry.bindTileEntityRenderer(LHTileEntities.ALTAR.get(), AltarTileRenderer::new);
             //ClientRegistry.bindTileEntityRenderer(LHTileEntities.ENCHANTING.get(), LHEnchantTileEntityRenderer::new);
-            //RenderTypeLookup.setRenderLayer(LHBlocks.greek_fire.get(), RenderType.getCutout());
+            //RenderTypeLookup.setRenderLayer(LHBlocks.greek_fire, RenderType.cutout());
             DeferredWorkQueue.runLater(LHItemModelProperties::registerProperties);
             //LHScreens.registerScreens();
             LHKeybinds.register();

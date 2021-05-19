@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 public class LHBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, LostHeroes.MOD_ID);
 
-    public static final Block greek_fire = registerNoItem("greek_fire", new GreekFireBlock(AbstractBlock.Properties.of(Material.FIRE, MaterialColor.COLOR_LIGHT_GREEN).noCollission().instabreak().lightLevel((p_235468_0_) -> 15).sound(SoundType.WOOL)));
+    //public static final Block greek_fire = registerNoItem("greek_fire", new GreekFireBlock(AbstractBlock.Properties.of(Material.FIRE, MaterialColor.COLOR_LIGHT_GREEN).noCollission().instabreak().lightLevel((p_235468_0_) -> 15).sound(SoundType.WOOL)));
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

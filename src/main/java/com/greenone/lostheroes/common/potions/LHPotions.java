@@ -26,6 +26,7 @@ public class LHPotions {
         LHEffects.register();
         Blessings.register();
 
+        POTIONS.register(eventBus);
         EFFECTS.register(eventBus);
         VANILLA_EFFECTS.register(eventBus);
     }

@@ -7,6 +7,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ThrowablePotionItem;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.potion.Potions;
@@ -17,6 +18,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -24,9 +26,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class GreekFireItem extends LHThrowablePotionItem {
-    public GreekFireItem(Properties properties) {
-        super(properties);
+public class GreekFireItem extends ThrowablePotionItem {
+    public GreekFireItem(Properties p_i225739_1_) {
+        super(p_i225739_1_);
     }
 
     @Override
@@ -35,31 +37,39 @@ public class GreekFireItem extends LHThrowablePotionItem {
     }
 
     @Override
-    public boolean isFoil(ItemStack p_77636_1_) {
+    public boolean isFoil(ItemStack stack) {
         return true;
     }
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        if(!world.isClientSide()){
-            GreekFireEntity greekFireEntity = new GreekFireEntity(world, player, getModifer(stack), isExplosive(stack));
-            greekFireEntity.setItem(stack);
-            greekFireEntity.shootFromRotation(player, player.xRot, player.yRot, -20.0F, 0.5F, 1.0F);
-            world.addFreshEntity(greekFireEntity);
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack itemstack = playerIn.getItemInHand(handIn);
+        if (!worldIn.isClientSide()) {
+            GreekFireEntity greekFireEntity = new GreekFireEntity(worldIn, playerIn, getModifer(playerIn.getItemInHand(handIn)), isExplosive(playerIn.getItemInHand(handIn)));
+            greekFireEntity.setItem(itemstack);
+            greekFireEntity.shootFromRotation(playerIn, playerIn.xRot, playerIn.yRot, -20.0F, 0.5F, 1.0F);
+            worldIn.addFreshEntity(greekFireEntity);
         }
 
-        player.awardStat(Stats.ITEM_USED.get(this));
-        if(!player.isCreative()){
-            stack.shrink(1);
+        playerIn.awardStat(Stats.ITEM_USED.get(this));
+        if (!playerIn.isCreative()) {
+            itemstack.shrink(1);
         }
 
-        return ActionResult.sidedSuccess(stack, world.isClientSide);
+        return ActionResult.sidedSuccess(itemstack, worldIn.isClientSide());
     }
 
+    @Override
+    public String getDescriptionId(ItemStack stack) {
+        return this.getDescriptionId();
+    }
+
+    /**
+     * allows items to add custom lines of information to the mouseover description
+     */
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         String regName = PotionUtils.getPotion(stack).getName("");
         switch (regName){
             case "greek_fire":
@@ -75,8 +85,9 @@ public class GreekFireItem extends LHThrowablePotionItem {
         }
     }
 
-    private int getModifer(ItemStack stack) {
+    public int getModifer(ItemStack stack){
         String regName = PotionUtils.getPotion(stack).getName("");
+        System.out.println(regName);
         switch (regName){
             case "greek_fire":
                 return 3;
@@ -89,9 +100,14 @@ public class GreekFireItem extends LHThrowablePotionItem {
         }
     }
 
-    private boolean isExplosive(ItemStack stack) {
+    public boolean isExplosive(ItemStack stack){
         String regName = PotionUtils.getPotion(stack).getName("");
-        return regName.contains("exp");
+        switch (regName){
+            case "greek_fire_2_exp":
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override

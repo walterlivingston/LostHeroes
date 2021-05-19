@@ -12,6 +12,7 @@ public class LHTileEntities {
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, LostHeroes.MOD_ID);
 
     public static final TileEntityType<AltarTile> ALTAR = TileEntityType.Builder.of(AltarTile::new, LHBlocks.pillars.get(Stone.MARBLE)).build(null);
+    public static final TileEntityType<LHEnchantTile> ENCHANT = TileEntityType.Builder.of(LHEnchantTile::new, LHBlocks.enchanting_table).build(null);
 
     public static void register(IEventBus eventBus){
         TILE_ENTITIES.register("altar", () -> ALTAR);

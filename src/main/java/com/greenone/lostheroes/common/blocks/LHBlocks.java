@@ -8,6 +8,7 @@ import com.greenone.lostheroes.common.items.LHItems;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -36,6 +37,7 @@ public class LHBlocks {
     public static Map<Stone, Block> stoneBrickStairs = new HashMap<>();
     public static Map<Stone, Block> pillars = new HashMap<>();
 
+    public static final Block enchanting_table = registerVanilla("enchanting_table", new LHEnchantmentTable(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_RED).requiresCorrectToolForDrops().strength(5.0F, 1200.0F)), ItemGroup.TAB_DECORATIONS);
 
     //public static final Block greek_fire = registerNoItem("greek_fire", new GreekFireBlock(AbstractBlock.Properties.of(Material.FIRE, MaterialColor.COLOR_LIGHT_GREEN).noCollission().instabreak().lightLevel((p_235468_0_) -> 15).sound(SoundType.WOOL)));
 
@@ -58,6 +60,7 @@ public class LHBlocks {
             pillars.put(s, register(s.tagName()+"_pillar", new PillarBlock(stone_prop)));
         }
 
+        VANILLA_BLOCKS.register(eventBus);
         BLOCKS.register(eventBus);
     }
 
@@ -65,21 +68,23 @@ public class LHBlocks {
         BLOCKS.register(name, () -> block);
         return block;
     }
-
     public static Block register(String name, Block block){
         BLOCKS.register(name, () -> block);
         LHItems.ITEMS.register(name, () -> new LHItemBlock(block, new Item.Properties().tab(LostHeroes.lh_group)));
         return block;
     }
-
     public static Block register(String name, Block block, Metal metal){
         LHItems.ITEMS.register(name, () -> new LHItemBlock(block, new Item.Properties().tab(LostHeroes.lh_group), metal));
         return registerNoItem(name, block);
     }
-
     private static Block registerVanilla(String name, Block block, ItemGroup group, Metal m) {
         VANILLA_BLOCKS.register(name, () -> block);
         LHItems.VANILLA_ITEMS.register(name, () -> new LHItemBlock(block, new Item.Properties().tab(group), m));
+        return block;
+    }
+    private static Block registerVanilla(String name, Block block, ItemGroup group) {
+        VANILLA_BLOCKS.register(name, () -> block);
+        LHItems.VANILLA_ITEMS.register(name, () -> new LHItemBlock(block, new Item.Properties().tab(group)));
         return block;
     }
 }

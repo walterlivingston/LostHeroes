@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.INameable;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -28,7 +29,7 @@ public class LHEnchantTile extends TileEntity implements INameable, ITickableTil
     private ITextComponent name;
 
     public LHEnchantTile() {
-        super(LHTileEntities.ENCHANT);
+        super(TileEntityType.ENCHANTING_TABLE);
     }
 
     public CompoundNBT save(CompoundNBT p_189515_1_) {

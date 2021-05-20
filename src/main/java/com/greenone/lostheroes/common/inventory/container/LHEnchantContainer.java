@@ -181,21 +181,45 @@ public class LHEnchantContainer extends Container {
                         if (compoundnbt != null) itemstack2.setTag(compoundnbt.copy());
                         this.enchantSlots.setItem(0, itemstack2);
                     }
-                    if(flag1) {this.enchantSlots.setItem(0, new ItemStack(LHItems.ingots.get(Metal.CELESTIAL_BRONZE)));}
-                    if(flag2) {this.enchantSlots.setItem(0, new ItemStack(LHItems.ingots.get(Metal.IMPERIAL_GOLD)));}
-                    if(flag3) {this.enchantSlots.setItem(0, new ItemStack(LHItems.nuggets.get(Metal.CELESTIAL_BRONZE)));}
-                    if(flag4) {this.enchantSlots.setItem(0, new ItemStack(LHItems.nuggets.get(Metal.IMPERIAL_GOLD)));}
-                    if(flag5) {this.enchantSlots.setItem(0, new ItemStack(LHBlocks.storageBlocks.get(Metal.CELESTIAL_BRONZE)));}
-                    if(flag6) {this.enchantSlots.setItem(0, new ItemStack(LHBlocks.storageBlocks.get(Metal.IMPERIAL_GOLD)));}
-                    if(flag7) {this.enchantSlots.setItem(0, new ItemStack(LHItems.ingots.get(Metal.ADAMANTINE)));}
+                    if(flag1) {
+                        itemstack2 = new ItemStack(LHItems.ingots.get(Metal.CELESTIAL_BRONZE));
+                        this.enchantSlots.setItem(0, new ItemStack(LHItems.ingots.get(Metal.CELESTIAL_BRONZE)));
+                        System.out.println("MADE IT");
+                    }
+                    if(flag2) {
+                        itemstack2 = new ItemStack(LHItems.ingots.get(Metal.IMPERIAL_GOLD));
+                        this.enchantSlots.setItem(0, new ItemStack(LHItems.ingots.get(Metal.IMPERIAL_GOLD)));
+                    }
+                    if(flag3) {
+                        itemstack2 = new ItemStack(LHItems.nuggets.get(Metal.CELESTIAL_BRONZE));
+                        this.enchantSlots.setItem(0, new ItemStack(LHItems.nuggets.get(Metal.CELESTIAL_BRONZE)));
+                    }
+                    if(flag4) {
+                        itemstack2 = new ItemStack(LHItems.nuggets.get(Metal.IMPERIAL_GOLD));
+                        this.enchantSlots.setItem(0, new ItemStack(LHItems.nuggets.get(Metal.IMPERIAL_GOLD)));
+                    }
+                    if(flag5) {
+                        itemstack2 = new ItemStack(LHBlocks.storageBlocks.get(Metal.CELESTIAL_BRONZE));
+                        this.enchantSlots.setItem(0, new ItemStack(LHBlocks.storageBlocks.get(Metal.CELESTIAL_BRONZE)));
+                    }
+                    if(flag6) {
+                        itemstack2 = new ItemStack(LHBlocks.storageBlocks.get(Metal.IMPERIAL_GOLD));
+                        this.enchantSlots.setItem(0, new ItemStack(LHBlocks.storageBlocks.get(Metal.IMPERIAL_GOLD)));
+                    }
+                    if(flag7) {
+                        itemstack2 = new ItemStack(LHItems.ingots.get(Metal.ADAMANTINE));
+                        this.enchantSlots.setItem(0, new ItemStack(LHItems.ingots.get(Metal.ADAMANTINE)));
+                    }
 
                     for (EnchantmentData enchantmentdata : list) {
                         if (flag) {
                             EnchantedBookItem.addEnchantment(itemstack2, enchantmentdata);
                         } else if (flag1 || flag2 || flag3 || flag4 || flag5 || flag6 || flag7) {
+                            System.out.println("MADE IT FURTHER");
                             break;
                         } else {
                             itemstack2.enchant(enchantmentdata.enchantment, enchantmentdata.level);
+                            System.out.println("I'm an idiot");
                         }
                     }
 

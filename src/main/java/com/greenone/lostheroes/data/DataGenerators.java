@@ -30,6 +30,7 @@ public final class DataGenerators {
         LHBlockTagsProvider blockTags = new LHBlockTagsProvider(gen, existingFileHelper);
         gen.addProvider(new LHItemTagsProvider(gen, blockTags, existingFileHelper));
 
+        gen.addProvider(new LHRecipeProvider(gen));
         gen.addProvider(new LHLangProvider(gen, "en_us"));
     }
 }

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    " N ",
+    "SSS"
+  ],
+  "key": {
+    "N": {
+      "item": "lostheroes:marble"
+    },
+    "S": {
+      "item": "lostheroes:marble_slab"
+    }
+  },
+  "result": {
+    "item": "lostheroes:marble_pillar"
+  }
+}

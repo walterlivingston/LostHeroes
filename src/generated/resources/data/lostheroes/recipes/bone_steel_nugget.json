@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/bone_steel"
+    }
+  ],
+  "result": {
+    "item": "lostheroes:bone_steel_nugget",
+    "count": 9
+  }
+}

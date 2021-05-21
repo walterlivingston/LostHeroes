@@ -95,7 +95,7 @@ public class ForgeTile extends LockableTileEntity implements ISidedInventory, IR
     }
 
     @Override
-    public void load(BlockState p_230337_1_, CompoundNBT p_230337_2_) { //TODO: MARK
+    public void load(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
         super.load(p_230337_1_, p_230337_2_);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(p_230337_2_, this.items);

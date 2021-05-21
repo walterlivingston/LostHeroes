@@ -1,7 +1,10 @@
 package com.greenone.lostheroes.common.items.tools;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
+import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.enums.Metal;
+import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.items.LHItemTier;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -31,13 +34,15 @@ public class LHBow extends BowItem {
         if (p_77615_3_ instanceof PlayerEntity) {
             PlayerEntity playerentity = (PlayerEntity)p_77615_3_;
             boolean flag = playerentity.abilities.instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, p_77615_1_) > 0;
+            IPlayerCap playerCap = playerentity.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+            boolean flag2 = playerCap.getParent() == Deities.APOLLO || playerCap.getParent() == Deities.ARTEMIS;
             ItemStack itemstack = playerentity.getProjectile(p_77615_1_);
 
             int i = this.getUseDuration(p_77615_1_) - p_77615_4_;
             i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(p_77615_1_, p_77615_2_, playerentity, i, !itemstack.isEmpty() || flag);
             if (i < 0) return;
 
-            if (!itemstack.isEmpty() || flag) {
+            if (!itemstack.isEmpty() || flag || flag2) {
                 if (itemstack.isEmpty()) {
                     itemstack = new ItemStack(Items.ARROW);
                 }

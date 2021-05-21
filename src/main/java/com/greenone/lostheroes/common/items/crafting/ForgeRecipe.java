@@ -46,7 +46,9 @@ public class ForgeRecipe implements IRecipe<IInventory> {
 
     @Override
     public boolean matches(IInventory inv, World world) {
-        return this.ing1.test(inv.getItem(0)) && this.ing2.test(inv.getItem(3));
+        boolean flag1 = this.ing1.test(inv.getItem(0)) && this.ing2.test(inv.getItem(1));
+        boolean flag2 = this.ing1.test(inv.getItem(1)) && this.ing2.test(inv.getItem(0));
+        return flag1 || flag2;
     }
 
     @Override

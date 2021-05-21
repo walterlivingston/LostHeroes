@@ -2,11 +2,11 @@ package com.greenone.lostheroes;
 
 import com.greenone.lostheroes.client.render.LHEnchantTileEntityRenderer;
 import com.greenone.lostheroes.client.render.SpearRenderer;
+import com.greenone.lostheroes.client.screen.ForgeScreen;
 import com.greenone.lostheroes.client.screen.LHEnchantScreen;
 import com.greenone.lostheroes.client.utils.LHClientUtils;
 import com.greenone.lostheroes.client.utils.LHKeybinds;
 import com.greenone.lostheroes.common.IProxy;
-import com.greenone.lostheroes.common.blocks.LHBlocks;
 import com.greenone.lostheroes.common.blocks.tiles.LHTileEntities;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.entities.LHEntities;
@@ -14,12 +14,11 @@ import com.greenone.lostheroes.common.inventory.container.LHContainers;
 import com.greenone.lostheroes.common.items.LHItemModelProperties;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.util.LHEventHandler;
-import com.greenone.lostheroes.common.util.Registration;
+import com.greenone.lostheroes.common.init.Registration;
+import com.greenone.lostheroes.common.world.LHOreGen;
 import com.greenone.lostheroes.data.DataGenerators;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
@@ -49,6 +48,8 @@ public class SideProxy implements IProxy {
     public static void commonSetup(final FMLCommonSetupEvent event) {
         CapabilityRegistry.registerCapabilities();
         LHNetworkHandler.registerMessages();
+        LHOreGen.initOres();
+        LHOreGen.setupOres();
     }
 
     private static void serverStarted(FMLServerStartedEvent event) {
@@ -89,6 +90,7 @@ public class SideProxy implements IProxy {
             //RenderTypeLookup.setRenderLayer(LHBlocks.greek_fire, RenderType.cutout());
             DeferredWorkQueue.runLater(LHItemModelProperties::registerProperties);
             ScreenManager.register(LHContainers.ENCHANTING, LHEnchantScreen::new);
+            ScreenManager.register(LHContainers.FORGE, ForgeScreen::new);
             LHKeybinds.register();
             MinecraftForge.EVENT_BUS.register(LHClientUtils.instance);
             RenderingRegistry.registerEntityRenderingHandler(LHEntities.SPEAR, new SpearRenderer.RenderFactory());

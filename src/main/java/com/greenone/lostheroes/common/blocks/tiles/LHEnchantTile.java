@@ -29,7 +29,7 @@ public class LHEnchantTile extends TileEntity implements INameable, ITickableTil
     private ITextComponent name;
 
     public LHEnchantTile() {
-        super(TileEntityType.ENCHANTING_TABLE);
+        super(LHTileEntities.ENCHANT);
     }
 
     public CompoundNBT save(CompoundNBT p_189515_1_) {

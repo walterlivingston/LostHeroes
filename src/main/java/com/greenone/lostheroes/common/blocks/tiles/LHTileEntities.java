@@ -13,9 +13,12 @@ public class LHTileEntities {
 
     public static final TileEntityType<AltarTile> ALTAR = TileEntityType.Builder.of(AltarTile::new, LHBlocks.pillars.get(Stone.MARBLE)).build(null);
     public static final TileEntityType<LHEnchantTile> ENCHANT = TileEntityType.Builder.of(LHEnchantTile::new, LHBlocks.enchanting_table).build(null);
+    public static final TileEntityType<ForgeTile> FORGE = TileEntityType.Builder.of(ForgeTile::new, LHBlocks.forge).build(null);
 
     public static void register(IEventBus eventBus){
         TILE_ENTITIES.register("altar", () -> ALTAR);
+        TILE_ENTITIES.register("forge", () -> FORGE);
+        TILE_ENTITIES.register("enchanting", () -> ENCHANT);
 
         TILE_ENTITIES.register(eventBus);
     }

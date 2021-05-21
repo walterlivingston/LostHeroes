@@ -3,12 +3,16 @@ package com.greenone.lostheroes.data.client;
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.Deity;
 import com.greenone.lostheroes.common.blocks.LHBlocks;
+import com.greenone.lostheroes.common.enchantment.LHEnchants;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.items.LHItems;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.common.data.LanguageProvider;
+
+import java.util.function.Supplier;
 
 public class LHLangProvider extends LanguageProvider {
     private final String locale;
@@ -71,9 +75,9 @@ public class LHLangProvider extends LanguageProvider {
             addItem(() -> LHItems.pearl_of_persephone, "Pearl of Persephone");
             //addItem(() -> LHItems.greek_fire, "Greek Fire");
 
-            //addEnchantment(LHEnchants.BLESSING, "Blessing");
+            addEnchantment(() -> LHEnchants.BLESSING, "Blessing");
 
-            //addBlock(() -> LHBlocks.forge, "Forge");
+            addBlock(() -> LHBlocks.forge, "Forge");
             addContainer("forge");
 
             add("key.categories.lostheroes", "LostHeroes");

@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.data.client;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.blocks.ForgeBlock;
 import com.greenone.lostheroes.common.blocks.LHBlocks;
 import com.greenone.lostheroes.common.blocks.PillarBlock;
 import com.greenone.lostheroes.common.enums.Metal;
@@ -9,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.util.Direction;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -49,7 +51,7 @@ public class LHBlockStateProvider extends BlockStateProvider {
             stairsBlock((StairsBlock)LHBlocks.stoneBrickStairs.get(s), modLoc("block/"+s.tagName()+"_brick"));
             pillarBlock(LHBlocks.pillars.get(s), blockModels.pillar(s.tagName()+"_pillar"), blockModels.pillarTop(s.tagName()+"_pillar"), blockModels.pillarMid(s.tagName()+"_pillar"), blockModels.pillarBottom(s.tagName()+"_pillar"));
         }
-        //forgeBlock((ForgeBlock) LHBlocks.forge,blockModels.orientable("forge", modLoc("block/forge_top"),modLoc("block/forge_front"),modLoc("block/forge_side")),blockModels.orientable("forge_on", modLoc("block/forge_top"),modLoc("block/forge_front_on"),modLoc("block/forge_side")));
+        forgeBlock((ForgeBlock) LHBlocks.forge,blockModels.orientable("forge", modLoc("block/forge_top"),modLoc("block/forge_front"),modLoc("block/forge_side")),blockModels.orientable("forge_on", modLoc("block/forge_top"),modLoc("block/forge_front_on"),modLoc("block/forge_side")));
     }
 
     public void pillarBlock(Block block, ModelFile pillar, ModelFile top, ModelFile middle, ModelFile bottom) {
@@ -64,7 +66,7 @@ public class LHBlockStateProvider extends BlockStateProvider {
                 .modelForState().modelFile(middle).addModel();
     }
 
-    /*public void forgeBlock(ForgeBlock block, ModelFile off, ModelFile on) {
+    public void forgeBlock(ForgeBlock block, ModelFile off, ModelFile on) {
         getVariantBuilder(block)
                 .partialState().with(block.FACING, Direction.EAST).with(block.LIT, Boolean.FALSE)
                 .modelForState().modelFile(off).rotationY(90).addModel()
@@ -82,5 +84,5 @@ public class LHBlockStateProvider extends BlockStateProvider {
                 .modelForState().modelFile(off).rotationY(270).addModel()
                 .partialState().with(block.FACING, Direction.WEST).with(block.LIT, Boolean.TRUE)
                 .modelForState().modelFile(on).rotationY(270).addModel();
-    }*/
+    }
 }

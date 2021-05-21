@@ -44,7 +44,7 @@ public class LHItem extends Item {
 
     @Override
     public boolean isEnchantable(ItemStack stack) {
-        if(metal != null){
+        if(metal != null || this == LHItems.adamantine_ingot_dull){
             return metal.canEnchant() || super.isEnchantable(stack);
         }
         return super.isEnchantable(stack);

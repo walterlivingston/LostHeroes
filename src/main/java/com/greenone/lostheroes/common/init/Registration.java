@@ -1,4 +1,4 @@
-package com.greenone.lostheroes.common.util;
+package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.common.blocks.LHBlocks;
 import com.greenone.lostheroes.common.blocks.tiles.LHTileEntities;
@@ -8,6 +8,7 @@ import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.init.LHTags;
 import com.greenone.lostheroes.common.inventory.container.LHContainers;
 import com.greenone.lostheroes.common.items.LHItems;
+import com.greenone.lostheroes.common.items.crafting.LHRecipeSerializers;
 import com.greenone.lostheroes.common.potions.LHPotions;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -26,5 +27,6 @@ public class Registration {
         Deities.init();
         LHTags.register();
         LHEnchants.register(eventBus);
+        LHRecipeSerializers.register(eventBus);
     }
 }

@@ -33,7 +33,7 @@ public class LHBlockLootTables extends BlockLootTables {
             dropSelf(LHBlocks.stoneBrickStairs.get(s));
             dropSelf(LHBlocks.pillars.get(s));
         }
-        //dropSelf(LHBlocks.forge);
+        dropSelf(LHBlocks.forge);
         //add(LHBlocks.greek_fire, noDrop());
     }
 

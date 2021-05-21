@@ -1,0 +1,12 @@
+{
+  "type": "lostheroes:alloying",
+  "ing1": {
+    "item": "minecraft:iron_ingot"
+  },
+  "ing2": {
+    "item": "minecraft:bone"
+  },
+  "result": "lostheroes:bone_steel_ingot",
+  "experience": 0.7,
+  "cookingtime": 200
+}

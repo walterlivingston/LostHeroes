@@ -16,6 +16,7 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -51,6 +52,7 @@ public class LHEventHandler {
     public void onPlayerTick(final TickEvent.PlayerTickEvent event){
         PlayerEntity player = event.player;
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+        if(playerCap.getMana()< playerCap.getMaxMana()) playerCap.setMana(playerCap.getMana()+0.0008F);
         if(playerCap!=null && playerCap.getParent()!=null){
             if(playerCap.getHadesCooldown() > 0) playerCap.decreaseHadesCooldown();
             if(!player.hasEffect(Blessings.ZEUS) && !player.isCreative() && player.abilities.mayfly){
@@ -90,5 +92,12 @@ public class LHEventHandler {
                 playerCap.resetHadesCooldown();
             }
         }
+    }
+
+    @SubscribeEvent
+    public void onPlayerWake(final PlayerWakeUpEvent event){
+        PlayerEntity player = event.getPlayer();
+        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+        playerCap.setMana(playerCap.getMaxMana());
     }
 }

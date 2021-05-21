@@ -101,6 +101,6 @@ public class LHOreGen {
         features.add(() -> configuredFeature);
         biomeFeatures.set(decoration.ordinal(), features);
 
-        ObfuscationReflectionHelper.setPrivateValue(BiomeGenerationSettings.class, biome.getGenerationSettings(), biomeFeatures, "features");
+        ObfuscationReflectionHelper.setPrivateValue(BiomeGenerationSettings.class, biome.getGenerationSettings(), biomeFeatures, "field_242484_f");
     }
 }

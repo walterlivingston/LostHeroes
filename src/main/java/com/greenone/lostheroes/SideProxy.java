@@ -12,6 +12,7 @@ import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.entities.LHEntities;
 import com.greenone.lostheroes.common.inventory.container.LHContainers;
 import com.greenone.lostheroes.common.items.LHItemModelProperties;
+import com.greenone.lostheroes.common.items.crafting.LHRecipeSerializers;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.util.LHEventHandler;
 import com.greenone.lostheroes.common.init.Registration;

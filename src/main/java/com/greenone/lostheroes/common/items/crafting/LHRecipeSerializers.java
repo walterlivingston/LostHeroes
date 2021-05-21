@@ -14,19 +14,20 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
 
 //@ObjectHolder(LostHeroes.MOD_ID)
-//@Mod.EventBusSubscriber(modid = LostHeroes.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = LostHeroes.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class LHRecipeSerializers {
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, LostHeroes.MOD_ID);
 
-    public static final ForgeRecipeSerializer<ForgeRecipe> FORGE = (ForgeRecipeSerializer<ForgeRecipe>) new ForgeRecipeSerializer<>(ForgeRecipe::new);//.setRegistryName(LostHeroes.MOD_ID, "alloying");
+    public static final ForgeRecipeSerializer<ForgeRecipe> FORGE = (ForgeRecipeSerializer<ForgeRecipe>) new ForgeRecipeSerializer<>(ForgeRecipe::new).setRegistryName(LostHeroes.MOD_ID, "alloying");
 
     public static void register(IEventBus eventBus){
+        Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(ForgeRecipe.FORGE.toString()), ForgeRecipe.FORGE);
         RECIPE_SERIALIZERS.register("alloying", () -> FORGE);
 
         RECIPE_SERIALIZERS.register(eventBus);
     }
 
-    //@SubscribeEvent
+    @SubscribeEvent
     public static void registerRecipeSerializer(final RegistryEvent.Register<IRecipeSerializer<?>> event){
         IForgeRegistry<IRecipeSerializer<?>> registry = event.getRegistry();
         Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(ForgeRecipe.FORGE.toString()), ForgeRecipe.FORGE);

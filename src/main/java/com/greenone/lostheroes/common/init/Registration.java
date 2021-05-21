@@ -27,6 +27,6 @@ public class Registration {
         Deities.init();
         LHTags.register();
         LHEnchants.register(eventBus);
-        LHRecipeSerializers.register(eventBus);
+        //LHRecipeSerializers.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 }

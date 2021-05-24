@@ -19,10 +19,10 @@ public class LHClientUtils {
     @SubscribeEvent
     public void keyInput(InputEvent.KeyInputEvent event){
         if(event.getAction() == GLFW.GLFW_PRESS) {
-            if (event.getKey() == LHKeybinds.MAIN_ABILITY.getKey().getValue()) {
+            if (LHKeybinds.MAIN_ABILITY.isDown()) {
                 LHNetworkHandler.INSTANCE.sendToServer(new PacketAbility(PacketAbility.Type.MAIN));
             }
-            if (event.getKey() == LHKeybinds.MINOR_ABILITY.getKey().getValue()) {
+            if (LHKeybinds.MINOR_ABILITY.isDown()) {
                 LHNetworkHandler.INSTANCE.sendToServer(new PacketAbility(PacketAbility.Type.MINOR));
             }
         }

@@ -30,7 +30,7 @@ public class LHClientUtils {
 
     @SubscribeEvent
     public void onRenderPost(RenderGameOverlayEvent.Post event){
-        if(event.getType() == RenderGameOverlayEvent.ElementType.TEXT){
+        if(event.getType() == RenderGameOverlayEvent.ElementType.VIGNETTE){
             if(Minecraft.getInstance().player.hasEffect(LHEffects.RAGE)){
                 LHUtils.renderRageOverlay();
             }

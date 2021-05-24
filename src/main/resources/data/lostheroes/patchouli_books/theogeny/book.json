@@ -1,0 +1,8 @@
+{
+  "name": "THEOGENY",
+  "landing_text": "WELCOME",
+  "version": 1,
+  "book_texture": "patchouli:textures/gui/book_red.png",
+  "model": "patchouli:book_red",
+  "show_progress": false
+}

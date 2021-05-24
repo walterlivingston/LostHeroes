@@ -134,7 +134,6 @@ dependencies {
 
     // These dependencies get remapped to your current MCP mappings
     // deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
@@ -169,8 +168,25 @@ publishing {
         }
     }
     repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+        maven { url 'https://maven.blamejared.com' }
+    }
+}
+
+repositories {
+    maven { url 'https://maven.blamejared.com' }
+}
+
+dependencies {
+    // 1.14+
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51")
+}
+
+minecraft {
+    runs {
+        client {
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
     }
 }

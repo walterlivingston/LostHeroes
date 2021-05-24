@@ -65,7 +65,7 @@ public class LHItems {
                 picks.put(m, registerPick(m.tagName()+"_pickaxe", m.getTier(),1, -2.8F, m));
                 axes.put(m, registerAxe(m.tagName()+"_axe", m.getTier(),6, -3.2F, m));
                 shovels.put(m, registerShovel(m.tagName()+"_shovel", m.getTier(),1.5F, -3F, m));
-                hoes.put(m, registerPick(m.tagName()+"_hoe", m.getTier(),-2, -1.0F, m));
+                hoes.put(m, registerHoe(m.tagName()+"_hoe", m.getTier(),-2, -1.0F, m));
                 bows.put(m, registerBow(m.tagName()+"_bow", m));
                 spears.put(m, registerSpear(m.tagName()+"_spear", m));
                 shields.put(m, registerShield(m.tagName()+"_shield", m));

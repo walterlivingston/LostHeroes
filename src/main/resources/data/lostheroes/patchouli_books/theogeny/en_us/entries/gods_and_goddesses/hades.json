@@ -2,6 +2,7 @@
   "name": "Hades",
   "icon": "lostheroes:textures/mob_effect/blessing_of_hades.png",
   "category": "gods_and_goddesses",
+  "sortnum": 3,
   "pages": [
     {
       "type": "text",

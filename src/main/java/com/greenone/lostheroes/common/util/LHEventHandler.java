@@ -52,15 +52,17 @@ public class LHEventHandler {
     public void onPlayerTick(final TickEvent.PlayerTickEvent event){
         PlayerEntity player = event.player;
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(playerCap.getMana()< playerCap.getMaxMana()) playerCap.setMana(playerCap.getMana()+0.0008F);
-        if(playerCap!=null && playerCap.getParent()!=null){
-            if(playerCap.getHadesCooldown() > 0) playerCap.decreaseHadesCooldown();
-            if(!player.hasEffect(Blessings.ZEUS) && !player.isCreative() && player.abilities.mayfly){
-                player.abilities.mayfly=false;
-                player.abilities.flying=false;
-                player.onUpdateAbilities();
+        if(!player.isDeadOrDying()){
+            if(playerCap.getMana()< playerCap.getMaxMana()) playerCap.setMana(playerCap.getMana()+0.0008F);
+            if(playerCap!=null && playerCap.getParent()!=null){
+                if(playerCap.getHadesCooldown() > 0) playerCap.decreaseHadesCooldown();
+                if(!player.hasEffect(Blessings.ZEUS) && !player.isCreative() && player.abilities.mayfly){
+                    player.abilities.mayfly=false;
+                    player.abilities.flying=false;
+                    player.onUpdateAbilities();
+                }
+                LHUtils.abilityCheck(player, playerCap);
             }
-            LHUtils.abilityCheck(player, playerCap);
         }
     }
 

@@ -11,6 +11,7 @@ public class AthenaAbilities extends AbstractAbility{
     public void mainAbility(PlayerEntity player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(player.isSteppingCarefully()){
+            System.out.println("HELLO");
             player.openMenu(new PCContainerProvider());
         }else if(playerCap.getMana()>0){
             float repairPoints = playerCap.getMana() * 100;

@@ -1,6 +1,6 @@
 {
-  "name": "THEOGENY",
-  "landing_text": "WELCOME",
+  "name": "Theogeny",
+  "landing_text": "This is a version of Hesiod's Theogeny.  The Theogeny is a poem detailing the geneologies and origins of the Greek Gods.  This edition adds further details on the world of gods and demigods.",
   "version": 1,
   "book_texture": "patchouli:textures/gui/book_red.png",
   "model": "patchouli:book_red",

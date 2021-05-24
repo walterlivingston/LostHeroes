@@ -2,6 +2,7 @@
   "name": "Zeus",
   "icon": "lostheroes:textures/mob_effect/blessing_of_zeus.png",
   "category": "gods_and_goddesses",
+  "sortnum": 1,
   "pages": [
     {
       "type": "text",

@@ -2,6 +2,7 @@
   "name": "Apollo",
   "icon": "lostheroes:textures/mob_effect/blessing_of_apollo.png",
   "category": "gods_and_goddesses",
+  "sortnum": 7,
   "pages": [
     {
       "type": "text",

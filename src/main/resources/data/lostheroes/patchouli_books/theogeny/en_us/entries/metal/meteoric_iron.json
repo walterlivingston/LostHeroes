@@ -1,0 +1,17 @@
+{
+  "name": "Meteoric Iron",
+  "icon": "lostheroes:meteoric_iron_ingot",
+  "category": "metals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Meteoric Iron is an extraterrestrial metal that was favored by the Egyptians.  It is not known whether this metal has magical properties."
+    },
+    {
+      "type": "spotlight",
+      "item": "lostheroes:meteoric_iron_ingot",
+      "title": "Meteoric Iron",
+      "text": "Meteoric Iron can be mined from meteors scattered across the world."
+    }
+  ]
+}

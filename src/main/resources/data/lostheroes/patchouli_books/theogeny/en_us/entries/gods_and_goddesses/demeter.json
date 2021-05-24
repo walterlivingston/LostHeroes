@@ -2,6 +2,7 @@
   "name": "Demeter",
   "icon": "lostheroes:textures/mob_effect/blessing_of_demeter.png",
   "category": "gods_and_goddesses",
+  "sortnum": 10,
   "pages": [
     {
       "type": "text",

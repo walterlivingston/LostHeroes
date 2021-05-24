@@ -2,6 +2,7 @@
   "name": "Aphrodite",
   "icon": "lostheroes:textures/mob_effect/blessing_of_aphrodite.png",
   "category": "gods_and_goddesses",
+  "sortnum": 6,
   "pages": [
     {
       "type": "text",

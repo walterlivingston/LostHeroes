@@ -2,6 +2,7 @@
   "name": "Hephaestus",
   "icon": "lostheroes:textures/mob_effect/blessing_of_hephaestus.png",
   "category": "gods_and_goddesses",
+  "sortnum": 12,
   "pages": [
     {
       "type": "text",

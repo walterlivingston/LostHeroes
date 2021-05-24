@@ -2,6 +2,7 @@
   "name": "Athena",
   "icon": "lostheroes:textures/mob_effect/blessing_of_athena.png",
   "category": "gods_and_goddesses",
+  "sortnum": 4,
   "pages": [
     {
       "type": "text",

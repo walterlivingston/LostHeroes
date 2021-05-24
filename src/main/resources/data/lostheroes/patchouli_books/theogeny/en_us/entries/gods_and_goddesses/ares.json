@@ -2,6 +2,7 @@
   "name": "Ares",
   "icon": "lostheroes:textures/mob_effect/blessing_of_ares.png",
   "category": "gods_and_goddesses",
+  "sortnum": 5,
   "pages": [
     {
       "type": "text",

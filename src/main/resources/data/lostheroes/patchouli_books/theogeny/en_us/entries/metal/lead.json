@@ -1,11 +1,17 @@
 {
-  "name": "Aphrodite",
-  "icon": "lostheroes:textures/mob_effect/blessing_of_aphrodite.png",
-  "category": "gods_and_goddesses",
+  "name": "Lead",
+  "icon": "lostheroes:lead_ingot",
+  "category": "metals",
   "pages": [
     {
       "type": "text",
-      "text": "This is a test entry, but it should show up!"
+      "text": "Lead is a heavy metal that is great for powerful weapons.  Due to its weight, attack speed can be greatly decreased with lead weapons, while damage is significantly increased."
+    },
+    {
+      "type": "spotlight",
+      "item": "lostheroes:lead_ingot",
+      "title": "Lead",
+      "text": "Lead can be found naturally in the depths of the world."
     }
   ]
 }

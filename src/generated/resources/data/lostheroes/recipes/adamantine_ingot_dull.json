@@ -1,9 +1,9 @@
 {
   "type": "lostheroes:alloying",
-  "ing1": {
+  "ing_one": {
     "item": "lostheroes:silver_ingot"
   },
-  "ing2": {
+  "ing_two": {
     "item": "minecraft:diamond"
   },
   "result": "lostheroes:adamantine_ingot_dull",

@@ -1,9 +1,9 @@
 {
   "type": "lostheroes:alloying",
-  "ing1": {
+  "ing_one": {
     "item": "lostheroes:copper_ingot"
   },
-  "ing2": {
+  "ing_two": {
     "item": "lostheroes:tin_ingot"
   },
   "result": "lostheroes:bronze_ingot",

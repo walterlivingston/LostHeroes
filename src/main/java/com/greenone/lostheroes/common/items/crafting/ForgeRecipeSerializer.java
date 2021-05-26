@@ -25,12 +25,12 @@ public class ForgeRecipeSerializer<T extends ForgeRecipe> extends ForgeRegistryE
         String s = JSONUtils.getAsString(json, "group", "");
         Ingredient ing1;
         Ingredient ing2;
-        if(json.get("ing1").isJsonObject() && json.get("ing2").isJsonObject()){
-            ing1 = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "ing1"));
-            ing2 = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "ing2"));
+        if(json.get("ing_one").isJsonObject() && json.get("ing_two").isJsonObject()){
+            ing1 = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "ing_one"));
+            ing2 = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "ing_two"));
         }else{
-            String i1 = JSONUtils.getAsString(json, "ing1");
-            String i2 = JSONUtils.getAsString(json, "ing2");
+            String i1 = JSONUtils.getAsString(json, "ing_one");
+            String i2 = JSONUtils.getAsString(json, "ing_two");
             ResourceLocation resourceLocation1 = new ResourceLocation(i1);
             ResourceLocation resourceLocation2 = new ResourceLocation(i2);
             ing1 = Ingredient.of(Registry.ITEM.getOptional(resourceLocation1).orElseThrow(() -> new IllegalStateException("Item: " + i1 + " does not exist")));

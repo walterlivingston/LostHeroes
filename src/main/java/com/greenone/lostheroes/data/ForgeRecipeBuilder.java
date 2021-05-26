@@ -95,8 +95,8 @@ public class ForgeRecipeBuilder {
                 p_218610_1_.addProperty("group", this.group);
             }
 
-            p_218610_1_.add("ing1", this.ing1.toJson());
-            p_218610_1_.add("ing2", this.ing2.toJson());
+            p_218610_1_.add("ing_one", this.ing1.toJson());
+            p_218610_1_.add("ing_two", this.ing2.toJson());
             p_218610_1_.addProperty("result", Registry.ITEM.getKey(this.result).toString());
             p_218610_1_.addProperty("experience", this.experience);
             p_218610_1_.addProperty("cookingtime", this.cookingTime);

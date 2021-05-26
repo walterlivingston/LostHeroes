@@ -2,6 +2,7 @@ package com.greenone.lostheroes.common.blocks.tiles;
 
 import com.google.common.collect.Lists;
 import com.greenone.lostheroes.common.blocks.ForgeBlock;
+import com.greenone.lostheroes.common.init.LHRecipes;
 import com.greenone.lostheroes.common.inventory.container.ForgeContainer;
 import com.greenone.lostheroes.common.items.crafting.ForgeRecipe;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -22,6 +23,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.util.Direction;
@@ -84,10 +86,10 @@ public class ForgeTile extends LockableTileEntity implements ISidedInventory, IR
         }
     };
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
-    protected final IRecipeType<? extends ForgeRecipe> recipeType;
+    protected final IRecipeType<ForgeRecipe> recipeType;
     public ForgeTile() {
         super(LHTileEntities.FORGE);
-        this.recipeType = ForgeRecipe.FORGE;
+        this.recipeType = LHRecipes.Types.ALLOYING;
     }
 
     private boolean isLit() {
@@ -137,7 +139,7 @@ public class ForgeTile extends LockableTileEntity implements ISidedInventory, IR
         if (!this.level.isClientSide) {
             ItemStack itemstack = this.items.get(2);
             if (this.isLit() || !itemstack.isEmpty() && !this.items.get(0).isEmpty()) {
-                IRecipe<?> irecipe = this.level.getRecipeManager().getRecipeFor((IRecipeType<ForgeRecipe>)this.recipeType, this, this.level).orElse(null);
+                ForgeRecipe irecipe = this.level.getRecipeManager().getRecipeFor(this.recipeType, this, this.level).orElse(null);
                 if (!this.isLit() && this.canBurn(irecipe)) {
                     this.litTime = this.getBurnDuration(itemstack);
                     this.litDuration = this.litTime;
@@ -236,7 +238,7 @@ public class ForgeTile extends LockableTileEntity implements ISidedInventory, IR
     }
 
     protected int getTotalCookTime() {
-        return this.level.getRecipeManager().getRecipeFor((IRecipeType<ForgeRecipe>)this.recipeType, this, this.level).map(ForgeRecipe::getCookTime).orElse(200);
+        return this.level.getRecipeManager().getRecipeFor(this.recipeType, this, this.level).map(ForgeRecipe::getCookTime).orElse(200);
     }
 
     public static boolean isFuel(ItemStack stack) {

@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.inventory.container;
 
 import com.greenone.lostheroes.common.blocks.tiles.ForgeTile;
+import com.greenone.lostheroes.common.init.LHRecipes;
 import com.greenone.lostheroes.common.inventory.ForgeFuelSlot;
 import com.greenone.lostheroes.common.inventory.ForgeResultSlot;
 import com.greenone.lostheroes.common.items.crafting.ForgeRecipe;
@@ -33,7 +34,7 @@ public class ForgeContainer extends RecipeBookContainer<IInventory> {
 
     public ForgeContainer(int idIn, PlayerInventory playerInvIn, IInventory forgeInvIn, IIntArray forgeDataIn) {
         super(LHContainers.FORGE, idIn);
-        this.recipeType = ForgeRecipe.FORGE;
+        this.recipeType = LHRecipes.Types.ALLOYING;
         checkContainerSize(forgeInvIn, 4);
         checkContainerDataCount(forgeDataIn, 4);
         this.forgeInv = forgeInvIn;

@@ -1,9 +1,9 @@
 package com.greenone.lostheroes.data;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.greenone.lostheroes.common.init.LHRecipes;
 import com.greenone.lostheroes.common.items.crafting.ForgeRecipe;
-import com.greenone.lostheroes.common.items.crafting.ForgeRecipeSerializer;
-import com.greenone.lostheroes.common.items.crafting.LHRecipeSerializers;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.ICriterionInstance;
@@ -29,9 +29,9 @@ public class ForgeRecipeBuilder {
     private final int cookingTime;
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
     private String group;
-    private final ForgeRecipeSerializer<?> serializer;
+    private final ForgeRecipe.Serializer serializer;
 
-    private ForgeRecipeBuilder(IItemProvider resultIn, Item ing1In, Item ing2In, float experienceIn, int cookingTimeIn, ForgeRecipeSerializer<?> serializerIn) {
+    private ForgeRecipeBuilder(IItemProvider resultIn, Item ing1In, Item ing2In, float experienceIn, int cookingTimeIn, ForgeRecipe.Serializer serializerIn) {
         this.result = resultIn.asItem();
         this.ing1 = ing1In;
         this.ing2 = ing2In;
@@ -41,7 +41,7 @@ public class ForgeRecipeBuilder {
     }
 
     public static ForgeRecipeBuilder forge(Item ing1, Item ing2, IItemProvider result, float experience, int cookingTime) {
-        return new ForgeRecipeBuilder(result, ing1, ing2, experience, cookingTime, LHRecipeSerializers.FORGE);
+        return new ForgeRecipeBuilder(result, ing1, ing2, experience, cookingTime, LHRecipes.Serializers.ALLOYING);
     }
 
     public ForgeRecipeBuilder unlockedBy(String p_218628_1_, ICriterionInstance p_218628_2_) {
@@ -95,8 +95,11 @@ public class ForgeRecipeBuilder {
                 p_218610_1_.addProperty("group", this.group);
             }
 
-            p_218610_1_.add("ing_one", this.ing1.toJson());
-            p_218610_1_.add("ing_two", this.ing2.toJson());
+            JsonArray jsonArray = new JsonArray();
+            jsonArray.add(ing1.toJson());
+            jsonArray.add(ing2.toJson());
+
+            p_218610_1_.add("ingredients", jsonArray);
             p_218610_1_.addProperty("result", Registry.ITEM.getKey(this.result).toString());
             p_218610_1_.addProperty("experience", this.experience);
             p_218610_1_.addProperty("cookingtime", this.cookingTime);

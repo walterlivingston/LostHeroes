@@ -1,11 +1,13 @@
 {
   "type": "lostheroes:alloying",
-  "ing_one": {
-    "item": "lostheroes:silver_ingot"
-  },
-  "ing_two": {
-    "item": "minecraft:diamond"
-  },
+  "ingredients": [
+    {
+      "item": "lostheroes:silver_ingot"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
   "result": "lostheroes:adamantine_ingot_dull",
   "experience": 0.7,
   "cookingtime": 200

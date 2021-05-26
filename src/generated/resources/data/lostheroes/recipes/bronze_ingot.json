@@ -1,11 +1,13 @@
 {
   "type": "lostheroes:alloying",
-  "ing_one": {
-    "item": "lostheroes:copper_ingot"
-  },
-  "ing_two": {
-    "item": "lostheroes:tin_ingot"
-  },
+  "ingredients": [
+    {
+      "item": "lostheroes:copper_ingot"
+    },
+    {
+      "item": "lostheroes:tin_ingot"
+    }
+  ],
   "result": "lostheroes:bronze_ingot",
   "experience": 0.7,
   "cookingtime": 200

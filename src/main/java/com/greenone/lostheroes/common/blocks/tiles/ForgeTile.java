@@ -23,7 +23,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.util.Direction;
@@ -97,15 +96,15 @@ public class ForgeTile extends LockableTileEntity implements ISidedInventory, IR
     }
 
     @Override
-    public void load(BlockState p_230337_1_, CompoundNBT p_230337_2_) {
-        super.load(p_230337_1_, p_230337_2_);
+    public void load(BlockState state, CompoundNBT compound) {
+        super.load(state, compound);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ItemStackHelper.loadAllItems(p_230337_2_, this.items);
-        this.litTime = p_230337_2_.getInt("BurnTime");
-        this.cookingProgress = p_230337_2_.getInt("CookTime");
-        this.cookingTotalTime = p_230337_2_.getInt("CookTimeTotal");
+        ItemStackHelper.loadAllItems(compound, this.items);
+        this.litTime = compound.getInt("BurnTime");
+        this.cookingProgress = compound.getInt("CookTime");
+        this.cookingTotalTime = compound.getInt("CookTimeTotal");
         this.litDuration = this.getBurnDuration(this.items.get(1));
-        CompoundNBT compoundnbt = p_230337_2_.getCompound("RecipesUsed");
+        CompoundNBT compoundnbt = compound.getCompound("RecipesUsed");
 
         for(String s : compoundnbt.getAllKeys()) {
             this.recipesUsed.put(new ResourceLocation(s), compoundnbt.getInt(s));
@@ -238,7 +237,7 @@ public class ForgeTile extends LockableTileEntity implements ISidedInventory, IR
     }
 
     protected int getTotalCookTime() {
-        return this.level.getRecipeManager().getRecipeFor(this.recipeType, this, this.level).map(ForgeRecipe::getCookTime).orElse(200);
+        return this.level.getRecipeManager().getRecipeFor(this.recipeType, this, this.level).map(ForgeRecipe::getCookingTime).orElse(200);
     }
 
     public static boolean isFuel(ItemStack stack) {
@@ -406,9 +405,9 @@ public class ForgeTile extends LockableTileEntity implements ISidedInventory, IR
         List<IRecipe<?>> list = Lists.newArrayList();
 
         for(Object2IntMap.Entry<ResourceLocation> entry : this.recipesUsed.object2IntEntrySet()) {
-            level.getRecipeManager().byKey(entry.getKey()).ifPresent((p_235642_4_) -> {
-                list.add(p_235642_4_);
-                createExperience(level, position, entry.getIntValue(), ((ForgeRecipe)p_235642_4_).getExperience());
+            level.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe) -> {
+                list.add(recipe);
+                createExperience(level, position, entry.getIntValue(), ((ForgeRecipe)recipe).getExperience());
             });
         }
 

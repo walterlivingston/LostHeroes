@@ -155,7 +155,7 @@ public class ForgeContainer extends RecipeBookContainer<IInventory> {
     }
 
     protected boolean canSmelt(ItemStack stack) {
-        return this.level.getRecipeManager().getRecipeFor((IRecipeType)this.recipeType, new Inventory(stack), this.level).isPresent();
+        return this.level.getRecipeManager().getRecipeFor(LHRecipes.Types.ALLOYING, new Inventory(stack), this.level).isPresent();
     }
 
     public boolean isFuel(ItemStack stack) {

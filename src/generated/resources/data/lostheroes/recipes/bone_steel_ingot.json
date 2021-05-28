@@ -8,7 +8,9 @@
       "item": "minecraft:bone"
     }
   ],
-  "result": "lostheroes:bone_steel_ingot",
+  "result": {
+    "item": "lostheroes:bone_steel_ingot"
+  },
   "experience": 0.7,
   "cookingtime": 200
 }

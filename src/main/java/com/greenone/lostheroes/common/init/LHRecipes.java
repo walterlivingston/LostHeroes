@@ -16,7 +16,7 @@ public class LHRecipes {
     }
 
     public static final class Serializers{
-        public static final ForgeRecipe.Serializer ALLOYING = new ForgeRecipe.Serializer(ForgeRecipe::new);
+        public static final ForgeRecipe.Serializer ALLOYING = new ForgeRecipe.Serializer();
 
         private Serializers(){}
     }

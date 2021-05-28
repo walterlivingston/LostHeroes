@@ -55,8 +55,8 @@ public class LHRecipeProvider extends ForgeRecipeProvider {
             ShapedRecipeBuilder.shaped(LHBlocks.pillars.get(s)).define('N', LHBlocks.stoneBlocks.get(s)).define('S', LHBlocks.stoneSlabs.get(s)).pattern("SSS").pattern(" N ").pattern("SSS").unlockedBy("has_"+s.tagName(), has(LHBlocks.stoneBlocks.get(s))).save(consumer);
         }
         ShapedRecipeBuilder.shaped(LHBlocks.forge).define('#', Blocks.POLISHED_BLACKSTONE).pattern("###").pattern("# #").pattern("###").unlockedBy("has_blackstone", has(Blocks.POLISHED_BLACKSTONE)).save(consumer);
-        ForgeRecipeBuilder.forge(LHItems.ingots.get(Metal.COPPER), LHItems.ingots.get(Metal.TIN), LHItems.ingots.get(Metal.BRONZE), 0.7F, 200).unlockedBy("has_copper_ingot", has(LHItems.ingots.get(Metal.COPPER))).unlockedBy("has_tin_ingot", has(LHItems.ingots.get(Metal.TIN))).save(consumer);
-        ForgeRecipeBuilder.forge(Items.IRON_INGOT, Items.BONE, LHItems.ingots.get(Metal.BONE_STEEL), 0.7F, 200).unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(consumer);
-        ForgeRecipeBuilder.forge(LHItems.ingots.get(Metal.SILVER), Items.DIAMOND, LHItems.adamantine_ingot_dull, 0.7F, 200).unlockedBy("has_diamond", has(Items.DIAMOND)).unlockedBy("has_silver_ingot", has(LHTags.Items.INGOTS.get(Metal.SILVER))).save(consumer);
+        ForgeRecipeBuilder.forge(LHItems.ingots.get(Metal.BRONZE), 0.7F, 200).requires(LHItems.ingots.get(Metal.COPPER)).requires(LHItems.ingots.get(Metal.TIN)).unlockedBy("has_copper_ingot", has(LHItems.ingots.get(Metal.COPPER))).unlockedBy("has_tin_ingot", has(LHItems.ingots.get(Metal.TIN))).save(consumer);
+        ForgeRecipeBuilder.forge(LHItems.ingots.get(Metal.BONE_STEEL), 0.7F, 200).requires(Items.IRON_INGOT).requires(Items.BONE).unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(consumer);
+        ForgeRecipeBuilder.forge(LHItems.adamantine_ingot_dull, 0.7F, 200).requires(Items.DIAMOND).requires(LHItems.ingots.get(Metal.SILVER)).unlockedBy("has_diamond", has(Items.DIAMOND)).unlockedBy("has_silver_ingot", has(LHTags.Items.INGOTS.get(Metal.SILVER))).save(consumer);
     }
 }

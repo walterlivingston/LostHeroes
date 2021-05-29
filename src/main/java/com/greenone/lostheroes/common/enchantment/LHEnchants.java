@@ -6,13 +6,13 @@ import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.items.LHItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class LHEnchants {
+    private static final EquipmentSlotType[] ARMOR_SLOTS = new EquipmentSlotType[]{EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET};
     public static final EnchantmentType METAL = EnchantmentType.create("metal", (item) -> {
         if(item!=null){
             if(item == LHItems.ingots.get(Metal.BRONZE) || item==LHItems.ingots.get(Metal.GOLD) || item==LHItems.adamantine_ingot_dull)
@@ -25,11 +25,10 @@ public class LHEnchants {
         return false;
     });
 
-
-
     public static final DeferredRegister<Enchantment> ENCHANTMENT = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, LostHeroes.MOD_ID);
 
     public static final Enchantment BLESSING = register("blessing", new BlessingEnchant());
+    public static final Enchantment REHYDRATION = register("rehydration", new RehydrationEnchantment(ARMOR_SLOTS));
 
     public static void register(IEventBus eventBus){
         ENCHANTMENT.register(eventBus);

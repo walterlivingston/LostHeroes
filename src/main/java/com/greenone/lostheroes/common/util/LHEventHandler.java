@@ -6,9 +6,13 @@ import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.capabilities.PlayerCap;
 import com.greenone.lostheroes.common.commands.LHCommands;
+import com.greenone.lostheroes.common.enchantment.LHEnchants;
 import com.greenone.lostheroes.common.init.Blessings;
 import com.greenone.lostheroes.common.init.Deities;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -62,6 +66,13 @@ public class LHEventHandler {
                     player.onUpdateAbilities();
                 }
                 LHUtils.abilityCheck(player, playerCap);
+            }
+        }
+        if(player.getArmorValue() > 0){
+            for(ItemStack stack : player.getArmorSlots()){
+                if(EnchantmentHelper.getEnchantments(stack).containsKey(LHEnchants.REHYDRATION) && player.isInWater()){
+                    if(player.getHealth() < player.getMaxHealth()) player.heal(0.001F);
+                }
             }
         }
     }

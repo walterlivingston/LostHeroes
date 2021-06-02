@@ -2,7 +2,10 @@ package com.greenone.lostheroes.common.util;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
+import com.greenone.lostheroes.common.enchantment.FleetEnchantment;
+import com.greenone.lostheroes.common.enchantment.LHEnchants;
 import com.greenone.lostheroes.common.init.Blessings;
+import com.greenone.lostheroes.common.potions.LHEffect;
 import com.greenone.lostheroes.common.potions.LHEffects;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.block.Block;
@@ -11,14 +14,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityPredicate;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.*;
@@ -87,6 +94,22 @@ public class LHUtils {
             case "hephaestus":
                 player.addEffect(new EffectInstance(LHEffects.FIRE_RESISTANCE, 30, 1, false, false, false, null));
                 break;
+        }
+    }
+
+    public static void enchantmentCheck(PlayerEntity player){
+        if(player.getArmorValue() > 0){
+            for(ItemStack stack : player.getArmorSlots()){
+                if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.REHYDRATION, stack) > 0 && player.isInWater()){
+                    if(player.getHealth() < player.getMaxHealth()) player.heal(0.001F);
+                }
+                if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.FLEET, stack) > 0){
+                    player.addEffect(new EffectInstance(new LHEffect().addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", (double)0.2F, AttributeModifier.Operation.MULTIPLY_TOTAL), 30, EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.FLEET, stack), false, false, false, null));
+                }
+                if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.DAEDALUS_ASPECT, stack) > 0){
+                    player.addEffect(new EffectInstance(new LHEffect().addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 0.3D, AttributeModifier.Operation.ADDITION), 30, EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.DAEDALUS_ASPECT, stack), false, false, false, null));
+                }
+            }
         }
     }
 

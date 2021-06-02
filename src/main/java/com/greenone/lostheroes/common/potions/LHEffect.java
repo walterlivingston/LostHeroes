@@ -9,7 +9,7 @@ public class LHEffect extends Effect {
         super(typeIn, liquidColorIn);
     }
 
-    protected LHEffect() {
+    public LHEffect() {
         super(EffectType.BENEFICIAL, 25520646);
     }
 

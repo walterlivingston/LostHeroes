@@ -5,13 +5,13 @@ import com.greenone.lostheroes.common.init.Deities;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
 
-public class RehydrationEnchantment extends GodlyEnchantment{
-    protected RehydrationEnchantment(Rarity p_i46731_1_, EnchantmentType p_i46731_2_, EquipmentSlotType... p_i46731_3_) {
-        super(p_i46731_1_, p_i46731_2_, Deities.POSEIDON, p_i46731_3_);
+public class PrecisionEnchantment extends GodlyEnchantment{
+    protected PrecisionEnchantment(Rarity rarity, EnchantmentType enchantmentType, EquipmentSlotType... slotTypes) {
+        super(rarity, enchantmentType, Deities.ARTEMIS, slotTypes);
     }
 
     @Override
     public int getMaxLevel() {
-        return 1;
+        return 3;
     }
 }

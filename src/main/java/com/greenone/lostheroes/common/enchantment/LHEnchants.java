@@ -12,6 +12,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class LHEnchants {
+    private static final DeferredRegister<Enchantment> ENCHANTMENT = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, LostHeroes.MOD_ID);
     private static final EquipmentSlotType[] ARMOR_SLOTS = new EquipmentSlotType[]{EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET};
     public static final EnchantmentType METAL = EnchantmentType.create("metal", (item) -> {
         if(item!=null){
@@ -25,10 +26,15 @@ public class LHEnchants {
         return false;
     });
 
-    public static final DeferredRegister<Enchantment> ENCHANTMENT = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, LostHeroes.MOD_ID);
-
     public static final Enchantment BLESSING = register("blessing", new BlessingEnchant());
-    public static final Enchantment REHYDRATION = register("rehydration", new RehydrationEnchantment(ARMOR_SLOTS));
+
+    public static final Enchantment THUNDER_STRIKE = register("thunder_strike", new ThunderStrikeEnchantment(Enchantment.Rarity.RARE, EnchantmentType.WEAPON, EquipmentSlotType.MAINHAND));
+    public static final Enchantment REHYDRATION = register("rehydration", new RehydrationEnchantment(Enchantment.Rarity.RARE, EnchantmentType.ARMOR_HEAD, EquipmentSlotType.HEAD));
+    public static final Enchantment UNDEAD_PRESENCE = register("undead_presence", new UndeadPresenceEnchantment(Enchantment.Rarity.RARE, EnchantmentType.ARMOR_CHEST, EquipmentSlotType.CHEST));
+    public static final Enchantment UNREQUITED = register("unrequited", new UnrequitedEnchantment(Enchantment.Rarity.RARE, EnchantmentType.BOW, EquipmentSlotType.MAINHAND));
+    public static final Enchantment PRECISION = register("precision", new PrecisionEnchantment(Enchantment.Rarity.RARE, EnchantmentType.BOW, EquipmentSlotType.MAINHAND));
+    public static final Enchantment FLEET = register("fleet", new FleetEnchantment(Enchantment.Rarity.RARE, EnchantmentType.ARMOR_FEET, EquipmentSlotType.FEET));
+    public static final Enchantment DAEDALUS_ASPECT = register("daedalus_aspect", new DaedalusAspectEnchantment(Enchantment.Rarity.RARE, EnchantmentType.ARMOR, ARMOR_SLOTS));
 
     public static void register(IEventBus eventBus){
         ENCHANTMENT.register(eventBus);

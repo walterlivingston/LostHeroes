@@ -8,9 +8,19 @@ import net.minecraft.inventory.EquipmentSlotType;
 public abstract class GodlyEnchantment extends Enchantment {
     protected static Deity deity;
 
-    protected GodlyEnchantment(Rarity p_i46731_1_, EnchantmentType p_i46731_2_, EquipmentSlotType[] p_i46731_3_, Deity deityIn) {
-        super(p_i46731_1_, p_i46731_2_, p_i46731_3_);
+    protected GodlyEnchantment(Rarity rarity, EnchantmentType enchantmentType, Deity deityIn, EquipmentSlotType... slotTypes) {
+        super(rarity, enchantmentType, slotTypes);
         deity = deityIn;
+    }
+
+    @Override
+    public int getMinCost(int p_77321_1_) {
+        return 5 + (p_77321_1_ - 1) * 8;
+    }
+
+    @Override
+    public int getMaxCost(int p_223551_1_) {
+        return super.getMinCost(p_223551_1_) + 50;
     }
 
     public static boolean isParent(Deity parent){

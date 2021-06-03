@@ -77,14 +77,15 @@ public class LHUtils {
                 else
                     playerCap.getParent().removeAttributeModifiers(player, player.getAttributes(), 0);
                 break;
-            case "dionysus":
-                player.addEffect(new EffectInstance(Blessings.DIONYSUS, 30, 1, false, false, false, null));
-                break;
             case "demeter":
                 if(player.isSteppingCarefully() && (player.isCreative() || playerCap.consumeMana(0.008F))){
                     player.addEffect(new EffectInstance(Blessings.DEMETER, 30, 1, false, false, false, null));
                 }
                 break;
+            case "dionysus":
+                player.addEffect(new EffectInstance(Blessings.DIONYSUS, 30, 1, false, false, false, null));
+                break;
+
             case "hermes":
                 if(player.isSprinting() && (player.isCreative() || playerCap.getMana() > 0.5F)){
                     player.addEffect(new EffectInstance(Blessings.HERMES, 30, 1, false, false, false, null));

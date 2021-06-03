@@ -8,7 +8,9 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Deities {
@@ -44,14 +46,14 @@ public class Deities {
             Items.BOW,
             Blessings.ARTEMIS,
             new ArtemisAbilities()).addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", (double)0.2F, AttributeModifier.Operation.MULTIPLY_TOTAL);
-    public static final Deity DIONYSUS = new Deity("dionysus",
-            Items.SWEET_BERRIES,
-            Blessings.DIONYSUS,
-            new DionysusAbilities());
     public static final Deity DEMETER = new Deity("demeter",
             Items.WHEAT,
             Blessings.DEMETER,
             new DemeterAbilities());
+    public static final Deity DIONYSUS = new Deity("dionysus",
+            Items.SWEET_BERRIES,
+            Blessings.DIONYSUS,
+            new DionysusAbilities());
     public static final Deity HERMES = new Deity("hermes",
             Items.SCUTE,
             Blessings.HERMES,
@@ -62,20 +64,21 @@ public class Deities {
             new HephaestusAbilities());
 
     public static Map<String, Deity> list = new HashMap<>();
+    public static List<Deity> ordered_list = new ArrayList<>();
 
     public static void init(){
-        list.put(ZEUS.getName(), ZEUS);
-        list.put(POSEIDON.getName(), POSEIDON);
-        list.put(HADES.getName(), HADES);
-        list.put(ATHENA.getName(), ATHENA);
-        list.put(ARES.getName(), ARES);
-        list.put(APHRODITE.getName(), APHRODITE);
-        list.put(APOLLO.getName(), APOLLO);
-        list.put(ARTEMIS.getName(), ARTEMIS);
-        list.put(DIONYSUS.getName(), DIONYSUS);
-        list.put(DEMETER.getName(), DEMETER);
-        list.put(HERMES.getName(), HERMES);
-        list.put(HEPHAESTUS.getName(), HEPHAESTUS);
+        addGod(ZEUS);
+        addGod(POSEIDON);
+        addGod(HADES);
+        addGod(ATHENA);
+        addGod(ARES);
+        addGod(APHRODITE);
+        addGod(APOLLO);
+        addGod(ARTEMIS);
+        addGod(DEMETER);
+        addGod(DIONYSUS);
+        addGod(HERMES);
+        addGod(HEPHAESTUS);
     }
 
     public static Deity getDeity(Item sacrificeIn){
@@ -94,5 +97,10 @@ public class Deities {
             }
         }
         return false;
+    }
+
+    private static void addGod(Deity deity){
+        list.put(deity.getName(), deity);
+        ordered_list.add(deity);
     }
 }

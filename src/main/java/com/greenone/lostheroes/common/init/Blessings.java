@@ -15,8 +15,8 @@ public class Blessings {
     public static final Blessing APHRODITE = new Blessing();
     public static final Blessing APOLLO = (Blessing) new Blessing().addAttributeModifier(Attributes.MAX_HEALTH, "5D6F0BA2-1186-46AC-B896-C61C5CEE99CC", 4.0D, AttributeModifier.Operation.ADDITION);
     public static final Blessing ARTEMIS = (Blessing) new Blessing().addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", (double)0.2F, AttributeModifier.Operation.MULTIPLY_TOTAL);
-    public static final Blessing DIONYSUS = new Blessing();
     public static final Blessing DEMETER = new Blessing();
+    public static final Blessing DIONYSUS = new Blessing();
     public static final Blessing HERMES = (Blessing) new Blessing().addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", (double)0.9F, AttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final Blessing HEPHAESTUS = new Blessing();
 

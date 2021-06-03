@@ -39,9 +39,8 @@ public class LHClientUtils {
                 LHUtils.renderRageOverlay();
             }
         }
-        IPlayerCap playerCap = Minecraft.getInstance().player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE){
-            hud.render(event.getMatrixStack());
+            new ManaHUD(Minecraft.getInstance()).render(event.getMatrixStack());
         }
     }
 }

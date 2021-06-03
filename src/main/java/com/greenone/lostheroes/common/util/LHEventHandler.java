@@ -51,6 +51,7 @@ public class LHEventHandler {
             Object[] values = Deities.list.values().toArray();
             playerCap.setParent((Deity) values[rand.nextInt(values.length)]);
             event.getPlayer().sendMessage(new StringTextComponent("You have been claimed by " + playerCap.getParent().getFormattedName()), event.getPlayer().getUUID());
+            playerCap.sync(event.getPlayer());
         }
     }
 
@@ -79,6 +80,7 @@ public class LHEventHandler {
                     player.onUpdateAbilities();
                 }
                 LHUtils.abilityCheck(player, playerCap);
+                playerCap.sync(player);
             }
         }
         LHUtils.enchantmentCheck(player);

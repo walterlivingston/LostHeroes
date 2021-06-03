@@ -1,6 +1,8 @@
 package com.greenone.lostheroes.client.utils;
 
 import com.greenone.lostheroes.client.gui.ManaHUD;
+import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
+import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.network.PacketAbility;
 import com.greenone.lostheroes.common.potions.LHEffects;
@@ -37,8 +39,9 @@ public class LHClientUtils {
                 LHUtils.renderRageOverlay();
             }
         }
+        IPlayerCap playerCap = Minecraft.getInstance().player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE){
-           hud.render(event.getMatrixStack());
+            hud.render(event.getMatrixStack());
         }
     }
 }

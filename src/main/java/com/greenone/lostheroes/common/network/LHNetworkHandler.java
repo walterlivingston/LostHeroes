@@ -19,5 +19,6 @@ public class LHNetworkHandler {
 
         INSTANCE.registerMessage(nextID(), PacketAbility.class, PacketAbility::toBytes, PacketAbility::new, PacketAbility::handle);
         INSTANCE.registerMessage(nextID(), PacketRiptide.class, PacketRiptide::toBytes, PacketRiptide::new, PacketRiptide::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        INSTANCE.registerMessage(nextID(), CapSyncPacket.class, CapSyncPacket::toBytes, CapSyncPacket::new, CapSyncPacket::handle);
     }
 }

@@ -1,16 +1,24 @@
 package com.greenone.lostheroes.common.capabilities;
 
 import com.greenone.lostheroes.common.Deity;
+import com.greenone.lostheroes.common.init.Deities;
+import com.greenone.lostheroes.common.network.CapSyncPacket;
+import com.greenone.lostheroes.common.network.LHNetworkHandler;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class PlayerCap implements IPlayerCap, ICapabilitySerializable<CompoundNBT> {
+public class PlayerCap implements IPlayerCap, ICapabilitySerializable<CompoundNBT>{
     private float maxMana = 10;
     private float mana = maxMana;
     private Deity parent = null;
@@ -81,6 +89,14 @@ public class PlayerCap implements IPlayerCap, ICapabilitySerializable<CompoundNB
     @Override
     public void decreaseHadesCooldown() {
         setHadesCooldown(getHadesCooldown()-1);
+    }
+
+    @Override
+    public void sync(PlayerEntity player) {
+        if (!player.getCommandSenderWorld().isClientSide()){
+            LHNetworkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+                    new CapSyncPacket(player, (CompoundNBT) CapabilityRegistry.PLAYERCAP.writeNBT(this, null)));
+        }
     }
 
     @Nonnull

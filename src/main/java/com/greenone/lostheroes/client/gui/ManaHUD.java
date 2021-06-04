@@ -4,6 +4,7 @@ import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.Deity;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
+import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.init.Blessings;
 import com.greenone.lostheroes.common.init.Deities;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -14,8 +15,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 
 public class ManaHUD extends AbstractGui{
-    private static final ResourceLocation HUD_TEX = new ResourceLocation(LostHeroes.MOD_ID, "textures/gui/mana_hud_thin.png");
-    private static final int hud_width = 125;
+    private static final ResourceLocation HUD_TEX = new ResourceLocation(LostHeroes.MOD_ID, "textures/gui/mana_hud.png");
+    private static final int mana_width = 27;
+    private static final int mana_height = 126;
+    private static final int hud_width = 127;
     private static final int hud_height = 256;
     private static final int large_icon_width = 28;
     private static final int large_icon_height = 28;
@@ -46,14 +49,19 @@ public class ManaHUD extends AbstractGui{
             matrixStack.scale(scale, scale, scale);
             width = (int) ((1/scale)*screenWidth);
             height = (int) ((1/scale)*screenHeight);
-            hudWidthOffset = (int) (width - hud_width - (1/scale)*10);
+            hudWidthOffset = LHConfig.getLeftHUD() ? (int) (hud_width/2 - (1/scale)*10) : (int) (width - hud_width - (1/scale)*10);
             hudHeightOffset = (int) (height - hud_height - (1/scale)*10);
+            renderMana(matrixStack, c);
             this.blit(matrixStack, hudWidthOffset, hudHeightOffset, 0, 0, hud_width, hud_height);
-            mc.getProfiler().pop();
             renderParentSymbol(matrixStack, c);
             renderBlessingSymbol(matrixStack);
             matrixStack.popPose();
         });
+    }
+
+    private void renderMana(MatrixStack matrixStack, IPlayerCap playerCap) {
+        float mana_percent = playerCap.getMana() / playerCap.getMaxMana();
+        this.blit(matrixStack, hudWidthOffset + mana_width + 23, hudHeightOffset + mana_height + 5 - (int) (mana_percent*mana_height), 144, (int) (256-(mana_height*mana_percent)), mana_width, (int) (mana_height*mana_percent));
     }
 
     public void renderParentSymbol(MatrixStack matrixStack, IPlayerCap playerCap){
@@ -76,40 +84,40 @@ public class ManaHUD extends AbstractGui{
     private void renderBlessingSymbol(MatrixStack matrixStack) {
         mc.getTextureManager().bind(HUD_TEX);
         if(player.hasEffect(Blessings.ZEUS)){
-            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 13, hudHeightOffset + hud_height/2 + small_icon_height/2 + 3, 212, 201, small_icon_width - 2, small_icon_height - 2);
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 13, hudHeightOffset + hud_height/2 + small_icon_height/2 + 1, 212, 201, small_icon_width - 2, small_icon_height - 2);
         }
         if(player.hasEffect(Blessings.POSEIDON)){
-            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 17, hudHeightOffset + hud_height/2 + small_icon_height/2 + 3, 212 + small_icon_width-1, 201, small_icon_width - 2, small_icon_height - 2);
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 17, hudHeightOffset + hud_height/2 + small_icon_height/2 + 1, 212 + small_icon_width-1, 201, small_icon_width - 2, small_icon_height - 2);
         }
         if(player.hasEffect(Blessings.HADES)){
-            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 37, hudHeightOffset + hud_height/2 + small_icon_height/2 + 17,  212 + 2*small_icon_width-2, 201, small_icon_width - 2, small_icon_height - 2);
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 37, hudHeightOffset + hud_height/2 + small_icon_height/2 + 15,  212 + 2*small_icon_width-2, 201, small_icon_width - 2, small_icon_height - 2);
         }
         if(player.hasEffect(Blessings.ATHENA)){
-            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 41, hudHeightOffset + hud_height/2 + small_icon_height/2 + 17,  212 + 3*small_icon_width-3, 201, small_icon_width - 2, small_icon_height - 2);
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 41, hudHeightOffset + hud_height/2 + small_icon_height/2 + 15,  212 + 3*small_icon_width-3, 201, small_icon_width - 2, small_icon_height - 2);
         }
         if(player.hasEffect(Blessings.ARES)){
-            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 51, hudHeightOffset + hud_height/2 + small_icon_height/2 + 43,  212, 201 + small_icon_height-1, small_icon_width - 2, small_icon_height - 2);
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 51, hudHeightOffset + hud_height/2 + small_icon_height/2 + 41,  212, 201 + small_icon_height-1, small_icon_width - 2, small_icon_height - 2);
         }
         if(player.hasEffect(Blessings.APHRODITE)){
-            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 55, hudHeightOffset + hud_height/2 + small_icon_height/2 + 43,  212 + small_icon_width-1, 201 + small_icon_height-1, small_icon_width - 2, small_icon_height - 2);
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 55, hudHeightOffset + hud_height/2 + small_icon_height/2 + 41,  212 + small_icon_width-1, 201 + small_icon_height-1, small_icon_width - 2, small_icon_height - 2);
         }
         if(player.hasEffect(Blessings.APOLLO)){
-            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 52, hudHeightOffset + hud_height/2 + small_icon_height/2 + 65,  212 + 2*small_icon_height-2, 201 + small_icon_height-1, small_icon_width - 2, small_icon_height - 2);
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 52, hudHeightOffset + hud_height/2 + small_icon_height/2 + 63,  212 + 2*small_icon_height-2, 201 + small_icon_height-1, small_icon_width - 2, small_icon_height - 2);
         }
         if(player.hasEffect(Blessings.ARTEMIS)){
-            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 55, hudHeightOffset + hud_height/2 + small_icon_height/2 + 65,  212 + 3*small_icon_height-3, 201 + small_icon_height-1, small_icon_width - 2, small_icon_height - 2);
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 55, hudHeightOffset + hud_height/2 + small_icon_height/2 + 63,  212 + 3*small_icon_height-3, 201 + small_icon_height-1, small_icon_width - 2, small_icon_height - 2);
         }
         if(player.hasEffect(Blessings.DEMETER)){
-            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 37, hudHeightOffset + hud_height/2 + small_icon_height/2 + 92,  212, 201 + 2*small_icon_height-2, small_icon_width - 2, small_icon_height - 2);
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 37, hudHeightOffset + hud_height/2 + small_icon_height/2 + 90,  212, 201 + 2*small_icon_height-2, small_icon_width - 2, small_icon_height - 2);
         }
         if(player.hasEffect(Blessings.DIONYSUS)){
-            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 41, hudHeightOffset + hud_height/2 + small_icon_height/2 + 93,  212 + small_icon_width-1, 201 + 2*small_icon_height-2, small_icon_width - 2, small_icon_height - 2);
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 41, hudHeightOffset + hud_height/2 + small_icon_height/2 + 91,  212 + small_icon_width-1, 201 + 2*small_icon_height-2, small_icon_width - 2, small_icon_height - 2);
         }
         if(player.hasEffect(Blessings.HERMES)){
-            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 17, hudHeightOffset + hud_height/2 + small_icon_height/2 + 107,  212 + 2*small_icon_width-2, 201 + 2*small_icon_height-2, small_icon_width - 2, small_icon_height - 2);
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 17, hudHeightOffset + hud_height/2 + small_icon_height/2 + 105,  212 + 2*small_icon_width-2, 201 + 2*small_icon_height-2, small_icon_width - 2, small_icon_height - 2);
         }
         if(player.hasEffect(Blessings.HEPHAESTUS)){
-            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 13, hudHeightOffset + hud_height/2 + small_icon_height/2 + 106,  212 + 3*small_icon_width-3, 201 + 2*small_icon_height-2, small_icon_width - 2, small_icon_height - 2);
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 13, hudHeightOffset + hud_height/2 + small_icon_height/2 + 104,  212 + 3*small_icon_width-3, 201 + 2*small_icon_height-2, small_icon_width - 2, small_icon_height - 2);
         }
     }
 }

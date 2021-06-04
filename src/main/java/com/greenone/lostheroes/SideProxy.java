@@ -9,6 +9,7 @@ import com.greenone.lostheroes.client.utils.LHKeybinds;
 import com.greenone.lostheroes.common.IProxy;
 import com.greenone.lostheroes.common.blocks.tiles.LHTileEntities;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
+import com.greenone.lostheroes.common.config.Config;
 import com.greenone.lostheroes.common.entities.LHEntities;
 import com.greenone.lostheroes.common.inventory.container.LHContainers;
 import com.greenone.lostheroes.common.items.LHItemModelProperties;
@@ -23,8 +24,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
@@ -32,8 +35,11 @@ import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import javax.annotation.Nullable;
+
+import static com.greenone.lostheroes.LostHeroes.MOD_ID;
 
 public class SideProxy implements IProxy {
     private static MinecraftServer server;
@@ -43,6 +49,14 @@ public class SideProxy implements IProxy {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(DataGenerators::gatherData);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(SideProxy::commonSetup);
         MinecraftForge.EVENT_BUS.register(LHEventHandler.instance);
+
+        // register configs
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.client_config);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.server_config);
+
+        // load configs
+        Config.loadConfig(Config.client_config, FMLPaths.CONFIGDIR.get().resolve(MOD_ID+"-client.toml").toString());
+        Config.loadConfig(Config.server_config, FMLPaths.CONFIGDIR.get().resolve(MOD_ID+"-server.toml").toString());
     }
 
     public static void commonSetup(final FMLCommonSetupEvent event) {

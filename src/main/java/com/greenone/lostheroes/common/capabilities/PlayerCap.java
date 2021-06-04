@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.capabilities;
 
 import com.greenone.lostheroes.common.Deity;
+import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.network.CapSyncPacket;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
@@ -19,7 +20,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class PlayerCap implements IPlayerCap, ICapabilitySerializable<CompoundNBT>{
-    private float maxMana = 10;
+    private float maxMana = LHConfig.getMaxMana();
     private float mana = maxMana;
     private Deity parent = null;
     private int hadesCooldown = 0;
@@ -78,7 +79,7 @@ public class PlayerCap implements IPlayerCap, ICapabilitySerializable<CompoundNB
 
     @Override
     public void resetHadesCooldown() {
-        setHadesCooldown(36000);
+        setHadesCooldown(LHConfig.getHadesCooldown());
     }
 
     @Override

@@ -14,8 +14,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 
 public class ManaHUD extends AbstractGui{
-    private static final ResourceLocation HUD_TEX = new ResourceLocation(LostHeroes.MOD_ID, "textures/gui/mana_hud.png");
-    private static final int hud_width = 123;
+    private static final ResourceLocation HUD_TEX = new ResourceLocation(LostHeroes.MOD_ID, "textures/gui/mana_hud_thin.png");
+    private static final int hud_width = 125;
     private static final int hud_height = 256;
     private static final int large_icon_width = 28;
     private static final int large_icon_height = 28;

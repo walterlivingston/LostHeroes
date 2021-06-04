@@ -12,7 +12,7 @@ public class PoseidonAbilities extends AbstractAbility{
     @Override
     public void mainAbility(PlayerEntity player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(player.isInWaterRainOrBubble() && (player.isCreative() || playerCap.consumeMana(2F))){
+        if(player.isInWaterRainOrBubble() && (player.isCreative() || playerCap.consumeMana(getMainManaReq()))){
             LHNetworkHandler.INSTANCE.sendTo(new PacketRiptide(), ((ServerPlayerEntity)player).connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
         }
     }
@@ -20,5 +20,15 @@ public class PoseidonAbilities extends AbstractAbility{
     @Override
     public void minorAbility(PlayerEntity player) {
 
+    }
+
+    @Override
+    public float getMainManaReq() {
+        return 2.0f;
+    }
+
+    @Override
+    public float getMinorManaReq() {
+        return 0;
     }
 }

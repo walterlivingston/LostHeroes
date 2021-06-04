@@ -46,7 +46,6 @@ public class SideProxy implements IProxy {
     private static MinecraftServer server;
 
     SideProxy(){
-        Registration.register();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(DataGenerators::gatherData);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(SideProxy::commonSetup);
         MinecraftForge.EVENT_BUS.register(LHEventHandler.instance);
@@ -59,6 +58,7 @@ public class SideProxy implements IProxy {
         // load configs
         Config.loadConfig(Config.client_config, FMLPaths.CONFIGDIR.get().resolve(MOD_ID+"-client.toml").toString());
         Config.loadConfig(Config.server_config, FMLPaths.CONFIGDIR.get().resolve(MOD_ID+"-server.toml").toString());
+        Registration.register();
     }
 
     public static void commonSetup(final FMLCommonSetupEvent event) {

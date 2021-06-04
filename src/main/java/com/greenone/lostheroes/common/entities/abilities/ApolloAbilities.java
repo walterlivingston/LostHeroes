@@ -45,4 +45,14 @@ public class ApolloAbilities extends AbstractAbility{
     public void minorAbility(PlayerEntity player) {
 
     }
+
+    @Override
+    public float getMainManaReq() {
+        return 0;
+    }
+
+    @Override
+    public float getMinorManaReq() {
+        return 0;
+    }
 }

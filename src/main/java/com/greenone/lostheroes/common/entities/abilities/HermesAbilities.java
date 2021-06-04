@@ -17,14 +17,24 @@ public class HermesAbilities extends AbstractAbility{
     @Override
     public void mainAbility(PlayerEntity player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if((player.isCreative() || playerCap.getMana()>=2.5F) && teleport(player)){
-            playerCap.consumeMana(2.5F);
+        if((player.isCreative() || playerCap.getMana()>=getMainManaReq()) && teleport(player)){
+            playerCap.consumeMana(getMainManaReq());
         }
     }
 
     @Override
     public void minorAbility(PlayerEntity player) {
 
+    }
+
+    @Override
+    public float getMainManaReq() {
+        return 2.5f;
+    }
+
+    @Override
+    public float getMinorManaReq() {
+        return 0;
     }
 
     private boolean teleport(PlayerEntity player) {

@@ -2,6 +2,7 @@ package com.greenone.lostheroes.common.entities.abilities;
 
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
+import com.greenone.lostheroes.common.config.LHConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.OreBlock;
 import net.minecraft.entity.item.ItemEntity;
@@ -14,11 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HadesAbilities extends AbstractAbility{
+    private float mainManaReq= LHConfig.getMaxMana();
+
     @Override
     public void mainAbility(PlayerEntity player) {
         System.out.println("HADES");
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(player.isCreative() || playerCap.consumeMana(playerCap.getMaxMana())){
+        if(player.isCreative() || playerCap.consumeMana(getMainManaReq())){
             callMinerals(player);
         }
     }
@@ -26,6 +29,22 @@ public class HadesAbilities extends AbstractAbility{
     @Override
     public void minorAbility(PlayerEntity player) {
 
+    }
+
+    @Override
+    public float getMainManaReq() {
+        return mainManaReq;
+    }
+
+    public float getMainManaReq(PlayerEntity player) {
+        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+        mainManaReq = playerCap.getMaxMana();
+        return getMainManaReq();
+    }
+
+    @Override
+    public float getMinorManaReq() {
+        return 0;
     }
 
     private void callMinerals(PlayerEntity player) {

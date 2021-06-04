@@ -57,6 +57,10 @@ public class Deity {
         else if(type == PacketAbility.Type.MINOR) abilities.minorAbility(player);
     }
 
+    public AbstractAbility getAbilities(){
+        return abilities;
+    }
+
     public Deity addAttributeModifier(Attribute attribute, String uuid, double amount, AttributeModifier.Operation operation) {
         AttributeModifier attributemodifier = new AttributeModifier(UUID.fromString(uuid), attribute.getDescriptionId(), amount, operation);
         this.attributeModifiers.put(attribute, attributemodifier);

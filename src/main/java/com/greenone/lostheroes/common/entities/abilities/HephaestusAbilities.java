@@ -14,7 +14,7 @@ public class HephaestusAbilities extends AbstractAbility{
     @Override
     public void mainAbility(PlayerEntity player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(player.isCreative() || playerCap.consumeMana(2.5F)){
+        if(player.isCreative() || playerCap.consumeMana(getMainManaReq())){
             fireball(player);
         }
     }
@@ -22,6 +22,16 @@ public class HephaestusAbilities extends AbstractAbility{
     @Override
     public void minorAbility(PlayerEntity player) {
 
+    }
+
+    @Override
+    public float getMainManaReq() {
+        return 2.5f;
+    }
+
+    @Override
+    public float getMinorManaReq() {
+        return 0;
     }
 
     private void fireball(PlayerEntity player) {

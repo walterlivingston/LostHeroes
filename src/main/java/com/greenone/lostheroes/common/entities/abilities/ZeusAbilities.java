@@ -17,7 +17,7 @@ public class ZeusAbilities extends AbstractAbility{
     public void mainAbility(PlayerEntity player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
-        if(player.level.canSeeSky(pos) && (player.isCreative() || playerCap.consumeMana(5))){
+        if(player.level.canSeeSky(pos) && (player.isCreative() || playerCap.consumeMana(getMainManaReq()))){
             LightningBoltEntity lightningBoltEntity = EntityType.LIGHTNING_BOLT.create(player.level);
             lightningBoltEntity.moveTo(LHUtils.getLookingAt(player, 64));
             lightningBoltEntity.setCause(player instanceof ServerPlayerEntity ? (ServerPlayerEntity) player : null);
@@ -30,5 +30,15 @@ public class ZeusAbilities extends AbstractAbility{
     @Override
     public void minorAbility(PlayerEntity player) {
 
+    }
+
+    @Override
+    public float getMainManaReq() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getMinorManaReq() {
+        return 0;
     }
 }

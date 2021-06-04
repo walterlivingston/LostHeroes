@@ -12,12 +12,22 @@ public class DemeterAbilities extends AbstractAbility{
     @Override
     public void mainAbility(PlayerEntity player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(playerCap.consumeMana(2.5F)) harvestAndReplant(player);
+        if(playerCap.consumeMana(getMainManaReq())) harvestAndReplant(player);
     }
 
     @Override
     public void minorAbility(PlayerEntity player) {
 
+    }
+
+    @Override
+    public float getMainManaReq() {
+        return 2.5f;
+    }
+
+    @Override
+    public float getMinorManaReq() {
+        return 0;
     }
 
     private void harvestAndReplant(PlayerEntity player) {

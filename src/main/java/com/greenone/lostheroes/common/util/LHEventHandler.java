@@ -13,11 +13,13 @@ import com.greenone.lostheroes.common.enchantment.BrilliantRiposteEnchantment;
 import com.greenone.lostheroes.common.enchantment.LHEnchants;
 import com.greenone.lostheroes.common.init.Blessings;
 import com.greenone.lostheroes.common.init.Deities;
+import com.greenone.lostheroes.common.potions.LHEffects;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.monster.AbstractRaiderEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
@@ -136,5 +138,13 @@ public class LHEventHandler {
         PlayerEntity player = event.getPlayer();
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         playerCap.setMana(playerCap.getMaxMana());
+    }
+
+    @SubscribeEvent
+    public void onSetAttackTarget(final LivingSetAttackTargetEvent event) {
+        if(event.getEntityLiving().hasEffect(LHEffects.APATHY)){
+            if(event.getEntityLiving() instanceof MonsterEntity && event.getTarget()!=null) ((MonsterEntity)event.getEntityLiving()).setTarget((LivingEntity) null);
+            if(event.getEntityLiving() instanceof AbstractRaiderEntity && event.getTarget()!=null) ((AbstractRaiderEntity)event.getEntityLiving()).setTarget((LivingEntity) null);
+        }
     }
 }

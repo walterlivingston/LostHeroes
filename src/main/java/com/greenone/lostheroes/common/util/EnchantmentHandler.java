@@ -59,7 +59,7 @@ public class EnchantmentHandler {
         if (event.getTarget() instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) event.getTarget();
             player.getArmorSlots().forEach((armor) -> {
-                if (EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.UNDEAD_PRESENCE, armor) > 0 && event.getEntityLiving().getMobType() == CreatureAttribute.UNDEAD) {
+                if (EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.UNDEAD_PRESENCE, armor) > 0 && event.getEntityLiving().getMobType() == CreatureAttribute.UNDEAD && event.getTarget()!=null) {
                     ((MonsterEntity) event.getEntityLiving()).setTarget(null);
                 }
             });

@@ -3,6 +3,7 @@ package com.greenone.lostheroes.common.items.tools;
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
+import com.greenone.lostheroes.common.enchantment.LHEnchants;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.items.LHItemTier;
@@ -77,6 +78,9 @@ public class LHBow extends BowItem {
                         abstractarrowentity.shootFromRotation(playerentity, playerentity.xRot, playerentity.yRot, 0.0F, f * 3.0F, 1.0F);
                         if (f == 1.0F) {
                             abstractarrowentity.setCritArrow(true);
+                        }
+                        if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.POISON_VOLLEY, stack) > 0){
+                            abstractarrowentity.addTag("poison_volley"+EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.POISON_VOLLEY, stack));
                         }
 
                         int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);

@@ -14,6 +14,7 @@ import com.greenone.lostheroes.common.entities.LHEntities;
 import com.greenone.lostheroes.common.inventory.container.LHContainers;
 import com.greenone.lostheroes.common.items.LHItemModelProperties;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
+import com.greenone.lostheroes.common.util.EnchantmentHandler;
 import com.greenone.lostheroes.common.util.LHEventHandler;
 import com.greenone.lostheroes.common.init.Registration;
 import com.greenone.lostheroes.common.world.LHOreGen;
@@ -49,6 +50,7 @@ public class SideProxy implements IProxy {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(DataGenerators::gatherData);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(SideProxy::commonSetup);
         MinecraftForge.EVENT_BUS.register(LHEventHandler.instance);
+        MinecraftForge.EVENT_BUS.register(EnchantmentHandler.instance);
 
         // register configs
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.client_config);

@@ -98,22 +98,6 @@ public class LHUtils {
         }
     }
 
-    public static void enchantmentCheck(PlayerEntity player){
-        if(player.getArmorValue() > 0){
-            for(ItemStack stack : player.getArmorSlots()){
-                if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.REHYDRATION, stack) > 0 && player.isInWater()){
-                    if(player.getHealth() < player.getMaxHealth()) player.heal(0.001F);
-                }
-                if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.FLEET, stack) > 0){
-                    player.addEffect(new EffectInstance(new LHEffect().addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", (double)0.2F, AttributeModifier.Operation.MULTIPLY_TOTAL), 30, EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.FLEET, stack), false, false, false, null));
-                }
-                if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.DAEDALUS_ASPECT, stack) > 0){
-                    player.addEffect(new EffectInstance(new LHEffect().addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 0.3D, AttributeModifier.Operation.ADDITION), 30, EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.DAEDALUS_ASPECT, stack), false, false, false, null));
-                }
-            }
-        }
-    }
-
     private static int determineNextAir(PlayerEntity player, int currentAir) {
         return Math.min(currentAir + 4, player.getMaxAirSupply());
     }

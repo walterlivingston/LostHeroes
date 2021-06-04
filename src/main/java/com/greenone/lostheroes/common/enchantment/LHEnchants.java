@@ -31,8 +31,13 @@ public class LHEnchants {
     public static final Enchantment THUNDER_STRIKE = register("thunder_strike", new ThunderStrikeEnchantment(Enchantment.Rarity.RARE, EnchantmentType.WEAPON, EquipmentSlotType.MAINHAND));
     public static final Enchantment REHYDRATION = register("rehydration", new RehydrationEnchantment(Enchantment.Rarity.RARE, EnchantmentType.ARMOR_HEAD, EquipmentSlotType.HEAD));
     public static final Enchantment UNDEAD_PRESENCE = register("undead_presence", new UndeadPresenceEnchantment(Enchantment.Rarity.RARE, EnchantmentType.ARMOR_CHEST, EquipmentSlotType.CHEST));
+    public static final Enchantment BRILLIANT_RIPOSTE = register("brilliant_riposte", new BrilliantRiposteEnchantment(Enchantment.Rarity.RARE, EnchantmentType.WEAPON, EquipmentSlotType.MAINHAND));
+    public static final Enchantment BRUTISH = register("brutish", new BrutishEnchantment(Enchantment.Rarity.RARE, EnchantmentType.WEAPON, EquipmentSlotType.MAINHAND));
     public static final Enchantment UNREQUITED = register("unrequited", new UnrequitedEnchantment(Enchantment.Rarity.RARE, EnchantmentType.BOW, EquipmentSlotType.MAINHAND));
+    public static final Enchantment POISON_VOLLEY = register("poison_volley", new PoisonVolleyEnchantment(Enchantment.Rarity.RARE, EnchantmentType.BOW, EquipmentSlotType.MAINHAND));
     public static final Enchantment PRECISION = register("precision", new PrecisionEnchantment(Enchantment.Rarity.RARE, EnchantmentType.BOW, EquipmentSlotType.MAINHAND));
+    public static final Enchantment LEAF_STEP = register("leaf_step", new LeafStepEnchantment(Enchantment.Rarity.RARE, EnchantmentType.ARMOR_FEET, EquipmentSlotType.FEET));
+    public static final Enchantment VINTAGE = register("vintage", new VintageEnchantment(Enchantment.Rarity.RARE, EnchantmentType.ARMOR_HEAD, EquipmentSlotType.HEAD));
     public static final Enchantment FLEET = register("fleet", new FleetEnchantment(Enchantment.Rarity.RARE, EnchantmentType.ARMOR_FEET, EquipmentSlotType.FEET));
     public static final Enchantment DAEDALUS_ASPECT = register("daedalus_aspect", new DaedalusAspectEnchantment(Enchantment.Rarity.RARE, EnchantmentType.ARMOR, ARMOR_SLOTS));
 

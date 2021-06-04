@@ -40,7 +40,7 @@ public class LHClientUtils {
             }
         }
         if(event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE){
-            new ManaHUD(Minecraft.getInstance()).render(event.getMatrixStack());
+            new ManaHUD(Minecraft.getInstance()).render(event.getMatrixStack(), 0.5f);
         }
     }
 }

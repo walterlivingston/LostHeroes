@@ -79,8 +79,13 @@ public class LHLangProvider extends LanguageProvider {
             addEnchantment(() -> LHEnchants.THUNDER_STRIKE, "Thunder Strike");
             addEnchantment(() -> LHEnchants.REHYDRATION, "Rehydration");
             addEnchantment(() -> LHEnchants.UNDEAD_PRESENCE, "Undead Presence");
+            addEnchantment(() -> LHEnchants.BRILLIANT_RIPOSTE, "Brilliant Riposte");
+            addEnchantment(() -> LHEnchants.BRUTISH, "Brutish");
             addEnchantment(() -> LHEnchants.UNREQUITED, "Unrequited");
+            addEnchantment(() -> LHEnchants.POISON_VOLLEY, "Poison Volley");
             addEnchantment(() -> LHEnchants.PRECISION, "Precision");
+            addEnchantment(() -> LHEnchants.LEAF_STEP, "Leaf Step");
+            addEnchantment(() -> LHEnchants.VINTAGE, "Vintage");
             addEnchantment(() -> LHEnchants.FLEET, "Fleet");
             addEnchantment(() -> LHEnchants.DAEDALUS_ASPECT, "Daedalus Aspect");
 

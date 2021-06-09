@@ -1,0 +1,19 @@
+{
+  "homepage": "https://www.curseforge.com/minecraft/mc-mods/lostheroes",
+  "1.16.5": {
+    "2.2": "Added Demeter and Hermes; Added Enchantments for each god; Fixed various abilities; Fixed server crashes; Added Mana HUD; Added config files"
+  },
+  "1.16.3": {
+    "2.1": "Added Ares, Aphrodite, Athena, Apollo, Artemis, Hephaestus, and Dionysus; Added Greek Fire Brewing; Added Ambrosia and Nectar; Fixed some mod compatibility issues; Fixed some server compatibility issues; Fixed Blessing of Zeus providing permanent flight; Fixed Pillar Block issues; Changed Hades sacrifice to Wither Skull; Fixed slow Katoptris attack",
+    "1.2": "Weapons update adding spears, more shields, arrow-rework, bow-rework; Added Meteoric Iron and Adamantine Items; Also reworked textures"
+  },
+  "1.16.1": {
+    "1.1": "Abilities update adding abilities for children of Zeus, Poseidon, and Hades; Added Silver and Lead Items; Added Pearl of Persephone",
+    "1.0.1": "Fixed Marble Slab Item Texture; Fixed Shovel Items extending Axe Items",
+    "1.0": "Initial Release adding Copper, Tin, Bronze, Celestial Bronze, and Imperial Gold Items; Added Zeus, Poseidon, and Hades claiming; Added Altars and Blessings"
+  },
+  "promos": {
+    "1.16.5-latest": "2.2",
+    "1.16.5-recommended": "2.2"
+  }
+}

@@ -19,7 +19,6 @@ import org.lwjgl.glfw.GLFW;
 @OnlyIn(Dist.CLIENT)
 public class LHClientUtils {
     public static final LHClientUtils instance = new LHClientUtils();
-    public static ManaHUD hud;
 
     @SubscribeEvent
     public void keyInput(InputEvent.KeyInputEvent event){

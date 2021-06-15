@@ -35,6 +35,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import java.util.List;
+import java.util.Random;
 
 public class LHUtils {
     public static void abilityCheck(PlayerEntity player, IPlayerCap playerCap){
@@ -42,13 +43,15 @@ public class LHUtils {
             case "zeus":
                 if(!(player.isCreative() || player.isSpectator())){
                     if(playerCap.getMana() > 0.5F) player.addEffect(new EffectInstance(Blessings.ZEUS, 30, 1, false, false, false, null));
-                    if(player.abilities.flying) playerCap.consumeMana(0.006F);
+                    if(player.abilities.flying) playerCap.consumeMana(0.012F);
                 }
                 break;
             case "poseidon":
                 if(!(player.isCreative() || player.isSpectator()))
-                    if(player.isUnderWater() && player.getAirSupply() < player.getMaxAirSupply())
+                    if(player.isUnderWater() && player.getAirSupply() < player.getMaxAirSupply()){
                         player.setAirSupply(determineNextAir(player, player.getAirSupply()));
+                        if(new Random().nextFloat() <= 0.10) player.heal(0.5f);
+                    }
                 break;
             case "hades":
                 break;

@@ -178,15 +178,15 @@ repositories {
 
 dependencies {
     // 1.14+
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51")
+    //compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51:api")
+    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-51")
 }
 
 minecraft {
     runs {
         client {
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            //property 'mixin.env.remapRefMap', 'true'
+            //property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
     }
 }

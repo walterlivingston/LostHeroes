@@ -40,8 +40,7 @@ public class Blessing extends LHEffect {
                     }
                 }
                 if(this == Blessings.DIONYSUS){
-                    if(player.getFoodData().needsFood()) player.getFoodData().setFoodLevel(player.getFoodData().getFoodLevel()+1);
-                    player.getFoodData().setSaturation(1.0F);
+                    player.getFoodData().eat(amplifier + 1, 1.0F);
                 }
                 if(this == Blessings.DEMETER){
                     if(d==100){

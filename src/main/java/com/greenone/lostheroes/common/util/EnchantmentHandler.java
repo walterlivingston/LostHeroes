@@ -47,8 +47,8 @@ public class EnchantmentHandler {
                 if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.FLEET, stack) > 0){
                     player.addEffect(new EffectInstance(new LHEffect().addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", (double)0.2F, AttributeModifier.Operation.MULTIPLY_TOTAL), 30, EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.FLEET, stack), false, false, false, null));
                 }
-                if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.DAEDALUS_ASPECT, stack) > 0){
-                    player.addEffect(new EffectInstance(new LHEffect().addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 0.3D, AttributeModifier.Operation.ADDITION), 30, EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.DAEDALUS_ASPECT, stack), false, false, false, null));
+                if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.BRUTISH, stack) > 0){
+                    player.addEffect(new EffectInstance(new LHEffect().addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 0.3D, AttributeModifier.Operation.ADDITION), 30, EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.BRUTISH, stack), false, false, false, null));
                 }
             }
         }

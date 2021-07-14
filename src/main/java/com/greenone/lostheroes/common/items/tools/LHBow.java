@@ -127,6 +127,11 @@ public class LHBow extends BowItem {
         return tier;
     }
 
+    @Override
+    public int getUseDuration(ItemStack stack) {
+        return (int) (super.getUseDuration(stack) - this.getTier().getSpeed()*100);
+    }
+
     public float getDamageModifier() { return tier.getAttackDamageBonus(); }
 
     @Override

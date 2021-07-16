@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "lostheroes:bronze_ingot"
+    }
+  },
+  "result": {
+    "item": "lostheroes:bronze_chestplate"
+  }
+}

@@ -26,6 +26,7 @@ public class LHItems {
     public static Map<Metal, Item> shovels = new HashMap<>();
     public static Map<Metal, Item> hoes = new HashMap<>();
     public static Map<Metal, Item> bows = new HashMap<>();
+    public static Map<Metal, Item> crossbows = new HashMap<>();
     public static Map<Metal, Item> spears = new HashMap<>();
     public static Map<Metal, Item> shields = new HashMap<>();
 
@@ -68,6 +69,7 @@ public class LHItems {
                 shovels.put(m, registerShovel(m.tagName()+"_shovel", m.getTier(),1.5F, -3F, m));
                 hoes.put(m, registerHoe(m.tagName()+"_hoe", m.getTier(),-2, -1.0F, m));
                 bows.put(m, registerBow(m.tagName()+"_bow", m));
+                crossbows.put(m, registerCrossbow(m.tagName()+"_crossbow", m));
                 spears.put(m, registerSpear(m.tagName()+"_spear", m));
                 shields.put(m, registerShield(m.tagName()+"_shield", m));
                 helmets.put(m, registerArmor(m.tagName()+"_helmet", m.getArmor(), EquipmentSlotType.HEAD, m));
@@ -126,6 +128,10 @@ public class LHItems {
     }
     private static Item registerBow(String name, Metal metal) {
         Item item = new LHBow(metal, new Item.Properties().tab(LostHeroes.lh_group));
+        return registerItem(name, item);
+    }
+    private static Item registerCrossbow(String name, Metal metal) {
+        Item item = new LHCrossbow(metal, new Item.Properties().tab(LostHeroes.lh_group));
         return registerItem(name, item);
     }
     private static Item registerSpear(String name, Metal metal) {

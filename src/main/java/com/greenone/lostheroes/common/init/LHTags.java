@@ -57,6 +57,7 @@ public class LHTags {
         public static final ITag.INamedTag<Item> SHOVELS = forge("shovels");
         public static final ITag.INamedTag<Item> HOES = forge("hoes");
         public static final ITag.INamedTag<Item> BOWS = forge("bows");
+        public static final ITag.INamedTag<Item> CROSSBOWS = forge("crossbows");
         public static final ITag.INamedTag<Item> SPEARS = forge("spears");
         public static final ITag.INamedTag<Item> SHIELDS = forge("shields");
         public static final ITag.INamedTag<Item> HELMETS = forge("helmets");

@@ -38,6 +38,7 @@ public class LHItemTagsProvider extends ItemTagsProvider {
                 tag(LHTags.Items.SHOVELS).add(LHItems.shovels.get(m));
                 tag(LHTags.Items.HOES).add(LHItems.hoes.get(m));
                 tag(LHTags.Items.BOWS).add(LHItems.bows.get(m));
+                tag(LHTags.Items.CROSSBOWS).add(LHItems.crossbows.get(m));
                 tag(LHTags.Items.SPEARS).add(LHItems.spears.get(m));
                 tag(LHTags.Items.SHIELDS).add(LHItems.shields.get(m));
                 tag(LHTags.Items.HELMETS).add(LHItems.helmets.get(m));

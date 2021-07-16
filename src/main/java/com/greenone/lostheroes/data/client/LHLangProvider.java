@@ -40,6 +40,7 @@ public class LHLangProvider extends LanguageProvider {
                     addItem(() -> LHItems.shovels.get(m), getFormattedName(m.tagName()+"_shovel",m));
                     addItem(() -> LHItems.hoes.get(m), getFormattedName(m.tagName()+"_hoe",m));
                     addItem(() -> LHItems.bows.get(m), getFormattedName(m.tagName()+"_bow",m));
+                    addItem(() -> LHItems.crossbows.get(m), getFormattedName(m.tagName()+"_crossbow",m));
                     addItem(() -> LHItems.spears.get(m), getFormattedName(m.tagName()+"_spear",m));
                     addItem(() -> LHItems.shields.get(m), getFormattedName(m.tagName()+"_shield",m));
                     addItem(() -> LHItems.helmets.get(m), getFormattedName(m.tagName()+"_helmet",m));

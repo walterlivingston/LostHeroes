@@ -50,6 +50,7 @@ public class LHItems {
     public static Item nectar = registerItem("nectar", new LHFood(new Item.Properties().tab(LostHeroes.lh_group).food(LHFoods.NECTAR), true));
 
     public static Item vanilla_bow = registerVanillaItem("bow", new LHBow(ItemTier.WOOD, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+    public static Item vanilla_crossbow = registerVanillaItem("crossbow", new LHCrossbow(ItemTier.WOOD, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
     //public static Item greek_fire = registerItem("greek_fire", new GreekFireItem(new Item.Properties().tab(LostHeroes.lh_group).stacksTo(1)));
 

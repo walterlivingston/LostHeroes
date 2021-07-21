@@ -75,6 +75,7 @@ public class LHLangProvider extends LanguageProvider {
             addItem(() -> LHItems.nectar, "Nectar");
             addItem(() -> LHItems.pearl_of_persephone, "Pearl of Persephone");
             //addItem(() -> LHItems.greek_fire, "Greek Fire");
+            addItem(() -> LHItems.drachma, "Drachma");
 
             addEnchantment(() -> LHEnchants.BLESSING, "Blessing");
             addEnchantment(() -> LHEnchants.THUNDER_STRIKE, "Thunder Strike");
@@ -89,6 +90,10 @@ public class LHLangProvider extends LanguageProvider {
             addEnchantment(() -> LHEnchants.VINTAGE, "Vintage");
             addEnchantment(() -> LHEnchants.FLEET, "Fleet");
             addEnchantment(() -> LHEnchants.DAEDALUS_ASPECT, "Daedalus Aspect");
+
+            add("entity.minecraft.villager.lostheroes.blacksmith", "Blacksmith");
+            add("entity.minecraft.villager.lostheroes.priest", "Priest");
+            add("entity.minecraft.villager.lostheroes.winemaker", "Winemaker");
 
             addBlock(() -> LHBlocks.forge, "Forge");
             addContainer("forge");

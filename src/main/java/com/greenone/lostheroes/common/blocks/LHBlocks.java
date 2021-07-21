@@ -41,6 +41,8 @@ public class LHBlocks {
     public static final Block enchanting_table = registerVanilla("enchanting_table", new LHEnchantmentTable(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_RED).requiresCorrectToolForDrops().strength(5.0F, 1200.0F)), ItemGroup.TAB_DECORATIONS);
     public static final Block forge = register("forge", new ForgeBlock(stone_prop));
 
+    public static final Block cask = register("forge", new CaskBlock(AbstractBlock.Properties.of(Material.WOOD).strength(0.6F).sound(SoundType.WOOD)));
+
     //public static final Block greek_fire = registerNoItem("greek_fire", new GreekFireBlock(AbstractBlock.Properties.of(Material.FIRE, MaterialColor.COLOR_LIGHT_GREEN).noCollission().instabreak().lightLevel((p_235468_0_) -> 15).sound(SoundType.WOOL)));
 
     public static void register(IEventBus eventBus) {

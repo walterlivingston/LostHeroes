@@ -14,6 +14,7 @@ import com.greenone.lostheroes.common.enchantment.LHEnchants;
 import com.greenone.lostheroes.common.init.Blessings;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.potions.LHEffects;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;

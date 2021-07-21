@@ -59,5 +59,7 @@ public class LHRecipeProvider extends ForgeRecipeProvider {
         ForgeRecipeBuilder.forge(LHItems.ingots.get(Metal.BRONZE), 0.7F, 200).requires(LHItems.ingots.get(Metal.COPPER)).requires(LHItems.ingots.get(Metal.TIN)).unlockedBy("has_copper_ingot", has(LHItems.ingots.get(Metal.COPPER))).unlockedBy("has_tin_ingot", has(LHItems.ingots.get(Metal.TIN))).save(consumer);
         ForgeRecipeBuilder.forge(LHItems.ingots.get(Metal.BONE_STEEL), 0.7F, 200).requires(Items.IRON_INGOT).requires(Items.BONE).unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(consumer);
         ForgeRecipeBuilder.forge(LHItems.adamantine_ingot_dull, 0.7F, 200).requires(Items.DIAMOND).requires(LHItems.ingots.get(Metal.SILVER)).unlockedBy("has_diamond", has(Items.DIAMOND)).unlockedBy("has_silver_ingot", has(LHTags.Items.INGOTS.get(Metal.SILVER))).save(consumer);
+
+        ShapedRecipeBuilder.shaped(LHBlocks.cask).define('#', Items.BRICK).pattern("# #").pattern("# #").pattern("###").unlockedBy("has_bricks", has(Items.BRICK)).save(consumer);
     }
 }

@@ -4,6 +4,7 @@ import com.greenone.lostheroes.common.blocks.tiles.AltarTile;
 import com.greenone.lostheroes.common.blocks.tiles.LHTileEntities;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.util.pattern.Altar;
+import com.greenone.lostheroes.common.util.pattern.BlackAltar;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -33,16 +34,18 @@ public class PillarBlock extends ContainerBlock {
     protected static final VoxelShape RENDER_SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
     public static final BooleanProperty IS_TOP = BooleanProperty.create("is_top");
     public static final BooleanProperty IS_BOTTOM = BooleanProperty.create("is_bottom");
+    public static final BooleanProperty IS_ALTAR = BooleanProperty.create("is_altar");
 
     public PillarBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(IS_TOP, true).setValue(IS_BOTTOM, true));
+        this.registerDefaultState(this.stateDefinition.any().setValue(IS_TOP, true).setValue(IS_BOTTOM, true).setValue(IS_ALTAR, false));
     }
 
     @Override
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
         Altar altar = new Altar();
-        if(!world.isClientSide() && altar.checkPattern(world, pos)){
+        BlackAltar blackAltar = new BlackAltar();
+        if(!world.isClientSide() && (altar.checkPattern(world, pos)||blackAltar.checkPattern(world,pos))){
             TileEntity te = world.getBlockEntity(pos);
             if(te instanceof AltarTile && hand==Hand.MAIN_HAND){
                 AltarTile at = (AltarTile) te;
@@ -92,7 +95,7 @@ public class PillarBlock extends ContainerBlock {
 
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(IS_TOP, IS_BOTTOM);
+        builder.add(IS_TOP, IS_BOTTOM, IS_ALTAR);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.greenone.lostheroes.common.blocks.LHBlocks;
 import com.greenone.lostheroes.common.blocks.tiles.LHTileEntities;
 import com.greenone.lostheroes.common.enchantment.LHEnchants;
 import com.greenone.lostheroes.common.entities.LHEntities;
+import com.greenone.lostheroes.common.entities.villager.VillagerInit;
 import com.greenone.lostheroes.common.inventory.container.LHContainers;
 import com.greenone.lostheroes.common.items.LHItems;
 import com.greenone.lostheroes.common.potions.LHPotions;
@@ -30,6 +31,7 @@ public class Registration {
         LHContainers.register(eventBus);
         LHPotions.register(eventBus);
         Deities.init();
+        VillagerInit.register(eventBus);
         LHTags.register();
         LHEnchants.register(eventBus);
     }

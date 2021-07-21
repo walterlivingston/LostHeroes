@@ -53,6 +53,8 @@ public class LHItems {
     public static Item vanilla_bow = registerVanillaItem("bow", new LHBow(ItemTier.WOOD, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
     public static Item vanilla_crossbow = registerVanillaItem("crossbow", new LHCrossbow(ItemTier.WOOD, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
+    public static Item drachma = registerItem("drachma", new LHItem(new Item.Properties().tab(LostHeroes.lh_group).stacksTo(16)));
+
     //public static Item greek_fire = registerItem("greek_fire", new GreekFireItem(new Item.Properties().tab(LostHeroes.lh_group).stacksTo(1)));
 
     public static void register(IEventBus eventBus) {

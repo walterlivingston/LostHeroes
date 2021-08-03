@@ -3,32 +3,27 @@ package com.greenone.lostheroes.common.entities.abilities;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.potions.LHEffects;
-import net.minecraft.entity.EntityPredicate;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.ai.goal.PrioritizedGoal;
-import net.minecraft.entity.monster.AbstractRaiderEntity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.raid.Raider;
+import net.minecraft.world.phys.AABB;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AphroditeAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(PlayerEntity player) {
+    public void mainAbility(Player player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        List<LivingEntity> list = player.level.getNearbyEntities(LivingEntity.class, new EntityPredicate().range(10), player, new AxisAlignedBB(player.blockPosition()).inflate(10));
-        if(!list.isEmpty() && (list.get(0) instanceof MonsterEntity || list.get(0) instanceof AbstractRaiderEntity) && (player.isCreative() || playerCap.consumeMana(getMainManaReq()))){
-            list.get(0).addEffect(new EffectInstance(LHEffects.APATHY, 1200));
+        AABB aabb = (new AABB(player.blockPosition())).inflate(10).expandTowards(0.0D, (double)player.level.getHeight(), 0.0D);
+        List<Monster> list = player.level.getEntitiesOfClass(Monster.class, aabb);
+        if(!list.isEmpty() && (list.get(0) instanceof Monster || list.get(0) instanceof Raider) && (player.isCreative() || playerCap.consumeMana(getMainManaReq()))){
+            list.get(0).addEffect(new MobEffectInstance(LHEffects.APATHY, 1200));
         }
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
+    public void minorAbility(Player player) {
 
     }
 

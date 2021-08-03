@@ -1,11 +1,11 @@
 package com.greenone.lostheroes.common.enchantment;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 public class BlessingEnchant extends Enchantment {
     public BlessingEnchant() {
-        super(Rarity.COMMON, LHEnchants.METAL, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND});
+        super(Rarity.COMMON, LHEnchants.METAL, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override

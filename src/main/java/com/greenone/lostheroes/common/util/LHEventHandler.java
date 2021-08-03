@@ -1,59 +1,31 @@
 package com.greenone.lostheroes.common.util;
 
 import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.client.gui.ManaHUD;
-import com.greenone.lostheroes.client.utils.LHClientUtils;
-import com.greenone.lostheroes.common.Blessing;
 import com.greenone.lostheroes.common.Deity;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.capabilities.PlayerCap;
 import com.greenone.lostheroes.common.commands.LHCommands;
-import com.greenone.lostheroes.common.enchantment.BrilliantRiposteEnchantment;
-import com.greenone.lostheroes.common.enchantment.LHEnchants;
 import com.greenone.lostheroes.common.init.Blessings;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.potions.LHEffects;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CropsBlock;
-import net.minecraft.client.Minecraft;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.AbstractRaiderEntity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectType;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.raid.Raider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
-import net.minecraftforge.event.entity.living.PotionEvent;
-import net.minecraftforge.event.entity.player.*;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.ArrayList;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = LostHeroes.MOD_ID)
 public class LHEventHandler {
@@ -66,14 +38,14 @@ public class LHEventHandler {
             Random rand = new Random();
             Object[] values = Deities.list.values().toArray();
             playerCap.setParent((Deity) values[rand.nextInt(values.length)]);
-            event.getPlayer().sendMessage(new StringTextComponent("You have been claimed by " + playerCap.getParent().getFormattedName()), event.getPlayer().getUUID());
+            event.getPlayer().sendMessage(new TextComponent("You have been claimed by " + playerCap.getParent().getFormattedName()), event.getPlayer().getUUID());
             playerCap.sync(event.getPlayer());
         }
     }
 
     @SubscribeEvent
     public void attachCapabilities(final AttachCapabilitiesEvent event) {
-        if (!((event.getObject()) instanceof PlayerEntity)) return;
+        if (!((event.getObject()) instanceof Player)) return;
         event.addCapability(new ResourceLocation(LostHeroes.MOD_ID, "player_cap"), new PlayerCap());
     }
 
@@ -84,15 +56,16 @@ public class LHEventHandler {
 
     @SubscribeEvent
     public void onPlayerTick(final TickEvent.PlayerTickEvent event) {
-        PlayerEntity player = event.player;
+        Player player = event.player;
+        player.level.updateSkyBrightness();
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if (!player.isDeadOrDying()) {
             if (playerCap.getMana() < playerCap.getMaxMana()) playerCap.setMana(playerCap.getMana() + 0.0008F);
             if (playerCap != null && playerCap.getParent() != null) {
                 if (playerCap.getHadesCooldown() > 0) playerCap.decreaseHadesCooldown();
-                if (!player.hasEffect(Blessings.ZEUS) && !player.isCreative() && player.abilities.mayfly) {
-                    player.abilities.mayfly = false;
-                    player.abilities.flying = false;
+                if (!player.hasEffect(Blessings.ZEUS) && !player.isCreative() && player.getAbilities().mayfly) {
+                    player.getAbilities().mayfly = false;
+                    player.getAbilities().flying = false;
                     player.onUpdateAbilities();
                 }
                 LHUtils.abilityCheck(player, playerCap);
@@ -104,8 +77,8 @@ public class LHEventHandler {
 
     @SubscribeEvent
     public void onPlayerClone(final PlayerEvent.Clone event) {
-        PlayerEntity originalPlayer = event.getOriginal();
-        PlayerEntity newPlayer = event.getPlayer();
+        Player originalPlayer = event.getOriginal();
+        Player newPlayer = event.getPlayer();
         IPlayerCap oPlayerCap = originalPlayer.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         IPlayerCap nPlayerCap = newPlayer.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         nPlayerCap.setParent(oPlayerCap.getParent());
@@ -116,8 +89,8 @@ public class LHEventHandler {
 
     @SubscribeEvent
     public void onPlayerDeath(final LivingDeathEvent event) {
-        if (event.getEntityLiving() instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+        if (event.getEntityLiving() instanceof Player) {
+            Player player = (Player) event.getEntityLiving();
             IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
             boolean flag1 = playerCap.getParent() == Deities.HADES && playerCap.getMana() == playerCap.getMaxMana();
             boolean flag2 = playerCap.getParent() != Deities.HADES && player.hasEffect(Blessings.HADES);
@@ -134,7 +107,7 @@ public class LHEventHandler {
 
     @SubscribeEvent
     public void onPlayerWake(final PlayerWakeUpEvent event) {
-        PlayerEntity player = event.getPlayer();
+        Player player = event.getPlayer();
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         playerCap.setMana(playerCap.getMaxMana());
     }
@@ -142,8 +115,16 @@ public class LHEventHandler {
     @SubscribeEvent
     public void onSetAttackTarget(final LivingSetAttackTargetEvent event) {
         if(event.getEntityLiving().hasEffect(LHEffects.APATHY)){
-            if(event.getEntityLiving() instanceof MonsterEntity && event.getTarget()!=null) ((MonsterEntity)event.getEntityLiving()).setTarget((LivingEntity) null);
-            if(event.getEntityLiving() instanceof AbstractRaiderEntity && event.getTarget()!=null) ((AbstractRaiderEntity)event.getEntityLiving()).setTarget((LivingEntity) null);
+            if(event.getEntityLiving() instanceof Monster && event.getTarget()!=null) ((Monster)event.getEntityLiving()).setTarget(null);
+            if(event.getEntityLiving() instanceof Raider && event.getTarget()!=null) ((Raider)event.getEntityLiving()).setTarget(null);
         }
+    }
+
+    @SubscribeEvent
+    public void onBiomeLoaded(final BiomeLoadingEvent event){
+        /*ResourceKey<Biome> eventBiomeKey = ResourceKey.create(Registry.BIOME_REGISTRY, event.getName());
+        if (eventBiomeKey == LHBiomes.LOTUS){
+            event.getGeneration().addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, LHFeatures.LOTUS_FLOWER_CLUSTER);
+        }*/
     }
 }

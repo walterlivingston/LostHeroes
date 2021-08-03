@@ -1,16 +1,16 @@
 package com.greenone.lostheroes.common.potions;
 
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectType;
+import com.greenone.lostheroes.client.render.properties.LHEffectRenderProperties;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 
-public class LHEffect extends Effect {
-    protected LHEffect(EffectType typeIn, int liquidColorIn) {
+public class LHEffect extends MobEffect {
+    protected LHEffect(MobEffectCategory typeIn, int liquidColorIn) {
         super(typeIn, liquidColorIn);
     }
 
     public LHEffect() {
-        super(EffectType.BENEFICIAL, 25520646);
+        super(MobEffectCategory.BENEFICIAL, 25520646);
     }
 
     @Override
@@ -19,17 +19,7 @@ public class LHEffect extends Effect {
     }
 
     @Override
-    public boolean shouldRender(EffectInstance effect) {
-        return !(effect.getDuration()<=35);
-    }
-
-    @Override
-    public boolean shouldRenderHUD(EffectInstance effect) {
-        return !(effect.getDuration()<=35);
-    }
-
-    @Override
-    public boolean shouldRenderInvText(EffectInstance effect) {
-        return !(effect.getDuration()<=35);
+    public Object getEffectRendererInternal() {
+        return new LHEffectRenderProperties();
     }
 }

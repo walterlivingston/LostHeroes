@@ -1,78 +1,94 @@
 package com.greenone.lostheroes.common.inventory.container;
 
-import com.greenone.lostheroes.common.blocks.tiles.ForgeTile;
 import com.greenone.lostheroes.common.init.LHRecipes;
 import com.greenone.lostheroes.common.inventory.ForgeFuelSlot;
 import com.greenone.lostheroes.common.inventory.ForgeResultSlot;
 import com.greenone.lostheroes.common.items.crafting.ForgeRecipe;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.IRecipeHelperPopulator;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.*;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.AbstractFurnaceTileEntity;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 
-public class ForgeContainer extends RecipeBookContainer<IInventory> {
-    private final IInventory forgeInv;
-    private final IIntArray forgeData;
-    protected final World level;
-    private final IRecipeType<? extends ForgeRecipe> recipeType;
-    //private final RecipeBookCategory recipeBookType;
+public class ForgeContainer extends RecipeBookMenu<Container> {
+    public static final int[] INGREDIENT_SLOT = new int[]{0,1};
+    public static final int FUEL_SLOT = 2;
+    public static final int RESULT_SLOT = 3;
+    public static final int SLOT_COUNT = 4;
+    public static final int DATA_COUNT = 4;
+    private static final int INV_SLOT_START = 3;
+    private static final int INV_SLOT_END = 30;
+    private static final int USE_ROW_SLOT_START = 30;
+    private static final int USE_ROW_SLOT_END = 39;
+    private final Container container;
+    private final ContainerData data;
+    protected final Level level;
+    private final RecipeType<? extends ForgeRecipe> recipeType;
+    private final RecipeBookType recipeBookType;
 
-    public ForgeContainer(int id, PlayerInventory playerInv, PacketBuffer buffer) {
-        this(id, playerInv, new Inventory(4), new IntArray(4));
+    public ForgeContainer(int id, Inventory inv, FriendlyByteBuf buf) {
+        this(LHContainers.FORGE, LHRecipes.Types.ALLOYING, null, id, inv);
     }
 
-    public ForgeContainer(int idIn, PlayerInventory playerInvIn, IInventory forgeInvIn, IIntArray forgeDataIn) {
-        super(LHContainers.FORGE, idIn);
-        this.recipeType = LHRecipes.Types.ALLOYING;
-        checkContainerSize(forgeInvIn, 4);
-        checkContainerDataCount(forgeDataIn, 4);
-        this.forgeInv = forgeInvIn;
-        this.forgeData = forgeDataIn;
-        this.level = playerInvIn.player.level;
-        this.addSlot(new Slot(forgeInvIn, 0, 40, 16));
-        this.addSlot(new Slot(forgeInvIn, 1, 71, 16));
-        this.addSlot(new ForgeFuelSlot(this, forgeInvIn, 2, 56, 53));
-        this.addSlot(new ForgeResultSlot(playerInvIn.player, forgeInvIn, 3, 116, 35));
+    public ForgeContainer(int id, Inventory inv, Container container, ContainerData containerData) {
+        this(LHContainers.FORGE, LHRecipes.Types.ALLOYING, null, id, inv, container, containerData);
+    }
+
+    protected ForgeContainer(MenuType<?> menuType, RecipeType<? extends ForgeRecipe> recipeType, RecipeBookType recipeBookType, int id, Inventory inv) {
+        this(menuType, recipeType, recipeBookType, id, inv, new SimpleContainer(4), new SimpleContainerData(4));
+    }
+
+    protected ForgeContainer(MenuType<?> menuType, RecipeType<? extends ForgeRecipe> recipeType, RecipeBookType recipeBookType, int id, Inventory inv, Container containerIn, ContainerData containerDataIn) {
+        super(menuType, id);
+        this.recipeType = recipeType;
+        this.recipeBookType = recipeBookType;
+        checkContainerSize(containerIn, 4);
+        checkContainerDataCount(containerDataIn, 4);
+        this.container = containerIn;
+        this.data = containerDataIn;
+        this.level = inv.player.level;
+        this.addSlot(new Slot(containerIn, 0, 40, 16));
+        this.addSlot(new Slot(containerIn, 1, 71, 16));
+        this.addSlot(new ForgeFuelSlot(this, containerIn, 2, 56, 53));
+        this.addSlot(new ForgeResultSlot(inv.player, containerIn, 3, 116, 35));
 
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerInvIn, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlot(new Slot(inv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
         for(int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(playerInvIn, k, 8 + k * 18, 142));
+            this.addSlot(new Slot(inv, k, 8 + k * 18, 142));
         }
 
-        this.addDataSlots(forgeDataIn);
+        this.addDataSlots(containerDataIn);
     }
 
     @Override
-    public void fillCraftSlotsStackedContents(RecipeItemHelper itemHelper) {
-        if(this.forgeInv instanceof IRecipeHelperPopulator){
-            ((IRecipeHelperPopulator)this.forgeInv).fillStackedContents(itemHelper);
+    public void fillCraftSlotsStackedContents(StackedContents stackedContents) {
+        if (this.container instanceof StackedContentsCompatible) {
+            ((StackedContentsCompatible)this.container).fillStackedContents(stackedContents);
         }
+
     }
 
     @Override
     public void clearCraftingContent() {
-        this.forgeInv.clearContent();
+        this.getSlot(0).set(ItemStack.EMPTY);
+        this.getSlot(1).set(ItemStack.EMPTY);
+        this.getSlot(3).set(ItemStack.EMPTY);
     }
 
     @Override
-    public boolean recipeMatches(IRecipe<? super IInventory> recipe) {
-        return recipe.matches(this.forgeInv, this.level);
+    public boolean recipeMatches(Recipe<? super Container> recipe) {
+        return recipe.matches(this.container, this.level);
     }
 
     @Override
@@ -96,29 +112,24 @@ public class ForgeContainer extends RecipeBookContainer<IInventory> {
     }
 
     @Override
-    public RecipeBookCategory getRecipeBookType() {
-        return null;
+    public boolean stillValid(Player player) {
+        return this.container.stillValid(player);
     }
 
     @Override
-    public boolean stillValid(PlayerEntity player) {
-        return this.forgeInv.stillValid(player);
-    }
-
-    @Override
-    public ItemStack quickMoveStack(PlayerEntity player, int index) {
+    public ItemStack quickMoveStack(Player player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
             if (index == 3) {
-                if (!this.moveItemStackTo(itemstack1, 4, 40, true)) {
+                if (!this.moveItemStackTo(itemstack1, 4, 39, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(itemstack1, itemstack);
-            } else if (index != 1 && index != 0 && index != 2) {
+            } else if (index != 2 && index != 1 && index != 0) {
                 if (this.canSmelt(itemstack1)) {
                     if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
                         return ItemStack.EMPTY;
@@ -127,14 +138,14 @@ public class ForgeContainer extends RecipeBookContainer<IInventory> {
                     if (!this.moveItemStackTo(itemstack1, 2, 3, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index >= 4 && index < 31) {
-                    if (!this.moveItemStackTo(itemstack1, 31, 40, false)) {
+                } else if (index >= 4 && index < 30) {
+                    if (!this.moveItemStackTo(itemstack1, 31, 39, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index >= 31 && index < 40 && !this.moveItemStackTo(itemstack1, 4, 31, false)) {
+                } else if (index >= 31 && index < 39 && !this.moveItemStackTo(itemstack1, 4, 31, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(itemstack1, 4, 40, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, 4, 39, false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -155,32 +166,39 @@ public class ForgeContainer extends RecipeBookContainer<IInventory> {
     }
 
     protected boolean canSmelt(ItemStack stack) {
-        return this.level.getRecipeManager().getRecipeFor(LHRecipes.Types.ALLOYING, new Inventory(stack), this.level).isPresent();
+        return this.level.getRecipeManager().getRecipeFor((RecipeType<ForgeRecipe>)this.recipeType, new SimpleContainer(stack), this.level).isPresent();
     }
 
     public boolean isFuel(ItemStack stack) {
-        return ForgeTile.isFuel(stack);
+        return net.minecraftforge.common.ForgeHooks.getBurnTime(stack, this.recipeType) > 0;
     }
 
-    @OnlyIn(Dist.CLIENT)
     public int getBurnProgress() {
-        int i = this.forgeData.get(2);
-        int j = this.forgeData.get(3);
+        int i = this.data.get(2);
+        int j = this.data.get(3);
         return j != 0 && i != 0 ? i * 24 / j : 0;
     }
 
-    @OnlyIn(Dist.CLIENT)
     public int getLitProgress() {
-        int i = this.forgeData.get(1);
+        int i = this.data.get(1);
         if (i == 0) {
             i = 200;
         }
 
-        return this.forgeData.get(0) * 13 / i;
+        return this.data.get(0) * 13 / i;
     }
 
-    @OnlyIn(Dist.CLIENT)
     public boolean isLit() {
-        return this.forgeData.get(0) > 0;
+        return this.data.get(0) > 0;
+    }
+
+    @Override
+    public RecipeBookType getRecipeBookType() {
+        return null;
+    }
+
+    @Override
+    public boolean shouldMoveToInventory(int index) {
+        return index != 2;
     }
 }

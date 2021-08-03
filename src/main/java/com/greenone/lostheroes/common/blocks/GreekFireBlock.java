@@ -1,32 +1,30 @@
 package com.greenone.lostheroes.common.blocks;
 
-import net.minecraft.block.AbstractFireBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
-public class GreekFireBlock extends AbstractFireBlock {
+public class GreekFireBlock extends BaseFireBlock {
     public GreekFireBlock(Properties properties) {
         super(properties, 2.0F);
     }
 
-    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
         return this.canSurvive(state, world, currentPos) ? this.defaultBlockState() : Blocks.AIR.defaultBlockState();
     }
 
     @Override
-    public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos) {
+    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
         BlockPos blockpos = pos.below();
         return world.getBlockState(blockpos).isFaceSturdy(world, blockpos, Direction.UP) || this.isValidFireLocation(world, pos);
     }
 
-    private boolean isValidFireLocation(IBlockReader block, BlockPos pos) {
+    private boolean isValidFireLocation(BlockGetter block, BlockPos pos) {
         for(Direction direction : Direction.values()) {
             if (this.canCatchFire(block, pos.relative(direction), direction.getOpposite())) {
                 return true;
@@ -36,7 +34,7 @@ public class GreekFireBlock extends AbstractFireBlock {
         return false;
     }
 
-    public boolean canCatchFire(IBlockReader world, BlockPos pos, Direction face) {
+    public boolean canCatchFire(BlockGetter world, BlockPos pos, Direction face) {
         return world.getBlockState(pos).isFlammable(world, pos, face);
     }
 

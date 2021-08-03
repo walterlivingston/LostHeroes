@@ -4,13 +4,13 @@ import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.blocks.LHBlocks;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
-import net.minecraft.block.Block;
-import net.minecraft.data.loot.BlockLootTables;
+import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.stream.Collectors;
 
-public class LHBlockLootTables extends BlockLootTables {
+public class LHBlockLootTables extends BlockLoot {
 
     @Override
     protected void addTables() {
@@ -34,6 +34,8 @@ public class LHBlockLootTables extends BlockLootTables {
             dropSelf(LHBlocks.pillars.get(s));
         }
         dropSelf(LHBlocks.forge);
+        dropSelf(LHBlocks.cask);
+        dropSelf(LHBlocks.lotus_flower);
         //add(LHBlocks.greek_fire, noDrop());
     }
 

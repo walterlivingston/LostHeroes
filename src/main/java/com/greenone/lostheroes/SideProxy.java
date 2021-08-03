@@ -11,32 +11,31 @@ import com.greenone.lostheroes.common.blocks.tiles.LHTileEntities;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.config.Config;
 import com.greenone.lostheroes.common.entities.LHEntities;
+import com.greenone.lostheroes.common.init.Registration;
 import com.greenone.lostheroes.common.inventory.container.LHContainers;
 import com.greenone.lostheroes.common.items.LHItemModelProperties;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.util.EnchantmentHandler;
 import com.greenone.lostheroes.common.util.LHEventHandler;
-import com.greenone.lostheroes.common.init.Registration;
 import com.greenone.lostheroes.common.world.LHOreGen;
 import com.greenone.lostheroes.data.DataGenerators;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.fmlserverevents.FMLServerStartedEvent;
+import net.minecraftforge.fmlserverevents.FMLServerStartingEvent;
+import net.minecraftforge.fmlserverevents.FMLServerStoppingEvent;
 
 import javax.annotation.Nullable;
 
@@ -65,7 +64,7 @@ public class SideProxy implements IProxy {
         CapabilityRegistry.registerCapabilities();
         LHNetworkHandler.registerMessages();
         LHOreGen.initOres();
-        LHOreGen.setupOres();
+        //LHOreGen.setupOres();
     }
 
     private static void serverStarted(FMLServerStartedEvent event) {
@@ -85,7 +84,7 @@ public class SideProxy implements IProxy {
 
     @Nullable
     @Override
-    public PlayerEntity getClientPlayer() {
+    public Player getClientPlayer() {
         return null;
     }
 
@@ -101,20 +100,19 @@ public class SideProxy implements IProxy {
         }
 
         private static void clientSetup(FMLClientSetupEvent event){
-            //ClientRegistry.bindTileEntityRenderer(LHTileEntities.ALTAR.get(), AltarTileRenderer::new);
-            ClientRegistry.bindTileEntityRenderer(LHTileEntities.ENCHANT, LHEnchantTileEntityRenderer::new);
+            BlockEntityRenderers.register(LHTileEntities.ENCHANT, LHEnchantTileEntityRenderer::new);
             //RenderTypeLookup.setRenderLayer(LHBlocks.greek_fire, RenderType.cutout());
-            DeferredWorkQueue.runLater(LHItemModelProperties::registerProperties);
-            ScreenManager.register(LHContainers.ENCHANTING, LHEnchantScreen::new);
-            ScreenManager.register(LHContainers.FORGE, ForgeScreen::new);
+            LHItemModelProperties.registerProperties();
+            MenuScreens.register(LHContainers.ENCHANTING, LHEnchantScreen::new);
+            MenuScreens.register(LHContainers.FORGE, ForgeScreen::new);
             LHKeybinds.register();
             MinecraftForge.EVENT_BUS.register(LHClientUtils.instance);
-            RenderingRegistry.registerEntityRenderingHandler(LHEntities.SPEAR, new SpearRenderer.RenderFactory());
+            EntityRenderers.register(LHEntities.SPEAR, SpearRenderer::new);
         }
 
         @Nullable
         @Override
-        public PlayerEntity getClientPlayer() {
+        public Player getClientPlayer() {
             return Minecraft.getInstance().player;
         }
     }

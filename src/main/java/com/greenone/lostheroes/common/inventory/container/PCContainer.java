@@ -1,19 +1,19 @@
 package com.greenone.lostheroes.common.inventory.container;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.WorkbenchContainer;
-import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.CraftingMenu;
 
-public class PCContainer extends WorkbenchContainer {
-    public PCContainer(int id, PlayerInventory playerInv){ super(id, playerInv); }
+public class PCContainer extends CraftingMenu {
+    public PCContainer(int id, Inventory playerInv){ super(id, playerInv); }
 
-    public PCContainer(int id, PlayerInventory playerInv, IWorldPosCallable world) {
+    public PCContainer(int id, Inventory playerInv, ContainerLevelAccess world) {
         super(id, playerInv, world);
     }
 
     @Override
-    public boolean stillValid(PlayerEntity player) {
+    public boolean stillValid(Player player) {
         return true;
     }
 }

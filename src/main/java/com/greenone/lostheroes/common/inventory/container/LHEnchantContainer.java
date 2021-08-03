@@ -2,59 +2,52 @@ package com.greenone.lostheroes.common.inventory.container;
 
 import com.greenone.lostheroes.common.blocks.LHBlocks;
 import com.greenone.lostheroes.common.enums.Metal;
-import com.greenone.lostheroes.common.items.LHItem;
 import com.greenone.lostheroes.common.items.LHItems;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.block.Blocks;
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.EnchantedBookItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.IntReferenceHolder;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.registry.Registry;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.EnchantedBookItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
 import java.util.Random;
 
-public class LHEnchantContainer extends Container {
-    private final IInventory enchantSlots = new Inventory(2) {
+public class LHEnchantContainer extends AbstractContainerMenu {
+    private final Container enchantSlots = new SimpleContainer(2) {
         public void setChanged() {
             super.setChanged();
             LHEnchantContainer.this.slotsChanged(this);
         }
     };
-    private final IWorldPosCallable access;
+    private final ContainerLevelAccess access;
     private final Random random = new Random();
-    private final IntReferenceHolder enchantmentSeed = IntReferenceHolder.standalone();
+    private final DataSlot enchantmentSeed = DataSlot.standalone();
     public final int[] costs = new int[3];
     public final int[] enchantClue = new int[]{-1, -1, -1};
     public final int[] levelClue = new int[]{-1, -1, -1};
 
-    public LHEnchantContainer(int p_i50085_1_, PlayerInventory p_i50085_2_) {
-        this(p_i50085_1_, p_i50085_2_, IWorldPosCallable.NULL);
+    public LHEnchantContainer(int p_39454_, Inventory p_39455_) {
+        this(p_39454_, p_39455_, ContainerLevelAccess.NULL);
     }
 
-    public LHEnchantContainer(int p_i50086_1_, PlayerInventory p_i50086_2_, IWorldPosCallable p_i50086_3_) {
-        super(LHContainers.ENCHANTING, p_i50086_1_);
-        this.access = p_i50086_3_;
+    public LHEnchantContainer(int p_39457_, Inventory p_39458_, ContainerLevelAccess p_39459_) {
+        super(MenuType.ENCHANTMENT, p_39457_);
+        this.access = p_39459_;
         this.addSlot(new Slot(this.enchantSlots, 0, 15, 47) {
-            public boolean mayPlace(ItemStack p_75214_1_) {
+            public boolean mayPlace(ItemStack p_39508_) {
                 return true;
             }
 
@@ -63,55 +56,55 @@ public class LHEnchantContainer extends Container {
             }
         });
         this.addSlot(new Slot(this.enchantSlots, 1, 35, 47) {
-            public boolean mayPlace(ItemStack p_75214_1_) {
-                return net.minecraftforge.common.Tags.Items.GEMS_LAPIS.contains(p_75214_1_.getItem());
+            public boolean mayPlace(ItemStack p_39517_) {
+                return net.minecraftforge.common.Tags.Items.GEMS_LAPIS.contains(p_39517_.getItem());
             }
         });
 
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(p_i50086_2_, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlot(new Slot(p_39458_, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
         for(int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(p_i50086_2_, k, 8 + k * 18, 142));
+            this.addSlot(new Slot(p_39458_, k, 8 + k * 18, 142));
         }
 
-        this.addDataSlot(IntReferenceHolder.shared(this.costs, 0));
-        this.addDataSlot(IntReferenceHolder.shared(this.costs, 1));
-        this.addDataSlot(IntReferenceHolder.shared(this.costs, 2));
-        this.addDataSlot(this.enchantmentSeed).set(p_i50086_2_.player.getEnchantmentSeed());
-        this.addDataSlot(IntReferenceHolder.shared(this.enchantClue, 0));
-        this.addDataSlot(IntReferenceHolder.shared(this.enchantClue, 1));
-        this.addDataSlot(IntReferenceHolder.shared(this.enchantClue, 2));
-        this.addDataSlot(IntReferenceHolder.shared(this.levelClue, 0));
-        this.addDataSlot(IntReferenceHolder.shared(this.levelClue, 1));
-        this.addDataSlot(IntReferenceHolder.shared(this.levelClue, 2));
+        this.addDataSlot(DataSlot.shared(this.costs, 0));
+        this.addDataSlot(DataSlot.shared(this.costs, 1));
+        this.addDataSlot(DataSlot.shared(this.costs, 2));
+        this.addDataSlot(this.enchantmentSeed).set(p_39458_.player.getEnchantmentSeed());
+        this.addDataSlot(DataSlot.shared(this.enchantClue, 0));
+        this.addDataSlot(DataSlot.shared(this.enchantClue, 1));
+        this.addDataSlot(DataSlot.shared(this.enchantClue, 2));
+        this.addDataSlot(DataSlot.shared(this.levelClue, 0));
+        this.addDataSlot(DataSlot.shared(this.levelClue, 1));
+        this.addDataSlot(DataSlot.shared(this.levelClue, 2));
     }
 
-    private float getPower(net.minecraft.world.World world, net.minecraft.util.math.BlockPos pos) {
+    private float getPower(net.minecraft.world.level.Level world, net.minecraft.core.BlockPos pos) {
         return world.getBlockState(pos).getEnchantPowerBonus(world, pos);
     }
 
-    public void slotsChanged(IInventory p_75130_1_) {
-        if (p_75130_1_ == this.enchantSlots) {
-            ItemStack itemstack = p_75130_1_.getItem(0);
+    public void slotsChanged(Container p_39461_) {
+        if (p_39461_ == this.enchantSlots) {
+            ItemStack itemstack = p_39461_.getItem(0);
             if (!itemstack.isEmpty() && itemstack.isEnchantable()) {
-                this.access.execute((p_217002_2_, p_217002_3_) -> {
+                this.access.execute((p_39485_, p_39486_) -> {
                     int power = 0;
 
                     for(int k = -1; k <= 1; ++k) {
                         for(int l = -1; l <= 1; ++l) {
-                            if ((k != 0 || l != 0) && p_217002_2_.isEmptyBlock(p_217002_3_.offset(l, 0, k)) && p_217002_2_.isEmptyBlock(p_217002_3_.offset(l, 1, k))) {
-                                power += getPower(p_217002_2_, p_217002_3_.offset(l * 2, 0, k * 2));
-                                power += getPower(p_217002_2_, p_217002_3_.offset(l * 2, 1, k * 2));
+                            if ((k != 0 || l != 0) && p_39485_.isEmptyBlock(p_39486_.offset(l, 0, k)) && p_39485_.isEmptyBlock(p_39486_.offset(l, 1, k))) {
+                                power += getPower(p_39485_, p_39486_.offset(l * 2, 0, k * 2));
+                                power += getPower(p_39485_, p_39486_.offset(l * 2, 1, k * 2));
 
                                 if (l != 0 && k != 0) {
-                                    power += getPower(p_217002_2_, p_217002_3_.offset(l * 2, 0, k));
-                                    power += getPower(p_217002_2_, p_217002_3_.offset(l * 2, 1, k));
-                                    power += getPower(p_217002_2_, p_217002_3_.offset(l, 0, k * 2));
-                                    power += getPower(p_217002_2_, p_217002_3_.offset(l, 1, k * 2));
+                                    power += getPower(p_39485_, p_39486_.offset(l * 2, 0, k));
+                                    power += getPower(p_39485_, p_39486_.offset(l * 2, 1, k));
+                                    power += getPower(p_39485_, p_39486_.offset(l, 0, k * 2));
+                                    power += getPower(p_39485_, p_39486_.offset(l, 1, k * 2));
                                 }
                             }
                         }
@@ -126,16 +119,16 @@ public class LHEnchantContainer extends Container {
                         if (this.costs[i1] < i1 + 1) {
                             this.costs[i1] = 0;
                         }
-                        this.costs[i1] = net.minecraftforge.event.ForgeEventFactory.onEnchantmentLevelSet(p_217002_2_, p_217002_3_, i1, (int)power, itemstack, costs[i1]);
+                        this.costs[i1] = net.minecraftforge.event.ForgeEventFactory.onEnchantmentLevelSet(p_39485_, p_39486_, i1, (int)power, itemstack, costs[i1]);
                     }
 
                     for(int j1 = 0; j1 < 3; ++j1) {
                         if (this.costs[j1] > 0) {
-                            List<EnchantmentData> list = this.getEnchantmentList(itemstack, j1, this.costs[j1]);
+                            List<EnchantmentInstance> list = this.getEnchantmentList(itemstack, j1, this.costs[j1]);
                             if (list != null && !list.isEmpty()) {
-                                EnchantmentData enchantmentdata = list.get(this.random.nextInt(list.size()));
-                                this.enchantClue[j1] = Registry.ENCHANTMENT.getId(enchantmentdata.enchantment);
-                                this.levelClue[j1] = enchantmentdata.level;
+                                EnchantmentInstance enchantmentinstance = list.get(this.random.nextInt(list.size()));
+                                this.enchantClue[j1] = Registry.ENCHANTMENT.getId(enchantmentinstance.enchantment);
+                                this.levelClue[j1] = enchantmentinstance.level;
                             }
                         }
                     }
@@ -153,32 +146,35 @@ public class LHEnchantContainer extends Container {
 
     }
 
-    public boolean clickMenuButton(PlayerEntity p_75140_1_, int p_75140_2_) {
+    public boolean clickMenuButton(Player p_39465_, int p_39466_) {
         ItemStack itemstack = this.enchantSlots.getItem(0);
         ItemStack itemstack1 = this.enchantSlots.getItem(1);
-        int i = p_75140_2_ + 1;
-        if ((itemstack1.isEmpty() || itemstack1.getCount() < i) && !p_75140_1_.abilities.instabuild) {
+        int i = p_39466_ + 1;
+        if ((itemstack1.isEmpty() || itemstack1.getCount() < i) && !p_39465_.getAbilities().instabuild) {
             return false;
-        } else if (this.costs[p_75140_2_] <= 0 || itemstack.isEmpty() || (p_75140_1_.experienceLevel < i || p_75140_1_.experienceLevel < this.costs[p_75140_2_]) && !p_75140_1_.abilities.instabuild) {
+        } else if (this.costs[p_39466_] <= 0 || itemstack.isEmpty() || (p_39465_.experienceLevel < i || p_39465_.experienceLevel < this.costs[p_39466_]) && !p_39465_.getAbilities().instabuild) {
             return false;
         } else {
-            this.access.execute((p_217003_6_, p_217003_7_) -> {
+            this.access.execute((p_39481_, p_39482_) -> {
                 ItemStack itemstack2 = itemstack;
-                List<EnchantmentData> list = this.getEnchantmentList(itemstack, p_75140_2_, this.costs[p_75140_2_]);
+                List<EnchantmentInstance> list = this.getEnchantmentList(itemstack, p_39466_, this.costs[p_39466_]);
                 if (!list.isEmpty()) {
-                    p_75140_1_.onEnchantmentPerformed(itemstack, i);
-                    boolean flag = itemstack.getItem() == Items.BOOK;
-                    boolean flag1 = itemstack.getItem() == LHItems.ingots.get(Metal.BRONZE);
-                    boolean flag2 = itemstack.getItem() == LHItems.ingots.get(Metal.GOLD);
-                    boolean flag3 = itemstack.getItem() == LHItems.nuggets.get(Metal.BRONZE);
-                    boolean flag4 = itemstack.getItem() == LHItems.nuggets.get(Metal.GOLD);
-                    boolean flag5 = itemstack.getItem() == LHBlocks.storageBlocks.get(Metal.BRONZE).asItem();
-                    boolean flag6 = itemstack.getItem() == LHBlocks.storageBlocks.get(Metal.GOLD).asItem();
-                    boolean flag7 = itemstack.getItem() == LHItems.adamantine_ingot_dull;
+                    p_39465_.onEnchantmentPerformed(itemstack, i);
+                    boolean flag = itemstack.is(Items.BOOK);
+                    boolean flag1 = itemstack.is(LHItems.ingots.get(Metal.BRONZE));
+                    boolean flag2 = itemstack.is(LHItems.ingots.get(Metal.GOLD));
+                    boolean flag3 = itemstack.is(LHItems.nuggets.get(Metal.BRONZE));
+                    boolean flag4 = itemstack.is(LHItems.nuggets.get(Metal.GOLD));
+                    boolean flag5 = itemstack.is(LHBlocks.storageBlocks.get(Metal.BRONZE).asItem());
+                    boolean flag6 = itemstack.is(LHBlocks.storageBlocks.get(Metal.GOLD).asItem());
+                    boolean flag7 = itemstack.is(LHItems.adamantine_ingot_dull);
                     if (flag) {
                         itemstack2 = new ItemStack(Items.ENCHANTED_BOOK);
-                        CompoundNBT compoundnbt = itemstack.getTag();
-                        if (compoundnbt != null) itemstack2.setTag(compoundnbt.copy());
+                        CompoundTag compoundtag = itemstack.getTag();
+                        if (compoundtag != null) {
+                            itemstack2.setTag(compoundtag.copy());
+                        }
+
                         this.enchantSlots.setItem(0, itemstack2);
                     }
                     if(flag1) {
@@ -211,34 +207,33 @@ public class LHEnchantContainer extends Container {
                         this.enchantSlots.setItem(0, new ItemStack(LHItems.ingots.get(Metal.ADAMANTINE)));
                     }
 
-                    for (EnchantmentData enchantmentdata : list) {
+                    for(int j = 0; j < list.size(); ++j) {
+                        EnchantmentInstance enchantmentinstance = list.get(j);
                         if (flag) {
-                            EnchantedBookItem.addEnchantment(itemstack2, enchantmentdata);
+                            EnchantedBookItem.addEnchantment(itemstack2, enchantmentinstance);
                         } else if (flag1 || flag2 || flag3 || flag4 || flag5 || flag6 || flag7) {
-                            System.out.println("MADE IT FURTHER");
-                            break;
+
                         } else {
-                            itemstack2.enchant(enchantmentdata.enchantment, enchantmentdata.level);
-                            System.out.println("I'm an idiot");
+                            itemstack2.enchant(enchantmentinstance.enchantment, enchantmentinstance.level);
                         }
                     }
 
-                    if (!p_75140_1_.abilities.instabuild) {
+                    if (!p_39465_.getAbilities().instabuild) {
                         itemstack1.shrink(i);
                         if (itemstack1.isEmpty()) {
                             this.enchantSlots.setItem(1, ItemStack.EMPTY);
                         }
                     }
 
-                    p_75140_1_.awardStat(Stats.ENCHANT_ITEM);
-                    if (p_75140_1_ instanceof ServerPlayerEntity) {
-                        CriteriaTriggers.ENCHANTED_ITEM.trigger((ServerPlayerEntity)p_75140_1_, itemstack2, i);
+                    p_39465_.awardStat(Stats.ENCHANT_ITEM);
+                    if (p_39465_ instanceof ServerPlayer) {
+                        CriteriaTriggers.ENCHANTED_ITEM.trigger((ServerPlayer)p_39465_, itemstack2, i);
                     }
 
                     this.enchantSlots.setChanged();
-                    this.enchantmentSeed.set(p_75140_1_.getEnchantmentSeed());
+                    this.enchantmentSeed.set(p_39465_.getEnchantmentSeed());
                     this.slotsChanged(this.enchantSlots);
-                    p_217003_6_.playSound((PlayerEntity)null, p_217003_7_, SoundEvents.ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0F, p_217003_6_.random.nextFloat() * 0.1F + 0.9F);
+                    p_39481_.playSound((Player)null, p_39482_, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1.0F, p_39481_.random.nextFloat() * 0.1F + 0.9F);
                 }
 
             });
@@ -246,53 +241,51 @@ public class LHEnchantContainer extends Container {
         }
     }
 
-    private List<EnchantmentData> getEnchantmentList(ItemStack p_178148_1_, int p_178148_2_, int p_178148_3_) {
-        this.random.setSeed((long)(this.enchantmentSeed.get() + p_178148_2_));
-        List<EnchantmentData> list = EnchantmentHelper.selectEnchantment(this.random, p_178148_1_, p_178148_3_, false);
-        if (p_178148_1_.getItem() == Items.BOOK && list.size() > 1) {
+    private List<EnchantmentInstance> getEnchantmentList(ItemStack p_39472_, int p_39473_, int p_39474_) {
+        this.random.setSeed((long)(this.enchantmentSeed.get() + p_39473_));
+        List<EnchantmentInstance> list = EnchantmentHelper.selectEnchantment(this.random, p_39472_, p_39474_, false);
+        if (p_39472_.is(Items.BOOK) && list.size() > 1) {
             list.remove(this.random.nextInt(list.size()));
         }
 
         return list;
     }
 
-    @OnlyIn(Dist.CLIENT)
     public int getGoldCount() {
         ItemStack itemstack = this.enchantSlots.getItem(1);
         return itemstack.isEmpty() ? 0 : itemstack.getCount();
     }
 
-    @OnlyIn(Dist.CLIENT)
     public int getEnchantmentSeed() {
         return this.enchantmentSeed.get();
     }
 
-    public void removed(PlayerEntity p_75134_1_) {
-        super.removed(p_75134_1_);
-        this.access.execute((p_217004_2_, p_217004_3_) -> {
-            this.clearContainer(p_75134_1_, p_75134_1_.level, this.enchantSlots);
+    public void removed(Player p_39488_) {
+        super.removed(p_39488_);
+        this.access.execute((p_39469_, p_39470_) -> {
+            this.clearContainer(p_39488_, this.enchantSlots);
         });
     }
 
-    public boolean stillValid(PlayerEntity p_75145_1_) {
-        return stillValid(this.access, p_75145_1_, LHBlocks.enchanting_table);
+    public boolean stillValid(Player p_39463_) {
+        return stillValid(this.access, p_39463_, Blocks.ENCHANTING_TABLE);
     }
 
-    public ItemStack quickMoveStack(PlayerEntity p_82846_1_, int p_82846_2_) {
+    public ItemStack quickMoveStack(Player p_39490_, int p_39491_) {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(p_82846_2_);
+        Slot slot = this.slots.get(p_39491_);
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
-            if (p_82846_2_ == 0) {
+            if (p_39491_ == 0) {
                 if (!this.moveItemStackTo(itemstack1, 2, 38, true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (p_82846_2_ == 1) {
+            } else if (p_39491_ == 1) {
                 if (!this.moveItemStackTo(itemstack1, 2, 38, true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (itemstack1.getItem() == Items.LAPIS_LAZULI) {
+            } else if (itemstack1.is(Items.LAPIS_LAZULI)) {
                 if (!this.moveItemStackTo(itemstack1, 1, 2, true)) {
                     return ItemStack.EMPTY;
                 }
@@ -317,7 +310,7 @@ public class LHEnchantContainer extends Container {
                 return ItemStack.EMPTY;
             }
 
-            slot.onTake(p_82846_1_, itemstack1);
+            slot.onTake(p_39490_, itemstack1);
         }
 
         return itemstack;

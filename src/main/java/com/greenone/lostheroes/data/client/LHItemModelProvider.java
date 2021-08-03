@@ -4,7 +4,7 @@ import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -28,15 +28,15 @@ public class LHItemModelProvider extends ItemModelProvider {
         ModelFile itemGenerated = getExistingFile(new ResourceLocation("item/generated"));
 
         for(Metal m : Metal.values()){
-            if(m.isVanilla()){
+            if(m == Metal.GOLD){
 
             }else {
-                withExistingParent(m.tagName() + "_block", modLoc("block/" + m.tagName() + "_block"));
+                if(m != Metal.COPPER) withExistingParent(m.tagName() + "_block", modLoc("block/" + m.tagName() + "_block"));
                 if (m.generateOre()) {
                     withExistingParent(m.tagName() + "_ore", modLoc("block/" + m.tagName() + "_ore"));
                 }
 
-                builder(itemGenerated, m.tagName() + "_ingot");
+                if(m != Metal.COPPER) builder(itemGenerated, m.tagName() + "_ingot");
                 builder(itemGenerated, m.tagName() + "_nugget");
                 builder(itemGenerated, m.tagName() + "_sword");
                 builder(itemGenerated, m.tagName() + "_pickaxe");
@@ -70,8 +70,10 @@ public class LHItemModelProvider extends ItemModelProvider {
         builder(itemGenerated, "ivlivs_spear");
         builder(itemGenerated, "backbiter");
         builder(itemGenerated, "katoptris");
+
         builder(itemGenerated, "ambrosia");
         builder(itemGenerated, "nectar");
+
         builder(itemGenerated, "pearl_of_persephone");
         builder(itemGenerated, "greek_fire");
         builder(itemGenerated, "drachma");

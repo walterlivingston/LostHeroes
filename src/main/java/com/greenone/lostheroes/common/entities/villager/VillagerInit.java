@@ -11,18 +11,18 @@ import com.greenone.lostheroes.common.enums.Stone;
 import com.greenone.lostheroes.common.items.LHItems;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.merchant.villager.VillagerProfession;
-import net.minecraft.entity.merchant.villager.VillagerTrades;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.MerchantOffer;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.village.PointOfInterestType;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -33,16 +33,16 @@ import java.util.Random;
 import java.util.Set;
 
 public class VillagerInit {
-    public static final DeferredRegister<PointOfInterestType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, LostHeroes.MOD_ID);
+    public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, LostHeroes.MOD_ID);
     public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.PROFESSIONS, LostHeroes.MOD_ID);
 
     public static final BlockState ALTAR_STATE_1 = LHBlocks.pillars.get(Stone.MARBLE).defaultBlockState().setValue(PillarBlock.IS_ALTAR, true);
     public static final BlockState ALTAR_STATE_2 = LHBlocks.pillars.get(Stone.BLACK_MARBLE).defaultBlockState().setValue(PillarBlock.IS_ALTAR, true);
     public static final Set<BlockState> ALTAR_STATES = ImmutableSet.copyOf(new BlockState[]{ALTAR_STATE_1, ALTAR_STATE_2});
 
-    public static final PointOfInterestType BLACKSMITH_POI = new PointOfInterestType("blacksmith", PointOfInterestType.getBlockStates(Blocks.ANVIL),1 ,1);
-    public static final PointOfInterestType PRIEST_POI = new PointOfInterestType("priest", ALTAR_STATES,1 ,1);
-    public static final PointOfInterestType WINEMAKER_POI = new PointOfInterestType("oracle", PointOfInterestType.getBlockStates(LHBlocks.cask),1 ,1);
+    public static final PoiType BLACKSMITH_POI = new PoiType("blacksmith", PoiType.getBlockStates(Blocks.ANVIL),1 ,1);
+    public static final PoiType PRIEST_POI = new PoiType("priest", ALTAR_STATES,1 ,1);
+    public static final PoiType WINEMAKER_POI = new PoiType("oracle", PoiType.getBlockStates(LHBlocks.cask),1 ,1);
 
 
     public static final VillagerProfession BLACKSMITH = registerProf("blacksmith", BLACKSMITH_POI, SoundEvents.VILLAGER_WORK_TOOLSMITH);
@@ -55,7 +55,7 @@ public class VillagerInit {
         PROFESSIONS.register(eventBus);
     }
 
-    private static VillagerProfession registerProf(String name, PointOfInterestType poi, SoundEvent soundEvent){
+    private static VillagerProfession registerProf(String name, PoiType poi, SoundEvent soundEvent){
         VillagerProfession prof = new VillagerProfession(name, poi, ImmutableSet.of(), ImmutableSet.of(), soundEvent);
         POI_TYPES.register(name, () -> poi);
         PROFESSIONS.register(name, () -> prof);
@@ -64,19 +64,19 @@ public class VillagerInit {
 
     public static void fillTradeData(){
         VillagerTrades.TRADES.put(BLACKSMITH, toIntMap(
-                ImmutableMap.of(1, new VillagerTrades.ITrade[]{
+                ImmutableMap.of(1, new VillagerTrades.ItemListing[]{
                         new MultiItemForDrachmasTrade(ImmutableList.of(Items.GOLD_INGOT, LHItems.ingots.get(Metal.LEAD), LHItems.ingots.get(Metal.SILVER)), ImmutableList.of(10, 10, 10), ImmutableList.of(1,1,1), 3, 2),
                         new DrachmasforMultiItemsTrade(ImmutableList.of(Items.GOLD_INGOT, LHItems.ingots.get(Metal.BRONZE)), ImmutableList.of(3, 2), ImmutableList.of(1,1), 3, 5),
-                    }, 2, new VillagerTrades.ITrade[]{
+                    }, 2, new VillagerTrades.ItemListing[]{
                         new MultiItemForDrachmasTrade(ImmutableList.of(Items.IRON_INGOT, LHItems.ingots.get(Metal.COPPER), LHItems.ingots.get(Metal.TIN)), ImmutableList.of(5, 5, 5), ImmutableList.of(1,1,1), 2, 2),
                 })));
     }
 
-    private static Int2ObjectMap<VillagerTrades.ITrade[]> toIntMap(ImmutableMap<Integer, VillagerTrades.ITrade[]> p_221238_0_) {
+    private static Int2ObjectMap<VillagerTrades.ItemListing[]> toIntMap(ImmutableMap<Integer, VillagerTrades.ItemListing[]> p_221238_0_) {
         return new Int2ObjectOpenHashMap<>(p_221238_0_);
     }
 
-    public static class MultiItemForDrachmasTrade implements VillagerTrades.ITrade{
+    public static class MultiItemForDrachmasTrade implements VillagerTrades.ItemListing{
         private final List<Item> items;
         private final List<Integer> amountOfItems;
         private final List<Integer> amountOfDrachmas;
@@ -99,7 +99,7 @@ public class VillagerInit {
         }
     }
 
-    public static class DrachmasforMultiItemsTrade implements VillagerTrades.ITrade{
+    public static class DrachmasforMultiItemsTrade implements VillagerTrades.ItemListing{
         private final List<Item> items;
         private final List<Integer> amountOfItems;
         private final List<Integer> amountOfDrachmas;

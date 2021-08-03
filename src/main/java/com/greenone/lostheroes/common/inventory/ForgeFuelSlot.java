@@ -1,14 +1,14 @@
 package com.greenone.lostheroes.common.inventory;
 
 import com.greenone.lostheroes.common.inventory.container.ForgeContainer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class ForgeFuelSlot extends Slot {
     private final ForgeContainer container;
-    public ForgeFuelSlot(ForgeContainer containerIn, IInventory forgeInv, int index, int x, int y) {
+    public ForgeFuelSlot(ForgeContainer containerIn, Container forgeInv, int index, int x, int y) {
         super(forgeInv, index, x, y);
         this.container = containerIn;
     }

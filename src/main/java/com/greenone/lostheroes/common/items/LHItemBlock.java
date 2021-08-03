@@ -1,9 +1,9 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.common.enums.Metal;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 
 public class LHItemBlock extends BlockItem {
     protected Metal metal = null;

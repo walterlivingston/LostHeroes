@@ -3,19 +3,19 @@ package com.greenone.lostheroes.common.entities.abilities;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.inventory.container.PCContainerProvider;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 public class AthenaAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(PlayerEntity player) {
+    public void mainAbility(Player player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(player.isSteppingCarefully()){
             System.out.println("HELLO");
             player.openMenu(new PCContainerProvider());
         }else if(playerCap.getMana()>0){
             float repairPoints = playerCap.getMana() * 100;
-            for(ItemStack stack : player.inventory.items){
+            for(ItemStack stack : player.inventoryMenu.getItems()){
                 if(repairPoints > 0 && stack.isDamaged()){
                     int repairAmt = stack.getMaxDamage() - stack.getDamageValue();
                     if(repairPoints > repairAmt){
@@ -32,7 +32,7 @@ public class AthenaAbilities extends AbstractAbility{
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
+    public void minorAbility(Player player) {
 
     }
 

@@ -9,10 +9,7 @@ import com.greenone.lostheroes.common.enums.Stone;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.items.LHItems;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.common.data.LanguageProvider;
-
-import java.util.function.Supplier;
 
 public class LHLangProvider extends LanguageProvider {
     private final String locale;
@@ -26,13 +23,13 @@ public class LHLangProvider extends LanguageProvider {
     protected void addTranslations() {
         if(this.locale.equals("en_us")){
             for(Metal m : Metal.values()){
-                if(m.isVanilla()){
+                if(m == Metal.GOLD){
 
                 }else{
-                    addBlock(() -> LHBlocks.storageBlocks.get(m), getFormattedName(m.tagName()+"_block",m));
+                    if(m != Metal.COPPER) addBlock(() -> LHBlocks.storageBlocks.get(m), getFormattedName(m.tagName()+"_block",m));
                     if(m.generateOre()) { addBlock(() -> LHBlocks.ores.get(m), getFormattedName(m.tagName()+"_ore",m)); }
 
-                    addItem(() -> LHItems.ingots.get(m), getFormattedName(m.tagName()+"_ingot",m));
+                    if(m != Metal.COPPER) addItem(() -> LHItems.ingots.get(m), getFormattedName(m.tagName()+"_ingot",m));
                     addItem(() -> LHItems.nuggets.get(m), getFormattedName(m.tagName()+"_nugget",m));
                     addItem(() -> LHItems.swords.get(m), getFormattedName(m.tagName()+"_sword",m));
                     addItem(() -> LHItems.axes.get(m), getFormattedName(m.tagName()+"_axe",m));
@@ -71,8 +68,10 @@ public class LHLangProvider extends LanguageProvider {
             addItem(() -> LHItems.backbiter, "Backbiter");
             addItem(() -> LHItems.aegis, "Aegis");
             addItem(() -> LHItems.katoptris, "Katoptris");
+
             addItem(() -> LHItems.ambrosia, "Ambrosia");
             addItem(() -> LHItems.nectar, "Nectar");
+
             addItem(() -> LHItems.pearl_of_persephone, "Pearl of Persephone");
             //addItem(() -> LHItems.greek_fire, "Greek Fire");
             addItem(() -> LHItems.drachma, "Drachma");

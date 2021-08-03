@@ -3,32 +3,32 @@ package com.greenone.lostheroes.common.entities.abilities;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.util.LHUtils;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.effect.LightningBoltEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.player.Player;
 
 public class ZeusAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(PlayerEntity player) {
+    public void mainAbility(Player player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
         if(player.level.canSeeSky(pos) && (player.isCreative() || playerCap.consumeMana(getMainManaReq()))){
-            LightningBoltEntity lightningBoltEntity = EntityType.LIGHTNING_BOLT.create(player.level);
+            LightningBolt lightningBoltEntity = EntityType.LIGHTNING_BOLT.create(player.level);
             lightningBoltEntity.moveTo(LHUtils.getLookingAt(player, 64));
-            lightningBoltEntity.setCause(player instanceof ServerPlayerEntity ? (ServerPlayerEntity) player : null);
+            lightningBoltEntity.setCause(player instanceof ServerPlayer ? (ServerPlayer) player : null);
             player.level.addFreshEntity(lightningBoltEntity);
             SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER;
-            player.level.playSound(player, pos, soundEvent, SoundCategory.WEATHER, 5.0F, 1.0F);
+            player.level.playSound(player, pos, soundEvent, SoundSource.WEATHER, 5.0F, 1.0F);
         }
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
+    public void minorAbility(Player player) {
 
     }
 

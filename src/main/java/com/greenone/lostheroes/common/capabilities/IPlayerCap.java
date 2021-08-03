@@ -1,8 +1,7 @@
 package com.greenone.lostheroes.common.capabilities;
 
 import com.greenone.lostheroes.common.Deity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.entity.player.Player;
 
 public interface IPlayerCap {
     float getMana();
@@ -17,5 +16,5 @@ public interface IPlayerCap {
     void resetHadesCooldown();
     int getHadesCooldown();
     void decreaseHadesCooldown();
-    void sync(PlayerEntity player);
+    void sync(Player player);
 }

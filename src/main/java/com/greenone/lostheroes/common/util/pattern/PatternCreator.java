@@ -1,9 +1,8 @@
 package com.greenone.lostheroes.common.util.pattern;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Block;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 
 public class PatternCreator {
     private final int x,y,z;
@@ -26,7 +25,7 @@ public class PatternCreator {
         }
     }
 
-    public boolean checkPattern(World world, BlockPos pos) {
+    public boolean checkPattern(Level world, BlockPos pos) {
         for (int y=0;y<this.y;y++) {
             for (int x=0;x<this.x;x++) {
                 for (int z=0;z<this.z;z++) {
@@ -45,6 +44,6 @@ public class PatternCreator {
     }
 
     public Block getBlock(int x, int y, int z) {
-        return blocks[x][y][z].getBlock();
+        return blocks[x][y][z];
     }
 }

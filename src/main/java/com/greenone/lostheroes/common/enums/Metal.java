@@ -2,16 +2,16 @@ package com.greenone.lostheroes.common.enums;
 
 import com.greenone.lostheroes.common.items.LHArmorMaterial;
 import com.greenone.lostheroes.common.items.LHItemTier;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemTier;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ArmorMaterials;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 
 import java.util.Locale;
 
 public enum Metal {
 
-    COPPER(Type.PURE, LHItemTier.COPPER, LHArmorMaterial.COPPER),
+    COPPER(Type.VANILLA, LHItemTier.COPPER, LHArmorMaterial.COPPER),
     TIN(Type.PURE, LHItemTier.TIN, LHArmorMaterial.TIN),
     LEAD(Type.PURE, LHItemTier.LEAD, LHArmorMaterial.LEAD),
     SILVER(Type.PURE, LHItemTier.SILVER, LHArmorMaterial.SILVER),
@@ -22,23 +22,23 @@ public enum Metal {
     METEORIC_IRON(Type.PURE, LHItemTier.METEORIC_IRON, LHArmorMaterial.METEORIC_IRON),
     ADAMANTINE(Type.BLESSED, LHItemTier.ADAMANTINE, LHArmorMaterial.ADAMANTINE),
 
-    GOLD(Type.VANILLA, ItemTier.GOLD, ArmorMaterial.GOLD);
+    GOLD(Type.VANILLA, Tiers.GOLD, ArmorMaterials.GOLD);
 
     private final Type type;
-    private final IItemTier tier;
-    private final IArmorMaterial armorMat;
+    private final Tier tier;
+    private final ArmorMaterial armorMat;
 
-    Metal(Type typeIn, IItemTier tierIn, IArmorMaterial armorMatIn){
+    Metal(Type typeIn, Tier tierIn, ArmorMaterial armorMatIn){
         this.type = typeIn;
         this.tier = tierIn;
         this.armorMat = armorMatIn;
     }
 
-    public IItemTier getTier() {
+    public Tier getTier() {
         return tier;
     }
 
-    public IArmorMaterial getArmor() {
+    public ArmorMaterial getArmor() {
         return armorMat;
     }
 

@@ -1,17 +1,11 @@
 package com.greenone.lostheroes.common.enchantment;
 
-import com.google.common.collect.Maps;
-import com.greenone.lostheroes.common.Deity;
 import com.greenone.lostheroes.common.init.Deities;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.*;
-import net.minecraft.inventory.EquipmentSlotType;
-
-import java.util.Map;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class FleetEnchantment extends GodlyEnchantment{
-    protected FleetEnchantment(Rarity rarity, EnchantmentType enchantmentType, EquipmentSlotType... slotTypes) {
+    protected FleetEnchantment(Rarity rarity, EnchantmentCategory enchantmentType, EquipmentSlot... slotTypes) {
         super(rarity, enchantmentType, Deities.HERMES, slotTypes);
     }
 

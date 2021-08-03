@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lostheroes:adamantine_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_adamantine_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/adamantine"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lostheroes:adamantine_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_adamantine_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

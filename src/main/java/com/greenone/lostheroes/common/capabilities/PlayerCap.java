@@ -5,27 +5,27 @@ import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.network.CapSyncPacket;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fmllegacy.network.PacketDistributor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class PlayerCap implements IPlayerCap, ICapabilitySerializable<CompoundNBT>{
+public class PlayerCap implements IPlayerCap, INBTSerializable<Tag>, ICapabilityProvider {
     private float maxMana = LHConfig.getMaxMana();
     private float mana = maxMana;
     private Deity parent = null;
     private int hadesCooldown = 0;
 
-    private LazyOptional<IPlayerCap> instance = LazyOptional.of(CapabilityRegistry.PLAYERCAP::getDefaultInstance);
+    private final LazyOptional<IPlayerCap> instance = LazyOptional.of(() -> this);
 
     @Override
     public float getMana() {
@@ -93,11 +93,18 @@ public class PlayerCap implements IPlayerCap, ICapabilitySerializable<CompoundNB
     }
 
     @Override
-    public void sync(PlayerEntity player) {
+    public void sync(Player player) {
         if (!player.getCommandSenderWorld().isClientSide()){
-            LHNetworkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
-                    new CapSyncPacket(player, (CompoundNBT) CapabilityRegistry.PLAYERCAP.writeNBT(this, null)));
+            LHNetworkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
+                    new CapSyncPacket(player, (CompoundTag) this.serializeNBT()));
         }
+    }
+
+    public void readFromNBT(CompoundTag tag, IPlayerCap instance) {
+        instance.setMana(tag.getFloat("mana"));
+        instance.setMaxMana(tag.getFloat("maxMana"));
+        instance.setParent(Deities.list.get(tag.getString("parent")));
+        instance.setHadesCooldown(tag.getInt("hadesCooldown"));
     }
 
     @Nonnull
@@ -110,14 +117,23 @@ public class PlayerCap implements IPlayerCap, ICapabilitySerializable<CompoundNB
     }
 
     @Override
-    public CompoundNBT serializeNBT() {
-        return (CompoundNBT) CapabilityRegistry.PLAYERCAP.getStorage().writeNBT(CapabilityRegistry.PLAYERCAP,
-                this.instance.orElseThrow(() -> new IllegalArgumentException("Lazy Optional cannot be empty")), null);
+    public Tag serializeNBT() {
+        CompoundTag nbt = new CompoundTag();
+        nbt.putFloat("mana", this.getMana());
+        nbt.putFloat("maxMana", this.getMaxMana());
+        nbt.putString("parent", this.getParent().getName());
+        nbt.putInt("hadesCooldown", this.getHadesCooldown());
+
+        return nbt;
     }
 
     @Override
-    public void deserializeNBT(CompoundNBT nbt) {
-        CapabilityRegistry.PLAYERCAP.getStorage().readNBT(CapabilityRegistry.PLAYERCAP,
-                this.instance.orElseThrow(() -> new IllegalArgumentException("Lazy Optional cannot be empty")), null, nbt);
+    public void deserializeNBT(Tag nbt) {
+        CompoundTag tag = (CompoundTag) nbt;
+
+        this.setMana(tag.getFloat("mana"));
+        this.setMaxMana(tag.getFloat("maxMana"));
+        this.setParent(Deities.list.get(tag.getString("parent")));
+        this.setHadesCooldown(tag.getInt("hadesCooldown"));
     }
 }

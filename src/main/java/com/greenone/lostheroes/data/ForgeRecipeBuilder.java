@@ -6,17 +6,17 @@ import com.google.gson.JsonObject;
 import com.greenone.lostheroes.common.init.LHRecipes;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.ICriterionInstance;
-import net.minecraft.advancements.IRequirementsStrategy;
-import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.advancements.CriterionTriggerInstance;
+import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.Registry;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.ItemLike;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,26 +34,26 @@ public class ForgeRecipeBuilder {
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
     private String group;
 
-    public ForgeRecipeBuilder(IItemProvider resultIn, int countIn, float experienceIn, int cookingTimeIn) {
+    public ForgeRecipeBuilder(ItemLike resultIn, int countIn, float experienceIn, int cookingTimeIn) {
         this.result = resultIn.asItem();
         this.count = countIn;
         this.experience = experienceIn;
         this.cookingTime = cookingTimeIn;
     }
 
-    public static ForgeRecipeBuilder forge(IItemProvider result, float experience, int cookingTime) {
+    public static ForgeRecipeBuilder forge(ItemLike result, float experience, int cookingTime) {
         return new ForgeRecipeBuilder(result, 1, experience, cookingTime);
     }
 
-    public ForgeRecipeBuilder requires(ITag<Item> p_203221_1_) {
+    public ForgeRecipeBuilder requires(Tag<Item> p_203221_1_) {
         return this.requires(Ingredient.of(p_203221_1_));
     }
 
-    public ForgeRecipeBuilder requires(IItemProvider p_200487_1_) {
+    public ForgeRecipeBuilder requires(ItemLike p_200487_1_) {
         return this.requires(p_200487_1_, 1);
     }
 
-    public ForgeRecipeBuilder requires(IItemProvider p_200491_1_, int p_200491_2_) {
+    public ForgeRecipeBuilder requires(ItemLike p_200491_1_, int p_200491_2_) {
         for(int i = 0; i < p_200491_2_; ++i) {
             this.requires(Ingredient.of(p_200491_1_));
         }
@@ -73,7 +73,7 @@ public class ForgeRecipeBuilder {
         return this;
     }
 
-    public ForgeRecipeBuilder unlockedBy(String p_200483_1_, ICriterionInstance p_200483_2_) {
+    public ForgeRecipeBuilder unlockedBy(String p_200483_1_, CriterionTriggerInstance p_200483_2_) {
         this.advancement.addCriterion(p_200483_1_, p_200483_2_);
         return this;
     }
@@ -83,11 +83,11 @@ public class ForgeRecipeBuilder {
         return this;
     }
 
-    public void save(Consumer<IFinishedRecipe> p_200482_1_) {
+    public void save(Consumer<FinishedRecipe> p_200482_1_) {
         this.save(p_200482_1_, Registry.ITEM.getKey(this.result));
     }
 
-    public void save(Consumer<IFinishedRecipe> p_200484_1_, String p_200484_2_) {
+    public void save(Consumer<FinishedRecipe> p_200484_1_, String p_200484_2_) {
         ResourceLocation resourcelocation = Registry.ITEM.getKey(this.result);
         if ((new ResourceLocation(p_200484_2_)).equals(resourcelocation)) {
             throw new IllegalStateException("Forge Recipe " + p_200484_2_ + " should remove its 'save' argument");
@@ -96,9 +96,9 @@ public class ForgeRecipeBuilder {
         }
     }
 
-    public void save(Consumer<IFinishedRecipe> p_200485_1_, ResourceLocation p_200485_2_) {
+    public void save(Consumer<FinishedRecipe> p_200485_1_, ResourceLocation p_200485_2_) {
         this.ensureValid(p_200485_2_);
-        this.advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(p_200485_2_)).rewards(AdvancementRewards.Builder.recipe(p_200485_2_)).requirements(IRequirementsStrategy.OR);
+        this.advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(p_200485_2_)).rewards(AdvancementRewards.Builder.recipe(p_200485_2_)).requirements(RequirementsStrategy.OR);
         p_200485_1_.accept(new ForgeRecipeBuilder.Result(p_200485_2_, this.result, this.count, this.experience, this.cookingTime,this.group == null ? "" : this.group, this.ingredients, this.advancement, new ResourceLocation(p_200485_2_.getNamespace(), "recipes/" + this.result.getItemCategory().getRecipeFolderName() + "/" + p_200485_2_.getPath())));
     }
 
@@ -108,7 +108,7 @@ public class ForgeRecipeBuilder {
         }
     }
 
-    public static class Result implements IFinishedRecipe {
+    public static class Result implements FinishedRecipe {
         private final ResourceLocation id;
         private final Item result;
         private final int count;
@@ -156,7 +156,7 @@ public class ForgeRecipeBuilder {
         }
 
         @Override
-        public IRecipeSerializer<?> getType() {
+        public RecipeSerializer<?> getType() {
             return LHRecipes.Serializers.ALLOYING;
         }
 

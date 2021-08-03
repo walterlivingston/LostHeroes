@@ -3,11 +3,10 @@ package com.greenone.lostheroes.common.util.pattern;
 import com.greenone.lostheroes.common.blocks.LHBlocks;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
-import net.minecraft.block.Block;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class Altar extends PatternCreator{
     private static final Block pillar = LHBlocks.pillars.get(Stone.MARBLE);
@@ -38,7 +37,7 @@ public class Altar extends PatternCreator{
     }
 
     @Override
-    public boolean checkPattern(World world, BlockPos pos) {
+    public boolean checkPattern(Level world, BlockPos pos) {
         BlockPos newPos = new BlockPos(pos.getX()-2, pos.getY()-1, pos.getZ()-2);
         return super.checkPattern(world, newPos);
     }

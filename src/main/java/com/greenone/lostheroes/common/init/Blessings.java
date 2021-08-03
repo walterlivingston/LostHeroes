@@ -2,8 +2,8 @@ package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.common.Blessing;
 import com.greenone.lostheroes.common.potions.LHPotions;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class Blessings {
 

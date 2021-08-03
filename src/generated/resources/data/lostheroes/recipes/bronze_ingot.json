@@ -2,7 +2,7 @@
   "type": "lostheroes:alloying",
   "ingredients": [
     {
-      "item": "lostheroes:copper_ingot"
+      "item": "minecraft:copper_ingot"
     },
     {
       "item": "lostheroes:tin_ingot"

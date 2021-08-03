@@ -1,18 +1,14 @@
 package com.greenone.lostheroes.common.enchantment;
 
-import com.greenone.lostheroes.common.Deity;
 import com.greenone.lostheroes.common.init.Deities;
-import net.minecraft.client.Minecraft;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class BrilliantRiposteEnchantment extends GodlyEnchantment{
     private float damageBonus;
 
-    protected BrilliantRiposteEnchantment(Rarity rarity, EnchantmentType enchantmentType, EquipmentSlotType... slotTypes) {
+    protected BrilliantRiposteEnchantment(Rarity rarity, EnchantmentCategory enchantmentType, EquipmentSlot... slotTypes) {
         super(rarity, enchantmentType, Deities.ATHENA, slotTypes);
     }
 
@@ -22,7 +18,7 @@ public class BrilliantRiposteEnchantment extends GodlyEnchantment{
     }
 
     @Override
-    public float getDamageBonus(int p_152376_1_, CreatureAttribute p_152376_2_) {
+    public float getDamageBonus(int p_152376_1_, MobType p_152376_2_) {
         float bonus = damageBonus;
         if(bonus==0) return super.getDamageBonus(p_152376_1_, p_152376_2_);
         else{

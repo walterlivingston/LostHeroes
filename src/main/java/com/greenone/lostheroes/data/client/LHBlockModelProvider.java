@@ -3,8 +3,8 @@ package com.greenone.lostheroes.data.client;
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
+import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.Direction;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -46,6 +46,8 @@ public class LHBlockModelProvider extends BlockModelProvider {
         }
         orientable("forge", modLoc(BLOCK_FOLDER+"/forge_top"),modLoc(BLOCK_FOLDER+"/forge_front"),modLoc(BLOCK_FOLDER+"/forge_side"));
         orientable("forge_on", modLoc(BLOCK_FOLDER+"/forge_top"),modLoc(BLOCK_FOLDER+"/forge_front_on"),modLoc(BLOCK_FOLDER+"/forge_side"));
+
+
     }
 
     public ModelBuilder pillar(String name) {

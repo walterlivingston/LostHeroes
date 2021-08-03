@@ -2,48 +2,51 @@ package com.greenone.lostheroes.common.blocks;
 
 import com.greenone.lostheroes.common.blocks.tiles.LHEnchantTile;
 import com.greenone.lostheroes.common.inventory.container.LHEnchantContainer;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.EnchantingTableBlock;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.inventory.container.SimpleNamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.INameable;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.Nameable;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.EnchantmentTableBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.EnchantmentTableBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
-public class LHEnchantmentTable extends EnchantingTableBlock {
+public class LHEnchantmentTable extends EnchantmentTableBlock {
     public LHEnchantmentTable(Properties properties) {
         super(properties);
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new LHEnchantTile();
+    public BlockEntity newBlockEntity(BlockPos p_153186_, BlockState p_153187_) {
+        return new LHEnchantTile(p_153186_, p_153187_);
     }
 
     @Nullable
     @Override
-    public INamedContainerProvider getMenuProvider(BlockState state, World world, BlockPos pos) {
-        TileEntity te = world.getBlockEntity(pos);
-        if(te instanceof LHEnchantTile){
-            ITextComponent iTextComponent = ((INameable)te).getDisplayName();
-            return new SimpleNamedContainerProvider((id, inv, player) -> new LHEnchantContainer(id, inv, IWorldPosCallable.create(world, pos)), iTextComponent);
+    public MenuProvider getMenuProvider(BlockState p_52993_, Level p_52994_, BlockPos p_52995_) {
+        BlockEntity blockentity = p_52994_.getBlockEntity(p_52995_);
+        if (blockentity instanceof EnchantmentTableBlockEntity) {
+            Component component = ((Nameable)blockentity).getDisplayName();
+            return new SimpleMenuProvider((p_52959_, p_52960_, p_52961_) -> {
+                return new LHEnchantContainer(p_52959_, p_52960_, ContainerLevelAccess.create(p_52994_, p_52995_));
+            }, component);
+        } else {
+            return null;
         }
-        return super.getMenuProvider(state, world, pos);
     }
 
     @Override
-    public void setPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         if (stack.hasCustomHoverName()) {
-            TileEntity tileentity = world.getBlockEntity(pos);
+            BlockEntity tileentity = world.getBlockEntity(pos);
             if (tileentity instanceof LHEnchantTile) {
                 ((LHEnchantTile)tileentity).setCustomName(stack.getHoverName());
             }

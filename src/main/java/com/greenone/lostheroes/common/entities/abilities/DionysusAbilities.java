@@ -2,35 +2,35 @@ package com.greenone.lostheroes.common.entities.abilities;
 
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
-import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.EntityPredicate;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
 public class DionysusAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(PlayerEntity player) {
+    public void mainAbility(Player player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(player.isCreative() || playerCap.consumeMana(getMainManaReq())){
-            List<LivingEntity> list = player.level.getNearbyEntities(LivingEntity.class, new EntityPredicate().range(5), player, new AxisAlignedBB(player.blockPosition()).inflate(5));
+            AABB aabb = (new AABB(player.blockPosition())).inflate(5);
+            List<LivingEntity> list = player.level.getEntitiesOfClass(LivingEntity.class, aabb);
             list.forEach(e -> {
                 if(!e.equals(player)){
-                    e.addEffect(new EffectInstance(Effects.CONFUSION, 200));
-                    if(e.getMobType() == CreatureAttribute.UNDEAD) e.addEffect(new EffectInstance(Effects.WITHER, 200, 5));
-                    else e.addEffect(new EffectInstance(Effects.POISON, 200, 5));
-                    e.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 200));
+                    e.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200));
+                    if(e.getMobType() == MobType.UNDEAD) e.addEffect(new MobEffectInstance(MobEffects.WITHER, 200, 5));
+                    else e.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 5));
+                    e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200));
                 }
             });
         }
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
+    public void minorAbility(Player player) {
 
     }
 

@@ -5,35 +5,35 @@ import com.google.common.collect.Multimap;
 import com.greenone.lostheroes.common.entities.SpearEntity;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.items.LHItemTier;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.TridentEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TridentItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class LHSpear extends TridentItem {
-    private final IItemTier tier;
+    private final Tier tier;
     private final Multimap<Attribute, AttributeModifier> spearAttributes;
 
     public LHSpear(Metal metal, Properties properties) {
         this(metal.getTier(), properties);
     }
 
-    public LHSpear(IItemTier itemTier, Properties properties) {
+    public LHSpear(Tier itemTier, Properties properties) {
         super(properties.defaultDurability(itemTier.getUses()));
         this.tier = itemTier;
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
@@ -43,9 +43,9 @@ public class LHSpear extends TridentItem {
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, World world, LivingEntity entityLiving, int timeLeft) {
-        if (entityLiving instanceof PlayerEntity) {
-            PlayerEntity playerentity = (PlayerEntity)entityLiving;
+    public void releaseUsing(ItemStack stack, Level world, LivingEntity entityLiving, int timeLeft) {
+        if (entityLiving instanceof Player) {
+            Player playerentity = (Player)entityLiving;
             int i = this.getUseDuration(stack) - timeLeft;
             if (i >= 10) {
                 int j = EnchantmentHelper.getRiptide(stack);
@@ -55,28 +55,28 @@ public class LHSpear extends TridentItem {
                             p_220047_1_.broadcastBreakEvent(entityLiving.getUsedItemHand());
                         });
                         if (j == 0) {
-                            SpearEntity spearEntity = new SpearEntity(world, playerentity, stack);
-                            spearEntity.shootFromRotation(playerentity, playerentity.xRot, playerentity.yRot, 0.0F, 2.5F + (float)j * 0.5F, 1.0F);
-                            if (playerentity.abilities.instabuild) {
-                                spearEntity.pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
+                            SpearEntity var8 = new SpearEntity(world, playerentity, stack);
+                            var8.shootFromRotation(playerentity, playerentity.getXRot(), playerentity.getYRot(), 0.0F, 2.5F + (float)j * 0.5F, 1.0F);
+                            if (playerentity.getAbilities().instabuild) {
+                                var8.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                             }
 
-                            world.addFreshEntity(spearEntity);
-                            world.playSound((PlayerEntity)null, spearEntity, SoundEvents.TRIDENT_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                            if (!playerentity.abilities.instabuild) {
-                                playerentity.inventory.removeItem(stack);
+                            world.addFreshEntity(var8);
+                            world.playSound((Player)null, var8, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            if (!playerentity.getAbilities().instabuild) {
+                                playerentity.getInventory().removeItem(stack);
                             }
                         }
                     }
 
                     playerentity.awardStat(Stats.ITEM_USED.get(this));
                     if (j > 0) {
-                        float f7 = playerentity.yRot;
-                        float f = playerentity.xRot;
-                        float f1 = -MathHelper.sin(f7 * ((float)Math.PI / 180F)) * MathHelper.cos(f * ((float)Math.PI / 180F));
-                        float f2 = -MathHelper.sin(f * ((float)Math.PI / 180F));
-                        float f3 = MathHelper.cos(f7 * ((float)Math.PI / 180F)) * MathHelper.cos(f * ((float)Math.PI / 180F));
-                        float f4 = MathHelper.sqrt(f1 * f1 + f2 * f2 + f3 * f3);
+                        float f7 = playerentity.yRotO;
+                        float f = playerentity.xRotO;
+                        float f1 = -Mth.sin(f7 * ((float)Math.PI / 180F)) * Mth.cos(f * ((float)Math.PI / 180F));
+                        float f2 = -Mth.sin(f * ((float)Math.PI / 180F));
+                        float f3 = Mth.cos(f7 * ((float)Math.PI / 180F)) * Mth.cos(f * ((float)Math.PI / 180F));
+                        float f4 = Mth.sqrt(f1 * f1 + f2 * f2 + f3 * f3);
                         float f5 = 3.0F * ((1.0F + (float)j) / 4.0F);
                         f1 = f1 * (f5 / f4);
                         f2 = f2 * (f5 / f4);
@@ -85,7 +85,7 @@ public class LHSpear extends TridentItem {
                         playerentity.startAutoSpinAttack(20);
                         if (playerentity.isOnGround()) {
                             float f6 = 1.1999999F;
-                            playerentity.move(MoverType.SELF, new Vector3d(0.0D, (double)1.1999999F, 0.0D));
+                            playerentity.move(MoverType.SELF, new Vec3(0.0D, (double)1.1999999F, 0.0D));
                         }
 
                         SoundEvent soundevent;
@@ -97,7 +97,7 @@ public class LHSpear extends TridentItem {
                             soundevent = SoundEvents.TRIDENT_RIPTIDE_1;
                         }
 
-                        world.playSound((PlayerEntity)null, playerentity, soundevent, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                        world.playSound((Player)null, playerentity, soundevent, SoundSource.PLAYERS, 1.0F, 1.0F);
                     }
 
                 }
@@ -106,11 +106,11 @@ public class LHSpear extends TridentItem {
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
-        return slot == EquipmentSlotType.MAINHAND ? this.spearAttributes : super.getAttributeModifiers(slot, stack);
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+        return slot == EquipmentSlot.MAINHAND ? this.spearAttributes : super.getAttributeModifiers(slot, stack);
     }
 
-    public IItemTier getTier() {
+    public Tier getTier() {
         return tier;
     }
 

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lostheroes:marble_stair"
+    ]
+  },
+  "criteria": {
+    "has_marble": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lostheroes:marble"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lostheroes:marble_stair"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_marble",
+      "has_the_recipe"
+    ]
+  ]
+}

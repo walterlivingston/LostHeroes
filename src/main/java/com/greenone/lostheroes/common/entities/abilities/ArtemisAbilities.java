@@ -4,20 +4,20 @@ import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.util.LHUtils;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.WolfEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 public class ArtemisAbilities extends AbstractAbility{
     private float mainManaReq= LHConfig.getMaxMana();
 
     @Override
-    public void mainAbility(PlayerEntity player) {
+    public void mainAbility(Player player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(LHUtils.getLookingAt(player, 5)!=null && playerCap.consumeMana(getMainManaReq(player))){
-            Vector3d spawnVec = LHUtils.getLookingAt(player, 5);
-            WolfEntity wolf = new WolfEntity(EntityType.WOLF, player.level);
+            Vec3 spawnVec = LHUtils.getLookingAt(player, 5);
+            Wolf wolf = new Wolf(EntityType.WOLF, player.level);
             wolf.tame(player);
             player.level.addFreshEntity(wolf);
             wolf.setPos(spawnVec.x, spawnVec.y, spawnVec.z);
@@ -25,7 +25,7 @@ public class ArtemisAbilities extends AbstractAbility{
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
+    public void minorAbility(Player player) {
 
     }
 
@@ -34,7 +34,7 @@ public class ArtemisAbilities extends AbstractAbility{
         return mainManaReq;
     }
 
-    public float getMainManaReq(PlayerEntity player) {
+    public float getMainManaReq(Player player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         mainManaReq = playerCap.getMaxMana();
         return getMainManaReq();

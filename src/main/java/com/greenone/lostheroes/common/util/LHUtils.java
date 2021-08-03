@@ -1,49 +1,42 @@
 package com.greenone.lostheroes.common.util;
 
-import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
-import com.greenone.lostheroes.common.enchantment.FleetEnchantment;
-import com.greenone.lostheroes.common.enchantment.LHEnchants;
 import com.greenone.lostheroes.common.init.Blessings;
-import com.greenone.lostheroes.common.potions.LHEffect;
 import com.greenone.lostheroes.common.potions.LHEffects;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.block.Block;
-import net.minecraft.block.CropsBlock;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityPredicate;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.Dimension;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Random;
 
 public class LHUtils {
-    public static void abilityCheck(PlayerEntity player, IPlayerCap playerCap){
+    public static void abilityCheck(Player player, IPlayerCap playerCap){
         switch(playerCap.getParent().getName()){
             case "zeus":
                 if(!(player.isCreative() || player.isSpectator())){
-                    if(playerCap.getMana() > 0.5F) player.addEffect(new EffectInstance(Blessings.ZEUS, 30, 1, false, false, false, null));
-                    if(player.abilities.flying) playerCap.consumeMana(0.012F);
+                    if(playerCap.getMana() > 0.5F) player.addEffect(new MobEffectInstance(Blessings.ZEUS, 30, 1, false, false, false, null));
+                    if(player.getAbilities().flying) playerCap.consumeMana(0.012F);
                 }
                 break;
             case "poseidon":
@@ -60,9 +53,10 @@ public class LHUtils {
             case "ares":
                 break;
             case "aphrodite":
-                if(!player.isSpectator() && player.isSteppingCarefully() && playerCap.consumeMana(0.008F)){
-                    List<CreatureEntity> mobs = player.level.getNearbyEntities(CreatureEntity.class, new EntityPredicate().range(10), player, new AxisAlignedBB(player.blockPosition()).inflate(10));
-                    mobs.stream().filter(mob -> !(mob instanceof MonsterEntity)).forEach(mob -> {
+                if(!player.isSpectator() && player.isSteppingCarefully() && ( player.isCreative() || playerCap.consumeMana(0.008F))){
+                    AABB aabb = (new AABB(player.blockPosition())).inflate(10).expandTowards(0.0D, (double)player.level.getHeight(), 0.0D);
+                    List<AgeableMob> mobs = player.level.getEntitiesOfClass(AgeableMob.class, aabb);
+                    mobs.stream().forEach(mob -> {
                         mob.getLookControl().setLookAt(mob, (float) (mob.getHeadRotSpeed() + 20), (float) mob.getHeadRotSpeed());
                         mob.getNavigation().moveTo(player, 1.25D);
                     });
@@ -79,53 +73,55 @@ public class LHUtils {
                     playerCap.getParent().applyAttributesModifiersToEntity(player, player.getAttributes(), 0);
                 else
                     playerCap.getParent().removeAttributeModifiers(player, player.getAttributes(), 0);
+
+                System.out.println(player.level.getSkyDarken());
                 break;
             case "demeter":
                 if(player.isSteppingCarefully() && (player.isCreative() || playerCap.consumeMana(0.008F))){
-                    player.addEffect(new EffectInstance(Blessings.DEMETER, 30, 1, false, false, false, null));
+                    player.addEffect(new MobEffectInstance(Blessings.DEMETER, 30, 1, false, false, false, null));
                 }
                 break;
             case "dionysus":
-                player.addEffect(new EffectInstance(Blessings.DIONYSUS, 30, 1, false, false, false, null));
+                player.addEffect(new MobEffectInstance(Blessings.DIONYSUS, 30, 1, false, false, false, null));
                 break;
 
             case "hermes":
                 if(player.isSprinting() && (player.isCreative() || playerCap.getMana() > 0.5F)){
-                    player.addEffect(new EffectInstance(Blessings.HERMES, 30, 1, false, false, false, null));
+                    player.addEffect(new MobEffectInstance(Blessings.HERMES, 30, 1, false, false, false, null));
                     playerCap.consumeMana(0.008F);
                 }
                 break;
             case "hephaestus":
-                player.addEffect(new EffectInstance(LHEffects.FIRE_RESISTANCE, 30, 1, false, false, false, null));
+                player.addEffect(new MobEffectInstance(LHEffects.FIRE_RESISTANCE, 30, 1, false, false, false, null));
                 break;
         }
     }
 
-    private static int determineNextAir(PlayerEntity player, int currentAir) {
+    private static int determineNextAir(Player player, int currentAir) {
         return Math.min(currentAir + 4, player.getMaxAirSupply());
     }
 
-    public static Vector3d getLookingAt(PlayerEntity player, int distance) {
-        Vector3d output;
-        World world = player.level;
-        float f = player.xRot; // Pitch
-        float f1 = player.yRot; // Yaw
-        Vector3d vec3d = player.getEyePosition(1.0F);
-        float f2 = MathHelper.cos(-f1 *((float) Math.PI / 180F) - (float) Math.PI);
-        float f3 = MathHelper.sin(-f1 *((float) Math.PI / 180F) - (float) Math.PI);
-        float f4 = -MathHelper.cos(-f *((float) Math.PI / 180F));
-        float f5 = MathHelper.sin(-f *((float) Math.PI / 180F));
+    public static Vec3 getLookingAt(Player player, int distance) {
+        Vec3 output;
+        Level world = player.level;
+        float f = player.xRotO; // Pitch
+        float f1 = player.yRotO; // Yaw
+        Vec3 vec3d = player.getEyePosition(1.0F);
+        float f2 = Mth.cos(-f1 *((float) Math.PI / 180F) - (float) Math.PI);
+        float f3 = Mth.sin(-f1 *((float) Math.PI / 180F) - (float) Math.PI);
+        float f4 = -Mth.cos(-f *((float) Math.PI / 180F));
+        float f5 = Mth.sin(-f *((float) Math.PI / 180F));
         float f6 = f3 * f4;
         float f7 = f2 * f4;
-        Vector3d vec3d1 = vec3d.add((double) f6*distance, (double) f5 * distance, (double) f7 * distance);
-        RayTraceResult trace = world.clip(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player));
+        Vec3 vec3d1 = vec3d.add((double) f6*distance, (double) f5 * distance, (double) f7 * distance);
+        BlockHitResult trace = world.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player));
         output = trace.getLocation();
         return output;
     }
 
-    public static boolean isItemInInventory(PlayerEntity player, Item item) {
+    public static boolean isItemInInventory(Player player, Item item) {
         ItemStack itemStack = null;
-        for(ItemStack i : player.inventory.items){
+        for(ItemStack i : player.inventoryMenu.getItems()){
             if(i != null && i.getItem()==item){
                 return true;
             }
@@ -133,39 +129,38 @@ public class LHUtils {
         return false;
     }
 
-    public static void renderRageOverlay() {
+    public static void renderTextureOverlay(ResourceLocation p_168709_, float p_168710_) {
         int height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
 
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.defaultBlendFunc();
-        RenderSystem.color4f(255, 96, 96, 1.0F);
-        RenderSystem.disableAlphaTest();
-        Minecraft.getInstance().getTextureManager().bind(new ResourceLocation(LostHeroes.MOD_ID, "textures/misc/rage_overlay.png"));
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferbuilder = tessellator.getBuilder();
-        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, p_168710_);
+        RenderSystem.setShaderTexture(0, p_168709_);
+        Tesselator tesselator = Tesselator.getInstance();
+        BufferBuilder bufferbuilder = tesselator.getBuilder();
+        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
         bufferbuilder.vertex(0.0D, (double)height, -90.0D).uv(0.0F, 1.0F).endVertex();
         bufferbuilder.vertex((double)width, (double)height, -90.0D).uv(1.0F, 1.0F).endVertex();
         bufferbuilder.vertex((double)width, 0.0D, -90.0D).uv(1.0F, 0.0F).endVertex();
         bufferbuilder.vertex(0.0D, 0.0D, -90.0D).uv(0.0F, 0.0F).endVertex();
-        tessellator.end();
+        tesselator.end();
         RenderSystem.depthMask(true);
         RenderSystem.enableDepthTest();
-        RenderSystem.enableAlphaTest();
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    public static void pearlTP(World world, PlayerEntity player, Hand hand) {
+    public static void pearlTP(Level world, Player player, InteractionHand hand) {
         if(!world.isClientSide()){
-            if(player instanceof ServerPlayerEntity){
-                if(player.getCommandSenderWorld().dimension() == World.NETHER){
-                    ServerPlayerEntity sPlayer = (ServerPlayerEntity) player;
+            if(player instanceof ServerPlayer){
+                if(((ServerPlayer) player).getLevel().dimension() == Level.NETHER){
+                    ServerPlayer sPlayer = (ServerPlayer) player;
                     BlockPos spawnPos = sPlayer.getRespawnPosition();
-                    ServerWorld sWorld = sPlayer.server.overworld();
-                    sPlayer.changeDimension(sWorld, sWorld.getPortalForcer());
-                    sPlayer.teleportTo(sWorld, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), sPlayer.yRot, sPlayer.xRot);
+                    ServerLevel sLevel = sPlayer.server.overworld();
+                    sPlayer.changeDimension(sLevel, sLevel.getPortalForcer());
+                    sPlayer.teleportTo(sLevel, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), sPlayer.yRotO, sPlayer.xRotO);
                     if(!player.isCreative()) player.getItemInHand(hand).shrink(1);
                 }
             }

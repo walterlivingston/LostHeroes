@@ -7,15 +7,14 @@ import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.init.Blessings;
 import com.greenone.lostheroes.common.init.Deities;
-import com.greenone.lostheroes.common.network.PacketAbility;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 
-public class ManaHUD extends AbstractGui{
+public class ManaHUD extends Gui {
     private static final ResourceLocation HUD_TEX = new ResourceLocation(LostHeroes.MOD_ID, "textures/gui/mana_hud.png");
     private static final int mana_width = 27;
     private static final int mana_height = 126;
@@ -33,20 +32,21 @@ public class ManaHUD extends AbstractGui{
     private static int height;
 
     private static Minecraft mc;
-    private static PlayerEntity player;
+    private static Player player;
 
     public ManaHUD(Minecraft mcIn){
+        super(mcIn);
         mc = mcIn;
         player = mc.player;
         screenWidth = mc.getWindow().getGuiScaledWidth();
         screenHeight = mc.getWindow().getGuiScaledHeight();
     }
 
-    public void render(MatrixStack matrixStack, float scale){
+    public void render(PoseStack matrixStack, float scale){
         player.getCapability(CapabilityRegistry.PLAYERCAP).ifPresent((c) -> {
-            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             matrixStack.pushPose();
-            mc.getTextureManager().bind(HUD_TEX);
+            RenderSystem.setShaderTexture(0, HUD_TEX);
             matrixStack.scale(scale, scale, scale);
             width = (int) ((1/scale)*screenWidth);
             height = (int) ((1/scale)*screenHeight);
@@ -61,12 +61,12 @@ public class ManaHUD extends AbstractGui{
         });
     }
 
-    private void renderMana(MatrixStack matrixStack, IPlayerCap playerCap) {
+    private void renderMana(PoseStack matrixStack, IPlayerCap playerCap) {
         float mana_percent = playerCap.getMana() / playerCap.getMaxMana();
         this.blit(matrixStack, hudWidthOffset + mana_width + 23, hudHeightOffset + mana_height + 5 - (int) (mana_percent*mana_height), 144, (int) (256-(mana_height*mana_percent)), mana_width, (int) (mana_height*mana_percent));
     }
 
-    public void renderParentSymbol(MatrixStack matrixStack, IPlayerCap playerCap){
+    public void renderParentSymbol(PoseStack matrixStack, IPlayerCap playerCap){
         Deity parent = playerCap.getParent();
         int i = Deities.ordered_list.indexOf(parent);
         int j = 0;
@@ -79,11 +79,11 @@ public class ManaHUD extends AbstractGui{
             i-=8;
             j=2;
         }
-        mc.getTextureManager().bind(HUD_TEX);
+        RenderSystem.setShaderTexture(0, HUD_TEX);
         this.blit(matrixStack, hudWidthOffset + hud_width/2 - large_icon_width/2 + 1, hudHeightOffset + hud_height/2 + large_icon_height/2 + 16, 144 + (i * large_icon_width), 1 + (j * large_icon_height), large_icon_width - 1, large_icon_height - 1);
     }
 
-    private void renderAbilitySymbol(MatrixStack matrixStack, IPlayerCap playerCap) {
+    private void renderAbilitySymbol(PoseStack matrixStack, IPlayerCap playerCap) {
         if(playerCap.getParent()!=null){
             boolean readyMain = playerCap.getParent().getAbilities().getMainManaReq() <= playerCap.getMana();
             boolean readyMinor = playerCap.getParent().getAbilities().getMinorManaReq() <= playerCap.getMana();
@@ -94,8 +94,8 @@ public class ManaHUD extends AbstractGui{
         }
     }
 
-    private void renderBlessingSymbol(MatrixStack matrixStack, IPlayerCap playerCap) {
-        mc.getTextureManager().bind(HUD_TEX);
+    private void renderBlessingSymbol(PoseStack matrixStack, IPlayerCap playerCap) {
+        RenderSystem.setShaderTexture(0, HUD_TEX);
         if(player.hasEffect(Blessings.ZEUS) && Blessings.ZEUS!=playerCap.getParent().getBlessing()){
             this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 13, hudHeightOffset + hud_height/2 + small_icon_height/2 + 1, 212, 201, small_icon_width - 2, small_icon_height - 2);
         }

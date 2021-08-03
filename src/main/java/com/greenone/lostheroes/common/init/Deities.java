@@ -2,11 +2,11 @@ package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.common.Deity;
 import com.greenone.lostheroes.common.entities.abilities.*;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +45,7 @@ public class Deities {
     public static final Deity ARTEMIS = new Deity("artemis",
             Items.BOW,
             Blessings.ARTEMIS,
-            new ArtemisAbilities()).addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", (double)0.2F, AttributeModifier.Operation.MULTIPLY_TOTAL);
+            new ArtemisAbilities()).addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", (double)0.9F, AttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final Deity DEMETER = new Deity("demeter",
             Items.WHEAT,
             Blessings.DEMETER,

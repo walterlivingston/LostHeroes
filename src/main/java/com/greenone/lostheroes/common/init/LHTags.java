@@ -2,12 +2,12 @@ package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,8 +20,8 @@ public class LHTags {
     }
 
     public static final class Blocks {
-        public static final Map<Metal, ITag.INamedTag<Block>> STORAGE_BLOCKS = new HashMap<>();
-        public static final Map<Metal, ITag.INamedTag<Block>> ORES = new HashMap<>();
+        public static final Map<Metal, Tags.IOptionalNamedTag<Block>> STORAGE_BLOCKS = new HashMap<>();
+        public static final Map<Metal, Tags.IOptionalNamedTag<Block>> ORES = new HashMap<>();
 
         public static void register() {
             for(Metal m : Metal.values()){
@@ -36,41 +36,41 @@ public class LHTags {
             }
         }
 
-        private static ITag.INamedTag<Block> forge(String path) {
+        private static Tags.IOptionalNamedTag<Block> forge(String path) {
             return BlockTags.createOptional(new ResourceLocation("forge", path));
         }
 
-        private static ITag.INamedTag<Block> mod(String path) {
+        private static Tags.IOptionalNamedTag<Block> mod(String path) {
             return BlockTags.createOptional(new ResourceLocation(LostHeroes.MOD_ID, path));
         }
     }
 
     public static final class Items {
-        public static final Map<Metal, ITag.INamedTag<Item>> STORAGE_BLOCKS = new HashMap<>();
-        public static final Map<Metal, ITag.INamedTag<Item>> ORES = new HashMap<>();
+        public static final Map<Metal, Tags.IOptionalNamedTag<Item>> STORAGE_BLOCKS = new HashMap<>();
+        public static final Map<Metal, Tags.IOptionalNamedTag<Item>> ORES = new HashMap<>();
 
-        public static final Map<Metal, ITag.INamedTag<Item>> INGOTS = new HashMap<>();
-        public static final Map<Metal, ITag.INamedTag<Item>> NUGGETS = new HashMap<>();
-        public static final ITag.INamedTag<Item> SWORDS = forge("swords");
-        public static final ITag.INamedTag<Item> PICKS = forge("pickaxes");
-        public static final ITag.INamedTag<Item> AXES = forge("axes");
-        public static final ITag.INamedTag<Item> SHOVELS = forge("shovels");
-        public static final ITag.INamedTag<Item> HOES = forge("hoes");
-        public static final ITag.INamedTag<Item> BOWS = forge("bows");
-        public static final ITag.INamedTag<Item> CROSSBOWS = forge("crossbows");
-        public static final ITag.INamedTag<Item> SPEARS = forge("spears");
-        public static final ITag.INamedTag<Item> SHIELDS = forge("shields");
-        public static final ITag.INamedTag<Item> HELMETS = forge("helmets");
-        public static final ITag.INamedTag<Item> CHESTPLATES = forge("chestplates");
-        public static final ITag.INamedTag<Item> LEGGINGS = forge("leggings");
-        public static final ITag.INamedTag<Item> BOOTS = forge("boots");
+        public static final Map<Metal, Tags.IOptionalNamedTag<Item>> INGOTS = new HashMap<>();
+        public static final Map<Metal, Tags.IOptionalNamedTag<Item>> NUGGETS = new HashMap<>();
+        public static final Tags.IOptionalNamedTag<Item> SWORDS = forge("swords");
+        public static final Tags.IOptionalNamedTag<Item> PICKS = forge("pickaxes");
+        public static final Tags.IOptionalNamedTag<Item> AXES = forge("axes");
+        public static final Tags.IOptionalNamedTag<Item> SHOVELS = forge("shovels");
+        public static final Tags.IOptionalNamedTag<Item> HOES = forge("hoes");
+        public static final Tags.IOptionalNamedTag<Item> BOWS = forge("bows");
+        public static final Tags.IOptionalNamedTag<Item> CROSSBOWS = forge("crossbows");
+        public static final Tags.IOptionalNamedTag<Item> SPEARS = forge("spears");
+        public static final Tags.IOptionalNamedTag<Item> SHIELDS = forge("shields");
+        public static final Tags.IOptionalNamedTag<Item> HELMETS = forge("helmets");
+        public static final Tags.IOptionalNamedTag<Item> CHESTPLATES = forge("chestplates");
+        public static final Tags.IOptionalNamedTag<Item> LEGGINGS = forge("leggings");
+        public static final Tags.IOptionalNamedTag<Item> BOOTS = forge("boots");
 
         public static void register() {
             for(Metal m : Metal.values()){
-                if(m.isVanilla()){
+                if(m == Metal.GOLD){
 
                 }else {
-                    STORAGE_BLOCKS.put(m, forge("storage_blocks/" + m.tagName()));
+                    if(m != Metal.COPPER) STORAGE_BLOCKS.put(m, forge("storage_blocks/" + m.tagName()));
                     if (m.generateOre()) {
                         ORES.put(m, forge("ores/" + m.tagName()));
                     }
@@ -81,11 +81,11 @@ public class LHTags {
             }
         }
 
-        private static ITag.INamedTag<Item> forge(String path) {
+        private static Tags.IOptionalNamedTag<Item> forge(String path) {
             return ItemTags.createOptional(new ResourceLocation("forge", path));
         }
 
-        private static ITag.INamedTag<Item> mod(String path) {
+        private static Tags.IOptionalNamedTag<Item> mod(String path) {
             return ItemTags.createOptional(new ResourceLocation(LostHeroes.MOD_ID, path));
         }
     }

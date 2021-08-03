@@ -3,18 +3,17 @@ package com.greenone.lostheroes.common.entities.abilities;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.util.LHUtils;
-import net.minecraft.entity.EntityPredicate;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
 public class ApolloAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(PlayerEntity player) {
+    public void mainAbility(Player player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(player.isSteppingCarefully() && playerCap.getMana()>0){
             float healthDiff = player.getMaxHealth()-player.getHealth();
@@ -25,9 +24,10 @@ public class ApolloAbilities extends AbstractAbility{
                 playerCap.setMana(0);
             }
         }else if(playerCap.getMana()>0){
-            Vector3d entityVec = LHUtils.getLookingAt(player, 0);
+            Vec3 entityVec = LHUtils.getLookingAt(player, 0);
             BlockPos entityPos = new BlockPos(entityVec.x, entityVec.y, entityVec.z);
-            List<LivingEntity> list = player.level.getNearbyEntities(LivingEntity.class, new EntityPredicate().range(2), player, new AxisAlignedBB(entityPos).inflate(2));
+            AABB aabb = (new AABB(player.blockPosition())).inflate(2);
+            List<LivingEntity> list = player.level.getEntitiesOfClass(LivingEntity.class, aabb);
             if(!list.isEmpty()){
                 LivingEntity entity = list.get(0);
                 float healthDiff = entity.getMaxHealth() - entity.getHealth();
@@ -42,7 +42,7 @@ public class ApolloAbilities extends AbstractAbility{
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
+    public void minorAbility(Player player) {
 
     }
 

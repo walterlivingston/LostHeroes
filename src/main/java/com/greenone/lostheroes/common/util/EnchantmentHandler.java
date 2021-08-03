@@ -5,21 +5,21 @@ import com.greenone.lostheroes.common.Blessing;
 import com.greenone.lostheroes.common.enchantment.BrilliantRiposteEnchantment;
 import com.greenone.lostheroes.common.enchantment.LHEnchants;
 import com.greenone.lostheroes.common.potions.LHEffect;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectType;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
@@ -38,17 +38,17 @@ import java.util.stream.Collectors;
 public class EnchantmentHandler {
     public static final EnchantmentHandler instance = new EnchantmentHandler();
 
-    public static void enchantmentCheck(PlayerEntity player){
+    public static void enchantmentCheck(Player player){
         if(player.getArmorValue() > 0){
             for(ItemStack stack : player.getArmorSlots()){
                 if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.REHYDRATION, stack) > 0 && player.isInWater()){
                     if(player.getHealth() < player.getMaxHealth()) player.heal(0.001F);
                 }
                 if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.FLEET, stack) > 0){
-                    player.addEffect(new EffectInstance(new LHEffect().addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", (double)0.2F, AttributeModifier.Operation.MULTIPLY_TOTAL), 30, EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.FLEET, stack), false, false, false, null));
+                    player.addEffect(new MobEffectInstance(new LHEffect().addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", (double)0.2F, AttributeModifier.Operation.MULTIPLY_TOTAL), 30, EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.FLEET, stack), false, false, false, null));
                 }
                 if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.BRUTISH, stack) > 0){
-                    player.addEffect(new EffectInstance(new LHEffect().addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 0.3D, AttributeModifier.Operation.ADDITION), 30, EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.BRUTISH, stack), false, false, false, null));
+                    player.addEffect(new MobEffectInstance(new LHEffect().addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 0.3D, AttributeModifier.Operation.ADDITION), 30, EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.BRUTISH, stack), false, false, false, null));
                 }
             }
         }
@@ -56,11 +56,11 @@ public class EnchantmentHandler {
 
     @SubscribeEvent
     public void onSetAttackTarget(final LivingSetAttackTargetEvent event) {
-        if (event.getTarget() instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) event.getTarget();
+        if (event.getTarget() instanceof Player) {
+            Player player = (Player) event.getTarget();
             player.getArmorSlots().forEach((armor) -> {
-                if (EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.UNDEAD_PRESENCE, armor) > 0 && event.getEntityLiving().getMobType() == CreatureAttribute.UNDEAD && event.getTarget()!=null) {
-                    ((MonsterEntity) event.getEntityLiving()).setTarget(null);
+                if (EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.UNDEAD_PRESENCE, armor) > 0 && event.getEntityLiving().getMobType() == MobType.UNDEAD && event.getTarget()!=null) {
+                    ((Monster) event.getEntityLiving()).setTarget(null);
                 }
             });
         }
@@ -97,12 +97,12 @@ public class EnchantmentHandler {
 
     @SubscribeEvent
     public void onPotionAdded(final PotionEvent.PotionApplicableEvent event) {
-        if(event.getEntityLiving() instanceof PlayerEntity && !(event.getPotionEffect().getEffect() instanceof Blessing)){
-            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+        if(event.getEntityLiving() instanceof Player && !(event.getPotionEffect().getEffect() instanceof Blessing)){
+            Player player = (Player) event.getEntityLiving();
             player.getArmorSlots().forEach((a) -> {
                 if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.VINTAGE, a) > 0){
                     int level = EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.VINTAGE, a);
-                    event.getPotionEffect().update(new EffectInstance(event.getPotionEffect().getEffect(), event.getPotionEffect().getDuration()*(3/2 * level), event.getPotionEffect().getAmplifier() + level - 1));
+                    event.getPotionEffect().update(new MobEffectInstance(event.getPotionEffect().getEffect(), event.getPotionEffect().getDuration()*(3/2 * level), event.getPotionEffect().getAmplifier() + level - 1));
                 }
             });
         }
@@ -110,8 +110,8 @@ public class EnchantmentHandler {
 
     @SubscribeEvent
     public void onFarmlandTrample(final BlockEvent.FarmlandTrampleEvent event) {
-        if(event.getEntity() instanceof PlayerEntity){
-            PlayerEntity player = (PlayerEntity) event.getEntity();
+        if(event.getEntity() instanceof Player){
+            Player player = (Player) event.getEntity();
             player.getArmorSlots().forEach((a) -> {
                 if(EnchantmentHelper.getItemEnchantmentLevel(LHEnchants.LEAF_STEP, a) > 0){
                     event.setCanceled(true);
@@ -122,10 +122,10 @@ public class EnchantmentHandler {
 
     @SubscribeEvent
     public void onProjectileImpact(final ProjectileImpactEvent event) {
-        if(event.getEntity() instanceof AbstractArrowEntity){
-            AbstractArrowEntity arrow = (AbstractArrowEntity) event.getEntity();
-            if(event.getRayTraceResult().getType() == RayTraceResult.Type.ENTITY){
-                EntityRayTraceResult entityRay = (EntityRayTraceResult) event.getRayTraceResult();
+        if(event.getEntity() instanceof AbstractArrow){
+            AbstractArrow arrow = (AbstractArrow) event.getEntity();
+            if(event.getRayTraceResult().getType() == BlockHitResult.Type.ENTITY){
+                EntityHitResult entityRay = (EntityHitResult) event.getRayTraceResult();
                 if(entityRay.getEntity() instanceof LivingEntity){
                     LivingEntity living = (LivingEntity) entityRay.getEntity();
                     float chance = 0.0f;
@@ -139,8 +139,8 @@ public class EnchantmentHandler {
                         chance = 3*0.15f;
                     }
                     if(chance!=0.0f && new Random().nextFloat() < chance ){
-                        ArrayList<Effect> bad_effects = (ArrayList<Effect>) Registry.MOB_EFFECT.stream().filter((e) -> e.getCategory() == EffectType.HARMFUL).collect(Collectors.toList());
-                        living.addEffect(new EffectInstance(bad_effects.get(new Random().nextInt(bad_effects.size())), 600));
+                        ArrayList<MobEffect> bad_effects = (ArrayList<MobEffect>) Registry.MOB_EFFECT.stream().filter((e) -> e.getCategory() == MobEffectCategory.HARMFUL).collect(Collectors.toList());
+                        living.addEffect(new MobEffectInstance(bad_effects.get(new Random().nextInt(bad_effects.size())), 600));
                         System.out.println(living.getActiveEffects());
                     }
                 }

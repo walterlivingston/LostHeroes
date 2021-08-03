@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "lostheroes:copper_shield",
     "lostheroes:tin_shield",
     "lostheroes:lead_shield",
     "lostheroes:silver_shield",

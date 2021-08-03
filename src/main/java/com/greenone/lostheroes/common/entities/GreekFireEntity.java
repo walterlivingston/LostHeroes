@@ -1,47 +1,44 @@
 package com.greenone.lostheroes.common.entities;
 
-import com.greenone.lostheroes.common.blocks.LHBlocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.projectile.PotionEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.event.ForgeEventFactory;
 
 import java.util.Random;
 
-public class GreekFireEntity extends PotionEntity {
+public class GreekFireEntity extends ThrownPotion {
     private int modifier=3;
     private boolean isExplosive=false;
 
-    public GreekFireEntity(EntityType<? extends PotionEntity> type, World world) {
+    public GreekFireEntity(EntityType<? extends ThrownPotion> type, Level world) {
         super(type, world);
     }
 
-    public GreekFireEntity(World world, LivingEntity thrower, int modifierIn, boolean isExplosiveIn) {
+    public GreekFireEntity(Level world, LivingEntity thrower, int modifierIn, boolean isExplosiveIn) {
         super(world, thrower);
         this.modifier = modifierIn;
         this.isExplosive = isExplosiveIn;
     }
 
-    public GreekFireEntity(World world, double x, double y, double z) {
+    public GreekFireEntity(Level world, double x, double y, double z) {
         super(world, x, y, z);
     }
 
     /*@Override
     protected void onHit(RayTraceResult trace) {
-        if(!this.getCommandSenderWorld().isClientSide()){
+        if(!this.getCommandSenderLevel().isClientSide()){
             Entity entity = this.getOwner();
-            if(entity == null || !(entity instanceof MobEntity) || this.getCommandSenderWorld().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) || ForgeEventFactory.getMobGriefingEvent(this.getCommandSenderWorld(), this.getEntity())){
-                if(isExplosive && this.getCommandSenderWorld().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)){
-                    this.getCommandSenderWorld().explode(this, this.getX(), this.getY(), this.getZ(), modifier, false, Explosion.Mode.BREAK);
+            if(entity == null || !(entity instanceof MobEntity) || this.getCommandSenderLevel().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) || ForgeEventFactory.getMobGriefingEvent(this.getCommandSenderLevel(), this.getEntity())){
+                if(isExplosive && this.getCommandSenderLevel().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)){
+                    this.getCommandSenderLevel().explode(this, this.getX(), this.getY(), this.getZ(), modifier, false, Explosion.Mode.BREAK);
                     this.remove();
                 }
                 Random rand = new Random();
@@ -50,8 +47,8 @@ public class GreekFireEntity extends PotionEntity {
                         for(int z = -modifier; z <= modifier; z++){
                             if(rand.nextBoolean() && rand.nextBoolean()) {
                                 BlockPos blockPos = new BlockPos(trace.getLocation().x + x, trace.getLocation().y + y, trace.getLocation().z + z);
-                                if (this.getCommandSenderWorld().getBlockState(blockPos).isAir()) {
-                                    this.getCommandSenderWorld().setBlock(blockPos, LHBlocks.greek_fire.defaultBlockState(), 1);
+                                if (this.getCommandSenderLevel().getBlockState(blockPos).isAir()) {
+                                    this.getCommandSenderLevel().setBlock(blockPos, LHBlocks.greek_fire.defaultBlockState(), 1);
                                 }
                             }
                         }
@@ -62,13 +59,13 @@ public class GreekFireEntity extends PotionEntity {
     }*/
 
     @Override
-    protected void onHitBlock(BlockRayTraceResult trace) {
-        if(!this.getCommandSenderWorld().isClientSide()){
+    protected void onHitBlock(BlockHitResult trace) {
+        if(!this.level.isClientSide()){
             Entity entity = this.getOwner();
-            if(entity == null || !(entity instanceof MobEntity) || this.getCommandSenderWorld().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) || ForgeEventFactory.getMobGriefingEvent(this.getCommandSenderWorld(), this.getEntity())){
-                if(isExplosive && this.getCommandSenderWorld().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)){
-                    this.getCommandSenderWorld().explode(this, this.getX(), this.getY(), this.getZ(), modifier, false, Explosion.Mode.BREAK);
-                    this.remove();
+            if(entity == null || !(entity instanceof Mob) || this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) || ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner())){
+                if(isExplosive && this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)){
+                    this.level.explode(this, this.getX(), this.getY(), this.getZ(), modifier, false, Explosion.BlockInteraction.BREAK);
+                    this.remove(false);
                 }
                 Random rand = new Random();
                 for(int y = -modifier; y <= modifier; y++){
@@ -76,8 +73,8 @@ public class GreekFireEntity extends PotionEntity {
                         for(int z = -modifier; z <= modifier; z++){
                             //if(rand.nextBoolean() && rand.nextBoolean()) {
                                 BlockPos blockPos = new BlockPos(trace.getLocation().x + x, trace.getLocation().y + y, trace.getLocation().z + z);
-                                if (this.getCommandSenderWorld().getBlockState(blockPos).isAir()) {
-                                    //this.getCommandSenderWorld().setBlock(blockPos, LHBlocks.greek_fire.defaultBlockState(), 2);
+                                if (this.level.getBlockState(blockPos).isAir()) {
+                                    //this.getCommandSenderLevel().setBlock(blockPos, LHBlocks.greek_fire.defaultBlockState(), 2);
                                 }
                             //}
                         }

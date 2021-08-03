@@ -1,24 +1,25 @@
 package com.greenone.lostheroes.common.items.tools;
 
+import com.greenone.lostheroes.client.render.properties.ShieldRenderProperties;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.items.LHItemTier;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShieldItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.Tier;
 
 public class LHShield extends ShieldItem {
-    private final IItemTier tier;
+    private final Tier tier;
 
     public LHShield(Metal metal, Properties properties) {
         this(metal.getTier(), properties);
     }
 
-    public LHShield(IItemTier itemTier, Properties properties) {
+    public LHShield(Tier itemTier, Properties properties) {
         super(properties.defaultDurability(itemTier.getUses()));
         this.tier = itemTier;
     }
 
-    public IItemTier getTier() {
+    public Tier getTier() {
         return tier;
     }
 
@@ -41,5 +42,10 @@ public class LHShield extends ShieldItem {
             return ((LHItemTier)tier).hasEffect() || super.isFoil(stack);
         }
         return super.isFoil(stack);
+    }
+
+    @Override
+    public Object getRenderPropertiesInternal() {
+        return new ShieldRenderProperties();
     }
 }

@@ -2,15 +2,13 @@ package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.items.crafting.ForgeRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
 
 public class LHRecipes {
 
     public static final class Types{
-        public static final IRecipeType<ForgeRecipe> ALLOYING = IRecipeType.register(LostHeroes.MOD_ID + ":alloying");
+        public static final RecipeType<ForgeRecipe> ALLOYING = RecipeType.register(LostHeroes.MOD_ID + ":alloying");
 
         private Types(){}
     }

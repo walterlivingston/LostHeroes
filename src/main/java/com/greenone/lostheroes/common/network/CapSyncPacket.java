@@ -1,35 +1,31 @@
 package com.greenone.lostheroes.common.network;
 
-import com.greenone.lostheroes.common.Deity;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
-import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.capabilities.PlayerCap;
-import com.greenone.lostheroes.common.init.Deities;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.UUID;
 import java.util.function.Supplier;
 
 public class CapSyncPacket{
     private UUID entityId;
-    private final CompoundNBT nbt;
+    private final CompoundTag nbt;
 
-    public CapSyncPacket(PacketBuffer buf){
+    public CapSyncPacket(FriendlyByteBuf buf){
         this.entityId = buf.readUUID();
         this.nbt = buf.readNbt();
     }
 
-    public void toBytes(PacketBuffer buf){
+    public void toBytes(FriendlyByteBuf buf){
         buf.writeUUID(this.entityId);
         buf.writeNbt(this.nbt);
     }
 
-    public CapSyncPacket(PlayerEntity player,CompoundNBT nbtIn){
+    public CapSyncPacket(Player player, CompoundTag nbtIn){
         this.entityId = player.getUUID();
         this.nbt = nbtIn;
     }
@@ -37,7 +33,7 @@ public class CapSyncPacket{
     public static void handle(final CapSyncPacket packet, Supplier<NetworkEvent.Context> ctx){
         ctx.get().enqueueWork(() -> {
             Minecraft.getInstance().level.getPlayerByUUID(packet.entityId).getCapability(CapabilityRegistry.PLAYERCAP).ifPresent((c) -> {
-                CapabilityRegistry.PLAYERCAP.getStorage().readNBT(CapabilityRegistry.PLAYERCAP, c, null, packet.nbt);
+                new PlayerCap().readFromNBT(packet.nbt, c);
             });
         });
         ctx.get().setPacketHandled(true);

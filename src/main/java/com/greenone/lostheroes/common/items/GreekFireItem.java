@@ -1,25 +1,21 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.common.entities.GreekFireEntity;
-import com.greenone.lostheroes.common.items.vanilla.LHThrowablePotionItem;
 import com.greenone.lostheroes.common.potions.LHPotions;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ThrowablePotionItem;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.potion.Potions;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ThrowablePotionItem;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -42,12 +38,12 @@ public class GreekFireItem extends ThrowablePotionItem {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack itemstack = playerIn.getItemInHand(handIn);
         if (!worldIn.isClientSide()) {
             GreekFireEntity greekFireEntity = new GreekFireEntity(worldIn, playerIn, getModifer(playerIn.getItemInHand(handIn)), isExplosive(playerIn.getItemInHand(handIn)));
             greekFireEntity.setItem(itemstack);
-            greekFireEntity.shootFromRotation(playerIn, playerIn.xRot, playerIn.yRot, -20.0F, 0.5F, 1.0F);
+            greekFireEntity.shootFromRotation(playerIn, playerIn.xRotO, playerIn.yRotO, -20.0F, 0.5F, 1.0F);
             worldIn.addFreshEntity(greekFireEntity);
         }
 
@@ -56,7 +52,7 @@ public class GreekFireItem extends ThrowablePotionItem {
             itemstack.shrink(1);
         }
 
-        return ActionResult.sidedSuccess(itemstack, worldIn.isClientSide());
+        return InteractionResultHolder.sidedSuccess(itemstack, worldIn.isClientSide());
     }
 
     @Override
@@ -69,18 +65,18 @@ public class GreekFireItem extends ThrowablePotionItem {
      */
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         String regName = PotionUtils.getPotion(stack).getName("");
         switch (regName){
             case "greek_fire":
-                tooltip.add(new StringTextComponent("\u00A7"+"9"+"Level I"));
+                tooltip.add(new TextComponent("\u00A7"+"9"+"Level I"));
                 break;
             case "greek_fire_2":
-                tooltip.add(new StringTextComponent("\u00A7"+"9"+"Level II"));
+                tooltip.add(new TextComponent("\u00A7"+"9"+"Level II"));
                 break;
             case "greek_fire_2_exp":
-                tooltip.add(new StringTextComponent("\u00A7"+"9"+"Level II"));
-                tooltip.add(new StringTextComponent("\u00A7"+"4"+"Explosive"));
+                tooltip.add(new TextComponent("\u00A7"+"9"+"Level II"));
+                tooltip.add(new TextComponent("\u00A7"+"4"+"Explosive"));
                 break;
         }
     }
@@ -111,7 +107,7 @@ public class GreekFireItem extends ThrowablePotionItem {
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
         if (this.allowdedIn(group)) {
             for(Potion potion : LHPotions.potionList) {
                 items.add(PotionUtils.setPotion(new ItemStack(this), potion));

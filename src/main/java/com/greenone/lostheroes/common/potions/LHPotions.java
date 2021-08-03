@@ -2,9 +2,8 @@ package com.greenone.lostheroes.common.potions;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.init.Blessings;
-import net.minecraft.item.Item;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.Potion;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -14,8 +13,8 @@ import java.util.List;
 
 public class LHPotions {
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, LostHeroes.MOD_ID);
-    public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, LostHeroes.MOD_ID);
-    public static final DeferredRegister<Effect> VANILLA_EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, "minecraft");
+    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, LostHeroes.MOD_ID);
+    public static final DeferredRegister<MobEffect> VANILLA_EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, "minecraft");
 
     public static List<Potion> potionList = new ArrayList<>();
     public static final Potion GREEK_FIRE = registerPotion("greek_fire", new Potion());

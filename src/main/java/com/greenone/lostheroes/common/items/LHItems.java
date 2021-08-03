@@ -1,11 +1,11 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.client.render.ShieldRenderer;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.items.tools.*;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -34,7 +34,7 @@ public class LHItems {
     public static Map<Metal, Item> chestplates = new HashMap<>();
     public static Map<Metal, Item> leggings = new HashMap<>();
     public static Map<Metal, Item> boots = new HashMap<>();
-    public static Item invisibility_cap = registerArmor("invisibility_cap", LHArmorMaterial.LEATHER, EquipmentSlotType.HEAD);
+    public static Item invisibility_cap = registerArmor("invisibility_cap", LHArmorMaterial.LEATHER, EquipmentSlot.HEAD);
 
     public static Item adamantine_ingot_dull = registerItem("adamantine_ingot_dull");
     public static Item ivlivs_coin = registerItem("ivlivs_coin", new LHItem(Metal.IMPERIAL_GOLD, new Item.Properties().tab(LostHeroes.lh_group).stacksTo(1)));
@@ -50,8 +50,8 @@ public class LHItems {
     public static Item ambrosia = registerFood("ambrosia", LHFoods.AMBROSIA, true);
     public static Item nectar = registerItem("nectar", new LHFood(new Item.Properties().tab(LostHeroes.lh_group).food(LHFoods.NECTAR), true));
 
-    public static Item vanilla_bow = registerVanillaItem("bow", new LHBow(ItemTier.WOOD, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
-    public static Item vanilla_crossbow = registerVanillaItem("crossbow", new LHCrossbow(ItemTier.WOOD, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+    public static Item vanilla_bow = registerVanillaItem("bow", new LHBow(Tiers.WOOD, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
+    public static Item vanilla_crossbow = registerVanillaItem("crossbow", new LHCrossbow(Tiers.WOOD, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
 
     public static Item drachma = registerItem("drachma", new LHItem(new Item.Properties().tab(LostHeroes.lh_group).stacksTo(16)));
 
@@ -59,11 +59,15 @@ public class LHItems {
 
     public static void register(IEventBus eventBus) {
         for(Metal m : Metal.values()){
-            if(m.isVanilla()){
-                ingots.put(m, registerVanillaItem(m.tagName()+"_ingot", ItemGroup.TAB_MATERIALS, m));
-                nuggets.put(m, registerVanillaItem(m.tagName()+"_nugget", ItemGroup.TAB_MATERIALS, m));
+            if(m == Metal.GOLD){
+                ingots.put(m, registerVanillaItem(m.tagName()+"_ingot", CreativeModeTab.TAB_MATERIALS, m));
+                nuggets.put(m, registerVanillaItem(m.tagName()+"_nugget", CreativeModeTab.TAB_MATERIALS, m));
             }else{
-                ingots.put(m, registerItem(m.tagName()+"_ingot", m));
+                if(m == Metal.COPPER) {
+                    ingots.put(m, registerVanillaItem(m.tagName()+"_ingot", CreativeModeTab.TAB_MATERIALS, m));
+                }else{
+                    ingots.put(m, registerItem(m.tagName()+"_ingot", m));
+                }
                 nuggets.put(m, registerItem(m.tagName()+"_nugget", m));
                 swords.put(m, registerSword(m.tagName()+"_sword", m.getTier(), 3, -2.4F, m));
                 picks.put(m, registerPick(m.tagName()+"_pickaxe", m.getTier(),1, -2.8F, m));
@@ -74,10 +78,10 @@ public class LHItems {
                 crossbows.put(m, registerCrossbow(m.tagName()+"_crossbow", m));
                 spears.put(m, registerSpear(m.tagName()+"_spear", m));
                 shields.put(m, registerShield(m.tagName()+"_shield", m));
-                helmets.put(m, registerArmor(m.tagName()+"_helmet", m.getArmor(), EquipmentSlotType.HEAD, m));
-                chestplates.put(m, registerArmor(m.tagName()+"_chestplate", m.getArmor(), EquipmentSlotType.CHEST, m));
-                leggings.put(m, registerArmor(m.tagName()+"_leggings", m.getArmor(), EquipmentSlotType.LEGS, m));
-                boots.put(m, registerArmor(m.tagName()+"_boots", m.getArmor(), EquipmentSlotType.FEET, m));
+                helmets.put(m, registerArmor(m.tagName()+"_helmet", m.getArmor(), EquipmentSlot.HEAD, m));
+                chestplates.put(m, registerArmor(m.tagName()+"_chestplate", m.getArmor(), EquipmentSlot.CHEST, m));
+                leggings.put(m, registerArmor(m.tagName()+"_leggings", m.getArmor(), EquipmentSlot.LEGS, m));
+                boots.put(m, registerArmor(m.tagName()+"_boots", m.getArmor(), EquipmentSlot.FEET, m));
             }
         }
         ITEMS.register(eventBus);
@@ -96,7 +100,7 @@ public class LHItems {
         Item item = new LHItem(metal, new Item.Properties().tab(LostHeroes.lh_group));
         return registerItem(name, item);
     }
-    private static Item registerFood(String name, Food food, boolean isGodly){
+    private static Item registerFood(String name, FoodProperties food, boolean isGodly){
         Item item = new LHFood(food, isGodly);
         return registerItem(name, item);
     }
@@ -104,27 +108,27 @@ public class LHItems {
         VANILLA_ITEMS.register(name, () -> item);
         return item;
     }
-    private static Item registerVanillaItem(String name, ItemGroup group, Metal metal){
+    private static Item registerVanillaItem(String name, CreativeModeTab group, Metal metal){
         Item item = new LHItem(metal, new Item.Properties().tab(group));
         return registerVanillaItem(name, item);
     }
-    private static Item registerSword(String name, IItemTier tier, int damage, float speed, Metal metal) {
+    private static Item registerSword(String name, Tier tier, int damage, float speed, Metal metal) {
         Item item = new LHSword(tier, damage, speed, new Item.Properties().tab(LostHeroes.lh_group), metal);
         return registerItem(name, item);
     }
-    private static Item registerPick(String name, IItemTier tier, int damage, float speed, Metal metal) {
+    private static Item registerPick(String name, Tier tier, int damage, float speed, Metal metal) {
         Item item = new LHPick(tier, damage, speed, new Item.Properties().tab(LostHeroes.lh_group), metal);
         return registerItem(name, item);
     }
-    private static Item registerAxe(String name, IItemTier tier, float damage, float speed, Metal metal) {
+    private static Item registerAxe(String name, Tier tier, float damage, float speed, Metal metal) {
         Item item = new LHAxe(tier, damage, speed, new Item.Properties().tab(LostHeroes.lh_group), metal);
         return registerItem(name, item);
     }
-    private static Item registerShovel(String name, IItemTier tier, float damage, float speed, Metal metal) {
+    private static Item registerShovel(String name, Tier tier, float damage, float speed, Metal metal) {
         Item item = new LHShovel(tier, damage, speed, new Item.Properties().tab(LostHeroes.lh_group), metal);
         return registerItem(name, item);
     }
-    private static Item registerHoe(String name, IItemTier tier, int damage, float speed, Metal metal) {
+    private static Item registerHoe(String name, Tier tier, int damage, float speed, Metal metal) {
         Item item = new LHHoe(tier, damage, speed, new Item.Properties().tab(LostHeroes.lh_group), metal);
         return registerItem(name, item);
     }
@@ -141,18 +145,18 @@ public class LHItems {
         return registerItem(name, item);
     }
     private static Item registerShield(String name, Metal metal) {
-        Item item = new LHShield(metal, new Item.Properties().tab(LostHeroes.lh_group).setISTER(()-> ShieldRenderer::new));
+        Item item = new LHShield(metal, new Item.Properties().tab(LostHeroes.lh_group));
         return registerItem(name, item);
     }
-    private static Item registerKnife(String name, IItemTier tier, int damage, float speed, Metal metal) {
+    private static Item registerKnife(String name, Tier tier, int damage, float speed, Metal metal) {
         Item item = new LHKnife(tier, damage, speed, new Item.Properties().tab(LostHeroes.lh_group), metal);
         return registerItem(name, item);
     }
-    private static Item registerArmor(String name, IArmorMaterial material, EquipmentSlotType slot, Metal metal) {
+    private static Item registerArmor(String name, ArmorMaterial material, EquipmentSlot slot, Metal metal) {
         Item item = new LHArmorItem(material, slot, new Item.Properties().tab(LostHeroes.lh_group), metal);
         return registerItem(name, item);
     }
-    private static Item registerArmor(String name, IArmorMaterial material, EquipmentSlotType slot) {
+    private static Item registerArmor(String name, ArmorMaterial material, EquipmentSlot slot) {
         Item item = new LHArmorItem(material, slot, new Item.Properties().tab(LostHeroes.lh_group));
         return registerItem(name, item);
     }

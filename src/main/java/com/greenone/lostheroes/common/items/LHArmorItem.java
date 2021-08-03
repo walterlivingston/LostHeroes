@@ -1,23 +1,23 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.common.enums.Metal;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.world.World;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class LHArmorItem extends ArmorItem {
     private Metal metal = null;
 
-    public LHArmorItem(IArmorMaterial p_i48534_1_, EquipmentSlotType p_i48534_2_, Properties p_i48534_3_) {
+    public LHArmorItem(ArmorMaterial p_i48534_1_, EquipmentSlot p_i48534_2_, Properties p_i48534_3_) {
         super(p_i48534_1_, p_i48534_2_, p_i48534_3_);
     }
 
-    public LHArmorItem(IArmorMaterial p_i48534_1_, EquipmentSlotType p_i48534_2_, Properties p_i48534_3_, Metal metalIn) {
+    public LHArmorItem(ArmorMaterial p_i48534_1_, EquipmentSlot p_i48534_2_, Properties p_i48534_3_, Metal metalIn) {
         super(p_i48534_1_, p_i48534_2_, p_i48534_3_);
         this.metal = metalIn;
     }
@@ -31,14 +31,15 @@ public class LHArmorItem extends ArmorItem {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+    public void onArmorTick(ItemStack stack, Level world, Player player) {
         if(stack.getItem() == LHItems.invisibility_cap){
             if(!player.isCreative()){
                 stack.hurtAndBreak(1, player, (playerEntity) -> {
-                    playerEntity.broadcastBreakEvent(EquipmentSlotType.HEAD);
+                    playerEntity.broadcastBreakEvent(EquipmentSlot.HEAD);
                 });
             }
-            player.addEffect(new EffectInstance(Effects.INVISIBILITY, 10, 0, false, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 10, 0, false, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 10, 0, false, false, false));
         }
         super.onArmorTick(stack, world, player);
     }

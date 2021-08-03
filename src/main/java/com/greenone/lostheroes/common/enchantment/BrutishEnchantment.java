@@ -1,13 +1,12 @@
 package com.greenone.lostheroes.common.enchantment;
 
-import com.greenone.lostheroes.common.Deity;
 import com.greenone.lostheroes.common.init.Deities;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class BrutishEnchantment extends GodlyEnchantment{
-    protected BrutishEnchantment(Rarity rarity, EnchantmentType enchantmentType, EquipmentSlotType... slotTypes) {
+    protected BrutishEnchantment(Rarity rarity, EnchantmentCategory enchantmentType, EquipmentSlot... slotTypes) {
         super(rarity, enchantmentType, Deities.ARES, slotTypes);
     }
 
@@ -17,7 +16,7 @@ public class BrutishEnchantment extends GodlyEnchantment{
     }
 
     @Override
-    public float getDamageBonus(int level, CreatureAttribute creatureAttribute) {
+    public float getDamageBonus(int level, MobType creatureAttribute) {
         return level*1.25f;
     }
 }

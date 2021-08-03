@@ -1,15 +1,15 @@
 package com.greenone.lostheroes.common.items;
 
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.LazyValue;
+import net.minecraft.util.LazyLoadedValue;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.Arrays;
 import java.util.function.Supplier;
 
-public enum LHItemTier implements IItemTier {
+public enum LHItemTier implements Tier {
 
     COPPER(2, 160, 5.0F, 1.5F, 10, () -> {
         return Ingredient.of(ItemTags.PLANKS);
@@ -47,7 +47,7 @@ public enum LHItemTier implements IItemTier {
     private final float speed;
     private final float damage;
     private final int enchantmentValue;
-    private final LazyValue<Ingredient> repairIngredient;
+    private final LazyLoadedValue<Ingredient> repairIngredient;
 
     LHItemTier(int levelIn, int usesIn, float speedIn, float damageIn, int enchantmentValueIn, Supplier<Ingredient> repairIngredientIn) {
         this.level = levelIn;
@@ -55,7 +55,7 @@ public enum LHItemTier implements IItemTier {
         this.speed = speedIn;
         this.damage = damageIn;
         this.enchantmentValue = enchantmentValueIn;
-        this.repairIngredient = new LazyValue<>(repairIngredientIn);
+        this.repairIngredient = new LazyLoadedValue<>(repairIngredientIn);
     }
 
     @Override

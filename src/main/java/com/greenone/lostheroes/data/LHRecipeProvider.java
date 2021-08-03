@@ -6,33 +6,33 @@ import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
 import com.greenone.lostheroes.common.init.LHTags;
 import com.greenone.lostheroes.common.items.LHItems;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.*;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.data.ForgeRecipeProvider;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.Consumer;
 
-public class LHRecipeProvider extends ForgeRecipeProvider {
+public class LHRecipeProvider extends RecipeProvider {
     public LHRecipeProvider(DataGenerator generatorIn) {
         super(generatorIn);
     }
 
     @Override
-    protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
+    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
         for(Metal m : Metal.values()){
-            if(m.isVanilla()){
+            if(m == Metal.GOLD){
 
             }else {
-                if(m.generateOre()){       CookingRecipeBuilder.smelting(Ingredient.of(LHBlocks.ores.get(m).asItem()), LHItems.ingots.get(m), 0.7F, 200).unlockedBy("has_"+m.tagName()+"_ore", has(LHBlocks.ores.get(m).asItem())).save(consumer); }
-                ShapedRecipeBuilder.shaped(LHBlocks.storageBlocks.get(m)).define('#', LHTags.Items.INGOTS.get(m)).pattern("###").pattern("###").pattern("###").unlockedBy("has_" + m.tagName()+"_ingot", has(LHTags.Items.INGOTS.get(m))).save(consumer);
+                if(m.generateOre()){       SimpleCookingRecipeBuilder.smelting(Ingredient.of(LHBlocks.ores.get(m).asItem()), LHItems.ingots.get(m), 0.7F, 200).unlockedBy("has_"+m.tagName()+"_ore", has(LHBlocks.ores.get(m).asItem())).save(consumer); }
+                if(m != Metal.COPPER) ShapedRecipeBuilder.shaped(LHBlocks.storageBlocks.get(m)).define('#', LHTags.Items.INGOTS.get(m)).pattern("###").pattern("###").pattern("###").unlockedBy("has_" + m.tagName()+"_ingot", has(LHTags.Items.INGOTS.get(m))).save(consumer);
                 ShapedRecipeBuilder.shaped(LHItems.ingots.get(m)).define('#', LHTags.Items.NUGGETS.get(m)).pattern("###").pattern("###").pattern("###").group("iron_ingot").unlockedBy("has_" + m.tagName() + "_nugget", has(LHTags.Items.NUGGETS.get(m))).save(consumer, new ResourceLocation(LostHeroes.MOD_ID, m.tagName() + "_ingot_from_nuggets"));
                 ShapelessRecipeBuilder.shapeless(LHItems.nuggets.get(m), 9).requires(LHTags.Items.INGOTS.get(m)).unlockedBy("has_" + m.tagName() + "_ingot", has(LHTags.Items.INGOTS.get(m))).save(consumer);
 
                 ShapedRecipeBuilder.shaped(LHItems.swords.get(m)).define('#', Items.STICK).define('X', LHTags.Items.INGOTS.get(m)).pattern("X").pattern("X").pattern("#").unlockedBy("has_" + m.tagName()+"_ingot", has(LHTags.Items.INGOTS.get(m))).save(consumer);
-                ShapelessRecipeBuilder.shapeless(LHItems.ingots.get(m), 9).requires(LHTags.Items.STORAGE_BLOCKS.get(m)).unlockedBy("has_" + m.tagName() + "_block", has(LHBlocks.storageBlocks.get(m))).save(consumer, new ResourceLocation(LostHeroes.MOD_ID, m.tagName()+"_ingot_from_block"));
+                if(m != Metal.COPPER) ShapelessRecipeBuilder.shapeless(LHItems.ingots.get(m), 9).requires(LHTags.Items.STORAGE_BLOCKS.get(m)).unlockedBy("has_" + m.tagName() + "_block", has(LHBlocks.storageBlocks.get(m))).save(consumer, new ResourceLocation(LostHeroes.MOD_ID, m.tagName()+"_ingot_from_block"));
                 ShapedRecipeBuilder.shaped(LHItems.axes.get(m)).define('#', Items.STICK).define('X', LHTags.Items.INGOTS.get(m)).pattern("XX").pattern("X#").pattern(" #").unlockedBy("has_" + m.tagName()+"_ingot", has(LHTags.Items.INGOTS.get(m))).save(consumer);
                 ShapedRecipeBuilder.shaped(LHItems.boots.get(m)).define('X', LHItems.ingots.get(m)).pattern("X X").pattern("X X").unlockedBy("has_"+m.tagName(), has(LHItems.ingots.get(m))).save(consumer);
                 ShapedRecipeBuilder.shaped(LHItems.chestplates.get(m)).define('X', LHItems.ingots.get(m)).pattern("X X").pattern("XXX").pattern("XXX").unlockedBy("has_"+m.tagName(), has(LHItems.ingots.get(m))).save(consumer);

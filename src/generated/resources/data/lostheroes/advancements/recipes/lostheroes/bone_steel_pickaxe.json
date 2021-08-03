@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lostheroes:bone_steel_pickaxe"
+    ]
+  },
+  "criteria": {
+    "has_bone_steel_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/bone_steel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lostheroes:bone_steel_pickaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bone_steel_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -2,12 +2,12 @@ package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.util.LHUtils;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class LHItem extends Item {
     protected Metal metal;
@@ -22,14 +22,14 @@ public class LHItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         if(this == LHItems.ivlivs_coin){
             int rand = (int) Math.round(Math.random());
-            if(rand==1) player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.ivlivs_sword));
-            else player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.ivlivs_spear));
-            return ActionResult.pass(player.getItemInHand(hand));
+            if(rand==1) player.setItemInHand(hand, new ItemStack(LHItems.ivlivs_sword));
+            else player.setItemInHand(hand, new ItemStack(LHItems.ivlivs_spear));
+            return InteractionResultHolder.pass(player.getItemInHand(hand));
         }
-        if(this == LHItems.anaklusmos_pen) player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.anaklusmos_sword));
+        if(this == LHItems.anaklusmos_pen) player.setItemInHand(hand, new ItemStack(LHItems.anaklusmos_sword));
         if(this == LHItems.pearl_of_persephone) LHUtils.pearlTP(world, player, hand);
         return super.use(world, player, hand);
     }

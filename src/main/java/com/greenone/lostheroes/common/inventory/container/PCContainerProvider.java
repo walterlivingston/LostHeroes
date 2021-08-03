@@ -1,23 +1,23 @@
 package com.greenone.lostheroes.common.inventory.container;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 
 import javax.annotation.Nullable;
 
-public class PCContainerProvider implements INamedContainerProvider {
+public class PCContainerProvider implements MenuProvider {
     @Override
-    public ITextComponent getDisplayName() {
-        return new StringTextComponent("Athena's Crafting");
+    public Component getDisplayName() {
+        return new TextComponent("Athena's Crafting");
     }
 
     @Nullable
     @Override
-    public Container createMenu(int id, PlayerInventory inv, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int id, Inventory inv, Player player) {
         return LHContainers.PORTABLE_CRAFTER.create(id, inv);
     }
 }

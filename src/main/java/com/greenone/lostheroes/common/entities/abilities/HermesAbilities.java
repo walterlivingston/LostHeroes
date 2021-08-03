@@ -3,27 +3,22 @@ package com.greenone.lostheroes.common.entities.abilities;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.util.LHUtils;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.monster.EndermiteEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.GameRules;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.entity.EntityTeleportEvent;
 
 public class HermesAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(PlayerEntity player) {
+    public void mainAbility(Player player) {
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if((player.isCreative() || playerCap.getMana()>=getMainManaReq()) && teleport(player)){
-            playerCap.consumeMana(getMainManaReq());
+        if((player.isCreative() || playerCap.getMana()>=getMainManaReq())){
+            if(teleport(player) && !player.isCreative())playerCap.consumeMana(getMainManaReq());
         }
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
+    public void minorAbility(Player player) {
 
     }
 
@@ -37,13 +32,13 @@ public class HermesAbilities extends AbstractAbility{
         return 0;
     }
 
-    private boolean teleport(PlayerEntity player) {
+    private boolean teleport(Player player) {
         if (!player.level.isClientSide) {
-            Vector3d lookPos = LHUtils.getLookingAt(player, 32);
-            if (player instanceof ServerPlayerEntity) {
-                ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) player;
+            Vec3 lookPos = LHUtils.getLookingAt(player, 32);
+            if (player instanceof ServerPlayer) {
+                ServerPlayer serverplayerentity = (ServerPlayer) player;
                 if (serverplayerentity.connection.getConnection().isConnected() && serverplayerentity.level == player.level && !serverplayerentity.isSleeping()) {
-                    net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(serverplayerentity, lookPos.x(), lookPos.y(), lookPos.z(), 0.0F);
+                    EntityTeleportEvent event = new EntityTeleportEvent(serverplayerentity, lookPos.x(), lookPos.y(), lookPos.z());
                     if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) { // Don't indent to lower patch size
                         if (player.isPassenger()) {
                             player.stopRiding();

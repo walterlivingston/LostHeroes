@@ -3,14 +3,14 @@ package com.greenone.lostheroes.common;
 import com.google.common.collect.Maps;
 import com.greenone.lostheroes.common.entities.abilities.AbstractAbility;
 import com.greenone.lostheroes.common.network.PacketAbility;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.AttributeModifierManager;
-import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.potion.Effect;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 
 import java.util.Map;
 import java.util.UUID;
@@ -18,18 +18,18 @@ import java.util.UUID;
 public class Deity {
     private final String name;
     private final Item sacrifice;
-    private final Effect blessing;
+    private final MobEffect blessing;
     private final AbstractAbility abilities;
     private Map<Attribute, AttributeModifier> attributeModifiers = Maps.newHashMap();
 
-    public Deity(String nameIn, Item sacrificeIn, Effect blessingIn, AbstractAbility abilitiesIn) {
+    public Deity(String nameIn, Item sacrificeIn, MobEffect blessingIn, AbstractAbility abilitiesIn) {
         this.name = nameIn;
         this.sacrifice = sacrificeIn;
         this.blessing = blessingIn;
         this.abilities = abilitiesIn;
     }
 
-    public Deity(String nameIn, Item sacrificeIn, Effect blessingIn, AbstractAbility abilitiesIn, Map<Attribute, AttributeModifier> attributeModifierMapIn) {
+    public Deity(String nameIn, Item sacrificeIn, MobEffect blessingIn, AbstractAbility abilitiesIn, Map<Attribute, AttributeModifier> attributeModifierMapIn) {
         this.name = nameIn;
         this.sacrifice = sacrificeIn;
         this.blessing = blessingIn;
@@ -48,11 +48,11 @@ public class Deity {
         return sacrifice;
     }
 
-    public Effect getBlessing() {
+    public MobEffect getBlessing() {
         return blessing;
     }
 
-    public void getAbilities(PacketAbility.Type type, PlayerEntity player) {
+    public void getAbilities(PacketAbility.Type type, Player player) {
         if(type == PacketAbility.Type.MAIN) abilities.mainAbility(player);
         else if(type == PacketAbility.Type.MINOR) abilities.minorAbility(player);
     }
@@ -61,8 +61,8 @@ public class Deity {
         return abilities;
     }
 
-    public Deity addAttributeModifier(Attribute attribute, String uuid, double amount, AttributeModifier.Operation operation) {
-        AttributeModifier attributemodifier = new AttributeModifier(UUID.fromString(uuid), attribute.getDescriptionId(), amount, operation);
+    public Deity addAttributeModifier(Attribute attribute, String uuid, double amplifier, AttributeModifier.Operation operation) {
+        AttributeModifier attributemodifier = new AttributeModifier(UUID.fromString(uuid), attribute::getDescriptionId, amplifier, operation);
         this.attributeModifiers.put(attribute, attributemodifier);
         return this;
     }
@@ -71,24 +71,26 @@ public class Deity {
         return this.attributeModifiers;
     }
 
-    public void removeAttributeModifiers(LivingEntity entityLivingBaseIn, AttributeModifierManager attributeMapIn, int amplifier) {
+    public void removeAttributeModifiers(LivingEntity entity, AttributeMap attMap, int p_19471_) {
         for(Map.Entry<Attribute, AttributeModifier> entry : this.attributeModifiers.entrySet()) {
-            ModifiableAttributeInstance modifiableattributeinstance = attributeMapIn.getInstance(entry.getKey());
-            if (modifiableattributeinstance != null) {
-                modifiableattributeinstance.removeModifier(entry.getValue());
+            AttributeInstance attributeinstance = attMap.getInstance(entry.getKey());
+            if (attributeinstance != null) {
+                attributeinstance.removeModifier(entry.getValue());
             }
         }
+
     }
 
-    public void applyAttributesModifiersToEntity(LivingEntity entityLivingBaseIn, AttributeModifierManager attributeMapIn, int amplifier) {
+    public void applyAttributesModifiersToEntity(LivingEntity p_19478_, AttributeMap p_19479_, int amplifier) {
         for(Map.Entry<Attribute, AttributeModifier> entry : this.attributeModifiers.entrySet()) {
-            ModifiableAttributeInstance modifiableattributeinstance = attributeMapIn.getInstance(entry.getKey());
-            if (modifiableattributeinstance != null) {
-                AttributeModifier attributeModifier = entry.getValue();
-                modifiableattributeinstance.removeModifier(attributeModifier);
-                modifiableattributeinstance.addPermanentModifier(new AttributeModifier(attributeModifier.getId(), entry.getValue().getName() + " " + amplifier, this.getAttributeModifierAmount(amplifier, attributeModifier), attributeModifier.getOperation()));
+            AttributeInstance attributeinstance = p_19479_.getInstance(entry.getKey());
+            if (attributeinstance != null) {
+                AttributeModifier attributemodifier = entry.getValue();
+                attributeinstance.removeModifier(attributemodifier);
+                attributeinstance.addPermanentModifier(new AttributeModifier(attributemodifier.getId(), attributemodifier.getName() + " " + amplifier, this.getAttributeModifierAmount(amplifier, attributemodifier), attributemodifier.getOperation()));
             }
         }
+
     }
 
     public double getAttributeModifierAmount(int amplifier, AttributeModifier modifier){

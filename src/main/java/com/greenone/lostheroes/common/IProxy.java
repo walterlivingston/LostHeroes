@@ -1,14 +1,14 @@
 package com.greenone.lostheroes.common;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;
 
 public interface IProxy {
 
     @Nullable
-    PlayerEntity getClientPlayer();
+    Player getClientPlayer();
 
     @Nullable
     MinecraftServer getServer();

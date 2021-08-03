@@ -44,7 +44,6 @@ public class VillagerInit {
     public static final PoiType PRIEST_POI = new PoiType("priest", ALTAR_STATES,1 ,1);
     public static final PoiType WINEMAKER_POI = new PoiType("oracle", PoiType.getBlockStates(LHBlocks.cask),1 ,1);
 
-
     public static final VillagerProfession BLACKSMITH = registerProf("blacksmith", BLACKSMITH_POI, SoundEvents.VILLAGER_WORK_TOOLSMITH);
     public static final VillagerProfession PRIEST = registerProf("priest", PRIEST_POI, SoundEvents.VILLAGER_WORK_LIBRARIAN);
     public static final VillagerProfession WINEMAKER = registerProf("winemaker", WINEMAKER_POI, SoundEvents.VILLAGER_WORK_CLERIC);

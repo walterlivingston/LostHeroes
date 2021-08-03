@@ -5,11 +5,13 @@ import com.google.common.collect.Lists;
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
+import com.greenone.lostheroes.common.enums.Wood;
 import com.greenone.lostheroes.common.init.LHBlocks;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.Features;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,6 +21,14 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
+import net.minecraft.world.level.levelgen.placement.FrequencyWithExtraChanceDecoratorConfiguration;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.DeferredRegister;
@@ -43,6 +53,10 @@ public class LHFeatures {
     public static final ConfiguredFeature<?, ?> ORE_MARBLE = Feature.ORE.configured(new OreConfiguration(OreConfiguration.Predicates.NATURAL_STONE, States.MARBLE, 33)).rangeUniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(79)).squared().count(10);
     public static final ConfiguredFeature<?, ?> ORE_BLACK_MARBLE = Feature.ORE.configured(new OreConfiguration(OreConfiguration.Predicates.NATURAL_STONE, States.BLACK_MARBLE, 33)).rangeUniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(79)).squared().count(10);
 
+    public static final ConfiguredFeature<TreeConfiguration, ?> OLIVE = Feature.TREE.configured((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(States.OLIVE_LOG), new StraightTrunkPlacer(4, 2, 0), new SimpleStateProvider(States.OLIVE_LEAVES), new SimpleStateProvider(States.OLIVE_SAPLING), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build());
+
+    public static final ConfiguredFeature<?, ?> OLIVE_TREE_FEATURE = Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(ImmutableList.of(OLIVE.weighted(0.33333334F)), OLIVE)).decorated(Features.Decorators.HEIGHTMAP_WITH_TREE_THRESHOLD_SQUARED).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, 0.05F, 1)));
+
     //public static final Feature<?> LOTUS_FLOWER_CLUSTER = Feature.FLOWER.configured(Features.Configs.DEFAULT_FLOWER_CONFIG).decorated(Features.Decorators.ADD_32).decorated(Features.Decorators.HEIGHTMAP_SQUARE).count(4).feature;
 
     public static void register(IEventBus eventBus){
@@ -51,7 +65,7 @@ public class LHFeatures {
         FEATURES.register(eventBus);
     }
 
-    public static void initOres(){
+    public static void initFeatures(){
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, LHBlocks.ores.get(Metal.TIN).getRegistryName(), ORE_TIN);
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, LHBlocks.ores.get(Metal.LEAD).getRegistryName(), ORE_LEAD);
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, LHBlocks.ores.get(Metal.SILVER).getRegistryName(), ORE_SILVER);
@@ -60,7 +74,7 @@ public class LHFeatures {
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, LHBlocks.stoneBlocks.get(Stone.BLACK_MARBLE).getRegistryName(), ORE_BLACK_MARBLE);
     }
 
-    public static void setupOres() {
+    public static void setupFeatures() {
         for (Map.Entry<ResourceKey<Biome>, Biome> biome : BuiltinRegistries.BIOME.entrySet()) {
             if(biome.getValue().getBiomeCategory().equals(Biome.BiomeCategory.NETHER)){
 
@@ -68,17 +82,20 @@ public class LHFeatures {
             else if(biome.getValue().getBiomeCategory().equals(Biome.BiomeCategory.THEEND)){
 
             }else{
-                addFeatureToBiome(biome.getValue(), BuiltinRegistries.CONFIGURED_FEATURE.get(LHBlocks.ores.get(Metal.TIN).getRegistryName()));
-                addFeatureToBiome(biome.getValue(), BuiltinRegistries.CONFIGURED_FEATURE.get(LHBlocks.ores.get(Metal.LEAD).getRegistryName()));
-                addFeatureToBiome(biome.getValue(), BuiltinRegistries.CONFIGURED_FEATURE.get(LHBlocks.ores.get(Metal.SILVER).getRegistryName()));
-                addFeatureToBiome(biome.getValue(), BuiltinRegistries.CONFIGURED_FEATURE.get(LHBlocks.stoneBlocks.get(Stone.MARBLE).getRegistryName()));
-                addFeatureToBiome(biome.getValue(), BuiltinRegistries.CONFIGURED_FEATURE.get(LHBlocks.storageBlocks.get(Metal.METEORIC_IRON).getRegistryName()));
+                addFeatureToBiome(biome.getValue(), BuiltinRegistries.CONFIGURED_FEATURE.get(LHBlocks.ores.get(Metal.TIN).getRegistryName()), GenerationStep.Decoration.UNDERGROUND_ORES);
+                addFeatureToBiome(biome.getValue(), BuiltinRegistries.CONFIGURED_FEATURE.get(LHBlocks.ores.get(Metal.LEAD).getRegistryName()), GenerationStep.Decoration.UNDERGROUND_ORES);
+                addFeatureToBiome(biome.getValue(), BuiltinRegistries.CONFIGURED_FEATURE.get(LHBlocks.ores.get(Metal.SILVER).getRegistryName()), GenerationStep.Decoration.UNDERGROUND_ORES);
+                addFeatureToBiome(biome.getValue(), BuiltinRegistries.CONFIGURED_FEATURE.get(LHBlocks.stoneBlocks.get(Stone.MARBLE).getRegistryName()), GenerationStep.Decoration.UNDERGROUND_ORES);
+                addFeatureToBiome(biome.getValue(), BuiltinRegistries.CONFIGURED_FEATURE.get(LHBlocks.storageBlocks.get(Metal.METEORIC_IRON).getRegistryName()), GenerationStep.Decoration.UNDERGROUND_ORES);
+
+            }
+            if(biome.getValue().getBiomeCategory().equals(Biome.BiomeCategory.PLAINS)){
+                //addFeatureToBiome(biome.getValue(), OLIVE_TREE_FEATURE, GenerationStep.Decoration.SURFACE_STRUCTURES);
             }
         }
     }
 
-    public static void addFeatureToBiome(Biome biome, ConfiguredFeature<?, ?> configuredFeature) {
-        GenerationStep.Decoration decoration = GenerationStep.Decoration.UNDERGROUND_ORES;
+    public static void addFeatureToBiome(Biome biome, ConfiguredFeature<?, ?> configuredFeature, GenerationStep.Decoration decoration) {
         List<List<Supplier<ConfiguredFeature<?, ?>>>> biomeFeatures = new ArrayList<>(biome.getGenerationSettings().features());
         while (biomeFeatures.size() <= decoration.ordinal()) {
             biomeFeatures.add(Lists.newArrayList());
@@ -98,5 +115,11 @@ public class LHFeatures {
 
         public static final BlockState MARBLE = LHBlocks.stoneBlocks.get(Stone.MARBLE).defaultBlockState();
         public static final BlockState BLACK_MARBLE = LHBlocks.stoneBlocks.get(Stone.BLACK_MARBLE).defaultBlockState();
+
+        public static final BlockState OLIVE_LOG = LHBlocks.logs.get(Wood.OLIVE).defaultBlockState();
+
+        public static final BlockState OLIVE_LEAVES = LHBlocks.leaves.get(Wood.OLIVE).defaultBlockState();
+
+        public static final BlockState OLIVE_SAPLING = LHBlocks.saplings.get(Wood.OLIVE).defaultBlockState();
     }
 }

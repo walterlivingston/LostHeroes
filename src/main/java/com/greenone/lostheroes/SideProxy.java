@@ -63,8 +63,8 @@ public class SideProxy implements IProxy {
     public static void commonSetup(final FMLCommonSetupEvent event) {
         CapabilityRegistry.registerCapabilities();
         LHNetworkHandler.registerMessages();
-        LHFeatures.initOres();
-        LHFeatures.setupOres();
+        LHFeatures.initFeatures();
+        LHFeatures.setupFeatures();
     }
 
     private static void serverStarted(FMLServerStartedEvent event) {

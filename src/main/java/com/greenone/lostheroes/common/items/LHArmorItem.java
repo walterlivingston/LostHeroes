@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.common.enums.Metal;
+import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;

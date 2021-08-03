@@ -1,6 +1,6 @@
 package com.greenone.lostheroes.common.inventory;
 
-import com.greenone.lostheroes.common.blocks.tiles.ForgeTile;
+import com.greenone.lostheroes.common.blocks.entity.ForgeBlockEntity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -45,8 +45,8 @@ public class ForgeResultSlot extends Slot {
     @Override
     protected void checkTakeAchievements(ItemStack stack) {
         stack.onCraftedBy(this.player.level, this.player, this.removeCount);
-        if (!this.player.level.isClientSide && this.container instanceof ForgeTile) {
-            ((ForgeTile)this.container).awardUsedRecipesAndPopExperience((ServerPlayer) this.player);
+        if (!this.player.level.isClientSide && this.container instanceof ForgeBlockEntity) {
+            ((ForgeBlockEntity)this.container).awardUsedRecipesAndPopExperience((ServerPlayer) this.player);
         }
 
         this.removeCount = 0;

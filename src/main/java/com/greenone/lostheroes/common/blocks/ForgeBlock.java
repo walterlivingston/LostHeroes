@@ -1,7 +1,7 @@
 package com.greenone.lostheroes.common.blocks;
 
-import com.greenone.lostheroes.common.blocks.tiles.ForgeTile;
-import com.greenone.lostheroes.common.blocks.tiles.LHTileEntities;
+import com.greenone.lostheroes.common.blocks.entity.ForgeBlockEntity;
+import com.greenone.lostheroes.common.blocks.entity.LHBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -37,7 +37,7 @@ public class ForgeBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING;
     public static final BooleanProperty LIT;
 
-    protected ForgeBlock(Properties p_48687_) {
+    public ForgeBlock(Properties p_48687_) {
         super(p_48687_);
         this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)).setValue(LIT, false));
     }
@@ -54,7 +54,7 @@ public class ForgeBlock extends BaseEntityBlock {
 
     protected void openContainer(Level p_53631_, BlockPos p_53632_, Player p_53633_) {
         BlockEntity blockentity = p_53631_.getBlockEntity(p_53632_);
-        if (blockentity instanceof ForgeTile) {
+        if (blockentity instanceof ForgeBlockEntity) {
             p_53633_.openMenu((MenuProvider)blockentity);
             p_53633_.awardStat(Stats.INTERACT_WITH_FURNACE);
         }
@@ -70,8 +70,8 @@ public class ForgeBlock extends BaseEntityBlock {
     public void setPlacedBy(Level p_48694_, BlockPos p_48695_, BlockState p_48696_, LivingEntity p_48697_, ItemStack p_48698_) {
         if (p_48698_.hasCustomHoverName()) {
             BlockEntity var6 = p_48694_.getBlockEntity(p_48695_);
-            if (var6 instanceof ForgeTile) {
-                ((ForgeTile)var6).setCustomName(p_48698_.getHoverName());
+            if (var6 instanceof ForgeBlockEntity) {
+                ((ForgeBlockEntity)var6).setCustomName(p_48698_.getHoverName());
             }
         }
 
@@ -81,10 +81,10 @@ public class ForgeBlock extends BaseEntityBlock {
     public void onRemove(BlockState p_48713_, Level p_48714_, BlockPos p_48715_, BlockState p_48716_, boolean p_48717_) {
         if (!p_48713_.is(p_48716_.getBlock())) {
             BlockEntity var6 = p_48714_.getBlockEntity(p_48715_);
-            if (var6 instanceof ForgeTile) {
+            if (var6 instanceof ForgeBlockEntity) {
                 if (p_48714_ instanceof ServerLevel) {
-                    Containers.dropContents(p_48714_, p_48715_, (ForgeTile)var6);
-                    ((ForgeTile)var6).getRecipesToAwardAndPopExperience((ServerLevel)p_48714_, Vec3.atCenterOf(p_48715_));
+                    Containers.dropContents(p_48714_, p_48715_, (ForgeBlockEntity)var6);
+                    ((ForgeBlockEntity)var6).getRecipesToAwardAndPopExperience((ServerLevel)p_48714_, Vec3.atCenterOf(p_48715_));
                 }
 
                 p_48714_.updateNeighbourForOutputSignal(p_48715_, this);
@@ -147,19 +147,19 @@ public class ForgeBlock extends BaseEntityBlock {
     }
 
     @Nullable
-    protected static <T extends BlockEntity> BlockEntityTicker<T> createFurnaceTicker(Level p_151988_, BlockEntityType<T> p_151989_, BlockEntityType<? extends ForgeTile> p_151990_) {
-        return p_151988_.isClientSide ? null : createTickerHelper(p_151989_, p_151990_, ForgeTile::serverTick);
+    protected static <T extends BlockEntity> BlockEntityTicker<T> createFurnaceTicker(Level p_151988_, BlockEntityType<T> p_151989_, BlockEntityType<? extends ForgeBlockEntity> p_151990_) {
+        return p_151988_.isClientSide ? null : createTickerHelper(p_151989_, p_151990_, ForgeBlockEntity::serverTick);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153273_, BlockState p_153274_, BlockEntityType<T> p_153275_) {
-        return createFurnaceTicker(p_153273_, p_153275_, LHTileEntities.FORGE);
+        return createFurnaceTicker(p_153273_, p_153275_, LHBlockEntities.FORGE);
     }
 
     @Override
     public BlockEntity newBlockEntity(BlockPos p_153277_, BlockState p_153278_) {
-        return new ForgeTile(p_153277_, p_153278_);
+        return new ForgeBlockEntity(p_153277_, p_153278_);
     }
 
     static {

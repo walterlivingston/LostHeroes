@@ -1,11 +1,11 @@
 package com.greenone.lostheroes.data;
 
 import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.common.blocks.LHBlocks;
+import com.greenone.lostheroes.common.init.LHBlocks;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
 import com.greenone.lostheroes.common.init.LHTags;
-import com.greenone.lostheroes.common.items.LHItems;
+import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;

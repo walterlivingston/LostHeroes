@@ -1,5 +1,6 @@
-package com.greenone.lostheroes.common.potions;
+package com.greenone.lostheroes.common.init;
 
+import com.greenone.lostheroes.common.potions.LHEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;

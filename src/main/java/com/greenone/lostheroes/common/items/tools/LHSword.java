@@ -2,7 +2,7 @@ package com.greenone.lostheroes.common.items.tools;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
-import com.greenone.lostheroes.common.items.LHItems;
+import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

@@ -1,6 +1,6 @@
 package com.greenone.lostheroes.client.render;
 
-import com.greenone.lostheroes.common.blocks.tiles.LHEnchantTile;
+import com.greenone.lostheroes.common.blocks.entity.LHEnchantBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
@@ -18,7 +18,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class LHEnchantTileEntityRenderer implements BlockEntityRenderer<LHEnchantTile> {
+public class LHEnchantTileEntityRenderer implements BlockEntityRenderer<LHEnchantBlockEntity> {
     public static final Material BOOK_LOCATION = new Material(TextureAtlas.LOCATION_BLOCKS, new ResourceLocation("entity/enchanting_table_book"));
     private final BookModel bookModel;
 
@@ -26,7 +26,7 @@ public class LHEnchantTileEntityRenderer implements BlockEntityRenderer<LHEnchan
         this.bookModel = new BookModel(p_173619_.bakeLayer(ModelLayers.BOOK));
     }
 
-    public void render(LHEnchantTile p_112418_, float p_112419_, PoseStack p_112420_, MultiBufferSource p_112421_, int p_112422_, int p_112423_) {
+    public void render(LHEnchantBlockEntity p_112418_, float p_112419_, PoseStack p_112420_, MultiBufferSource p_112421_, int p_112422_, int p_112423_) {
         p_112420_.pushPose();
         p_112420_.translate(0.5D, 0.75D, 0.5D);
         float f = (float)p_112418_.time + p_112419_;

@@ -1,5 +1,6 @@
-package com.greenone.lostheroes.common.inventory.container;
+package com.greenone.lostheroes.common.inventory.menu;
 
+import com.greenone.lostheroes.common.init.LHMenus;
 import com.greenone.lostheroes.common.init.LHRecipes;
 import com.greenone.lostheroes.common.inventory.ForgeFuelSlot;
 import com.greenone.lostheroes.common.inventory.ForgeResultSlot;
@@ -16,7 +17,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public class ForgeContainer extends RecipeBookMenu<Container> {
+public class ForgeMenu extends RecipeBookMenu<Container> {
     public static final int[] INGREDIENT_SLOT = new int[]{0,1};
     public static final int FUEL_SLOT = 2;
     public static final int RESULT_SLOT = 3;
@@ -32,19 +33,19 @@ public class ForgeContainer extends RecipeBookMenu<Container> {
     private final RecipeType<? extends ForgeRecipe> recipeType;
     private final RecipeBookType recipeBookType;
 
-    public ForgeContainer(int id, Inventory inv, FriendlyByteBuf buf) {
-        this(LHContainers.FORGE, LHRecipes.Types.ALLOYING, null, id, inv);
+    public ForgeMenu(int id, Inventory inv, FriendlyByteBuf buf) {
+        this(LHMenus.FORGE, LHRecipes.Types.ALLOYING, null, id, inv);
     }
 
-    public ForgeContainer(int id, Inventory inv, Container container, ContainerData containerData) {
-        this(LHContainers.FORGE, LHRecipes.Types.ALLOYING, null, id, inv, container, containerData);
+    public ForgeMenu(int id, Inventory inv, Container container, ContainerData containerData) {
+        this(LHMenus.FORGE, LHRecipes.Types.ALLOYING, null, id, inv, container, containerData);
     }
 
-    protected ForgeContainer(MenuType<?> menuType, RecipeType<? extends ForgeRecipe> recipeType, RecipeBookType recipeBookType, int id, Inventory inv) {
+    protected ForgeMenu(MenuType<?> menuType, RecipeType<? extends ForgeRecipe> recipeType, RecipeBookType recipeBookType, int id, Inventory inv) {
         this(menuType, recipeType, recipeBookType, id, inv, new SimpleContainer(4), new SimpleContainerData(4));
     }
 
-    protected ForgeContainer(MenuType<?> menuType, RecipeType<? extends ForgeRecipe> recipeType, RecipeBookType recipeBookType, int id, Inventory inv, Container containerIn, ContainerData containerDataIn) {
+    protected ForgeMenu(MenuType<?> menuType, RecipeType<? extends ForgeRecipe> recipeType, RecipeBookType recipeBookType, int id, Inventory inv, Container containerIn, ContainerData containerDataIn) {
         super(menuType, id);
         this.recipeType = recipeType;
         this.recipeBookType = recipeBookType;

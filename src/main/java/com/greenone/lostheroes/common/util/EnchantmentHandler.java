@@ -3,7 +3,7 @@ package com.greenone.lostheroes.common.util;
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.Blessing;
 import com.greenone.lostheroes.common.enchantment.BrilliantRiposteEnchantment;
-import com.greenone.lostheroes.common.enchantment.LHEnchants;
+import com.greenone.lostheroes.common.init.LHEnchants;
 import com.greenone.lostheroes.common.potions.LHEffect;
 import net.minecraft.core.Registry;
 import net.minecraft.world.effect.MobEffect;

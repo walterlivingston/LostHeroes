@@ -6,7 +6,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class DaedalusAspectEnchantment extends GodlyEnchantment{
-    protected DaedalusAspectEnchantment(Rarity p_i46731_1_, EnchantmentCategory p_i46731_2_, EquipmentSlot... p_i46731_3_) {
+    public DaedalusAspectEnchantment(Rarity p_i46731_1_, EnchantmentCategory p_i46731_2_, EquipmentSlot... p_i46731_3_) {
         super(p_i46731_1_, p_i46731_2_, Deities.HEPHAESTUS, p_i46731_3_);
     }
 

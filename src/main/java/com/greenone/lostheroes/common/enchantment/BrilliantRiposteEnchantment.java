@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 public class BrilliantRiposteEnchantment extends GodlyEnchantment{
     private float damageBonus;
 
-    protected BrilliantRiposteEnchantment(Rarity rarity, EnchantmentCategory enchantmentType, EquipmentSlot... slotTypes) {
+    public BrilliantRiposteEnchantment(Rarity rarity, EnchantmentCategory enchantmentType, EquipmentSlot... slotTypes) {
         super(rarity, enchantmentType, Deities.ATHENA, slotTypes);
     }
 

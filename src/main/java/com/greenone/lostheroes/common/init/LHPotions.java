@@ -1,7 +1,6 @@
-package com.greenone.lostheroes.common.potions;
+package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.common.init.Blessings;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraftforge.eventbus.api.IEventBus;

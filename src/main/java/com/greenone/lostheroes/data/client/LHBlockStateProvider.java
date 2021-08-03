@@ -2,7 +2,7 @@ package com.greenone.lostheroes.data.client;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.blocks.ForgeBlock;
-import com.greenone.lostheroes.common.blocks.LHBlocks;
+import com.greenone.lostheroes.common.init.LHBlocks;
 import com.greenone.lostheroes.common.blocks.PillarBlock;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;

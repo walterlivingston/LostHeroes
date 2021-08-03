@@ -5,7 +5,7 @@ import com.greenone.lostheroes.client.gui.ManaHUD;
 import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.network.PacketAbility;
-import com.greenone.lostheroes.common.potions.LHEffects;
+import com.greenone.lostheroes.common.init.LHEffects;
 import com.greenone.lostheroes.common.util.LHUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;

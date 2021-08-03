@@ -1,7 +1,7 @@
 package com.greenone.lostheroes.common.blocks;
 
-import com.greenone.lostheroes.common.blocks.tiles.AltarTile;
-import com.greenone.lostheroes.common.blocks.tiles.LHTileEntities;
+import com.greenone.lostheroes.common.blocks.entity.AltarBlockEntity;
+import com.greenone.lostheroes.common.blocks.entity.LHBlockEntities;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.util.pattern.Altar;
 import com.greenone.lostheroes.common.util.pattern.BlackAltar;
@@ -43,7 +43,7 @@ public class PillarBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
-        return createTickerHelper(p_153214_, LHTileEntities.ALTAR, AltarTile::tick);
+        return createTickerHelper(p_153214_, LHBlockEntities.ALTAR, AltarBlockEntity::tick);
     }
 
     @Override
@@ -52,8 +52,8 @@ public class PillarBlock extends BaseEntityBlock {
         BlackAltar blackAltar = new BlackAltar();
         if(!world.isClientSide() && (altar.checkPattern(world, pos)||blackAltar.checkPattern(world,pos))){
             BlockEntity te = world.getBlockEntity(pos);
-            if(te instanceof AltarTile && hand==InteractionHand.MAIN_HAND){
-                AltarTile at = (AltarTile) te;
+            if(te instanceof AltarBlockEntity && hand==InteractionHand.MAIN_HAND){
+                AltarBlockEntity at = (AltarBlockEntity) te;
                 if(at.checkCooldown() && !player.getMainHandItem().isEmpty() && Deities.isSacrifice(player.getMainHandItem().getItem())){
                     at.addItem(player.getItemInHand(hand), player);
                     return InteractionResult.SUCCESS;
@@ -72,7 +72,7 @@ public class PillarBlock extends BaseEntityBlock {
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
         if(state.getBlock() != newState.getBlock()){
             BlockEntity te = world.getBlockEntity(pos);
-            if(te instanceof AltarTile){
+            if(te instanceof AltarBlockEntity){
                 world.updateNeighbourForOutputSignal(pos, this);
             }
         }
@@ -111,6 +111,6 @@ public class PillarBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new AltarTile(pos, state);
+        return new AltarBlockEntity(pos, state);
     }
 }

@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CrossbowItem;

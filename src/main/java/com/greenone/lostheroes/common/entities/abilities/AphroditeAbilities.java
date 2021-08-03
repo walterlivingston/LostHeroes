@@ -2,7 +2,7 @@ package com.greenone.lostheroes.common.entities.abilities;
 
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
-import com.greenone.lostheroes.common.potions.LHEffects;
+import com.greenone.lostheroes.common.init.LHEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;

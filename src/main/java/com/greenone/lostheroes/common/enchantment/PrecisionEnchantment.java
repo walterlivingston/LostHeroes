@@ -5,7 +5,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class PrecisionEnchantment extends GodlyEnchantment{
-    protected PrecisionEnchantment(Rarity rarity, EnchantmentCategory enchantmentType, EquipmentSlot... slotTypes) {
+    public PrecisionEnchantment(Rarity rarity, EnchantmentCategory enchantmentType, EquipmentSlot... slotTypes) {
         super(rarity, enchantmentType, Deities.ARTEMIS, slotTypes);
     }
 

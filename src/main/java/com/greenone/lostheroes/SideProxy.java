@@ -7,12 +7,12 @@ import com.greenone.lostheroes.client.screen.LHEnchantScreen;
 import com.greenone.lostheroes.client.utils.LHClientUtils;
 import com.greenone.lostheroes.client.utils.LHKeybinds;
 import com.greenone.lostheroes.common.IProxy;
-import com.greenone.lostheroes.common.blocks.tiles.LHTileEntities;
+import com.greenone.lostheroes.common.blocks.entity.LHBlockEntities;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.config.Config;
 import com.greenone.lostheroes.common.entities.LHEntities;
 import com.greenone.lostheroes.common.init.Registration;
-import com.greenone.lostheroes.common.inventory.container.LHContainers;
+import com.greenone.lostheroes.common.init.LHMenus;
 import com.greenone.lostheroes.common.items.LHItemModelProperties;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.util.EnchantmentHandler;
@@ -100,11 +100,11 @@ public class SideProxy implements IProxy {
         }
 
         private static void clientSetup(FMLClientSetupEvent event){
-            BlockEntityRenderers.register(LHTileEntities.ENCHANT, LHEnchantTileEntityRenderer::new);
+            BlockEntityRenderers.register(LHBlockEntities.ENCHANT, LHEnchantTileEntityRenderer::new);
             //RenderTypeLookup.setRenderLayer(LHBlocks.greek_fire, RenderType.cutout());
             LHItemModelProperties.registerProperties();
-            MenuScreens.register(LHContainers.ENCHANTING, LHEnchantScreen::new);
-            MenuScreens.register(LHContainers.FORGE, ForgeScreen::new);
+            MenuScreens.register(LHMenus.ENCHANTING, LHEnchantScreen::new);
+            MenuScreens.register(LHMenus.FORGE, ForgeScreen::new);
             LHKeybinds.register();
             MinecraftForge.EVENT_BUS.register(LHClientUtils.instance);
             EntityRenderers.register(LHEntities.SPEAR, SpearRenderer::new);

@@ -1,7 +1,7 @@
 package com.greenone.lostheroes.client.screen;
 
 import com.google.common.collect.Lists;
-import com.greenone.lostheroes.common.inventory.container.LHEnchantContainer;
+import com.greenone.lostheroes.common.inventory.menu.LHEnchantMenu;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -27,7 +27,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import java.util.List;
 import java.util.Random;
 
-public class LHEnchantScreen extends AbstractContainerScreen<LHEnchantContainer> {
+public class LHEnchantScreen extends AbstractContainerScreen<LHEnchantMenu> {
     private static final ResourceLocation ENCHANTING_TABLE_LOCATION = new ResourceLocation("textures/gui/container/enchanting_table.png");
     private static final ResourceLocation ENCHANTING_BOOK_LOCATION = new ResourceLocation("textures/entity/enchanting_table_book.png");
     private final Random random = new Random();
@@ -41,7 +41,7 @@ public class LHEnchantScreen extends AbstractContainerScreen<LHEnchantContainer>
     public float oOpen;
     private ItemStack last = ItemStack.EMPTY;
 
-    public LHEnchantScreen(LHEnchantContainer p_98754_, Inventory p_98755_, Component p_98756_) {
+    public LHEnchantScreen(LHEnchantMenu p_98754_, Inventory p_98755_, Component p_98756_) {
         super(p_98754_, p_98755_, p_98756_);
     }
 

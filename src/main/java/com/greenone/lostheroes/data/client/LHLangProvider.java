@@ -2,12 +2,12 @@ package com.greenone.lostheroes.data.client;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.Deity;
-import com.greenone.lostheroes.common.blocks.LHBlocks;
-import com.greenone.lostheroes.common.enchantment.LHEnchants;
+import com.greenone.lostheroes.common.init.LHBlocks;
+import com.greenone.lostheroes.common.init.LHEnchants;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
 import com.greenone.lostheroes.common.init.Deities;
-import com.greenone.lostheroes.common.items.LHItems;
+import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 

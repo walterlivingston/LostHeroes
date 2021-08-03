@@ -1,7 +1,8 @@
-package com.greenone.lostheroes.common.items;
+package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
+import com.greenone.lostheroes.common.items.*;
 import com.greenone.lostheroes.common.items.tools.*;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;

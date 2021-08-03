@@ -6,7 +6,7 @@ import net.minecraft.world.entity.MobType;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class BrutishEnchantment extends GodlyEnchantment{
-    protected BrutishEnchantment(Rarity rarity, EnchantmentCategory enchantmentType, EquipmentSlot... slotTypes) {
+    public BrutishEnchantment(Rarity rarity, EnchantmentCategory enchantmentType, EquipmentSlot... slotTypes) {
         super(rarity, enchantmentType, Deities.ARES, slotTypes);
     }
 

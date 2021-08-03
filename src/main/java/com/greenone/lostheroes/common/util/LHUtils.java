@@ -2,7 +2,7 @@ package com.greenone.lostheroes.common.util;
 
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.init.Blessings;
-import com.greenone.lostheroes.common.potions.LHEffects;
+import com.greenone.lostheroes.common.init.LHEffects;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;

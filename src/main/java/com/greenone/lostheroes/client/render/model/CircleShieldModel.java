@@ -2,7 +2,7 @@ package com.greenone.lostheroes.client.render.model;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
-import com.greenone.lostheroes.common.items.LHItems;
+import com.greenone.lostheroes.common.init.LHItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;

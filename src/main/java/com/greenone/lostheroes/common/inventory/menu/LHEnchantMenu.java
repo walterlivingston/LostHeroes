@@ -1,8 +1,8 @@
-package com.greenone.lostheroes.common.inventory.container;
+package com.greenone.lostheroes.common.inventory.menu;
 
-import com.greenone.lostheroes.common.blocks.LHBlocks;
+import com.greenone.lostheroes.common.init.LHBlocks;
 import com.greenone.lostheroes.common.enums.Metal;
-import com.greenone.lostheroes.common.items.LHItems;
+import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
@@ -25,11 +25,11 @@ import net.minecraft.world.level.block.Blocks;
 import java.util.List;
 import java.util.Random;
 
-public class LHEnchantContainer extends AbstractContainerMenu {
+public class LHEnchantMenu extends AbstractContainerMenu {
     private final Container enchantSlots = new SimpleContainer(2) {
         public void setChanged() {
             super.setChanged();
-            LHEnchantContainer.this.slotsChanged(this);
+            LHEnchantMenu.this.slotsChanged(this);
         }
     };
     private final ContainerLevelAccess access;
@@ -39,11 +39,11 @@ public class LHEnchantContainer extends AbstractContainerMenu {
     public final int[] enchantClue = new int[]{-1, -1, -1};
     public final int[] levelClue = new int[]{-1, -1, -1};
 
-    public LHEnchantContainer(int p_39454_, Inventory p_39455_) {
+    public LHEnchantMenu(int p_39454_, Inventory p_39455_) {
         this(p_39454_, p_39455_, ContainerLevelAccess.NULL);
     }
 
-    public LHEnchantContainer(int p_39457_, Inventory p_39458_, ContainerLevelAccess p_39459_) {
+    public LHEnchantMenu(int p_39457_, Inventory p_39458_, ContainerLevelAccess p_39459_) {
         super(MenuType.ENCHANTMENT, p_39457_);
         this.access = p_39459_;
         this.addSlot(new Slot(this.enchantSlots, 0, 15, 47) {

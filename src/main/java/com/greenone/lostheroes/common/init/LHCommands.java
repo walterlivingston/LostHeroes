@@ -1,5 +1,9 @@
-package com.greenone.lostheroes.common.commands;
+package com.greenone.lostheroes.common.init;
 
+import com.greenone.lostheroes.common.commands.GetManaCommand;
+import com.greenone.lostheroes.common.commands.GetParentCommand;
+import com.greenone.lostheroes.common.commands.SetManaCommand;
+import com.greenone.lostheroes.common.commands.SetParentCommand;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;

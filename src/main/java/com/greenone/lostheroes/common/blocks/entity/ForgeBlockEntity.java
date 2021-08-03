@@ -1,9 +1,9 @@
-package com.greenone.lostheroes.common.blocks.tiles;
+package com.greenone.lostheroes.common.blocks.entity;
 
 import com.google.common.collect.Lists;
 import com.greenone.lostheroes.common.blocks.ForgeBlock;
 import com.greenone.lostheroes.common.init.LHRecipes;
-import com.greenone.lostheroes.common.inventory.container.ForgeContainer;
+import com.greenone.lostheroes.common.inventory.menu.ForgeMenu;
 import com.greenone.lostheroes.common.items.crafting.ForgeRecipe;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -41,7 +41,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ForgeTile extends BaseContainerBlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible {
+public class ForgeBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible {
     protected static final int[] SLOT_INPUT = new int[]{0,1};
     protected static final int SLOT_FUEL = 2;
     protected static final int SLOT_RESULT = 3;
@@ -64,13 +64,13 @@ public class ForgeTile extends BaseContainerBlockEntity implements WorldlyContai
         public int get(int index) {
             switch(index) {
                 case 0:
-                    return ForgeTile.this.litTime;
+                    return ForgeBlockEntity.this.litTime;
                 case 1:
-                    return ForgeTile.this.litDuration;
+                    return ForgeBlockEntity.this.litDuration;
                 case 2:
-                    return ForgeTile.this.cookingProgress;
+                    return ForgeBlockEntity.this.cookingProgress;
                 case 3:
-                    return ForgeTile.this.cookingTotalTime;
+                    return ForgeBlockEntity.this.cookingTotalTime;
                 default:
                     return 0;
             }
@@ -79,16 +79,16 @@ public class ForgeTile extends BaseContainerBlockEntity implements WorldlyContai
         public void set(int index, int value) {
             switch(index) {
                 case 0:
-                    ForgeTile.this.litTime = value;
+                    ForgeBlockEntity.this.litTime = value;
                     break;
                 case 1:
-                    ForgeTile.this.litDuration = value;
+                    ForgeBlockEntity.this.litDuration = value;
                     break;
                 case 2:
-                    ForgeTile.this.cookingProgress = value;
+                    ForgeBlockEntity.this.cookingProgress = value;
                     break;
                 case 3:
-                    ForgeTile.this.cookingTotalTime = value;
+                    ForgeBlockEntity.this.cookingTotalTime = value;
             }
 
         }
@@ -100,8 +100,8 @@ public class ForgeTile extends BaseContainerBlockEntity implements WorldlyContai
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
     private final RecipeType<? extends ForgeRecipe> recipeType;
 
-    public ForgeTile(BlockPos pos, BlockState state) {
-        super(LHTileEntities.FORGE, pos, state);
+    public ForgeBlockEntity(BlockPos pos, BlockState state) {
+        super(LHBlockEntities.FORGE, pos, state);
         this.recipeType = LHRecipes.Types.ALLOYING;
     }
 
@@ -141,7 +141,7 @@ public class ForgeTile extends BaseContainerBlockEntity implements WorldlyContai
         return tag;
     }
 
-    public static void serverTick(Level level, BlockPos pos, BlockState state, ForgeTile tile) {
+    public static void serverTick(Level level, BlockPos pos, BlockState state, ForgeBlockEntity tile) {
         boolean flag = tile.isLit();
         boolean flag1 = false;
         if (tile.isLit()) {
@@ -442,6 +442,6 @@ public class ForgeTile extends BaseContainerBlockEntity implements WorldlyContai
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory inv) {
-        return new ForgeContainer(id, inv, this, this.dataAccess);
+        return new ForgeMenu(id, inv, this, this.dataAccess);
     }
 }

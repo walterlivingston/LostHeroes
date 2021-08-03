@@ -5,7 +5,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class FleetEnchantment extends GodlyEnchantment{
-    protected FleetEnchantment(Rarity rarity, EnchantmentCategory enchantmentType, EquipmentSlot... slotTypes) {
+    public FleetEnchantment(Rarity rarity, EnchantmentCategory enchantmentType, EquipmentSlot... slotTypes) {
         super(rarity, enchantmentType, Deities.HERMES, slotTypes);
     }
 

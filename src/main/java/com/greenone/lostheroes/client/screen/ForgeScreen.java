@@ -1,7 +1,7 @@
 package com.greenone.lostheroes.client.screen;
 
 import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.common.inventory.container.ForgeContainer;
+import com.greenone.lostheroes.common.inventory.menu.ForgeMenu;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -11,13 +11,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class ForgeScreen extends AbstractContainerScreen<ForgeContainer> implements RecipeUpdateListener {
+public class ForgeScreen extends AbstractContainerScreen<ForgeMenu> implements RecipeUpdateListener {
     private static final ResourceLocation texture = new ResourceLocation(LostHeroes.MOD_ID, "textures/gui/container/forge.png");
     private static final ResourceLocation RECIPE_BUTTON_LOCATION = new ResourceLocation("textures/gui/recipe_button.png");
     //public final AbstractRecipeBookGui recipeBookComponent;
     private boolean widthTooNarrow;
 
-    public ForgeScreen(ForgeContainer container, Inventory inv, Component titleIn) {
+    public ForgeScreen(ForgeMenu container, Inventory inv, Component titleIn) {
         super(container, inv, titleIn);
         //this.recipeBookComponent = new FurnaceRecipeGui();
     }

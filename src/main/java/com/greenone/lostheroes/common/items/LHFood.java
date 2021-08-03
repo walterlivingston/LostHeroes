@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;

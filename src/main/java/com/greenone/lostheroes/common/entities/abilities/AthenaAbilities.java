@@ -2,7 +2,7 @@ package com.greenone.lostheroes.common.entities.abilities;
 
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
-import com.greenone.lostheroes.common.inventory.container.PCContainerProvider;
+import com.greenone.lostheroes.common.inventory.menu.PCMenu;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -12,7 +12,7 @@ public class AthenaAbilities extends AbstractAbility{
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(player.isSteppingCarefully()){
             System.out.println("HELLO");
-            player.openMenu(new PCContainerProvider());
+            player.openMenu(new PCMenu.Provider());
         }else if(playerCap.getMana()>0){
             float repairPoints = playerCap.getMana() * 100;
             for(ItemStack stack : player.inventoryMenu.getItems()){

@@ -1,7 +1,7 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.common.entities.GreekFireEntity;
-import com.greenone.lostheroes.common.potions.LHPotions;
+import com.greenone.lostheroes.common.init.LHPotions;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;

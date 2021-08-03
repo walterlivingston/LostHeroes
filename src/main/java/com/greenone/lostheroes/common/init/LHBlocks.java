@@ -1,10 +1,10 @@
-package com.greenone.lostheroes.common.blocks;
+package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.blocks.*;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
 import com.greenone.lostheroes.common.items.LHItemBlock;
-import com.greenone.lostheroes.common.items.LHItems;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -18,7 +18,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class LHBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, LostHeroes.MOD_ID);

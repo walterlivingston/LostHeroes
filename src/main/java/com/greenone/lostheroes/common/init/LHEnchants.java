@@ -1,9 +1,8 @@
-package com.greenone.lostheroes.common.enchantment;
+package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.common.blocks.LHBlocks;
+import com.greenone.lostheroes.common.enchantment.*;
 import com.greenone.lostheroes.common.enums.Metal;
-import com.greenone.lostheroes.common.items.LHItems;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;

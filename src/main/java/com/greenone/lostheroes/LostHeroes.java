@@ -2,7 +2,7 @@ package com.greenone.lostheroes;
 
 import com.greenone.lostheroes.common.IProxy;
 import com.greenone.lostheroes.common.enums.Metal;
-import com.greenone.lostheroes.common.items.LHItems;
+import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.DistExecutor;

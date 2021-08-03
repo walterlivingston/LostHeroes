@@ -1,4 +1,4 @@
-package com.greenone.lostheroes.common.blocks.tiles;
+package com.greenone.lostheroes.common.blocks.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class LHEnchantTile extends BlockEntity implements Nameable {
+public class LHEnchantBlockEntity extends BlockEntity implements Nameable {
     public int time;
     public float flip;
     public float oFlip;
@@ -29,8 +29,8 @@ public class LHEnchantTile extends BlockEntity implements Nameable {
     private static final Random RANDOM = new Random();
     private Component name;
 
-    public LHEnchantTile(BlockPos p_155501_, BlockState p_155502_) {
-        super(LHTileEntities.ENCHANT, p_155501_, p_155502_);
+    public LHEnchantBlockEntity(BlockPos p_155501_, BlockState p_155502_) {
+        super(LHBlockEntities.ENCHANT, p_155501_, p_155502_);
     }
 
     public CompoundTag save(CompoundTag p_59271_) {

@@ -2,7 +2,7 @@ package com.greenone.lostheroes.common;
 
 import com.greenone.lostheroes.common.init.Blessings;
 import com.greenone.lostheroes.common.potions.LHEffect;
-import com.greenone.lostheroes.common.potions.LHEffects;
+import com.greenone.lostheroes.common.init.LHEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

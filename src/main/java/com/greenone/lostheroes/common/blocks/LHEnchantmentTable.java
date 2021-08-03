@@ -1,7 +1,7 @@
 package com.greenone.lostheroes.common.blocks;
 
-import com.greenone.lostheroes.common.blocks.tiles.LHEnchantTile;
-import com.greenone.lostheroes.common.inventory.container.LHEnchantContainer;
+import com.greenone.lostheroes.common.blocks.entity.LHEnchantBlockEntity;
+import com.greenone.lostheroes.common.inventory.menu.LHEnchantMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
@@ -26,7 +26,7 @@ public class LHEnchantmentTable extends EnchantmentTableBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos p_153186_, BlockState p_153187_) {
-        return new LHEnchantTile(p_153186_, p_153187_);
+        return new LHEnchantBlockEntity(p_153186_, p_153187_);
     }
 
     @Nullable
@@ -36,7 +36,7 @@ public class LHEnchantmentTable extends EnchantmentTableBlock {
         if (blockentity instanceof EnchantmentTableBlockEntity) {
             Component component = ((Nameable)blockentity).getDisplayName();
             return new SimpleMenuProvider((p_52959_, p_52960_, p_52961_) -> {
-                return new LHEnchantContainer(p_52959_, p_52960_, ContainerLevelAccess.create(p_52994_, p_52995_));
+                return new LHEnchantMenu(p_52959_, p_52960_, ContainerLevelAccess.create(p_52994_, p_52995_));
             }, component);
         } else {
             return null;
@@ -47,8 +47,8 @@ public class LHEnchantmentTable extends EnchantmentTableBlock {
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         if (stack.hasCustomHoverName()) {
             BlockEntity tileentity = world.getBlockEntity(pos);
-            if (tileentity instanceof LHEnchantTile) {
-                ((LHEnchantTile)tileentity).setCustomName(stack.getHoverName());
+            if (tileentity instanceof LHEnchantBlockEntity) {
+                ((LHEnchantBlockEntity)tileentity).setCustomName(stack.getHoverName());
             }
         }
     }

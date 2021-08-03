@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.common.enums.Metal;
+import com.greenone.lostheroes.common.init.LHItems;
 import com.greenone.lostheroes.common.util.LHUtils;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;

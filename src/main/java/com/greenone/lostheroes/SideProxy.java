@@ -11,13 +11,13 @@ import com.greenone.lostheroes.common.blocks.entity.LHBlockEntities;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.config.Config;
 import com.greenone.lostheroes.common.entities.LHEntities;
-import com.greenone.lostheroes.common.init.Registration;
 import com.greenone.lostheroes.common.init.LHMenus;
+import com.greenone.lostheroes.common.init.Registration;
 import com.greenone.lostheroes.common.items.LHItemModelProperties;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.util.EnchantmentHandler;
 import com.greenone.lostheroes.common.util.LHEventHandler;
-import com.greenone.lostheroes.common.world.LHOreGen;
+import com.greenone.lostheroes.common.world.LHFeatures;
 import com.greenone.lostheroes.data.DataGenerators;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -63,8 +63,8 @@ public class SideProxy implements IProxy {
     public static void commonSetup(final FMLCommonSetupEvent event) {
         CapabilityRegistry.registerCapabilities();
         LHNetworkHandler.registerMessages();
-        LHOreGen.initOres();
-        //LHOreGen.setupOres();
+        LHFeatures.initOres();
+        LHFeatures.setupOres();
     }
 
     private static void serverStarted(FMLServerStartedEvent event) {

@@ -1,5 +1,7 @@
 package com.greenone.lostheroes.common.entities;
 
+import com.google.common.collect.Sets;
+import com.greenone.lostheroes.common.blocks.GreekFireBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -9,10 +11,12 @@ import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.event.ForgeEventFactory;
 
-import java.util.Random;
+import java.util.Set;
 
 public class GreekFireEntity extends ThrownPotion {
     private int modifier=3;
@@ -32,31 +36,23 @@ public class GreekFireEntity extends ThrownPotion {
         super(world, x, y, z);
     }
 
-    /*@Override
-    protected void onHit(RayTraceResult trace) {
-        if(!this.getCommandSenderLevel().isClientSide()){
+    @Override
+    protected void onHit(HitResult trace) {
+        if(!this.level.isClientSide()){
             Entity entity = this.getOwner();
-            if(entity == null || !(entity instanceof MobEntity) || this.getCommandSenderLevel().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) || ForgeEventFactory.getMobGriefingEvent(this.getCommandSenderLevel(), this.getEntity())){
-                if(isExplosive && this.getCommandSenderLevel().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)){
-                    this.getCommandSenderLevel().explode(this, this.getX(), this.getY(), this.getZ(), modifier, false, Explosion.Mode.BREAK);
-                    this.remove();
+            if(entity == null || !(entity instanceof Mob) || this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) || ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner())){
+                if(isExplosive && this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)){
+                    this.level.explode(this, this.getX(), this.getY(), this.getZ(), modifier, false, Explosion.BlockInteraction.BREAK);
+                    this.remove(false);
                 }
-                Random rand = new Random();
-                for(int y = -modifier; y <= modifier; y++){
-                    for(int x = -modifier; x <= modifier; x++){
-                        for(int z = -modifier; z <= modifier; z++){
-                            if(rand.nextBoolean() && rand.nextBoolean()) {
-                                BlockPos blockPos = new BlockPos(trace.getLocation().x + x, trace.getLocation().y + y, trace.getLocation().z + z);
-                                if (this.getCommandSenderLevel().getBlockState(blockPos).isAir()) {
-                                    this.getCommandSenderLevel().setBlock(blockPos, LHBlocks.greek_fire.defaultBlockState(), 1);
-                                }
-                            }
-                        }
+                for(BlockPos blockpos2 : getBurnSet(new BlockPos(trace.getLocation()), modifier)) {
+                    if (this.random.nextInt(3) == 0 && (this.level.getBlockState(blockpos2).isAir() || this.level.getBlockState(blockpos2).is(Blocks.WATER)) && this.level.getBlockState(blockpos2.below()).isSolidRender(this.level, blockpos2.below())) {
+                        this.level.setBlockAndUpdate(blockpos2, GreekFireBlock.getState(this.level, blockpos2));
                     }
                 }
             }
         }
-    }*/
+    }
 
     @Override
     protected void onHitBlock(BlockHitResult trace) {
@@ -67,20 +63,25 @@ public class GreekFireEntity extends ThrownPotion {
                     this.level.explode(this, this.getX(), this.getY(), this.getZ(), modifier, false, Explosion.BlockInteraction.BREAK);
                     this.remove(false);
                 }
-                Random rand = new Random();
-                for(int y = -modifier; y <= modifier; y++){
-                    for(int x = -modifier; x <= modifier; x++){
-                        for(int z = -modifier; z <= modifier; z++){
-                            //if(rand.nextBoolean() && rand.nextBoolean()) {
-                                BlockPos blockPos = new BlockPos(trace.getLocation().x + x, trace.getLocation().y + y, trace.getLocation().z + z);
-                                if (this.level.getBlockState(blockPos).isAir()) {
-                                    //this.getCommandSenderLevel().setBlock(blockPos, LHBlocks.greek_fire.defaultBlockState(), 2);
-                                }
-                            //}
-                        }
+
+                for(BlockPos blockpos2 : getBurnSet(trace.getBlockPos(), modifier)) {
+                    if (this.random.nextInt(3) == 0 && (this.level.getBlockState(blockpos2).isAir() || this.level.getBlockState(blockpos2).is(Blocks.WATER)) && this.level.getBlockState(blockpos2.below()).isSolidRender(this.level, blockpos2.below())) {
+                        this.level.setBlockAndUpdate(blockpos2, GreekFireBlock.getState(this.level, blockpos2));
                     }
                 }
             }
         }
+    }
+
+    public Set<BlockPos> getBurnSet(BlockPos pos, int radius){
+        Set<BlockPos> ret = Sets.newHashSet();
+        for(int y = -radius; y <= radius; y++){
+            for(int x = -radius; x <= radius; x++){
+                for(int z = -radius; z <= radius; z++){
+                    ret.add(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
+                }
+            }
+        }
+        return ret;
     }
 }

@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "com.greenone.lostheroes.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+
+  ],
+  "refmap": "mixins.lostheroes.refmap.json"
+}

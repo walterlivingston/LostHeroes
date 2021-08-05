@@ -16,9 +16,6 @@ public class LHPotions {
     public static final DeferredRegister<MobEffect> VANILLA_EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, "minecraft");
 
     public static List<Potion> potionList = new ArrayList<>();
-    public static final Potion GREEK_FIRE = registerPotion("greek_fire", new Potion());
-    public static final Potion GREEK_FIRE_2 = registerPotion("greek_fire_2", new Potion());
-    public static final Potion GREEK_FIRE_2_EXP = registerPotion("greek_fire_2_exp", new Potion());
 
     public static void register(IEventBus eventBus){
         LHEffects.register();
@@ -30,6 +27,7 @@ public class LHPotions {
     }
 
     private static Potion registerPotion(String name, Potion potion) {
+        potionList.add(potion);
         POTIONS.register(name, () -> potion);
         return potion;
     }

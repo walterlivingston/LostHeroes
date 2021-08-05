@@ -25,6 +25,8 @@ public class LHBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, LostHeroes.MOD_ID);
     public static final DeferredRegister<Block> VANILLA_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "minecraft");
 
+    public static final Material WATERPROOF_FIRE = (new Material.Builder(MaterialColor.NONE)).nonSolid().build();
+
     public static final BlockBehaviour.Properties metal_prop = BlockBehaviour.Properties.of(Material.HEAVY_METAL).requiresCorrectToolForDrops().strength(5, 10);
     public static final BlockBehaviour.Properties stone_prop = BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F);
 
@@ -49,7 +51,7 @@ public class LHBlocks {
 
     public static final Block cask = register("cask", new CaskBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(0.6F).sound(SoundType.WOOD)));
     public static final Block lotus_flower = register("lotus_flower", new LotusFlowerBlock(MobEffects.LEVITATION, 5, BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)));
-    //public static final Block greek_fire = registerNoItem("greek_fire", new GreekFireBlock(BlockBehaviour.Properties.of(Material.FIRE, MaterialColor.COLOR_LIGHT_GREEN).noCollission().instabreak().lightLevel((p_235468_0_) -> 15).sound(SoundType.WOOL)));
+    public static final Block greek_fire = registerNoItem("greek_fire", new GreekFireBlock(BlockBehaviour.Properties.of(WATERPROOF_FIRE, MaterialColor.COLOR_LIGHT_GREEN).noCollission().instabreak().lightLevel((p_235468_0_) -> 15).sound(SoundType.WOOL)));
 
     public static void register(IEventBus eventBus) {
         for(Metal m : Metal.values()){

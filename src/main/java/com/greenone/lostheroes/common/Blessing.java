@@ -26,6 +26,7 @@ public class Blessing extends LHEffect {
             if(!(player.isCreative() || entityLivingBaseIn.isSpectator())){
                 if(this == Blessings.ZEUS){
                     player.getAbilities().mayfly = true;
+                    player.onUpdateAbilities();
                 }
                 if(this == Blessings.POSEIDON){
                     player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 50, 1, false, false, false, new MobEffectInstance(MobEffects.WATER_BREATHING)));

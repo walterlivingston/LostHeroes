@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.entities;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.init.LHEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;

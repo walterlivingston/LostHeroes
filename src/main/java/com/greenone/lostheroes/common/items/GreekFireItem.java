@@ -1,117 +1,104 @@
 package com.greenone.lostheroes.common.items;
 
+import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.entities.GreekFireEntity;
-import com.greenone.lostheroes.common.init.LHPotions;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ThrowablePotionItem;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class GreekFireItem extends ThrowablePotionItem {
-    public GreekFireItem(Properties p_i225739_1_) {
-        super(p_i225739_1_);
-    }
+public class GreekFireItem extends Item {
 
-    @Override
-    public ItemStack getDefaultInstance() {
-        return PotionUtils.setPotion(super.getDefaultInstance(), LHPotions.GREEK_FIRE);
-    }
-
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        return true;
-    }
-
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        ItemStack itemstack = playerIn.getItemInHand(handIn);
-        if (!worldIn.isClientSide()) {
-            GreekFireEntity greekFireEntity = new GreekFireEntity(worldIn, playerIn, getModifer(playerIn.getItemInHand(handIn)), isExplosive(playerIn.getItemInHand(handIn)));
-            greekFireEntity.setItem(itemstack);
-            greekFireEntity.shootFromRotation(playerIn, playerIn.xRotO, playerIn.yRotO, -20.0F, 0.5F, 1.0F);
-            worldIn.addFreshEntity(greekFireEntity);
-        }
-
-        playerIn.awardStat(Stats.ITEM_USED.get(this));
-        if (!playerIn.isCreative()) {
-            itemstack.shrink(1);
-        }
-
-        return InteractionResultHolder.sidedSuccess(itemstack, worldIn.isClientSide());
+    public GreekFireItem() {
+        super(new Item.Properties().tab(LostHeroes.lh_group).stacksTo(1));
     }
 
     @Override
     public String getDescriptionId(ItemStack stack) {
-        return this.getDescriptionId();
+        String ret = this.getDescriptionId();
+        if(this.getModifier(stack) == 3){
+            ret += "_1";
+        }else if(this.getModifier(stack) == 7){
+            ret += "_2";
+        }
+
+        if(this.isExplosive(stack)){
+            ret += "_exp";
+        }
+        return ret;
     }
 
-    /**
-     * allows items to add custom lines of information to the mouseover description
-     */
-    @OnlyIn(Dist.CLIENT)
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SPLASH_POTION_THROW, SoundSource.PLAYERS, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
+        ItemStack itemstack = player.getItemInHand(hand);
+        if (!level.isClientSide) {
+            GreekFireEntity greekFireEntity = new GreekFireEntity(level, player, getModifier(itemstack), isExplosive(itemstack));
+            greekFireEntity.setItem(itemstack);
+            greekFireEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), -20.0F, 0.5F, 1.0F);
+            level.addFreshEntity(greekFireEntity);
+        }
+
+        player.awardStat(Stats.ITEM_USED.get(this));
+        if (!player.getAbilities().instabuild) {
+            itemstack.shrink(1);
+        }
+        return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
+    }
+
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        String regName = PotionUtils.getPotion(stack).getName("");
-        switch (regName){
-            case "greek_fire":
-                tooltip.add(new TextComponent("\u00A7"+"9"+"Level I"));
-                break;
-            case "greek_fire_2":
-                tooltip.add(new TextComponent("\u00A7"+"9"+"Level II"));
-                break;
-            case "greek_fire_2_exp":
-                tooltip.add(new TextComponent("\u00A7"+"9"+"Level II"));
-                tooltip.add(new TextComponent("\u00A7"+"4"+"Explosive"));
-                break;
+        if(this.getModifier(stack) == 3){
+            tooltip.add(new TextComponent("\u00A7"+"9"+"Level I"));
+        }else if(this.getModifier(stack) == 7){
+            tooltip.add(new TextComponent("\u00A7"+"9"+"Level II"));
+        }
+
+        if(this.isExplosive(stack)){
+            tooltip.add(new TextComponent("\u00A7"+"4"+"Explosive"));
         }
     }
 
-    public int getModifer(ItemStack stack){
-        String regName = PotionUtils.getPotion(stack).getName("");
-        System.out.println(regName);
-        switch (regName){
-            case "greek_fire":
+    public int getModifier(ItemStack stack){
+        switch(stack.getOrCreateTag().getInt("Level")){
+            case 1:
                 return 3;
-            case "greek_fire_2":
-                return 7;
-            case "greek_fire_2_exp":
+            case 2:
                 return 7;
             default:
-                return 0;
+                return 3;
         }
     }
 
     public boolean isExplosive(ItemStack stack){
-        String regName = PotionUtils.getPotion(stack).getName("");
-        switch (regName){
-            case "greek_fire_2_exp":
-                return true;
-            default:
-                return false;
-        }
+        return stack.getOrCreateTag().getBoolean("Explosive");
+    }
+
+    public static ItemStack setLevel(ItemStack stack, int level, boolean isExplosive) {
+        stack.getOrCreateTag().putInt("Level", level);
+        stack.getOrCreateTag().putBoolean("Explosive", isExplosive);
+        return stack;
     }
 
     @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        if (this.allowdedIn(group)) {
-            for(Potion potion : LHPotions.potionList) {
-                items.add(PotionUtils.setPotion(new ItemStack(this), potion));
-            }
-        }
+    public void fillItemCategory(CreativeModeTab p_41391_, NonNullList<ItemStack> p_41392_) {
+        //if (this.allowdedIn(p_41391_)) {
+            p_41392_.add(new ItemStack(this));
+            p_41392_.add(setLevel(new ItemStack(this), 2, false));
+            p_41392_.add(setLevel(new ItemStack(this), 2, true));
+        //}
     }
 }

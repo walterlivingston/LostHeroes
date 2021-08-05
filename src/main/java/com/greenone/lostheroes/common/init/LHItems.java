@@ -56,7 +56,7 @@ public class LHItems {
 
     public static Item drachma = registerItem("drachma", new LHItem(new Item.Properties().tab(LostHeroes.lh_group).stacksTo(16)));
 
-    //public static Item greek_fire = registerItem("greek_fire", new GreekFireItem(new Item.Properties().tab(LostHeroes.lh_group).stacksTo(1)));
+    public static Item greek_fire = registerItem("greek_fire", new GreekFireItem());
 
     public static void register(IEventBus eventBus) {
         for(Metal m : Metal.values()){

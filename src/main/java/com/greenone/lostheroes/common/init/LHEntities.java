@@ -1,6 +1,8 @@
-package com.greenone.lostheroes.common.entities;
+package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.entities.GreekFireEntity;
+import com.greenone.lostheroes.common.entities.SpearEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;

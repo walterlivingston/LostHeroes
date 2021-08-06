@@ -2,6 +2,7 @@ package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.entities.GreekFireEntity;
+import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -24,6 +25,11 @@ public class GreekFireItem extends Item {
 
     public GreekFireItem() {
         super(new Item.Properties().tab(LostHeroes.lh_group).stacksTo(1));
+    }
+
+    @Override
+    public ItemStack getDefaultInstance() {
+        return new ItemStack(LHItems.greek_fire);
     }
 
     @Override
@@ -87,7 +93,7 @@ public class GreekFireItem extends Item {
         return stack.getOrCreateTag().getBoolean("Explosive");
     }
 
-    public static ItemStack setLevel(ItemStack stack, int level, boolean isExplosive) {
+    public ItemStack setLevel(ItemStack stack, int level, boolean isExplosive) {
         stack.getOrCreateTag().putInt("Level", level);
         stack.getOrCreateTag().putBoolean("Explosive", isExplosive);
         return stack;
@@ -96,9 +102,9 @@ public class GreekFireItem extends Item {
     @Override
     public void fillItemCategory(CreativeModeTab p_41391_, NonNullList<ItemStack> p_41392_) {
         //if (this.allowdedIn(p_41391_)) {
-            p_41392_.add(new ItemStack(this));
-            p_41392_.add(setLevel(new ItemStack(this), 2, false));
-            p_41392_.add(setLevel(new ItemStack(this), 2, true));
+            p_41392_.add(getDefaultInstance());
+            p_41392_.add(setLevel(getDefaultInstance(), 2, false));
+            p_41392_.add(setLevel(getDefaultInstance(), 2, true));
         //}
     }
 }

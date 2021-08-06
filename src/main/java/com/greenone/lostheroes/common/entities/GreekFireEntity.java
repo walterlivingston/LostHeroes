@@ -43,7 +43,7 @@ public class GreekFireEntity extends ThrownPotion {
             if(entity == null || !(entity instanceof Mob) || this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) || ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner())){
                 if(isExplosive && this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)){
                     this.level.explode(this, this.getX(), this.getY(), this.getZ(), modifier, false, Explosion.BlockInteraction.BREAK);
-                    this.remove(false);
+                    this.discard();
                 }
                 for(BlockPos blockpos2 : getBurnSet(new BlockPos(trace.getLocation()), modifier)) {
                     if (this.random.nextInt(3) == 0 && (this.level.getBlockState(blockpos2).isAir() || this.level.getBlockState(blockpos2).is(Blocks.WATER)) && this.level.getBlockState(blockpos2.below()).isSolidRender(this.level, blockpos2.below())) {
@@ -61,7 +61,7 @@ public class GreekFireEntity extends ThrownPotion {
             if(entity == null || !(entity instanceof Mob) || this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING) || ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner())){
                 if(isExplosive && this.level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)){
                     this.level.explode(this, this.getX(), this.getY(), this.getZ(), modifier, false, Explosion.BlockInteraction.BREAK);
-                    this.remove(false);
+                    this.discard();
                 }
 
                 for(BlockPos blockpos2 : getBurnSet(trace.getBlockPos(), modifier)) {

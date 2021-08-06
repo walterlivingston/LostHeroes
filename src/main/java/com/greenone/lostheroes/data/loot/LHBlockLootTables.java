@@ -1,9 +1,10 @@
 package com.greenone.lostheroes.data.loot;
 
 import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.common.init.LHBlocks;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
+import com.greenone.lostheroes.common.enums.Wood;
+import com.greenone.lostheroes.common.init.LHBlocks;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -33,10 +34,17 @@ public class LHBlockLootTables extends BlockLoot {
             dropSelf(LHBlocks.stoneBrickStairs.get(s));
             dropSelf(LHBlocks.pillars.get(s));
         }
+        for(Wood w : Wood.values()){
+            dropSelf(LHBlocks.logs.get(w));
+            dropSelf(LHBlocks.planks.get(w));
+            add(LHBlocks.leaves.get(w), BlockLoot::createShearsOnlyDrop);
+            dropSelf(LHBlocks.saplings.get(w));
+        }
         dropSelf(LHBlocks.forge);
         dropSelf(LHBlocks.cask);
         dropSelf(LHBlocks.lotus_flower);
-        //add(LHBlocks.greek_fire, noDrop());
+        add(LHBlocks.grape_vine, BlockLoot::createShearsOnlyDrop);
+        add(LHBlocks.greek_fire, noDrop());
     }
 
     @Override

@@ -113,6 +113,6 @@ public class LHBlocks {
                         p_152624_.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? p_50789_ : p_50790_).strength(2.0F).sound(SoundType.WOOD)));
     }
     private static Block registerLeaves(String name, SoundType p_152615_) {
-        return register(name, new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(p_152615_).noOcclusion()));
+        return register(name, new LHLeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(p_152615_).noOcclusion()));
     }
 }

@@ -53,6 +53,8 @@ public class LHBlocks {
     public static final Block lotus_flower = register("lotus_flower", new LotusFlowerBlock(MobEffects.LEVITATION, 5, BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)));
     public static final Block greek_fire = registerNoItem("greek_fire", new GreekFireBlock(BlockBehaviour.Properties.of(WATERPROOF_FIRE, MaterialColor.COLOR_LIGHT_GREEN).noCollission().instabreak().lightLevel((p_235468_0_) -> 15).sound(SoundType.WOOL)));
 
+    public static final Block grape_vine = register("grape_vine", new GrapeVineBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().strength(0.2F).sound(SoundType.VINE)));
+
     public static void register(IEventBus eventBus) {
         for(Metal m : Metal.values()){
             if(m.isVanilla()){

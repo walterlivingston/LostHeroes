@@ -104,7 +104,7 @@ public class LHFeatures {
         features.add(() -> configuredFeature);
         biomeFeatures.set(decoration.ordinal(), features);
 
-        ObfuscationReflectionHelper.setPrivateValue(BiomeGenerationSettings.class, biome.getGenerationSettings(), biomeFeatures, "features");
+        ObfuscationReflectionHelper.setPrivateValue(BiomeGenerationSettings.class, biome.getGenerationSettings(), biomeFeatures, "f_47781_");
     }
 
     public class States{

@@ -73,7 +73,7 @@ public class LHLangProvider extends LanguageProvider {
             addItem(() -> LHItems.nectar, "Nectar");
 
             addItem(() -> LHItems.pearl_of_persephone, "Pearl of Persephone");
-            //addItem(() -> LHItems.greek_fire, "Greek Fire");
+            addItem(() -> LHItems.greek_fire, "Greek Fire");
             addItem(() -> LHItems.drachma, "Drachma");
 
             addEnchantment(() -> LHEnchants.BLESSING, "Blessing");

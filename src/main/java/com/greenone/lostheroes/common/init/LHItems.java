@@ -6,6 +6,7 @@ import com.greenone.lostheroes.common.items.*;
 import com.greenone.lostheroes.common.items.tools.*;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -50,6 +51,7 @@ public class LHItems {
 
     public static Item ambrosia = registerFood("ambrosia", LHFoods.AMBROSIA, true);
     public static Item nectar = registerItem("nectar", new LHFood(new Item.Properties().tab(LostHeroes.lh_group).food(LHFoods.NECTAR), true));
+    public static Item grapes = registerItem("grapes", new LHFood(new Item.Properties().tab(LostHeroes.lh_group).food(Foods.SWEET_BERRIES), true));
 
     public static Item vanilla_bow = registerVanillaItem("bow", new LHBow(Tiers.WOOD, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
     public static Item vanilla_crossbow = registerVanillaItem("crossbow", new LHCrossbow(Tiers.WOOD, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));

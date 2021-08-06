@@ -429,7 +429,7 @@ public class ForgeBlockEntity extends BaseContainerBlockEntity implements Worldl
     }
 
     @Override
-    protected void invalidateCaps() {
+    public void invalidateCaps() {
         super.invalidateCaps();
         for (int x = 0; x < handlers.length; x++)
             handlers[x].invalidate();

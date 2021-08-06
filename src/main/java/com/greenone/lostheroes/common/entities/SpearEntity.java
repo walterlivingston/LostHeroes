@@ -88,7 +88,7 @@ public class SpearEntity extends AbstractArrow implements EntityType.EntityFacto
                     this.spawnAtLocation(this.getPickupItem(), 0.1F);
                 }
 
-                this.remove(false);
+                this.discard();
             } else if (i > 0) {
                 this.setNoPhysics(true);
                 Vec3 vector3d = new Vec3(entity.getX() - this.getX(), entity.getEyeY() - this.getY(), entity.getZ() - this.getZ());

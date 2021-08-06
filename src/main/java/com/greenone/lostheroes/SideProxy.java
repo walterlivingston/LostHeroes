@@ -1,5 +1,6 @@
 package com.greenone.lostheroes;
 
+import com.greenone.lostheroes.client.color.LHColors;
 import com.greenone.lostheroes.client.render.LHEnchantTileEntityRenderer;
 import com.greenone.lostheroes.client.render.SpearRenderer;
 import com.greenone.lostheroes.client.screen.ForgeScreen;
@@ -105,6 +106,9 @@ public class SideProxy implements IProxy {
         private static void clientSetup(FMLClientSetupEvent event){
             BlockEntityRenderers.register(LHBlockEntities.ENCHANT, LHEnchantTileEntityRenderer::new);
             ItemBlockRenderTypes.setRenderLayer(LHBlocks.greek_fire, RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(LHBlocks.grape_vine, RenderType.cutout());
+            LHColors.registerBlockColors();
+            LHColors.registerItemColors();
             LHItemModelProperties.registerProperties();
             MenuScreens.register(LHMenus.ENCHANTING, LHEnchantScreen::new);
             MenuScreens.register(LHMenus.FORGE, ForgeScreen::new);

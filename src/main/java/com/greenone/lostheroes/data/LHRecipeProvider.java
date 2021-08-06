@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.data;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.enums.Wood;
 import com.greenone.lostheroes.common.init.LHBlocks;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
@@ -54,6 +55,9 @@ public class LHRecipeProvider extends RecipeProvider {
             ShapedRecipeBuilder.shaped(LHBlocks.stoneBrickSlabs.get(s), 6).define('#', LHBlocks.stoneBricks.get(s)).pattern("###").unlockedBy("has_"+s.tagName()+"_brick", has(LHBlocks.stoneBricks.get(s))).save(consumer);
             ShapedRecipeBuilder.shaped(LHBlocks.stoneBrickStairs.get(s), 4).define('#', LHBlocks.stoneBricks.get(s)).pattern("#  ").pattern("## ").pattern("###").unlockedBy("has_"+s.tagName()+"_brick", has(LHBlocks.stoneBricks.get(s))).save(consumer);
             ShapedRecipeBuilder.shaped(LHBlocks.pillars.get(s)).define('N', LHBlocks.stoneBlocks.get(s)).define('S', LHBlocks.stoneSlabs.get(s)).pattern("SSS").pattern(" N ").pattern("SSS").unlockedBy("has_"+s.tagName(), has(LHBlocks.stoneBlocks.get(s))).save(consumer);
+        }
+        for(Wood w : Wood.values()){
+            ShapelessRecipeBuilder.shapeless(LHBlocks.planks.get(w), 4).requires(LHBlocks.logs.get(w)).unlockedBy("has_"+w.tagName()+"_log", has(LHBlocks.logs.get(w))).save(consumer);
         }
         ShapedRecipeBuilder.shaped(LHBlocks.forge).define('#', Blocks.POLISHED_BLACKSTONE).pattern("###").pattern("# #").pattern("###").unlockedBy("has_blackstone", has(Blocks.POLISHED_BLACKSTONE)).save(consumer);
         ForgeRecipeBuilder.forge(LHItems.ingots.get(Metal.BRONZE), 0.7F, 200).requires(LHItems.ingots.get(Metal.COPPER)).requires(LHItems.ingots.get(Metal.TIN)).unlockedBy("has_copper_ingot", has(LHItems.ingots.get(Metal.COPPER))).unlockedBy("has_tin_ingot", has(LHItems.ingots.get(Metal.TIN))).save(consumer);

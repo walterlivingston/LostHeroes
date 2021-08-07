@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.enums;
 
 import com.greenone.lostheroes.common.blocks.grower.OliveTreeGrower;
+import com.greenone.lostheroes.common.blocks.grower.PomegranateTreeGrower;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.material.MaterialColor;
 
@@ -9,7 +10,7 @@ import java.util.Locale;
 public enum Wood {
 
     OLIVE(MaterialColor.RAW_IRON, MaterialColor.COLOR_LIGHT_GRAY, new OliveTreeGrower()),
-    POMEGRANATE(MaterialColor.RAW_IRON, MaterialColor.PODZOL, new OliveTreeGrower());;
+    POMEGRANATE(MaterialColor.RAW_IRON, MaterialColor.PODZOL, new PomegranateTreeGrower());;
 
     private final MaterialColor innerColor;
     private final MaterialColor outerColor;

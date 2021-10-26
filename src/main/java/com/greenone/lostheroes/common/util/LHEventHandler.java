@@ -61,7 +61,6 @@ public class LHEventHandler {
 
     @SubscribeEvent
     public void onPlayerJoined(final PlayerEvent.PlayerLoggedInEvent event) {
-        LHClientUtils.hud = new ManaHUD(Minecraft.getInstance());
         IPlayerCap playerCap = event.getPlayer().getCapability(CapabilityRegistry.PLAYERCAP, null).orElseThrow(() -> new IllegalArgumentException("No Capability at Login"));
         if (playerCap.getParent() == null) {
             Random rand = new Random();

@@ -13,6 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.glfw.GLFW;
 
@@ -20,6 +21,11 @@ import org.lwjgl.glfw.GLFW;
 public class LHClientUtils {
     public static final LHClientUtils instance = new LHClientUtils();
     public static ManaHUD hud;
+
+    @SubscribeEvent
+    public void onPlayerJoined(final PlayerEvent.PlayerLoggedInEvent event){
+        hud = new ManaHUD(Minecraft.getInstance());
+    }
 
     @SubscribeEvent
     public void keyInput(InputEvent.KeyInputEvent event){

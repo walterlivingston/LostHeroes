@@ -23,6 +23,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -112,11 +114,6 @@ public class SideProxy implements IProxy {
             RenderingRegistry.registerEntityRenderingHandler(LHEntities.SPEAR, new SpearRenderer.RenderFactory());
         }
 
-        @Nullable
-        @Override
-        public PlayerEntity getClientPlayer() {
-            return Minecraft.getInstance().player;
-        }
     }
 
     public static class Common extends SideProxy{

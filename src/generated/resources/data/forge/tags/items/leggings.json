@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "lostheroes:tin_leggings",
+    "lostheroes:lead_leggings",
+    "lostheroes:silver_leggings",
+    "lostheroes:bronze_leggings",
+    "lostheroes:celestial_bronze_leggings",
+    "lostheroes:imperial_gold_leggings",
+    "lostheroes:bone_steel_leggings",
+    "lostheroes:meteoric_iron_leggings",
+    "lostheroes:adamantine_leggings"
+  ]
+}

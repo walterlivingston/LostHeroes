@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "lostheroes:tin_nugget",
+    "lostheroes:lead_nugget",
+    "lostheroes:silver_nugget",
+    "lostheroes:bronze_nugget",
+    "lostheroes:celestial_bronze_nugget",
+    "lostheroes:imperial_gold_nugget",
+    "lostheroes:bone_steel_nugget",
+    "lostheroes:meteoric_iron_nugget",
+    "lostheroes:adamantine_nugget"
+  ]
+}

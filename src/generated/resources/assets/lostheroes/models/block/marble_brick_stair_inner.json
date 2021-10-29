@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "side": "lostheroes:block/marble_brick",
+    "bottom": "lostheroes:block/marble_brick",
+    "top": "lostheroes:block/marble_brick"
+  }
+}

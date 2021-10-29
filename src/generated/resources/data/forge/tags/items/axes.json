@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "lostheroes:tin_axe",
+    "lostheroes:lead_axe",
+    "lostheroes:silver_axe",
+    "lostheroes:bronze_axe",
+    "lostheroes:celestial_bronze_axe",
+    "lostheroes:imperial_gold_axe",
+    "lostheroes:bone_steel_axe",
+    "lostheroes:meteoric_iron_axe",
+    "lostheroes:adamantine_axe"
+  ]
+}

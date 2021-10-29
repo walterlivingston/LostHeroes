@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "iron_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/adamantine"
+    }
+  },
+  "result": {
+    "item": "lostheroes:adamantine_ingot"
+  }
+}

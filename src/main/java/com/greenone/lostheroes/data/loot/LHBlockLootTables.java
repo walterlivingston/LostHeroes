@@ -35,15 +35,15 @@ public class LHBlockLootTables extends BlockLoot {
             dropSelf(LHBlocks.pillars.get(s));
         }
         for(Wood w : Wood.values()){
-            dropSelf(LHBlocks.logs.get(w));
-            dropSelf(LHBlocks.planks.get(w));
-            add(LHBlocks.leaves.get(w), BlockLoot::createShearsOnlyDrop);
-            dropSelf(LHBlocks.saplings.get(w));
+            //dropSelf(LHBlocks.logs.get(w));
+            //dropSelf(LHBlocks.planks.get(w));
+            //add(LHBlocks.leaves.get(w), BlockLoot::createShearsOnlyDrop);
+            //dropSelf(LHBlocks.saplings.get(w));
         }
         dropSelf(LHBlocks.forge);
-        dropSelf(LHBlocks.cask);
-        dropSelf(LHBlocks.lotus_flower);
-        add(LHBlocks.grape_vine, BlockLoot::createShearsOnlyDrop);
+        //dropSelf(LHBlocks.cask);
+        //dropSelf(LHBlocks.lotus_flower);
+        //add(LHBlocks.grape_vine, BlockLoot::createShearsOnlyDrop);
         add(LHBlocks.greek_fire, noDrop());
     }
 

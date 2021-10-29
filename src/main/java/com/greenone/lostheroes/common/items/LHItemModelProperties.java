@@ -4,9 +4,7 @@ import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 
 public class LHItemModelProperties {
     public static void registerProperties(){
@@ -20,7 +18,7 @@ public class LHItemModelProperties {
             });
             ItemProperties.register(bow, new ResourceLocation(LostHeroes.MOD_ID, "pulling"), (p_239428_0_, p_239428_1_, p_239428_2_, p_174623_) -> p_239428_2_ != null && p_239428_2_.isUsingItem() && p_239428_2_.getUseItem() == p_239428_0_ ? 1.0F : 0.0F);
         }
-        for(Item crossbow : LHItems.crossbows.values()){
+        /*for(Item crossbow : LHItems.crossbows.values()){
             ItemProperties.register(crossbow, new ResourceLocation(LostHeroes.MOD_ID, "pull"), (p_239427_0_, p_239427_1_, p_239427_2_, p_174623_) -> {
                 if (p_239427_2_ == null) {
                     return 0.0F;
@@ -31,7 +29,7 @@ public class LHItemModelProperties {
             ItemProperties.register(crossbow, new ResourceLocation(LostHeroes.MOD_ID,"pulling"), (p_239426_0_, p_239426_1_, p_239426_2_, p_174623_) -> p_239426_2_ != null && p_239426_2_.isUsingItem() && p_239426_2_.getUseItem() == p_239426_0_ && !CrossbowItem.isCharged(p_239426_0_) ? 1.0F : 0.0F);
             ItemProperties.register(crossbow, new ResourceLocation(LostHeroes.MOD_ID,"charged"), (p_239425_0_, p_239425_1_, p_239425_2_, p_174623_) -> p_239425_2_ != null && CrossbowItem.isCharged(p_239425_0_) ? 1.0F : 0.0F);
             ItemProperties.register(crossbow, new ResourceLocation(LostHeroes.MOD_ID,"firework"), (p_239424_0_, p_239424_1_, p_239424_2_, p_174623_) -> p_239424_2_ != null && CrossbowItem.isCharged(p_239424_0_) && CrossbowItem.containsChargedProjectile(p_239424_0_, Items.FIREWORK_ROCKET) ? 1.0F : 0.0F);}
-        for(Item shield : LHItems.shields.values()){
+        */for(Item shield : LHItems.shields.values()){
             ItemProperties.register(shield, new ResourceLocation(LostHeroes.MOD_ID,"blocking"), (p_239421_0_, p_239421_1_, p_239421_2_, p_174623_) -> p_239421_2_ != null && p_239421_2_.isUsingItem() && p_239421_2_.getUseItem() == p_239421_0_ ? 1.0F : 0.0F);
         }
         ItemProperties.register(LHItems.aegis, new ResourceLocation(LostHeroes.MOD_ID,"blocking"), (p_239421_0_, p_239421_1_, p_239421_2_, p_174623_) -> p_239421_2_ != null && p_239421_2_.isUsingItem() && p_239421_2_.getUseItem() == p_239421_0_ ? 1.0F : 0.0F);

@@ -2,7 +2,6 @@ package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.blocks.entity.LHBlockEntities;
-import com.greenone.lostheroes.common.entities.villager.VillagerInit;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -24,7 +23,7 @@ public class Registration {
         LHMenus.register(eventBus);
         LHPotions.register(eventBus);
         Deities.init();
-        VillagerInit.register(eventBus);
+        //VillagerInit.register(eventBus);
         LHTags.register();
         LHEnchants.register(eventBus);
     }

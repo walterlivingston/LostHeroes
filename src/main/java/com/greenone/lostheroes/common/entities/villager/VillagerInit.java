@@ -1,39 +1,7 @@
 package com.greenone.lostheroes.common.entities.villager;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.common.init.LHBlocks;
-import com.greenone.lostheroes.common.blocks.PillarBlock;
-import com.greenone.lostheroes.common.enums.Metal;
-import com.greenone.lostheroes.common.enums.Stone;
-import com.greenone.lostheroes.common.init.LHItems;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.ai.village.poi.PoiType;
-import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerTrades;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 public class VillagerInit {
-    public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, LostHeroes.MOD_ID);
+    /*public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, LostHeroes.MOD_ID);
     public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.PROFESSIONS, LostHeroes.MOD_ID);
 
     public static final BlockState ALTAR_STATE_1 = LHBlocks.pillars.get(Stone.MARBLE).defaultBlockState().setValue(PillarBlock.IS_ALTAR, true);
@@ -119,5 +87,5 @@ public class VillagerInit {
             int choose = (int) (random.nextFloat() * items.size());
             return new MerchantOffer(new ItemStack(LHItems.drachma, amountOfDrachmas.get(choose)), new ItemStack(items.get(choose), this.amountOfItems.get(choose)), this.uses, this.villagerExp, 0.05f);
         }
-    }
+    }*/
 }

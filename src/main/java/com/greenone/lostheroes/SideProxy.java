@@ -106,7 +106,7 @@ public class SideProxy implements IProxy {
         private static void clientSetup(FMLClientSetupEvent event){
             BlockEntityRenderers.register(LHBlockEntities.ENCHANT, LHEnchantTileEntityRenderer::new);
             ItemBlockRenderTypes.setRenderLayer(LHBlocks.greek_fire, RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(LHBlocks.grape_vine, RenderType.cutout());
+            //ItemBlockRenderTypes.setRenderLayer(LHBlocks.grape_vine, RenderType.cutout());
             LHColors.registerBlockColors();
             LHColors.registerItemColors();
             LHItemModelProperties.registerProperties();

@@ -43,7 +43,7 @@ public class LHRecipeProvider extends RecipeProvider {
                 ShapedRecipeBuilder.shaped(LHItems.picks.get(m)).define('#', Items.STICK).define('X', LHTags.Items.INGOTS.get(m)).pattern("XXX").pattern(" # ").pattern(" # ").unlockedBy("has_" + m.tagName()+"_ingot", has(LHTags.Items.INGOTS.get(m))).save(consumer);
                 ShapedRecipeBuilder.shaped(LHItems.shovels.get(m)).define('#', Items.STICK).define('X', LHTags.Items.INGOTS.get(m)).pattern("X").pattern("#").pattern("#").unlockedBy("has_" + m.tagName()+"_ingot", has(LHTags.Items.INGOTS.get(m))).save(consumer);
                 ShapedRecipeBuilder.shaped(LHItems.bows.get(m)).define('#', LHItems.ingots.get(m)).define('X', Items.STRING).pattern(" #X").pattern("# X").pattern(" #X").unlockedBy("has_string", has(Items.STRING)).unlockedBy("has_" + m.tagName()+"_ingot", has(LHTags.Items.INGOTS.get(m))).save(consumer);
-                ShapedRecipeBuilder.shaped(LHItems.crossbows.get(m)).define('~', Items.STRING).define('#', LHItems.ingots.get(m)).define('&', Items.IRON_INGOT).define('$', Blocks.TRIPWIRE_HOOK).pattern("#&#").pattern("~$~").pattern(" # ").unlockedBy("has_string", has(Items.STRING)).unlockedBy("has_" + m.tagName()+"_ingot", has(LHItems.ingots.get(m))).unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).unlockedBy("has_tripwire_hook", has(Blocks.TRIPWIRE_HOOK)).save(consumer);
+                //ShapedRecipeBuilder.shaped(LHItems.crossbows.get(m)).define('~', Items.STRING).define('#', LHItems.ingots.get(m)).define('&', Items.IRON_INGOT).define('$', Blocks.TRIPWIRE_HOOK).pattern("#&#").pattern("~$~").pattern(" # ").unlockedBy("has_string", has(Items.STRING)).unlockedBy("has_" + m.tagName()+"_ingot", has(LHItems.ingots.get(m))).unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).unlockedBy("has_tripwire_hook", has(Blocks.TRIPWIRE_HOOK)).save(consumer);
                 ShapedRecipeBuilder.shaped(LHItems.shields.get(m)).define('W', LHItems.ingots.get(m)).define('o', Items.IRON_INGOT).pattern("WoW").pattern("WWW").pattern(" W ").unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).unlockedBy("has_" + m.tagName()+"_ingot", has(LHTags.Items.INGOTS.get(m))).save(consumer);
                 ShapedRecipeBuilder.shaped(LHItems.spears.get(m)).define('#', Items.STICK).define('X', LHItems.ingots.get(m)).pattern("  X").pattern(" # ").pattern("#  ").unlockedBy("has_" + m.tagName()+"_ingot", has(LHTags.Items.INGOTS.get(m))).save(consumer);
             }
@@ -57,13 +57,13 @@ public class LHRecipeProvider extends RecipeProvider {
             ShapedRecipeBuilder.shaped(LHBlocks.pillars.get(s)).define('N', LHBlocks.stoneBlocks.get(s)).define('S', LHBlocks.stoneSlabs.get(s)).pattern("SSS").pattern(" N ").pattern("SSS").unlockedBy("has_"+s.tagName(), has(LHBlocks.stoneBlocks.get(s))).save(consumer);
         }
         for(Wood w : Wood.values()){
-            ShapelessRecipeBuilder.shapeless(LHBlocks.planks.get(w), 4).requires(LHBlocks.logs.get(w)).unlockedBy("has_"+w.tagName()+"_log", has(LHBlocks.logs.get(w))).save(consumer);
+            //ShapelessRecipeBuilder.shapeless(LHBlocks.planks.get(w), 4).requires(LHBlocks.logs.get(w)).unlockedBy("has_"+w.tagName()+"_log", has(LHBlocks.logs.get(w))).save(consumer);
         }
         ShapedRecipeBuilder.shaped(LHBlocks.forge).define('#', Blocks.POLISHED_BLACKSTONE).pattern("###").pattern("# #").pattern("###").unlockedBy("has_blackstone", has(Blocks.POLISHED_BLACKSTONE)).save(consumer);
         ForgeRecipeBuilder.forge(LHItems.ingots.get(Metal.BRONZE), 0.7F, 200).requires(LHItems.ingots.get(Metal.COPPER)).requires(LHItems.ingots.get(Metal.TIN)).unlockedBy("has_copper_ingot", has(LHItems.ingots.get(Metal.COPPER))).unlockedBy("has_tin_ingot", has(LHItems.ingots.get(Metal.TIN))).save(consumer);
         ForgeRecipeBuilder.forge(LHItems.ingots.get(Metal.BONE_STEEL), 0.7F, 200).requires(Items.IRON_INGOT).requires(Items.BONE).unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(consumer);
         ForgeRecipeBuilder.forge(LHItems.adamantine_ingot_dull, 0.7F, 200).requires(Items.DIAMOND).requires(LHItems.ingots.get(Metal.SILVER)).unlockedBy("has_diamond", has(Items.DIAMOND)).unlockedBy("has_silver_ingot", has(LHTags.Items.INGOTS.get(Metal.SILVER))).save(consumer);
 
-        ShapedRecipeBuilder.shaped(LHBlocks.cask).define('#', Items.BRICK).pattern("# #").pattern("# #").pattern("###").unlockedBy("has_bricks", has(Items.BRICK)).save(consumer);
+        //ShapedRecipeBuilder.shaped(LHBlocks.cask).define('#', Items.BRICK).pattern("# #").pattern("# #").pattern("###").unlockedBy("has_bricks", has(Items.BRICK)).save(consumer);
     }
 }

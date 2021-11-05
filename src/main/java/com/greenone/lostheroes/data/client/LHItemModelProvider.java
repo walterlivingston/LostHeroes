@@ -26,6 +26,7 @@ public class LHItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         ModelFile itemGenerated = getExistingFile(new ResourceLocation("item/generated"));
+        ModelFile handheld = getExistingFile(new ResourceLocation("item/handheld"));
 
         for(Metal m : Metal.values()){
             if(m.isVanilla()){
@@ -38,11 +39,11 @@ public class LHItemModelProvider extends ItemModelProvider {
 
                 builder(itemGenerated, m.tagName() + "_ingot");
                 builder(itemGenerated, m.tagName() + "_nugget");
-                builder(itemGenerated, m.tagName() + "_sword");
-                builder(itemGenerated, m.tagName() + "_pickaxe");
-                builder(itemGenerated, m.tagName() + "_axe");
-                builder(itemGenerated, m.tagName() + "_shovel");
-                builder(itemGenerated, m.tagName() + "_hoe");
+                builder(handheld, m.tagName() + "_sword");
+                builder(handheld, m.tagName() + "_pickaxe");
+                builder(handheld, m.tagName() + "_axe");
+                builder(handheld, m.tagName() + "_shovel");
+                builder(handheld, m.tagName() + "_hoe");
                 builder(itemGenerated, m.tagName() + "_spear");
                 builder(itemGenerated, m.tagName() + "_helmet");
                 builder(itemGenerated, m.tagName() + "_chestplate");
@@ -64,12 +65,12 @@ public class LHItemModelProvider extends ItemModelProvider {
         builder(itemGenerated, "invisibility_cap");
         builder(itemGenerated, "adamantine_ingot_dull");
         builder(itemGenerated, "anaklusmos_pen");
-        builder(itemGenerated, "anaklusmos_sword");
+        builder(handheld, "anaklusmos_sword");
         builder(itemGenerated, "ivlivs_coin");
-        builder(itemGenerated, "ivlivs_sword");
+        builder(handheld, "ivlivs_sword");
         builder(itemGenerated, "ivlivs_spear");
-        builder(itemGenerated, "backbiter");
-        builder(itemGenerated, "katoptris");
+        builder(handheld, "backbiter");
+        builder(handheld, "katoptris");
         builder(itemGenerated, "ambrosia");
         builder(itemGenerated, "nectar");
         builder(itemGenerated, "pearl_of_persephone");

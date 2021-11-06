@@ -72,7 +72,7 @@ public class LHUtils {
                     playerCap.getParent().removeAttributeModifiers(player, player.getAttributes(), 0);
                 break;
             case "artemis":
-                if(player.level.isNight())
+                if(player.level.dayTime() > 13000 && player.level.dayTime() < 22300)
                     playerCap.getParent().applyAttributesModifiersToEntity(player, player.getAttributes(), 0);
                 else
                     playerCap.getParent().removeAttributeModifiers(player, player.getAttributes(), 0);

@@ -45,7 +45,7 @@ public class Deities {
     public static final Deity ARTEMIS = new Deity("artemis",
             Items.BOW,
             Blessings.ARTEMIS,
-            new ArtemisAbilities()).addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", (double)0.9F, AttributeModifier.Operation.MULTIPLY_TOTAL);
+            new ArtemisAbilities()).addAttributeModifier(Attributes.MOVEMENT_SPEED, "91AEAA56-376B-4498-935B-2F7F68070635", (double)0.2F, AttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final Deity DEMETER = new Deity("demeter",
             Items.WHEAT,
             Blessings.DEMETER,

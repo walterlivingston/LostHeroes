@@ -73,8 +73,6 @@ public class LHUtils {
                     playerCap.getParent().applyAttributesModifiersToEntity(player, player.getAttributes(), 0);
                 else
                     playerCap.getParent().removeAttributeModifiers(player, player.getAttributes(), 0);
-
-                System.out.println(player.level.getSkyDarken());
                 break;
             case "demeter":
                 if(player.isSteppingCarefully() && (player.isCreative() || playerCap.consumeMana(0.008F))){

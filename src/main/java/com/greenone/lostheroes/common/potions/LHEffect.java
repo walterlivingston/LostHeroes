@@ -20,16 +20,16 @@ public class LHEffect extends Effect {
 
     @Override
     public boolean shouldRender(EffectInstance effect) {
-        return !(effect.getDuration()<=35);
+        return !(effect.getDuration()<=35) && effect.getEffect()!=LHEffects.RAGE;
     }
 
     @Override
     public boolean shouldRenderHUD(EffectInstance effect) {
-        return !(effect.getDuration()<=35);
+        return !(effect.getDuration()<=35) && effect.getEffect()!=LHEffects.RAGE;
     }
 
     @Override
     public boolean shouldRenderInvText(EffectInstance effect) {
-        return !(effect.getDuration()<=35);
+        return !(effect.getDuration()<=35) && effect.getEffect()!=LHEffects.RAGE;
     }
 }

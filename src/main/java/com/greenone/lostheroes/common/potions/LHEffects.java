@@ -12,7 +12,7 @@ public class LHEffects {
     public static final Effect APATHY = new LHEffect();
 
     public static void register(){
-        //LHPotions.EFFECTS.register("rage", () -> RAGE);
+        LHPotions.EFFECTS.register("rage", () -> RAGE);
         LHPotions.VANILLA_EFFECTS.register("fire_resistance", () -> FIRE_RESISTANCE);
     }
 }

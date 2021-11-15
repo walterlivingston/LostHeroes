@@ -44,7 +44,7 @@ public class LHItemModelProvider extends ItemModelProvider {
                 builder(handheld, m.tagName() + "_axe");
                 builder(handheld, m.tagName() + "_shovel");
                 builder(handheld, m.tagName() + "_hoe");
-                builder(itemGenerated, m.tagName() + "_spear");
+                builder(handheld, m.tagName() + "_spear");
                 builder(itemGenerated, m.tagName() + "_helmet");
                 builder(itemGenerated, m.tagName() + "_chestplate");
                 builder(itemGenerated, m.tagName() + "_leggings");
@@ -68,7 +68,7 @@ public class LHItemModelProvider extends ItemModelProvider {
         builder(handheld, "anaklusmos_sword");
         builder(itemGenerated, "ivlivs_coin");
         builder(handheld, "ivlivs_sword");
-        builder(itemGenerated, "ivlivs_spear");
+        builder(handheld, "ivlivs_spear");
         builder(handheld, "backbiter");
         builder(handheld, "katoptris");
         builder(itemGenerated, "ambrosia");

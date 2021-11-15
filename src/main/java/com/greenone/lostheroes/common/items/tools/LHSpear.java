@@ -2,6 +2,7 @@ package com.greenone.lostheroes.common.items.tools;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.entities.SpearEntity;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.items.LHItemTier;
@@ -18,6 +19,7 @@ import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -40,6 +42,12 @@ public class LHSpear extends TridentItem {
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", getDamageModifier(), AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2.9F, AttributeModifier.Operation.ADDITION));
         this.spearAttributes = builder.build();
+    }
+
+    public ResourceLocation getRenderResourceLocation(){
+        String resLoc = this.getRegistryName().toString();
+        String name = resLoc.substring(resLoc.indexOf(":")+1);
+        return new ResourceLocation(LostHeroes.MOD_ID, "textures/entity/"+name+".png");
     }
 
     @Override

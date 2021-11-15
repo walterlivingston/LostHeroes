@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.client.render.LHItemStackTileEntityRenderer;
 import com.greenone.lostheroes.client.render.ShieldRenderer;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.items.tools.*;
@@ -128,7 +129,7 @@ public class LHItems {
         return registerItem(name, item);
     }
     private static Item registerSpear(String name, Metal metal) {
-        Item item = new LHSpear(metal, new Item.Properties().tab(LostHeroes.lh_group));
+        Item item = new LHSpear(metal, new Item.Properties().tab(LostHeroes.lh_group).setISTER(()-> LHItemStackTileEntityRenderer::new));
         return registerItem(name, item);
     }
     private static Item registerShield(String name, Metal metal) {

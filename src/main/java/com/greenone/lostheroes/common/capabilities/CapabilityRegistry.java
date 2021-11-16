@@ -26,6 +26,9 @@ public class CapabilityRegistry {
             if(instance!=null){
                 nbt.putFloat("mana", instance.getMana());
                 nbt.putFloat("maxMana", instance.getMaxMana());
+                nbt.putInt("level", instance.getLevel());
+                nbt.putInt("maxLevel", instance.getMaxLevel());
+                nbt.putFloat("experience", instance.getExperience());
                 nbt.putString("parent", instance.getParent().getName());
                 nbt.putInt("hadesCooldown", instance.getHadesCooldown());
             }
@@ -38,6 +41,9 @@ public class CapabilityRegistry {
 
             instance.setMana(tag.getFloat("mana"));
             instance.setMaxMana(tag.getFloat("maxMana"));
+            instance.setMaxLevel(tag.getInt("maxLevel"));
+            instance.setLevel(tag.getInt("level"));
+            instance.setExperience(tag.getFloat("experience"));
             instance.setParent(Deities.list.get(tag.getString("parent")));
             instance.setHadesCooldown(tag.getInt("hadesCooldown"));
         }

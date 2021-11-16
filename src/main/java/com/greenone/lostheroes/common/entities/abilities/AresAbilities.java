@@ -12,27 +12,25 @@ public class AresAbilities extends AbstractAbility{
     private float mainManaReq= LHConfig.getMaxMana();
 
     @Override
-    public void mainAbility(PlayerEntity player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(player.isCreative() || playerCap.consumeMana(getMainManaReq(player))){
+    public void mainAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+        if(player.isCreative() || playerCap.consumeMana(getMainManaReq())){
             player.addEffect(new EffectInstance(LHEffects.RAGE, 900, 1, false, false, false, null));
+            if(!player.isCreative()) success();
+
         }
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
-
+    public void minorAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
     }
 
     @Override
     public float getMainManaReq() {
-        return mainManaReq;
-    }
-
-    public float getMainManaReq(PlayerEntity player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        mainManaReq = playerCap.getMaxMana();
-        return getMainManaReq();
+        return playerCap != null ? playerCap.getMaxMana() : LHConfig.getMaxMana();
     }
 
     @Override

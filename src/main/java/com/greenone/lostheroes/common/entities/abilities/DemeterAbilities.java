@@ -10,14 +10,19 @@ import net.minecraft.util.math.BlockPos;
 
 public class DemeterAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(PlayerEntity player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(playerCap.consumeMana(getMainManaReq())) harvestAndReplant(player);
+    public void mainAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+        if(player.isCreative() | playerCap.consumeMana(getMainManaReq())) {
+            harvestAndReplant(player);
+            if(!player.isCreative()) success();
+        }
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
-
+    public void minorAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
     }
 
     @Override

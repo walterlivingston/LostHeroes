@@ -1,5 +1,6 @@
 package com.greenone.lostheroes.common.capabilities;
 
+import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.Deity;
 import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.init.Deities;
@@ -10,6 +11,8 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Util;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
@@ -22,6 +25,9 @@ import javax.annotation.Nullable;
 public class PlayerCap implements IPlayerCap, ICapabilitySerializable<CompoundNBT>{
     private float maxMana = LHConfig.getMaxMana();
     private float mana = maxMana;
+    private int maxLevel = LHConfig.getMaxLevel();
+    private int level = 1;
+    private float experience = 0;
     private Deity parent = null;
     private int hadesCooldown = 0;
 
@@ -60,6 +66,53 @@ public class PlayerCap implements IPlayerCap, ICapabilitySerializable<CompoundNB
         }else{
             return false;
         }
+    }
+
+    @Override
+    public int getMaxLevel() {
+        return maxLevel;
+    }
+
+    @Override
+    public void setMaxLevel(int level) {
+        maxLevel = level;
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
+    }
+
+    @Override
+    public void setLevel(int level) {
+        this.level=level;
+    }
+
+    @Override
+    public float getExperience() {
+        return experience;
+    }
+
+    @Override
+    public void setExperience(float amount) {
+        experience=amount;
+    }
+
+    @Override
+    public boolean addExperience(PlayerEntity player, float amount) {
+        if(level <= maxLevel){
+            experience+=amount;
+            float xpToLevelUp = level*1000 + 50*level;
+            if(experience >= xpToLevelUp){
+                level+=1;
+                experience=0;
+                maxMana+=1;
+                fillMana();
+                player.sendMessage(new StringTextComponent("You just leveled up!  You are now level "+level), Util.NIL_UUID);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

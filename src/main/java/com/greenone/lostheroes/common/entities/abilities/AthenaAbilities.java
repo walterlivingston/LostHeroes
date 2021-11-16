@@ -8,8 +8,9 @@ import net.minecraft.item.ItemStack;
 
 public class AthenaAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(PlayerEntity player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+    public void mainAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(player.isSteppingCarefully()){
             System.out.println("HELLO");
             player.openMenu(new PCContainerProvider());
@@ -27,13 +28,17 @@ public class AthenaAbilities extends AbstractAbility{
                     }
                 }
             }
-            if(!player.isCreative()){ playerCap.setMana(repairPoints/100);}
+            if(!player.isCreative()){
+                playerCap.setMana(repairPoints/100);
+                success();
+            }
         }
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
-
+    public void minorAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
     }
 
     @Override

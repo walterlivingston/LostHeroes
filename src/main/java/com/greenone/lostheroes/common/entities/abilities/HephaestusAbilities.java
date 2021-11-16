@@ -12,10 +12,12 @@ import net.minecraft.util.math.vector.Vector3d;
 
 public class HephaestusAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(PlayerEntity player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+    public void mainAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(player.isCreative() || playerCap.consumeMana(getMainManaReq())){
             fireball(player);
+            if(!player.isCreative()) success();
         }
     }
 

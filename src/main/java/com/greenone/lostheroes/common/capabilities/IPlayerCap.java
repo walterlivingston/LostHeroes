@@ -11,6 +11,13 @@ public interface IPlayerCap {
     void setMaxMana(float amount);
     void fillMana();
     boolean consumeMana(float amount);
+    int getMaxLevel();
+    void setMaxLevel(int level);
+    int getLevel();
+    void setLevel(int level);
+    float getExperience();
+    void setExperience(float amount);
+    boolean addExperience(PlayerEntity player, float amount);
     Deity getParent();
     void setParent(Deity parentIn);
     void setHadesCooldown(int amount);

@@ -1,5 +1,7 @@
 package com.greenone.lostheroes.common.blocks.tiles;
 
+import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
+import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.init.Deities;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,6 +37,8 @@ public class AltarTile extends TileEntity implements ITickableTileEntity {
             addEffectsToPlayers(Deities.getDeity(item.getItem()).getBlessing(), player);
             if(!player.isCreative()) item.shrink(1);
             resetCooldown();
+            IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+            if(playerCap!=null) playerCap.addExperience(player, 50);
         }
     }
 

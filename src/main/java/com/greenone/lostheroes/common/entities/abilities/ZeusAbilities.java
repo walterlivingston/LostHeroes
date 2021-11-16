@@ -14,8 +14,9 @@ import net.minecraft.util.math.BlockPos;
 
 public class ZeusAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(PlayerEntity player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+    public void mainAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
         if(player.level.canSeeSky(pos) && (player.isCreative() || playerCap.consumeMana(getMainManaReq()))){
             LightningBoltEntity lightningBoltEntity = EntityType.LIGHTNING_BOLT.create(player.level);
@@ -24,12 +25,14 @@ public class ZeusAbilities extends AbstractAbility{
             player.level.addFreshEntity(lightningBoltEntity);
             SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER;
             player.level.playSound(player, pos, soundEvent, SoundCategory.WEATHER, 5.0F, 1.0F);
+            success();
         }
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
-
+    public void minorAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
     }
 
     @Override

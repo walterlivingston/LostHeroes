@@ -10,17 +10,18 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.vector.Vector3d;
 
 public class ArtemisAbilities extends AbstractAbility{
-    private float mainManaReq= LHConfig.getMaxMana();
 
     @Override
-    public void mainAbility(PlayerEntity player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(LHUtils.getLookingAt(player, 5)!=null && playerCap.consumeMana(getMainManaReq(player))){
+    public void mainAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+        if(LHUtils.getLookingAt(player, 5)!=null && (player.isCreative() | playerCap.consumeMana(getMainManaReq()))){
             Vector3d spawnVec = LHUtils.getLookingAt(player, 5);
             WolfEntity wolf = new WolfEntity(EntityType.WOLF, player.level);
             wolf.tame(player);
             player.level.addFreshEntity(wolf);
             wolf.setPos(spawnVec.x, spawnVec.y, spawnVec.z);
+            if(!player.isCreative()) success();
         }
     }
 
@@ -31,13 +32,7 @@ public class ArtemisAbilities extends AbstractAbility{
 
     @Override
     public float getMainManaReq() {
-        return mainManaReq;
-    }
-
-    public float getMainManaReq(PlayerEntity player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        mainManaReq = playerCap.getMaxMana();
-        return getMainManaReq();
+        return playerCap != null ? playerCap.getMaxMana() : LHConfig.getMaxMana();
     }
 
     @Override

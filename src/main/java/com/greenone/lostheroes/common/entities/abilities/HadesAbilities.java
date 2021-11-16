@@ -15,31 +15,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HadesAbilities extends AbstractAbility{
-    private float mainManaReq= LHConfig.getMaxMana();
 
     @Override
-    public void mainAbility(PlayerEntity player) {
-        System.out.println("HADES");
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+    public void mainAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(player.isCreative() || playerCap.consumeMana(getMainManaReq())){
             callMinerals(player);
+            if(!player.isCreative()) success();
         }
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
-
+    public void minorAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
     }
 
     @Override
     public float getMainManaReq() {
-        return mainManaReq;
-    }
-
-    public float getMainManaReq(PlayerEntity player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        mainManaReq = playerCap.getMaxMana();
-        return getMainManaReq();
+        return playerCap != null ? playerCap.getMaxMana() : LHConfig.getMaxMana();
     }
 
     @Override

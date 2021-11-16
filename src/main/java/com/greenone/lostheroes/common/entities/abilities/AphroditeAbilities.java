@@ -2,6 +2,7 @@ package com.greenone.lostheroes.common.entities.abilities;
 
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
+import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.potions.LHEffects;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
@@ -19,22 +20,26 @@ import java.util.List;
 
 public class AphroditeAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(PlayerEntity player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+    public void mainAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         List<LivingEntity> list = player.level.getNearbyEntities(LivingEntity.class, new EntityPredicate().range(10), player, new AxisAlignedBB(player.blockPosition()).inflate(10));
         if(!list.isEmpty() && (list.get(0) instanceof MonsterEntity || list.get(0) instanceof AbstractRaiderEntity) && (player.isCreative() || playerCap.consumeMana(getMainManaReq()))){
             list.get(0).addEffect(new EffectInstance(LHEffects.APATHY, 1200));
+            if(!player.isCreative()) success();
         }
+
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
-
+    public void minorAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
     }
 
     @Override
     public float getMainManaReq() {
-        return 10;
+        return playerCap != null ? playerCap.getMaxMana() : LHConfig.getMaxMana();
     }
 
     @Override

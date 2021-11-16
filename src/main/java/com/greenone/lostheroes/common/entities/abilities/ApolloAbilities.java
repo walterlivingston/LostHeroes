@@ -14,8 +14,9 @@ import java.util.List;
 
 public class ApolloAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(PlayerEntity player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+    public void mainAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if(player.isSteppingCarefully() && playerCap.getMana()>0){
             float healthDiff = player.getMaxHealth()-player.getHealth();
             if(playerCap.consumeMana(healthDiff/2)){
@@ -24,6 +25,7 @@ public class ApolloAbilities extends AbstractAbility{
                 player.setHealth(player.getHealth()+playerCap.getMana());
                 playerCap.setMana(0);
             }
+            if(!player.isCreative()) success();
         }else if(playerCap.getMana()>0){
             Vector3d entityVec = LHUtils.getLookingAt(player, 0);
             BlockPos entityPos = new BlockPos(entityVec.x, entityVec.y, entityVec.z);
@@ -37,13 +39,15 @@ public class ApolloAbilities extends AbstractAbility{
                     entity.setHealth(entity.getHealth()+playerCap.getMana());
                     playerCap.setMana(0);
                 }
+                if(!player.isCreative()) success();
             }
         }
     }
 
     @Override
-    public void minorAbility(PlayerEntity player) {
-
+    public void minorAbility(PlayerEntity playerIn) {
+        player = playerIn;
+        playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
     }
 
     @Override

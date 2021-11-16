@@ -9,6 +9,7 @@ public class LHCommands {
         dispatcher.register(Commands.literal("lh")
             .then(SetManaCommand.register(dispatcher))
             .then(GetManaCommand.register(dispatcher))
+            .then(GetLevelCommand.register(dispatcher))
             .then(SetParentCommand.register(dispatcher))
             .then(GetParentCommand.register(dispatcher))
         );

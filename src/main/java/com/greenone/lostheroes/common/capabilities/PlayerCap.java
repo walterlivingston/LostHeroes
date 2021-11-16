@@ -100,7 +100,7 @@ public class PlayerCap implements IPlayerCap, ICapabilitySerializable<CompoundNB
 
     @Override
     public boolean addExperience(PlayerEntity player, float amount) {
-        if(level <= maxLevel){
+        if(level < maxLevel){
             experience+=amount;
             float xpToLevelUp = level*1000 + 50*level;
             if(experience >= xpToLevelUp){

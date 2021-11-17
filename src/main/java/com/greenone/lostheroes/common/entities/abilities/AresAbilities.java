@@ -30,7 +30,7 @@ public class AresAbilities extends AbstractAbility{
 
     @Override
     public float getMainManaReq() {
-        return playerCap != null ? playerCap.getMaxMana() : LHConfig.getMaxMana();
+        return LHConfig.getMaxMana();
     }
 
     @Override

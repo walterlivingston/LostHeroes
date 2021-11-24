@@ -13,9 +13,9 @@ import java.util.List;
 
 public class DionysusAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(Player player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(player.isCreative() || playerCap.consumeMana(getMainManaReq())){
+    public void mainAbility(Player playerIn) {
+        player = playerIn;
+        if(player.isCreative() || playerCap().consumeMana(getMainManaReq())){
             AABB aabb = (new AABB(player.blockPosition())).inflate(5);
             List<LivingEntity> list = player.level.getEntitiesOfClass(LivingEntity.class, aabb);
             list.forEach(e -> {
@@ -26,12 +26,13 @@ public class DionysusAbilities extends AbstractAbility{
                     e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200));
                 }
             });
+            if(!list.isEmpty()) success();
         }
     }
 
     @Override
-    public void minorAbility(Player player) {
-
+    public void minorAbility(Player playerIn) {
+        player = playerIn;
     }
 
     @Override

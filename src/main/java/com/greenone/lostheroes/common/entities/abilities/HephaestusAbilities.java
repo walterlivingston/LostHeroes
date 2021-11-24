@@ -12,16 +12,17 @@ import net.minecraft.world.phys.Vec3;
 
 public class HephaestusAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(Player player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(player.isCreative() || playerCap.consumeMana(getMainManaReq())){
+    public void mainAbility(Player playerIn) {
+        player = playerIn;
+        if(player.isCreative() || playerCap().consumeMana(getMainManaReq())){
             fireball(player);
+            success();
         }
     }
 
     @Override
-    public void minorAbility(Player player) {
-
+    public void minorAbility(Player playerIn) {
+        player = playerIn;
     }
 
     @Override

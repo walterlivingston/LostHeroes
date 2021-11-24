@@ -5,9 +5,11 @@ import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.network.CapSyncPacket;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
+import net.minecraft.Util;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
@@ -20,8 +22,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class PlayerCap implements IPlayerCap, INBTSerializable<Tag>, ICapabilityProvider {
-    private float maxMana = LHConfig.getMaxMana();
+    private float maxMana = LHConfig.getBaseMaxMana();
     private float mana = maxMana;
+    private int maxLevel = LHConfig.getMaxLevel();
+    private int level = 1;
+    private float experience = 0;
     private Deity parent = null;
     private int hadesCooldown = 0;
 
@@ -60,6 +65,53 @@ public class PlayerCap implements IPlayerCap, INBTSerializable<Tag>, ICapability
         }else{
             return false;
         }
+    }
+
+    @Override
+    public int getMaxLevel() {
+        return maxLevel;
+    }
+
+    @Override
+    public void setMaxLevel(int level) {
+        maxLevel = level;
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
+    }
+
+    @Override
+    public void setLevel(int level) {
+        this.level=level;
+    }
+
+    @Override
+    public float getExperience() {
+        return experience;
+    }
+
+    @Override
+    public void setExperience(float amount) {
+        experience=amount;
+    }
+
+    @Override
+    public boolean addExperience(Player player, float amount) {
+        if(level < maxLevel){
+            experience+=amount;
+            float xpToLevelUp = level*1000 + 50*level;
+            if(experience >= xpToLevelUp){
+                level+=1;
+                experience=0;
+                maxMana+=1;
+                fillMana();
+                player.sendMessage(new TextComponent("You just leveled up!  You are now level "+level), Util.NIL_UUID);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -103,6 +155,9 @@ public class PlayerCap implements IPlayerCap, INBTSerializable<Tag>, ICapability
     public void readFromNBT(CompoundTag tag, IPlayerCap instance) {
         instance.setMana(tag.getFloat("mana"));
         instance.setMaxMana(tag.getFloat("maxMana"));
+        instance.setMaxLevel(tag.getInt("maxLevel"));
+        instance.setLevel(tag.getInt("level"));
+        instance.setExperience(tag.getFloat("experience"));
         instance.setParent(Deities.list.get(tag.getString("parent")));
         instance.setHadesCooldown(tag.getInt("hadesCooldown"));
     }
@@ -121,6 +176,9 @@ public class PlayerCap implements IPlayerCap, INBTSerializable<Tag>, ICapability
         CompoundTag nbt = new CompoundTag();
         nbt.putFloat("mana", this.getMana());
         nbt.putFloat("maxMana", this.getMaxMana());
+        nbt.putInt("level", this.getLevel());
+        nbt.putInt("maxLevel", this.getMaxLevel());
+        nbt.putFloat("experience", this.getExperience());
         nbt.putString("parent", this.getParent().getName());
         nbt.putInt("hadesCooldown", this.getHadesCooldown());
 
@@ -133,6 +191,9 @@ public class PlayerCap implements IPlayerCap, INBTSerializable<Tag>, ICapability
 
         this.setMana(tag.getFloat("mana"));
         this.setMaxMana(tag.getFloat("maxMana"));
+        this.setMaxLevel(tag.getInt("maxLevel"));
+        this.setLevel(tag.getInt("level"));
+        this.setExperience(tag.getFloat("experience"));
         this.setParent(Deities.list.get(tag.getString("parent")));
         this.setHadesCooldown(tag.getInt("hadesCooldown"));
     }

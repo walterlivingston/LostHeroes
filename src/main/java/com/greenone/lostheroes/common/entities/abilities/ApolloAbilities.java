@@ -13,17 +13,19 @@ import java.util.List;
 
 public class ApolloAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(Player player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(player.isSteppingCarefully() && playerCap.getMana()>0){
+    public void mainAbility(Player playerIn) {
+        player = playerIn;
+        if(player.isSteppingCarefully() && playerCap().getMana()>0){
             float healthDiff = player.getMaxHealth()-player.getHealth();
-            if(playerCap.consumeMana(healthDiff/2)){
+            if(playerCap().consumeMana(healthDiff/2)){
                 player.setHealth(player.getMaxHealth());
+                success();
             }else{
-                player.setHealth(player.getHealth()+playerCap.getMana());
-                playerCap.setMana(0);
+                player.setHealth(player.getHealth()+playerCap().getMana());
+                playerCap().setMana(0);
+                success();
             }
-        }else if(playerCap.getMana()>0){
+        }else if(playerCap().getMana()>0){
             Vec3 entityVec = LHUtils.getLookingAt(player, 0);
             BlockPos entityPos = new BlockPos(entityVec.x, entityVec.y, entityVec.z);
             AABB aabb = (new AABB(player.blockPosition())).inflate(2);
@@ -31,19 +33,21 @@ public class ApolloAbilities extends AbstractAbility{
             if(!list.isEmpty()){
                 LivingEntity entity = list.get(0);
                 float healthDiff = entity.getMaxHealth() - entity.getHealth();
-                if(playerCap.consumeMana(healthDiff/2)){
+                if(playerCap().consumeMana(healthDiff/2)){
                     entity.setHealth(entity.getMaxHealth());
+                    success();
                 }else{
-                    entity.setHealth(entity.getHealth()+playerCap.getMana());
-                    playerCap.setMana(0);
+                    entity.setHealth(entity.getHealth()+playerCap().getMana());
+                    playerCap().setMana(0);
+                    success();
                 }
             }
         }
     }
 
     @Override
-    public void minorAbility(Player player) {
-
+    public void minorAbility(Player playerIn) {
+        player = playerIn;
     }
 
     @Override

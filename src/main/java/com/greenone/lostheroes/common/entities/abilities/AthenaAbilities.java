@@ -8,13 +8,12 @@ import net.minecraft.world.item.ItemStack;
 
 public class AthenaAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(Player player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
+    public void mainAbility(Player playerIn) {
+        player = playerIn;
         if(player.isSteppingCarefully()){
-            System.out.println("HELLO");
             player.openMenu(new PCMenu.Provider());
-        }else if(playerCap.getMana()>0){
-            float repairPoints = playerCap.getMana() * 100;
+        }else if(playerCap().getMana()>0){
+            float repairPoints = playerCap().getMana() * 100;
             for(ItemStack stack : player.inventoryMenu.getItems()){
                 if(repairPoints > 0 && stack.isDamaged()){
                     int repairAmt = stack.getMaxDamage() - stack.getDamageValue();
@@ -27,13 +26,14 @@ public class AthenaAbilities extends AbstractAbility{
                     }
                 }
             }
-            if(!player.isCreative()){ playerCap.setMana(repairPoints/100);}
+            if(!player.isCreative()) playerCap().setMana(repairPoints/100);
+            if(repairPoints > 0) success();
         }
     }
 
     @Override
-    public void minorAbility(Player player) {
-
+    public void minorAbility(Player playerIn) {
+        player = playerIn;
     }
 
     @Override

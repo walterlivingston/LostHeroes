@@ -10,16 +10,17 @@ import net.minecraftforge.fmllegacy.network.NetworkDirection;
 
 public class PoseidonAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(Player player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(player.isInWaterRainOrBubble() && (player.isCreative() || playerCap.consumeMana(getMainManaReq()))){
+    public void mainAbility(Player playerIn) {
+        player = playerIn;
+        if(player.isInWaterRainOrBubble() && (player.isCreative() || playerCap().consumeMana(getMainManaReq()))){
             LHNetworkHandler.INSTANCE.sendTo(new PacketRiptide(), ((ServerPlayer)player).connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+            success();
         }
     }
 
     @Override
-    public void minorAbility(Player player) {
-
+    public void minorAbility(Player playerIn) {
+        player = playerIn;
     }
 
     @Override

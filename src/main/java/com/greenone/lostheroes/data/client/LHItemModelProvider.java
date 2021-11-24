@@ -74,6 +74,7 @@ public class LHItemModelProvider extends ItemModelProvider {
 
         builder(itemGenerated, "ambrosia");
         builder(itemGenerated, "nectar");
+        builder(itemGenerated, "grapes");
 
         builder(itemGenerated, "pearl_of_persephone");
         builder(itemGenerated, "greek_fire");

@@ -10,14 +10,17 @@ import net.minecraft.world.level.block.CropBlock;
 
 public class DemeterAbilities extends AbstractAbility{
     @Override
-    public void mainAbility(Player player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(playerCap.consumeMana(getMainManaReq())) harvestAndReplant(player);
+    public void mainAbility(Player playerIn) {
+        player = playerIn;
+        if(playerCap().consumeMana(getMainManaReq())) {
+            harvestAndReplant(player);
+            success();
+        }
     }
 
     @Override
-    public void minorAbility(Player player) {
-
+    public void minorAbility(Player playerIn) {
+        player = playerIn;
     }
 
     @Override

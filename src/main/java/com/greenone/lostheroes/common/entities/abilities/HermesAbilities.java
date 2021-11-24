@@ -1,7 +1,5 @@
 package com.greenone.lostheroes.common.entities.abilities;
 
-import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
-import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.util.LHUtils;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -9,17 +7,18 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 
 public class HermesAbilities extends AbstractAbility{
+    public int max_distance = 32;
     @Override
-    public void mainAbility(Player player) {
-        IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if((player.isCreative() || playerCap.getMana()>=getMainManaReq())){
-            if(teleport(player) && !player.isCreative())playerCap.consumeMana(getMainManaReq());
+    public void mainAbility(Player playerIn) {
+        player = playerIn;
+        if((player.isCreative() || playerCap().getMana()>=getMainManaReq())){
+            teleport(player);
         }
     }
 
     @Override
-    public void minorAbility(Player player) {
-
+    public void minorAbility(Player playerIn) {
+        player = playerIn;
     }
 
     @Override
@@ -34,10 +33,11 @@ public class HermesAbilities extends AbstractAbility{
 
     private boolean teleport(Player player) {
         if (!player.level.isClientSide) {
-            Vec3 lookPos = LHUtils.getLookingAt(player, 32);
+            Vec3 lookPos = LHUtils.getLookingAt(player, max_distance);
+            double tp_distance = lookPos.distanceTo(player.getEyePosition());
             if (player instanceof ServerPlayer) {
                 ServerPlayer serverplayerentity = (ServerPlayer) player;
-                if (serverplayerentity.connection.getConnection().isConnected() && serverplayerentity.level == player.level && !serverplayerentity.isSleeping()) {
+                if (serverplayerentity.connection.getConnection().isConnected() && serverplayerentity.level == player.level && !serverplayerentity.isSleeping() && playerCap().consumeMana((float) ((5/max_distance) * tp_distance))) {
                     EntityTeleportEvent event = new EntityTeleportEvent(serverplayerentity, lookPos.x(), lookPos.y(), lookPos.z());
                     if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) { // Don't indent to lower patch size
                         if (player.isPassenger()) {
@@ -45,12 +45,13 @@ public class HermesAbilities extends AbstractAbility{
                         }
 
                         player.teleportTo(event.getTargetX(), event.getTargetY(), event.getTargetZ());
+                        success();
                         //player.fallDistance = 0.0F;
                         //player.hurt(DamageSource.FALL, event.getAttackDamage());
                         return true;
                     } //Forge: End
                 }
-            } else if (player != null) {
+            } else if (player != null && playerCap().consumeMana((float) ((5/max_distance) * tp_distance))) {
                 player.teleportTo(lookPos.x(), lookPos.y(), lookPos.z());
                 //player.fallDistance = 0.0F;
             }

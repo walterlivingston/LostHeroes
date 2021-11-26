@@ -73,10 +73,10 @@ public class LHBlocks {
             pillars.put(s, register(s.tagName()+"_pillar", new PillarBlock(stone_prop)));
         }
         for(Wood w : Wood.values()){
-            logs.put(w, registerLog(w.tagName()+"_log", w.getInnerColor(), w.getOuterColor()));
-            planks.put(w, register(w.tagName()+"_planks", new Block(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD))));
-            leaves.put(w, registerLeaves(w.tagName()+"_leaves", SoundType.GRASS));
-            saplings.put(w, register(w.tagName()+"_sapling", new SaplingBlock(w.getGrower(), BlockBehaviour.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS))));
+            //logs.put(w, registerLog(w.tagName()+"_log", w.getInnerColor(), w.getOuterColor()));
+            //planks.put(w, register(w.tagName()+"_planks", new Block(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD))));
+            //leaves.put(w, registerLeaves(w.tagName()+"_leaves", SoundType.GRASS));
+            //saplings.put(w, register(w.tagName()+"_sapling", new SaplingBlock(w.getGrower(), BlockBehaviour.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS))));
         }
 
         VANILLA_BLOCKS.register(eventBus);

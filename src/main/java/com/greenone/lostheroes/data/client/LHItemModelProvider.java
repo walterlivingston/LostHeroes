@@ -3,6 +3,7 @@ package com.greenone.lostheroes.data.client;
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
+import com.greenone.lostheroes.common.enums.Wood;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -59,6 +60,13 @@ public class LHItemModelProvider extends ItemModelProvider {
             withExistingParent(s.tagName()+"_brick_slab", modLoc("block/" + s.tagName()+"_brick_slab"));
             withExistingParent(s.tagName()+"_brick_stair", modLoc("block/" + s.tagName()+"_brick_stair"));
             withExistingParent(s.tagName()+"_pillar", modLoc("block/" + s.tagName()+"_pillar"));
+        }
+        for(Wood w : Wood.values()){
+            withExistingParent(w.tagName() + "_log", modLoc("block/" + w.tagName() + "_log"));
+            withExistingParent("stripped_" + w.tagName() + "_log", modLoc("block/stripped_" + w.tagName() + "_log"));
+            withExistingParent(w.tagName() + "_leaves", modLoc("block/" + w.tagName() + "_leaves"));
+            withExistingParent(w.tagName() + "_planks", modLoc("block/" + w.tagName() + "_planks"));
+            withExistingParent(w.tagName() + "_sapling", modLoc("block/" + w.tagName() + "_sapling"));
         }
         withExistingParent("forge", modLoc("block/forge"));
 

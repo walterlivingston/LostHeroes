@@ -53,10 +53,10 @@ public class LHFeatures {
     public static final ConfiguredFeature<?, ?> ORE_MARBLE = Feature.ORE.configured(new OreConfiguration(OreConfiguration.Predicates.NATURAL_STONE, States.MARBLE, 33)).rangeUniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(79)).squared().count(10);
     public static final ConfiguredFeature<?, ?> ORE_BLACK_MARBLE = Feature.ORE.configured(new OreConfiguration(OreConfiguration.Predicates.NATURAL_STONE, States.BLACK_MARBLE, 33)).rangeUniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(79)).squared().count(10);
 
-    public static final ConfiguredFeature<TreeConfiguration, ?> OLIVE = Feature.TREE.configured((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(States.OLIVE_LOG), new StraightTrunkPlacer(4, 2, 0), new SimpleStateProvider(States.OLIVE_LEAVES), new SimpleStateProvider(States.OLIVE_SAPLING), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build());
+    //public static final ConfiguredFeature<TreeConfiguration, ?> OLIVE = Feature.TREE.configured((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(States.OLIVE_LOG), new StraightTrunkPlacer(4, 2, 0), new SimpleStateProvider(States.OLIVE_LEAVES), new SimpleStateProvider(States.OLIVE_SAPLING), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build());
     public static final ConfiguredFeature<TreeConfiguration, ?> POMEGRANATE = Feature.TREE.configured((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(States.POMEGRANATE_LOG), new StraightTrunkPlacer(4, 2, 0), new SimpleStateProvider(States.POMEGRANATE_LEAVES), new SimpleStateProvider(States.POMEGRANATE_SAPLING), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build());
 
-    public static final ConfiguredFeature<?, ?> OLIVE_TREE_FEATURE = Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(ImmutableList.of(OLIVE.weighted(0.33333334F)), OLIVE)).decorated(Features.Decorators.HEIGHTMAP_WITH_TREE_THRESHOLD_SQUARED).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, 0.05F, 1)));
+    //public static final ConfiguredFeature<?, ?> OLIVE_TREE_FEATURE = Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(ImmutableList.of(OLIVE.weighted(0.33333334F)), OLIVE)).decorated(Features.Decorators.HEIGHTMAP_WITH_TREE_THRESHOLD_SQUARED).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, 0.05F, 1)));
     public static final ConfiguredFeature<?, ?> POMEGRANATE_TREE_FEATURE = Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(ImmutableList.of(POMEGRANATE.weighted(0.33333334F)), POMEGRANATE)).decorated(Features.Decorators.HEIGHTMAP_WITH_TREE_THRESHOLD_SQUARED).decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(0, 0.05F, 1)));
 
     //public static final Feature<?> LOTUS_FLOWER_CLUSTER = Feature.FLOWER.configured(Features.Configs.DEFAULT_FLOWER_CONFIG).decorated(Features.Decorators.ADD_32).decorated(Features.Decorators.HEIGHTMAP_SQUARE).count(4).feature;
@@ -92,7 +92,7 @@ public class LHFeatures {
 
             }
             if(biome.getValue().getBiomeCategory().equals(Biome.BiomeCategory.PLAINS)){
-                addFeatureToBiome(biome.getValue(), OLIVE_TREE_FEATURE, GenerationStep.Decoration.SURFACE_STRUCTURES);
+                //addFeatureToBiome(biome.getValue(), OLIVE_TREE_FEATURE, GenerationStep.Decoration.SURFACE_STRUCTURES);
             }
         }
     }
@@ -118,13 +118,13 @@ public class LHFeatures {
         public static final BlockState MARBLE = LHBlocks.stoneBlocks.get(Stone.MARBLE).defaultBlockState();
         public static final BlockState BLACK_MARBLE = LHBlocks.stoneBlocks.get(Stone.BLACK_MARBLE).defaultBlockState();
 
-        public static final BlockState OLIVE_LOG = LHBlocks.logs.get(Wood.OLIVE).defaultBlockState();
+        //public static final BlockState OLIVE_LOG = LHBlocks.logs.get(Wood.OLIVE).defaultBlockState();
         public static final BlockState POMEGRANATE_LOG = LHBlocks.logs.get(Wood.POMEGRANATE).defaultBlockState();
 
-        public static final BlockState OLIVE_LEAVES = LHBlocks.leaves.get(Wood.OLIVE).defaultBlockState();
+        //public static final BlockState OLIVE_LEAVES = LHBlocks.leaves.get(Wood.OLIVE).defaultBlockState();
         public static final BlockState POMEGRANATE_LEAVES = LHBlocks.leaves.get(Wood.POMEGRANATE).defaultBlockState();
 
-        public static final BlockState OLIVE_SAPLING = LHBlocks.saplings.get(Wood.OLIVE).defaultBlockState();
+        //public static final BlockState OLIVE_SAPLING = LHBlocks.saplings.get(Wood.OLIVE).defaultBlockState();
         public static final BlockState POMEGRANATE_SAPLING = LHBlocks.saplings.get(Wood.POMEGRANATE).defaultBlockState();
     }
 }

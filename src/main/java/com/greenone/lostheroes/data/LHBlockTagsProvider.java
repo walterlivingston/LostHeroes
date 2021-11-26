@@ -2,10 +2,12 @@ package com.greenone.lostheroes.data;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
+import com.greenone.lostheroes.common.enums.Wood;
 import com.greenone.lostheroes.common.init.LHBlocks;
 import com.greenone.lostheroes.common.init.LHTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -29,6 +31,14 @@ public class LHBlockTagsProvider extends BlockTagsProvider {
                     tag(Tags.Blocks.ORES).add(LHBlocks.ores.get(m));
                 }
             }
+        }
+        for(Wood w : Wood.values()){
+            tag(BlockTags.LOGS).add(LHBlocks.logs.get(w));
+            //tag(LHTags.Blocks.LOGS.get(w)).add(LHBlocks.stripped_logs.get(w));
+            //tag(BlockTags.LOGS).add(LHBlocks.stripped_logs.get(w));
+            //tag(BlockTags.LOGS_THAT_BURN).add(LHBlocks.logs.get(w));
+            //tag(BlockTags.LOGS_THAT_BURN).add(LHBlocks.stripped_logs.get(w));
+            //tag(BlockTags.LEAVES).add(LHBlocks.leaves.get(w));
         }
     }
 }

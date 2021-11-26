@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "lostheroes:block/stripped_pomegranate_log",
+    "end": "lostheroes:block/stripped_pomegranate_log_top"
+  }
+}

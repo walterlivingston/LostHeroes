@@ -2,6 +2,7 @@ package com.greenone.lostheroes.data.client;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.Deity;
+import com.greenone.lostheroes.common.enums.Wood;
 import com.greenone.lostheroes.common.init.LHBlocks;
 import com.greenone.lostheroes.common.init.LHEnchants;
 import com.greenone.lostheroes.common.enums.Metal;
@@ -54,6 +55,13 @@ public class LHLangProvider extends LanguageProvider {
                 addBlock(() -> LHBlocks.stoneBrickStairs.get(s), getFormattedName(s.tagName()+"_brick_stair"));
                 addBlock(() -> LHBlocks.stoneBrickSlabs.get(s), getFormattedName(s.tagName()+"_brick_slab"));
                 addBlock(() -> LHBlocks.pillars.get(s), getFormattedName(s.tagName()+"_pillar"));
+            }
+            for(Wood w : Wood.values()){
+                addBlock(() -> LHBlocks.logs.get(w), getFormattedName(w.tagName() + "_log"));
+                addBlock(() -> LHBlocks.stripped_logs.get(w), getFormattedName("stripped_" + w.tagName() + "_log"));
+                addBlock(() -> LHBlocks.leaves.get(w), getFormattedName(w.tagName() + "_leaves"));
+                addBlock(() -> LHBlocks.planks.get(w), getFormattedName(w.tagName() + "_planks"));
+                addBlock(() -> LHBlocks.saplings.get(w), getFormattedName(w.tagName() + "_sapling"));
             }
             for(Deity d : Deities.list.values()){
                 addEffect(d::getBlessing, getFormattedName("blessing_of_"+d.getName()));

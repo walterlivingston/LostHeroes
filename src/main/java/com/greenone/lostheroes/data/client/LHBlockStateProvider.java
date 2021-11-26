@@ -2,6 +2,7 @@ package com.greenone.lostheroes.data.client;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.blocks.ForgeBlock;
+import com.greenone.lostheroes.common.enums.Wood;
 import com.greenone.lostheroes.common.init.LHBlocks;
 import com.greenone.lostheroes.common.blocks.PillarBlock;
 import com.greenone.lostheroes.common.enums.Metal;
@@ -9,6 +10,7 @@ import com.greenone.lostheroes.common.enums.Stone;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -51,8 +53,31 @@ public class LHBlockStateProvider extends BlockStateProvider {
             stairsBlock((StairBlock)LHBlocks.stoneBrickStairs.get(s), modLoc("block/"+s.tagName()+"_brick"));
             pillarBlock(LHBlocks.pillars.get(s), blockModels.pillar(s.tagName()+"_pillar"), blockModels.pillarTop(s.tagName()+"_pillar"), blockModels.pillarMid(s.tagName()+"_pillar"), blockModels.pillarBottom(s.tagName()+"_pillar"));
         }
+        for(Wood w : Wood.values()){
+            logBlock((RotatedPillarBlock) LHBlocks.logs.get(w));
+            logBlock((RotatedPillarBlock) LHBlocks.stripped_logs.get(w));
+            leafBlock(w.tagName()+"_leaves", LHBlocks.leaves.get(w));
+            simpleBlock(LHBlocks.planks.get(w));
+            crossBlock(w.tagName()+"_sapling", LHBlocks.saplings.get(w));
+        }
         forgeBlock((ForgeBlock) LHBlocks.forge,blockModels.orientable("forge", modLoc("block/forge_top"),modLoc("block/forge_front"),modLoc("block/forge_side")),blockModels.orientable("forge_on", modLoc("block/forge_top"),modLoc("block/forge_front_on"),modLoc("block/forge_side")));
 
+    }
+
+    public void leafBlock(String name, Block block){
+        simpleBlock(block, leaves(name, block));
+    }
+
+    public void crossBlock(String name, Block block){
+        simpleBlock(block, cross(name, block));
+    }
+
+    public ModelFile leaves(String name, Block block) {
+        return models().singleTexture(name, mcLoc("block/leaves"),"all",blockTexture(block));
+    }
+
+    public ModelFile cross(String name, Block block) {
+        return models().singleTexture(name, mcLoc("block/cross"),"cross",blockTexture(block));
     }
 
     public void pillarBlock(Block block, ModelFile pillar, ModelFile top, ModelFile middle, ModelFile bottom) {

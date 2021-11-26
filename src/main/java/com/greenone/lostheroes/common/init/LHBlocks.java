@@ -1,16 +1,21 @@
 package com.greenone.lostheroes.common.init;
 
+import ca.weblite.objc.Proxy;
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.blocks.*;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
 import com.greenone.lostheroes.common.enums.Wood;
 import com.greenone.lostheroes.common.items.LHItemBlock;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -41,6 +46,7 @@ public class LHBlocks {
     public static Map<Stone, Block> pillars = new HashMap<>();
 
     public static Map<Wood, Block> logs = new HashMap<>();
+    public static Map<Wood, Block> stripped_logs = new HashMap<>();
     public static Map<Wood, Block> planks = new HashMap<>();
     public static Map<Wood, Block> leaves = new HashMap<>();
     public static Map<Wood, Block> saplings = new HashMap<>();
@@ -74,6 +80,7 @@ public class LHBlocks {
         }
         for(Wood w : Wood.values()){
             logs.put(w, registerLog(w.tagName()+"_log", w.getInnerColor(), w.getOuterColor()));
+            stripped_logs.put(w, registerLog("stripped_"+w.tagName()+"_log", w.getInnerColor(), w.getInnerColor()));
             planks.put(w, register(w.tagName()+"_planks", new Block(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD))));
             leaves.put(w, registerLeaves(w.tagName()+"_leaves", SoundType.GRASS));
             saplings.put(w, register(w.tagName()+"_sapling", new SaplingBlock(w.getGrower(), BlockBehaviour.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS))));
@@ -112,6 +119,14 @@ public class LHBlocks {
                         p_152624_.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? p_50789_ : p_50790_).strength(2.0F).sound(SoundType.WOOD)));
     }
     private static Block registerLeaves(String name, SoundType p_152615_) {
-        return register(name, new LHLeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(p_152615_).noOcclusion()));
+        return register(name, new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(p_152615_).noOcclusion().isValidSpawn(LHBlocks::ocelotOrParrot).isSuffocating(LHBlocks::never).isViewBlocking(LHBlocks::never)));
+    }
+
+    private static Boolean ocelotOrParrot(BlockState p_50822_, BlockGetter p_50823_, BlockPos p_50824_, EntityType<?> p_50825_) {
+        return p_50825_ == EntityType.OCELOT || p_50825_ == EntityType.PARROT;
+    }
+
+    private static Boolean never(BlockState p_50779_, BlockGetter p_50780_, BlockPos p_50781_) {
+        return false;
     }
 }

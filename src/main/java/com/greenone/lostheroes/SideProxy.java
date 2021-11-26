@@ -11,6 +11,7 @@ import com.greenone.lostheroes.common.IProxy;
 import com.greenone.lostheroes.common.blocks.entity.LHBlockEntities;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.config.Config;
+import com.greenone.lostheroes.common.enums.Wood;
 import com.greenone.lostheroes.common.init.LHEntities;
 import com.greenone.lostheroes.common.init.LHBlocks;
 import com.greenone.lostheroes.common.init.LHMenus;
@@ -106,7 +107,9 @@ public class SideProxy implements IProxy {
         private static void clientSetup(FMLClientSetupEvent event){
             BlockEntityRenderers.register(LHBlockEntities.ENCHANT, LHEnchantTileEntityRenderer::new);
             ItemBlockRenderTypes.setRenderLayer(LHBlocks.greek_fire, RenderType.cutout());
-            //ItemBlockRenderTypes.setRenderLayer(LHBlocks.grape_vine, RenderType.cutout());
+            for(Wood w : Wood.values()) {
+                ItemBlockRenderTypes.setRenderLayer(LHBlocks.saplings.get(w), RenderType.cutout());
+            }
             LHColors.registerBlockColors();
             LHColors.registerItemColors();
             LHItemModelProperties.registerProperties();

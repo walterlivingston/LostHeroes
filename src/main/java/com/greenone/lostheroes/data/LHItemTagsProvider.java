@@ -2,11 +2,14 @@ package com.greenone.lostheroes.data;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
+import com.greenone.lostheroes.common.enums.Wood;
 import com.greenone.lostheroes.common.init.LHTags;
 import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -47,6 +50,8 @@ public class LHItemTagsProvider extends ItemTagsProvider {
                 tag(LHTags.Items.BOOTS).add(LHItems.boots.get(m));
             }
         }
+        //copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
+        //copy(BlockTags.LEAVES, ItemTags.LEAVES);
         copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
         copy(Tags.Blocks.ORES, Tags.Items.ORES);
     }

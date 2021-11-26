@@ -22,12 +22,13 @@ public final class DataGenerators {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         gen.addProvider(new LHBlockModelProvider(gen, existingFileHelper));
-        gen.addProvider(new LHItemModelProvider(gen, existingFileHelper));
         gen.addProvider(new LHBlockStateProvider(gen, existingFileHelper));
+        gen.addProvider(new LHItemModelProvider(gen, existingFileHelper));
 
         gen.addProvider(new LHLootTableProvider(gen));
 
         LHBlockTagsProvider blockTags = new LHBlockTagsProvider(gen, existingFileHelper);
+        gen.addProvider(blockTags);
         gen.addProvider(new LHItemTagsProvider(gen, blockTags, existingFileHelper));
 
         gen.addProvider(new LHRecipeProvider(gen));

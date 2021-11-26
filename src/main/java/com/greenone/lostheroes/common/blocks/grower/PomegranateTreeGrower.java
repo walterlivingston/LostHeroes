@@ -1,5 +1,6 @@
 package com.greenone.lostheroes.common.blocks.grower;
 
+import com.greenone.lostheroes.common.world.LHFeatures;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -11,7 +12,6 @@ public class PomegranateTreeGrower extends AbstractTreeGrower {
     @Nullable
     @Override
     protected ConfiguredFeature<TreeConfiguration, ?> getConfiguredFeature(Random random, boolean b) {
-        //return LHFeatures.POMEGRANATE;
-        return null;
+        return LHFeatures.POMEGRANATE;
     }
 }

@@ -3,6 +3,7 @@ package com.greenone.lostheroes.data.client;
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
+import com.greenone.lostheroes.common.enums.Wood;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
@@ -36,13 +37,20 @@ public class LHBlockModelProvider extends BlockModelProvider {
             singleTexture(s.tagName(), modLoc("block/" + s.tagName()), modLoc("block/" + s.tagName()));
             slab(s.tagName()+"_slab", modLoc("block/"+s.tagName()), modLoc("block/"+s.tagName()), modLoc("block/"+s.tagName()));
             stairs(s.tagName()+"_stair", modLoc("block/"+s.tagName()), modLoc("block/"+s.tagName()), modLoc("block/"+s.tagName()));
-            singleTexture(s.tagName()+"_brick", modLoc("block/" + s.tagName()+"_brick"), modLoc("block/" + s.tagName()+"_brick"));
+            cubeAll(s.tagName()+"_brick", modLoc("block/"+s.tagName()+"_brick"));
             slab(s.tagName()+"_brick_slab", modLoc("block/"+s.tagName()+"_brick"), modLoc("block/"+s.tagName()+"_brick"), modLoc("block/"+s.tagName()+"_brick"));
             stairs(s.tagName()+"_brick_stair", modLoc("block/"+s.tagName()+"_brick"), modLoc("block/"+s.tagName()+"_brick"), modLoc("block/"+s.tagName()+"_brick"));
             pillar(s.tagName()+"_pillar");
             pillarTop(s.tagName()+"_pillar");
             pillarMid(s.tagName()+"_pillar");
             pillarBottom(s.tagName()+"_pillar");
+        }
+        for(Wood w : Wood.values()){
+            cubeColumn(w.tagName()+"_log", modLoc("block/" + w.tagName() + "_log"), modLoc("block/" + w.tagName() + "_log_top"));
+            cubeColumn("stripped_" + w.tagName()+"_log", modLoc("block/stripped_" + w.tagName() + "_log"), modLoc("block/stripped_" + w.tagName() + "_log_top"));
+            singleTexture(w.tagName() + "_leaves", mcLoc("block/leaves"), modLoc("block/" + w.tagName() + "_leaves"));
+            cubeAll(w.tagName()+"_planks", modLoc("block/" + w.tagName() + "_planks"));
+            cross(w.tagName() + "_sapling", modLoc("block/" + w.tagName() + "_sapling"));
         }
         orientable("forge", modLoc(BLOCK_FOLDER+"/forge_top"),modLoc(BLOCK_FOLDER+"/forge_front"),modLoc(BLOCK_FOLDER+"/forge_side"));
         orientable("forge_on", modLoc(BLOCK_FOLDER+"/forge_top"),modLoc(BLOCK_FOLDER+"/forge_front_on"),modLoc(BLOCK_FOLDER+"/forge_side"));

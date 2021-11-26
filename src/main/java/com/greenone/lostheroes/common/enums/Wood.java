@@ -9,7 +9,7 @@ import java.util.Locale;
 
 public enum Wood {
 
-    OLIVE(MaterialColor.RAW_IRON, MaterialColor.COLOR_LIGHT_GRAY, new OliveTreeGrower()),
+    //OLIVE(MaterialColor.RAW_IRON, MaterialColor.COLOR_LIGHT_GRAY, new OliveTreeGrower()),
     POMEGRANATE(MaterialColor.RAW_IRON, MaterialColor.PODZOL, new PomegranateTreeGrower());;
 
     private final MaterialColor innerColor;

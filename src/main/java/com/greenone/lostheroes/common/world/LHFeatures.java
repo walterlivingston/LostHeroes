@@ -96,6 +96,9 @@ public class LHFeatures {
             if(biome.getValue().getBiomeCategory().equals(Biome.BiomeCategory.PLAINS)){
                 //addFeatureToBiome(biome.getValue(), OLIVE_TREE_FEATURE, GenerationStep.Decoration.SURFACE_STRUCTURES);
             }
+            if(biome.getValue().getBiomeCategory().equals(Biome.BiomeCategory.SAVANNA)){
+                addFeatureToBiome(biome.getValue(), POMEGRANATE_TREE_FEATURE, GenerationStep.Decoration.SURFACE_STRUCTURES);
+            }
         }
     }
 

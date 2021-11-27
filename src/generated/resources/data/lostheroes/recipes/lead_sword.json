@@ -10,7 +10,7 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "tag": "forge:ingots/lead"
+      "item": "lostheroes:lead_ingot"
     }
   },
   "result": {

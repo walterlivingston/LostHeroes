@@ -24,7 +24,7 @@ public class Registration {
         LHPotions.register(eventBus);
         Deities.init();
         //VillagerInit.register(eventBus);
-        LHTags.register();
+        //LHTags.register();
         LHEnchants.register(eventBus);
     }
 

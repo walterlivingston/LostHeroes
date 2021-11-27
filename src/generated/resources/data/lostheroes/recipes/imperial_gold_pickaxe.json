@@ -10,7 +10,7 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "tag": "forge:ingots/imperial_gold"
+      "item": "lostheroes:imperial_gold_ingot"
     }
   },
   "result": {

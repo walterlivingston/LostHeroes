@@ -10,7 +10,7 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "tag": "forge:ingots/tin"
+      "item": "lostheroes:tin_ingot"
     }
   },
   "result": {

@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/imperial_gold"
+            "items": [
+              "lostheroes:imperial_gold_ingot"
+            ]
           }
         ]
       }

@@ -1,6 +1,5 @@
 package com.greenone.lostheroes.common.init;
 
-import ca.weblite.objc.Proxy;
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.blocks.*;
 import com.greenone.lostheroes.common.enums.Metal;
@@ -48,6 +47,12 @@ public class LHBlocks {
     public static Map<Wood, Block> logs = new HashMap<>();
     public static Map<Wood, Block> stripped_logs = new HashMap<>();
     public static Map<Wood, Block> planks = new HashMap<>();
+    public static Map<Wood, Block> wooden_buttons = new HashMap<>();
+    public static Map<Wood, Block> wooden_doors = new HashMap<>();
+    public static Map<Wood, Block> wooden_stairs = new HashMap<>();
+    public static Map<Wood, Block> wooden_slabs = new HashMap<>();
+    public static Map<Wood, Block> fence = new HashMap<>();
+    public static Map<Wood, Block> fence_gates = new HashMap<>();
     public static Map<Wood, Block> leaves = new HashMap<>();
     public static Map<Wood, Block> saplings = new HashMap<>();
 
@@ -82,6 +87,12 @@ public class LHBlocks {
             logs.put(w, registerLog(w.tagName()+"_log", w.getInnerColor(), w.getOuterColor()));
             stripped_logs.put(w, registerLog("stripped_"+w.tagName()+"_log", w.getInnerColor(), w.getInnerColor()));
             planks.put(w, register(w.tagName()+"_planks", new Block(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2.0F, 3.0F).sound(SoundType.WOOD))));
+            wooden_buttons.put(w, register(w.tagName() + "_button", new WoodButtonBlock(BlockBehaviour.Properties.of(Material.DECORATION).noCollission().strength(0.5F).sound(SoundType.WOOD))));
+            wooden_doors.put(w, register(w.tagName() + "_door", new DoorBlock(BlockBehaviour.Properties.of(Material.WOOD, planks.get(w).defaultMaterialColor()).strength(3.0F).sound(SoundType.WOOD).noOcclusion())));
+            wooden_stairs.put(w, register(w.tagName() + "_stairs", new StairBlock(planks.get(w).defaultBlockState(), BlockBehaviour.Properties.copy(planks.get(w)))));
+            wooden_slabs.put(w, register(w.tagName() + "_slab", new SlabBlock(BlockBehaviour.Properties.of(Material.WOOD, w.getInnerColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD))));
+            fence.put(w, register(w.tagName() + "_fence", new FenceBlock(BlockBehaviour.Properties.of(Material.WOOD, w.getInnerColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD))));
+            fence_gates.put(w, register(w.tagName() + "_fence_gate", new FenceGateBlock(BlockBehaviour.Properties.of(Material.WOOD, w.getInnerColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD))));
             leaves.put(w, registerLeaves(w.tagName()+"_leaves", SoundType.GRASS));
             saplings.put(w, register(w.tagName()+"_sapling", new SaplingBlock(w.getGrower(), BlockBehaviour.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS))));
         }

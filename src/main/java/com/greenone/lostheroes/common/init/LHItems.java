@@ -52,7 +52,7 @@ public class LHItems {
     public static Item ambrosia = registerFood("ambrosia", LHFoods.AMBROSIA, true);
     public static Item nectar = registerItem("nectar", new LHFood(new Item.Properties().tab(LostHeroes.lh_group).food(LHFoods.NECTAR), true));
     public static Item grapes = registerItem("grapes", new LHFood(new Item.Properties().tab(LostHeroes.lh_group).food(Foods.SWEET_BERRIES), false));
-    //public static Item pomegranate = registerItem("pomegranate", new LHFood(new Item.Properties().tab(LostHeroes.lh_group).food(Foods.CHORUS_FRUIT), false));
+    public static Item pomegranate = registerItem("pomegranate", new LHFood(new Item.Properties().tab(LostHeroes.lh_group).food(Foods.CHORUS_FRUIT), false));
 
     public static Item vanilla_bow = registerVanillaItem("bow", new LHBow(Tiers.WOOD, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
     public static Item vanilla_crossbow = registerVanillaItem("crossbow", new LHCrossbow(Tiers.WOOD, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));

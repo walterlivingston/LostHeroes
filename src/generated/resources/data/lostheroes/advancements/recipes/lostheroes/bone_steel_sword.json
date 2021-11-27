@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/bone_steel"
+            "items": [
+              "lostheroes:bone_steel_ingot"
+            ]
           }
         ]
       }

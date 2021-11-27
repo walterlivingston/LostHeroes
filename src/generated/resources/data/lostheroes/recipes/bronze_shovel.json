@@ -10,7 +10,7 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "tag": "forge:ingots/bronze"
+      "item": "lostheroes:bronze_ingot"
     }
   },
   "result": {

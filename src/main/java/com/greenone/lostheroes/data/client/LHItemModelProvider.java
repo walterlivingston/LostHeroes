@@ -64,8 +64,14 @@ public class LHItemModelProvider extends ItemModelProvider {
         for(Wood w : Wood.values()){
             withExistingParent(w.tagName() + "_log", modLoc("block/" + w.tagName() + "_log"));
             withExistingParent("stripped_" + w.tagName() + "_log", modLoc("block/stripped_" + w.tagName() + "_log"));
-            withExistingParent(w.tagName() + "_leaves", modLoc("block/" + w.tagName() + "_leaves"));
             withExistingParent(w.tagName() + "_planks", modLoc("block/" + w.tagName() + "_planks"));
+            //withExistingParent(w.tagName() + "_door", modLoc("block/" + w.tagName() + "_door"));
+            withExistingParent(w.tagName() + "_button", modLoc("block/" + w.tagName() + "_button_inventory"));
+            withExistingParent(w.tagName() + "_stairs", modLoc("block/" + w.tagName() + "_stairs"));
+            withExistingParent(w.tagName() + "_slab", modLoc("block/" + w.tagName() + "_slab"));
+            withExistingParent(w.tagName() + "_fence", modLoc("block/" + w.tagName() + "_fence"));
+            withExistingParent(w.tagName() + "_fence_gate", modLoc("block/" + w.tagName() + "_fence_gate"));
+            withExistingParent(w.tagName() + "_leaves", modLoc("block/" + w.tagName() + "_leaves"));
             withExistingParent(w.tagName() + "_sapling", modLoc("block/" + w.tagName() + "_sapling"));
         }
         withExistingParent("forge", modLoc("block/forge"));
@@ -83,6 +89,7 @@ public class LHItemModelProvider extends ItemModelProvider {
         builder(itemGenerated, "ambrosia");
         builder(itemGenerated, "nectar");
         builder(itemGenerated, "grapes");
+        builder(itemGenerated, "pomegranate");
 
         builder(itemGenerated, "pearl_of_persephone");
         builder(itemGenerated, "greek_fire");

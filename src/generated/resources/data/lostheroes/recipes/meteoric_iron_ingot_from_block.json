@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "forge:storage_blocks/meteoric_iron"
+      "item": "lostheroes:meteoric_iron_block"
     }
   ],
   "result": {

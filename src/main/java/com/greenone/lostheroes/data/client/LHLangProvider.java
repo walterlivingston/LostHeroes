@@ -59,8 +59,14 @@ public class LHLangProvider extends LanguageProvider {
             for(Wood w : Wood.values()){
                 addBlock(() -> LHBlocks.logs.get(w), getFormattedName(w.tagName() + "_log"));
                 addBlock(() -> LHBlocks.stripped_logs.get(w), getFormattedName("stripped_" + w.tagName() + "_log"));
-                addBlock(() -> LHBlocks.leaves.get(w), getFormattedName(w.tagName() + "_leaves"));
                 addBlock(() -> LHBlocks.planks.get(w), getFormattedName(w.tagName() + "_planks"));
+                addBlock(() -> LHBlocks.wooden_buttons.get(w), getFormattedName(w.tagName() + "_button"));
+                addBlock(() -> LHBlocks.wooden_doors.get(w), getFormattedName(w.tagName() + "_door"));
+                addBlock(() -> LHBlocks.wooden_stairs.get(w), getFormattedName(w.tagName() + "_stair"));
+                addBlock(() -> LHBlocks.wooden_slabs.get(w), getFormattedName(w.tagName() + "_slab"));
+                addBlock(() -> LHBlocks.fence.get(w), getFormattedName(w.tagName() + "_fence"));
+                addBlock(() -> LHBlocks.fence_gates.get(w), getFormattedName(w.tagName() + "_fence_gate"));
+                addBlock(() -> LHBlocks.leaves.get(w), getFormattedName(w.tagName() + "_leaves"));
                 addBlock(() -> LHBlocks.saplings.get(w), getFormattedName(w.tagName() + "_sapling"));
             }
             for(Deity d : Deities.list.values()){
@@ -80,6 +86,7 @@ public class LHLangProvider extends LanguageProvider {
             addItem(() -> LHItems.ambrosia, "Ambrosia");
             addItem(() -> LHItems.nectar, "Nectar");
             addItem(() -> LHItems.grapes, "Grapes");
+            addItem(() -> LHItems.pomegranate, "Pomegranate");
 
             addItem(() -> LHItems.pearl_of_persephone, "Pearl of Persephone");
             addItem(() -> LHItems.greek_fire, "Greek Fire");

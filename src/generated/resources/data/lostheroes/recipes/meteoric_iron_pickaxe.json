@@ -10,7 +10,7 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "tag": "forge:ingots/meteoric_iron"
+      "item": "lostheroes:meteoric_iron_ingot"
     }
   },
   "result": {

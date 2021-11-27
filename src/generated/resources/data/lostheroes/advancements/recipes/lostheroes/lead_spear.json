@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/lead"
+            "items": [
+              "lostheroes:lead_ingot"
+            ]
           }
         ]
       }

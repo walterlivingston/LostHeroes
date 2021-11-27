@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:ingots/adamantine"
+      "item": "lostheroes:adamantine_ingot"
     }
   },
   "result": {

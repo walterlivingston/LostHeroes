@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "tag": "forge:ingots/silver"
+      "item": "lostheroes:silver_ingot"
     }
   },
   "result": {

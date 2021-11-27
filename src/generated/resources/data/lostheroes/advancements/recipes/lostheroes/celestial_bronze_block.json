@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/celestial_bronze"
+            "items": [
+              "lostheroes:celestial_bronze_ingot"
+            ]
           }
         ]
       }

@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:nuggets/lead"
+            "items": [
+              "lostheroes:lead_nugget"
+            ]
           }
         ]
       }

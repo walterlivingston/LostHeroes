@@ -23,7 +23,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/silver"
+            "items": [
+              "lostheroes:silver_ingot"
+            ]
           }
         ]
       }

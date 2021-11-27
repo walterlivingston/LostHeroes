@@ -20,7 +20,7 @@ public class LHBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
-        for(Metal m : Metal.values()) {
+        /*for(Metal m : Metal.values()) {
             if(m.isVanilla()){
 
             }else {
@@ -31,7 +31,7 @@ public class LHBlockTagsProvider extends BlockTagsProvider {
                     tag(Tags.Blocks.ORES).add(LHBlocks.ores.get(m));
                 }
             }
-        }
+        }*/
         for(Wood w : Wood.values()){
             tag(BlockTags.LOGS).add(LHBlocks.logs.get(w));
             //tag(LHTags.Blocks.LOGS.get(w)).add(LHBlocks.stripped_logs.get(w));

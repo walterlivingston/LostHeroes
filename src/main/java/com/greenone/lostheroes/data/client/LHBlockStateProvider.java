@@ -9,10 +9,7 @@ import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -56,8 +53,14 @@ public class LHBlockStateProvider extends BlockStateProvider {
         for(Wood w : Wood.values()){
             logBlock((RotatedPillarBlock) LHBlocks.logs.get(w));
             logBlock((RotatedPillarBlock) LHBlocks.stripped_logs.get(w));
-            leafBlock(w.tagName()+"_leaves", LHBlocks.leaves.get(w));
             simpleBlock(LHBlocks.planks.get(w));
+            buttonBlock((ButtonBlock) LHBlocks.wooden_buttons.get(w), modLoc("block/"+w.tagName()+"_planks"));
+
+            stairsBlock((StairBlock) LHBlocks.wooden_stairs.get(w), modLoc("block/"+w.tagName()+"_planks"));
+            slabBlock((SlabBlock) LHBlocks.wooden_slabs.get(w), modLoc("block/"+w.tagName()+"_planks"), modLoc("block/"+w.tagName()+"_planks"));
+            fenceBlock((FenceBlock) LHBlocks.fence.get(w), modLoc("block/"+w.tagName()+"_planks"));
+            fenceGateBlock((FenceGateBlock) LHBlocks.fence_gates.get(w), modLoc("block/"+w.tagName()+"_planks"));
+            leafBlock(w.tagName()+"_leaves", LHBlocks.leaves.get(w));
             crossBlock(w.tagName()+"_sapling", LHBlocks.saplings.get(w));
         }
         forgeBlock((ForgeBlock) LHBlocks.forge,blockModels.orientable("forge", modLoc("block/forge_top"),modLoc("block/forge_front"),modLoc("block/forge_side")),blockModels.orientable("forge_on", modLoc("block/forge_top"),modLoc("block/forge_front_on"),modLoc("block/forge_side")));

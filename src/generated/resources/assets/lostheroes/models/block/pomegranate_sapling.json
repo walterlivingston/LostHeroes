@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "lostheroes:block/pomegranate_sapling"
-  }
-}

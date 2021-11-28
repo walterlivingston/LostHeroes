@@ -1,0 +1,21 @@
+{
+  "type": "lostheroes:underworld",
+  "generator" : {
+    "type": "minecraft:noise",
+    "settings": {
+      "lakes": false,
+      "features": true,
+      "biome": "lostheroes:asphodel_fields",
+      "structures": {
+        "structures": {}
+      },
+      "layers": [
+        {
+          "height": 3,
+          "block": "minecraft:dirt"
+        }
+      ]
+    }
+  }
+
+}

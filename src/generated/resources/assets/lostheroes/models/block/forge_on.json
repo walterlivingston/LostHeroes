@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "side": "lostheroes:block/forge_top",
-    "front": "lostheroes:block/forge_front_on",
-    "top": "lostheroes:block/forge_side"
-  }
-}

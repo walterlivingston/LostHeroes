@@ -1,0 +1,44 @@
+{
+  "depth": 10,
+  "scale": 1,
+  "precipitation": "none",
+  "category": "none",
+  "temperature": 1.0,
+  "temperature_modifier": "none",
+  "downfall": 0,
+  "player_spawn_friendly": false,
+  "creature_spawn_friendly": 0,
+  "effects": {
+    "fog_color": 6707796,
+    "foliage_color": 6707796,
+    "grass_color": 6707796,
+    "sky_color": 6707796,
+    "water_color": 6707796,
+    "water_fog_color": 6707796,
+    "grass_color_modifier": "none"
+  },
+  "surface_builder": "minecraft:badlands",
+  "carvers": {
+    "air": ["minecraft:canyon"],
+    "liquid": ["minecraft:cave"]
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+  "starts": [],
+  "spawners": {
+
+  },
+  "spawn_costs": {
+
+  }
+}

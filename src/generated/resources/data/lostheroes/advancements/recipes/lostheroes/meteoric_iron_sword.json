@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lostheroes:meteoric_iron_sword"
+    ]
+  },
+  "criteria": {
+    "has_meteoric_iron_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lostheroes:meteoric_iron_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lostheroes:meteoric_iron_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_meteoric_iron_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

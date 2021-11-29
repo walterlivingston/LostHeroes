@@ -5,12 +5,11 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.TheEndBiomeSource;
 
 public class LHBiomes {
     public static final ResourceKey<Biome> ASPHODEL_FIELDS = register("asphodel_fields");
 
-    public void registerSources(){
+    public static void registerSources(){
         Registry.register(Registry.BIOME_SOURCE, "underworld", UnderworldBiomeSource.CODEC);
     }
 

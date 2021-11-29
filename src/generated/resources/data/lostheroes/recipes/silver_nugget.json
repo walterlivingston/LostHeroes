@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lostheroes:silver_ingot"
+    }
+  ],
+  "result": {
+    "item": "lostheroes:silver_nugget",
+    "count": 9
+  }
+}

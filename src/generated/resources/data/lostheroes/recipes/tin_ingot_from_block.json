@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lostheroes:tin_block"
+    }
+  ],
+  "result": {
+    "item": "lostheroes:tin_ingot",
+    "count": 9
+  }
+}

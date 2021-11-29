@@ -1,6 +1,6 @@
 {
   "depth": 10,
-  "scale": 1,
+  "scale": 0,
   "precipitation": "none",
   "category": "none",
   "temperature": 1.0,
@@ -17,7 +17,7 @@
     "water_fog_color": 6707796,
     "grass_color_modifier": "none"
   },
-  "surface_builder": "minecraft:badlands",
+  "surface_builder": "minecraft:grass",
   "carvers": {
     "air": ["minecraft:canyon"],
     "liquid": ["minecraft:cave"]

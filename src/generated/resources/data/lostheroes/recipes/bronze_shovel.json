@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "lostheroes:bronze_ingot"
+    }
+  },
+  "result": {
+    "item": "lostheroes:bronze_shovel"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "lostheroes:block/pomegranate_slab_top"
+    },
+    "type=bottom": {
+      "model": "lostheroes:block/pomegranate_slab"
+    },
+    "type=double": {
+      "model": "lostheroes:block/pomegranate_planks"
+    }
+  }
+}

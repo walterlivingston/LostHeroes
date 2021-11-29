@@ -2,19 +2,65 @@
   "type": "lostheroes:underworld",
   "generator" : {
     "type": "minecraft:noise",
+    "seed": 1,
     "settings": {
-      "lakes": false,
-      "features": true,
-      "biome": "lostheroes:asphodel_fields",
+      "bedrock_roof_position": -10,
+      "bedrock_floor_position": 0,
+      "min_surface_level": 50,
+      "sea_level": 63,
+      "disable_mob_generation": false,
+      "noise_caves_enabled": false,
+      "noodle_caves_enabled": false,
+      "deepslate_enabled": false,
+      "ore_veins_enabled": true,
+      "aquifers_enabled": false,
+      "default_block": {
+        "Name": "minecraft:stone",
+        "Properties": {
+          "level": ""
+        }
+      },
+      "default_fluid": {
+        "Name": "minecraft:water",
+        "Properties": {
+          "level": "8"
+        }
+      },
       "structures": {
         "structures": {}
       },
-      "layers": [
-        {
-          "height": 3,
-          "block": "minecraft:dirt"
-        }
-      ]
+      "noise": {
+        "min_y": 0,
+        "top_slide":{
+          "target": -10,
+          "size": 3,
+          "offset": 0
+        },
+        "bottom_slide":{
+          "target": -10,
+          "size": 0,
+          "offset": 0
+        },
+        "sampling": {
+          "xz_scale": 0.9999999814507745,
+          "xz_factor": 80,
+          "y_scale": 0.9999999814507745,
+          "y_factor": 160
+        },
+        "size_vertical": 2,
+        "size_horizontal": 1,
+        "height": 256,
+        "density_factor": 1,
+        "density_offset": -0.46875,
+        "random_density_offset": true,
+        "simplex_surface_noise": true,
+        "island_noise_override": false,
+        "amplified": false
+      }
+    },
+    "biome_source": {
+      "biomes": ["lostheroes:asphodel_fields"],
+      "type": "minecraft:underworld"
     }
   }
 

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lostheroes:bronze_ingot"
+    }
+  ],
+  "result": {
+    "item": "lostheroes:bronze_nugget",
+    "count": 9
+  }
+}

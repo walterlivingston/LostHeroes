@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "lostheroes:celestial_bronze_ingot"
+    }
+  },
+  "result": {
+    "item": "lostheroes:celestial_bronze_block"
+  }
+}

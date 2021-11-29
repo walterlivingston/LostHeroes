@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "lostheroes:block/lead_block"
+    }
+  }
+}

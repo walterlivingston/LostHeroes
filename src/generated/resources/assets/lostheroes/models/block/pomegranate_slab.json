@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "side": "lostheroes:block/pomegranate_planks",
+    "bottom": "lostheroes:block/pomegranate_planks",
+    "top": "lostheroes:block/pomegranate_planks"
+  }
+}

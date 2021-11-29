@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "X#",
+    " #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "lostheroes:adamantine_ingot"
+    }
+  },
+  "result": {
+    "item": "lostheroes:adamantine_axe"
+  }
+}

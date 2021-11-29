@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lostheroes:lead_block"
+    }
+  ],
+  "result": {
+    "item": "lostheroes:lead_ingot",
+    "count": 9
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lostheroes:tin_ingot"
+    ]
+  },
+  "criteria": {
+    "has_tin_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lostheroes:tin_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lostheroes:tin_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tin_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

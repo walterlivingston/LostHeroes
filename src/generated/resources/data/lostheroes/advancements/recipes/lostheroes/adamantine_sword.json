@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lostheroes:adamantine_sword"
+    ]
+  },
+  "criteria": {
+    "has_adamantine_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lostheroes:adamantine_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lostheroes:adamantine_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_adamantine_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

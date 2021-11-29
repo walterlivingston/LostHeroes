@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WoW",
+    "WWW",
+    " W "
+  ],
+  "key": {
+    "W": {
+      "item": "lostheroes:tin_ingot"
+    },
+    "o": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "lostheroes:tin_shield"
+  }
+}

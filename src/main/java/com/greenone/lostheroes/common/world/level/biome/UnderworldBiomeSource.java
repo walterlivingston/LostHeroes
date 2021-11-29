@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.world.level.biome;
 
 import com.google.common.collect.ImmutableList;
+import com.greenone.lostheroes.common.util.PixelMapReader;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Registry;
@@ -12,6 +13,7 @@ public class UnderworldBiomeSource extends BiomeSource {
             p_48644_.group(RegistryLookupCodec.create(Registry.BIOME_REGISTRY).forGetter((p_151890_) ->
                     p_151890_.biomes)).apply(p_48644_, p_48644_.stable(UnderworldBiomeSource::new)));
     private final Registry<Biome> biomes;
+    private final PixelMapReader biomeMap = new PixelMapReader("underworld");
 
     //TODO Change biomes
     public UnderworldBiomeSource(Registry<Biome> biomesIn) {
@@ -33,9 +35,14 @@ public class UnderworldBiomeSource extends BiomeSource {
         return this;
     }
 
-    //Fix Biome Indexing
     @Override
     public Biome getNoiseBiome(int x, int y, int z) {
+        //return getBiomeFromColor(biomeMap.getColor(x, z));
+        return biomes.get(LHBiomes.ASPHODEL_FIELDS);
+    }
+
+    //TODO Add list of biomes and their colors
+    public Biome getBiomeFromColor(String hex){
         return biomes.get(LHBiomes.ASPHODEL_FIELDS);
     }
 }

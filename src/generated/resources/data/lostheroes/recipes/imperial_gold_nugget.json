@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lostheroes:imperial_gold_ingot"
+    }
+  ],
+  "result": {
+    "item": "lostheroes:imperial_gold_nugget",
+    "count": 9
+  }
+}

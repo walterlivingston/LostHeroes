@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lostheroes:meteoric_iron_ingot"
+    }
+  ],
+  "result": {
+    "item": "lostheroes:meteoric_iron_nugget",
+    "count": 9
+  }
+}

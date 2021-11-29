@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "lostheroes:item/meteoric_iron_axe"
+  }
+}

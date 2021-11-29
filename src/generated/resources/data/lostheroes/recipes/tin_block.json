@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "lostheroes:tin_ingot"
+    }
+  },
+  "result": {
+    "item": "lostheroes:tin_block"
+  }
+}

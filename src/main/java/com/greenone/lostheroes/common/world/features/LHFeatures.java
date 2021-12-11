@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-//TODO Rework Feature Generation
 public class LHFeatures {
 
     public static final List<OreConfiguration.TargetBlockState> ORE_TIN_TARGET_LIST = List.of(OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES, LHBlocks.ores.get(Metal.TIN).defaultBlockState()), OreConfiguration.target(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, LHBlocks.ores.get(Metal.TIN).defaultBlockState()));
@@ -43,7 +42,7 @@ public class LHFeatures {
     public static final ConfiguredFeature<?, ?> ORE_SILVER = FeatureUtils.register("ore_silver", Feature.ORE.configured(new OreConfiguration(ORE_SILVER_TARGET_LIST, 9)));
     public static final ConfiguredFeature<?, ?> ORE_SILVER_BURIED = FeatureUtils.register("ore_silver_buried", Feature.ORE.configured(new OreConfiguration(ORE_SILVER_TARGET_LIST, 9, 0.5F)));
 
-    public static final ConfiguredFeature<LakeFeature.Configuration, ?> ORE_METEORIC_IRON = FeatureUtils.register("ore_meteoric_iron", Feature.LAKE.configured(new LakeFeature.Configuration(BlockStateProvider.simple(LHBlocks.ores.get(Metal.METEORIC_IRON)), BlockStateProvider.simple(Blocks.STONE.defaultBlockState()))));
+    public static final ConfiguredFeature<?, ?> ORE_METEORIC_IRON = FeatureUtils.register("ore_meteoric_iron", Feature.LAKE.configured(new LakeFeature.Configuration(BlockStateProvider.simple(LHBlocks.storageBlocks.get(Metal.METEORIC_IRON)), BlockStateProvider.simple(Blocks.STONE.defaultBlockState()))));
 
     public static final ConfiguredFeature<?, ?> ORE_MARBLE = FeatureUtils.register("ore_marble", Feature.ORE.configured(new OreConfiguration(OreFeatures.NATURAL_STONE, LHBlocks.stoneBlocks.get(Stone.MARBLE).defaultBlockState(), 64)));
     public static final ConfiguredFeature<?, ?> ORE_BLACK_MARBLE = FeatureUtils.register("ore_black_marble", Feature.ORE.configured(new OreConfiguration(OreFeatures.NATURAL_STONE, LHBlocks.stoneBlocks.get(Stone.BLACK_MARBLE).defaultBlockState(), 24)));
@@ -68,13 +67,13 @@ public class LHFeatures {
                 addFeatureToBiome(biome.getValue(), GenerationStep.Decoration.UNDERGROUND_ORES, Placements.ORE_MARBLE_LOWER);
                 addFeatureToBiome(biome.getValue(), GenerationStep.Decoration.UNDERGROUND_ORES, Placements.ORE_MARBLE_UPPER);
                 addFeatureToBiome(biome.getValue(), GenerationStep.Decoration.UNDERGROUND_ORES, Placements.ORE_BLACK_MARBLE_LOWER);
-                addFeatureToBiome(biome.getValue(), GenerationStep.Decoration.UNDERGROUND_ORES, Placements.ORE_BLACK_MARBLE_UPPER);
+                //addFeatureToBiome(biome.getValue(), GenerationStep.Decoration.UNDERGROUND_ORES, Placements.ORE_BLACK_MARBLE_UPPER);
             }
             if(biome.getValue().getBiomeCategory().equals(Biome.BiomeCategory.PLAINS)){
                 //addFeatureToBiome(biome.getValue(), OLIVE_TREE_FEATURE, GenerationStep.Decoration.SURFACE_STRUCTURES);
             }
             if(biome.getValue().getBiomeCategory().equals(Biome.BiomeCategory.SAVANNA)){
-                //addFeatureToBiome(biome.getValue(), POMEGRANATE_TREE_FEATURE, GenerationStep.Decoration.SURFACE_STRUCTURES);
+                addFeatureToBiome(biome.getValue(), GenerationStep.Decoration.SURFACE_STRUCTURES, TreeFeatures.Placements.POMEGRANATE_NATURAL);
             }
         }
     }
@@ -117,9 +116,8 @@ public class LHFeatures {
 
         public static final PlacedFeature ORE_MARBLE_UPPER = PlacementUtils.register("ore_marble_upper", ORE_MARBLE.placed(rareOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(128)))));
         public static final PlacedFeature ORE_MARBLE_LOWER = PlacementUtils.register("ore_marble_lower", ORE_MARBLE.placed(commonOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(60)))));
-        public static final PlacedFeature ORE_BLACK_MARBLE_UPPER = PlacementUtils.register("ore_black_marble_upper", ORE_MARBLE.placed(rareOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(128)))));
-        public static final PlacedFeature ORE_BLACK_MARBLE_LOWER = PlacementUtils.register("ore_black_marble_lower", ORE_MARBLE.placed(commonOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(60)))));
-
+        public static final PlacedFeature ORE_BLACK_MARBLE_UPPER = PlacementUtils.register("ore_black_marble_upper", ORE_BLACK_MARBLE.placed(rareOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(64), VerticalAnchor.absolute(128)))));
+        public static final PlacedFeature ORE_BLACK_MARBLE_LOWER = PlacementUtils.register("ore_black_marble_lower", ORE_BLACK_MARBLE.placed(commonOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(60)))));
     }
 
     /*public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, LostHeroes.MOD_ID);

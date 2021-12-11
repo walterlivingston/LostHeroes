@@ -2,13 +2,18 @@ package com.greenone.lostheroes.common.world.features;
 
 import com.greenone.lostheroes.common.enums.Wood;
 import com.greenone.lostheroes.common.init.LHBlocks;
+import net.minecraft.core.BlockPos;
 import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
@@ -16,13 +21,15 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePla
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.*;
 
+import java.util.List;
 import java.util.OptionalInt;
 
 public class TreeFeatures {
 
     public static final ConfiguredFeature<TreeConfiguration, ?> POMEGRANATE = FeatureUtils.register("pomegranate", Feature.TREE.configured(createPomegranate().build()));
+    public static final ConfiguredFeature<RandomFeatureConfiguration, ?> POMEGRANATE_NATURAL = FeatureUtils.register("pomegranate_natural", Feature.RANDOM_SELECTOR.configured(new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(POMEGRANATE.placed(), 0.33333334F)), POMEGRANATE.placed())));
 
     private static TreeConfiguration.TreeConfigurationBuilder createStraightBlobTree(Block p_195147_, Block p_195148_, int p_195149_, int p_195150_, int p_195151_, int p_195152_) {
         return new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(p_195147_), new StraightTrunkPlacer(p_195149_, p_195150_, p_195151_), BlockStateProvider.simple(p_195148_), new BlobFoliagePlacer(ConstantInt.of(p_195152_), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1));
@@ -49,6 +56,8 @@ public class TreeFeatures {
     }
 
     public static class Placements {
+        public static final PlacementModifier TREE_THRESHOLD = SurfaceWaterDepthFilter.forMaxDepth(0);
         public static final PlacedFeature POMEGRANATE_CHECKED = PlacementUtils.register("pomegranate_checked", POMEGRANATE.filteredByBlockSurvival(LHBlocks.saplings.get(Wood.POMEGRANATE)));
+        public static final PlacedFeature POMEGRANATE_NATURAL = PlacementUtils.register("pomegranate_natural", TreeFeatures.POMEGRANATE_NATURAL.placed(PlacementUtils.countExtra(0, 0.05F, 1), InSquarePlacement.spread(), TREE_THRESHOLD, PlacementUtils.HEIGHTMAP_OCEAN_FLOOR, BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(LHBlocks.saplings.get(Wood.POMEGRANATE).defaultBlockState(), BlockPos.ZERO)), BiomeFilter.biome()));
     }
 }

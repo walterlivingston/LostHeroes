@@ -9,7 +9,6 @@ import com.greenone.lostheroes.client.utils.LHClientUtils;
 import com.greenone.lostheroes.client.utils.LHKeybinds;
 import com.greenone.lostheroes.common.IProxy;
 import com.greenone.lostheroes.common.blocks.entity.LHBlockEntities;
-import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.config.Config;
 import com.greenone.lostheroes.common.enums.Wood;
 import com.greenone.lostheroes.common.init.LHEntities;
@@ -20,7 +19,7 @@ import com.greenone.lostheroes.common.items.LHItemModelProperties;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.util.EnchantmentHandler;
 import com.greenone.lostheroes.common.util.LHEventHandler;
-import com.greenone.lostheroes.common.world.LHFeatures;
+import com.greenone.lostheroes.common.world.features.LHFeatures;
 import com.greenone.lostheroes.data.DataGenerators;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -31,6 +30,9 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -38,9 +40,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
-import net.minecraftforge.fmlserverevents.FMLServerStartedEvent;
-import net.minecraftforge.fmlserverevents.FMLServerStartingEvent;
-import net.minecraftforge.fmlserverevents.FMLServerStoppingEvent;
 
 import javax.annotation.Nullable;
 
@@ -66,23 +65,22 @@ public class SideProxy implements IProxy {
     }
 
     public static void commonSetup(final FMLCommonSetupEvent event) {
-        CapabilityRegistry.registerCapabilities();
         LHNetworkHandler.registerMessages();
-        LHFeatures.initFeatures();
+        //LHFeatures.initFeatures();
         LHFeatures.setupFeatures();
     }
 
-    private static void serverStarted(FMLServerStartedEvent event) {
+    private static void serverStarted(ServerStartedEvent event) {
         LostHeroes.LOGGER.info("Server Started");
         server = event.getServer();
     }
 
-    private static void serverStarting(FMLServerStartingEvent event) {
+    private static void serverStarting(ServerStartingEvent event) {
         MinecraftForge.EVENT_BUS.addListener(LHEventHandler::registerCommands);
         LHNetworkHandler.registerMessages();
     }
 
-    private static void serverStopping(FMLServerStoppingEvent event) {
+    private static void serverStopping(ServerStoppingEvent event) {
         LostHeroes.LOGGER.info("Server Stopped");
         server = null;
     }

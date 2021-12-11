@@ -1,7 +1,7 @@
 package com.greenone.lostheroes.client.utils;
 
 import net.minecraft.client.KeyMapping;
-import net.minecraftforge.fmlclient.registry.ClientRegistry;
+import net.minecraftforge.client.ClientRegistry;
 
 import static com.greenone.lostheroes.LostHeroes.MOD_ID;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_C;

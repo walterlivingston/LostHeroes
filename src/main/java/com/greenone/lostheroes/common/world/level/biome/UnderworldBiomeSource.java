@@ -36,7 +36,7 @@ public class UnderworldBiomeSource extends BiomeSource {
     }
 
     @Override
-    public Biome getNoiseBiome(int x, int y, int z) {
+    public Biome getNoiseBiome(int p_186735_, int p_186736_, int p_186737_, Climate.Sampler p_186738_) {
         //return getBiomeFromColor(biomeMap.getColor(x, z));
         return biomes.get(LHBiomes.ASPHODEL_FIELDS);
     }

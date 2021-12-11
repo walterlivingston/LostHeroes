@@ -33,7 +33,7 @@ public class ForgeMenu extends RecipeBookMenu<Container> {
     private final RecipeType<? extends ForgeRecipe> recipeType;
     private final RecipeBookType recipeBookType;
 
-    public ForgeMenu(int id, Inventory inv, FriendlyByteBuf buf) {
+    public ForgeMenu(int id, Inventory inv) {
         this(LHMenus.FORGE, LHRecipes.Types.ALLOYING, null, id, inv);
     }
 

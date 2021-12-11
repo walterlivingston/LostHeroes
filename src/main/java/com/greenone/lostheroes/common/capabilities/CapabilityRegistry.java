@@ -1,16 +1,15 @@
 package com.greenone.lostheroes.common.capabilities;
 
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public class CapabilityRegistry {
-    @CapabilityInject(IPlayerCap.class)
+    //@CapabilityInject(IPlayerCap.class)
     public static Capability<IPlayerCap> PLAYERCAP = null;
 
-    public static void registerCapabilities(){
+    /*public static void registerCapabilities(){
         CapabilityManager.INSTANCE.register(IPlayerCap.class);
-    }
+    }*/
 
     /*private static class PlayerCapStorage implements Capability.IStorage<IPlayerCap>{
         @Nullable

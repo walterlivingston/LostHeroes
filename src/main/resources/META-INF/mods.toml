@@ -18,12 +18,12 @@ This mod is based on Rick Riordan's Heroes of Olympus book series.  This is a mo
 [[dependencies.lostheroes]]
 modId="forge"
 mandatory=true
-versionRange="[37,)"
+versionRange="[39,)"
 
 [[dependencies.lostheroes]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.17,)"
+versionRange="[1.18,)"
 ordering="NONE"
 side="BOTH"
 

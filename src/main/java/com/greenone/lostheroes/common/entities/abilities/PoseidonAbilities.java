@@ -6,7 +6,7 @@ import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.network.PacketRiptide;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.fmllegacy.network.NetworkDirection;
+import net.minecraftforge.network.NetworkDirection;
 
 public class PoseidonAbilities extends AbstractAbility{
     @Override

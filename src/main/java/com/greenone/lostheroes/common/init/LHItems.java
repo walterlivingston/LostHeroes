@@ -2,9 +2,11 @@ package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
+import com.greenone.lostheroes.common.enums.Wood;
 import com.greenone.lostheroes.common.items.*;
 import com.greenone.lostheroes.common.items.tools.*;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
@@ -31,6 +33,8 @@ public class LHItems {
     //public static Map<Metal, Item> crossbows = new HashMap<>();
     public static Map<Metal, Item> spears = new HashMap<>();
     public static Map<Metal, Item> shields = new HashMap<>();
+
+    public static Map<Wood, Item> boats = new HashMap<>();
 
     public static Map<Metal, Item> helmets = new HashMap<>();
     public static Map<Metal, Item> chestplates = new HashMap<>();
@@ -87,6 +91,9 @@ public class LHItems {
                 leggings.put(m, registerArmor(m.tagName()+"_leggings", m.getArmor(), EquipmentSlot.LEGS, m));
                 boots.put(m, registerArmor(m.tagName()+"_boots", m.getArmor(), EquipmentSlot.FEET, m));
             }
+        }
+        for(Wood w : Wood.values()){
+            //boats.put(w, new BoatItem((Boat.Type) LHBoatType.byName(w.tagName()), new Item.Properties()).stacksTo(1).tab(CreativeModeTab.TAB_TRANSPORTATION));
         }
         ITEMS.register(eventBus);
         VANILLA_ITEMS.register(eventBus);

@@ -51,7 +51,10 @@ public class LHBlockModelProvider extends BlockModelProvider {
             cubeAll(w.tagName()+"_planks", modLoc("block/" + w.tagName() + "_planks"));
             button(w.tagName()+"_button", modLoc("block/"+w.tagName()+"_planks"));
             buttonInventory(w.tagName()+"_button_inventory", modLoc("block/"+w.tagName()+"_planks"));
-            //TODO door
+            doorBottomLeft(w.tagName()+"_door", modLoc("block/"+w.tagName()+"_door_bottom"), modLoc("block/"+w.tagName()+"_door_top"));
+            doorBottomRight(w.tagName()+"_door", modLoc("block/"+w.tagName()+"_door_bottom"), modLoc("block/"+w.tagName()+"_door_top"));
+            doorTopLeft(w.tagName()+"_door", modLoc("block/"+w.tagName()+"_door_bottom"), modLoc("block/"+w.tagName()+"_door_top"));
+            doorTopRight(w.tagName()+"_door", modLoc("block/"+w.tagName()+"_door_bottom"), modLoc("block/"+w.tagName()+"_door_top"));
             stairs(w.tagName()+"_stairs", modLoc("block/"+w.tagName()+"_planks"), modLoc("block/"+w.tagName()+"_planks"), modLoc("block/"+w.tagName()+"_planks"));
             slab(w.tagName()+"_slab", modLoc("block/"+w.tagName()+"_planks"), modLoc("block/"+w.tagName()+"_planks"), modLoc("block/"+w.tagName()+"_planks"));
             fencePost(w.tagName()+"_fence", modLoc("block/"+w.tagName()+"_planks"));
@@ -64,8 +67,6 @@ public class LHBlockModelProvider extends BlockModelProvider {
         }
         orientable("forge", modLoc(BLOCK_FOLDER+"/forge_top"),modLoc(BLOCK_FOLDER+"/forge_front"),modLoc(BLOCK_FOLDER+"/forge_side"));
         orientable("forge_on", modLoc(BLOCK_FOLDER+"/forge_top"),modLoc(BLOCK_FOLDER+"/forge_front_on"),modLoc(BLOCK_FOLDER+"/forge_side"));
-
-
     }
 
     public ModelBuilder pillar(String name) {

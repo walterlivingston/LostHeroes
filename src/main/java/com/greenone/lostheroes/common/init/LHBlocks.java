@@ -51,6 +51,8 @@ public class LHBlocks {
     public static Map<Wood, Block> wooden_doors = new HashMap<>();
     public static Map<Wood, Block> wooden_stairs = new HashMap<>();
     public static Map<Wood, Block> wooden_slabs = new HashMap<>();
+    public static Map<Wood, Block> standing_signs = new HashMap<>();
+    public static Map<Wood, Block> wall_signs = new HashMap<>();
     public static Map<Wood, Block> fence = new HashMap<>();
     public static Map<Wood, Block> fence_gates = new HashMap<>();
     public static Map<Wood, Block> leaves = new HashMap<>();
@@ -91,6 +93,7 @@ public class LHBlocks {
             wooden_doors.put(w, register(w.tagName() + "_door", new DoorBlock(BlockBehaviour.Properties.of(Material.WOOD, planks.get(w).defaultMaterialColor()).strength(3.0F).sound(SoundType.WOOD).noOcclusion())));
             wooden_stairs.put(w, register(w.tagName() + "_stairs", new StairBlock(planks.get(w).defaultBlockState(), BlockBehaviour.Properties.copy(planks.get(w)))));
             wooden_slabs.put(w, register(w.tagName() + "_slab", new SlabBlock(BlockBehaviour.Properties.of(Material.WOOD, w.getInnerColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD))));
+            //standing_signs.put(w, register(w.tagName() + "_sign", new StandingSignBlock()))
             fence.put(w, register(w.tagName() + "_fence", new FenceBlock(BlockBehaviour.Properties.of(Material.WOOD, w.getInnerColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD))));
             fence_gates.put(w, register(w.tagName() + "_fence_gate", new FenceGateBlock(BlockBehaviour.Properties.of(Material.WOOD, w.getInnerColor()).strength(2.0F, 3.0F).sound(SoundType.WOOD))));
             leaves.put(w, registerLeaves(w.tagName()+"_leaves", SoundType.GRASS));

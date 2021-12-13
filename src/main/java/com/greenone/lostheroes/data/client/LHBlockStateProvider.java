@@ -55,7 +55,7 @@ public class LHBlockStateProvider extends BlockStateProvider {
             logBlock((RotatedPillarBlock) LHBlocks.stripped_logs.get(w));
             simpleBlock(LHBlocks.planks.get(w));
             buttonBlock((ButtonBlock) LHBlocks.wooden_buttons.get(w), modLoc("block/"+w.tagName()+"_planks"));
-
+            doorBlock((DoorBlock) LHBlocks.wooden_doors.get(w), modLoc("block/"+w.tagName()+"_door_bottom"), modLoc("block/"+w.tagName()+"_door_top"));
             stairsBlock((StairBlock) LHBlocks.wooden_stairs.get(w), modLoc("block/"+w.tagName()+"_planks"));
             slabBlock((SlabBlock) LHBlocks.wooden_slabs.get(w), modLoc("block/"+w.tagName()+"_planks"), modLoc("block/"+w.tagName()+"_planks"));
             fenceBlock((FenceBlock) LHBlocks.fence.get(w), modLoc("block/"+w.tagName()+"_planks"));

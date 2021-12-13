@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top",
+  "textures": {
+    "bottom": "lostheroes:block/pomegranate_door_bottom",
+    "top": "lostheroes:block/pomegranate_door_top"
+  }
+}

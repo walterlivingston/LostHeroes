@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lostheroes:adamantine_leggings"
+    ]
+  },
+  "criteria": {
+    "has_adamantine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lostheroes:adamantine_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lostheroes:adamantine_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_adamantine",
+      "has_the_recipe"
+    ]
+  ]
+}

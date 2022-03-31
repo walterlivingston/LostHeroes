@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lostheroes:meteoric_iron_leggings"
+    ]
+  },
+  "criteria": {
+    "has_meteoric_iron": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lostheroes:meteoric_iron_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lostheroes:meteoric_iron_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_meteoric_iron",
+      "has_the_recipe"
+    ]
+  ]
+}

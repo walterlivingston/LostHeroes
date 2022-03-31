@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "lostheroes:tin_ingot"
+      "lostheroes:copper_ore"
     ]
   },
   "criteria": {
-    "has_tin_ore": {
+    "has_copper_ore": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "lostheroes:tin_ore"
+            "item": "lostheroes:copper_ore"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "lostheroes:tin_ingot"
+        "recipe": "lostheroes:copper_ore"
       }
     }
   },
   "requirements": [
     [
-      "has_tin_ore",
+      "has_copper_ore",
       "has_the_recipe"
     ]
   ]

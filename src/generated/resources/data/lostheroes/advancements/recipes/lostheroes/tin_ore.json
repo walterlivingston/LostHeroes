@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "lostheroes:lead_ingot"
+      "lostheroes:tin_ore"
     ]
   },
   "criteria": {
-    "has_lead_ore": {
+    "has_tin_ore": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "lostheroes:lead_ore"
+            "item": "lostheroes:tin_ore"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "lostheroes:lead_ingot"
+        "recipe": "lostheroes:tin_ore"
       }
     }
   },
   "requirements": [
     [
-      "has_lead_ore",
+      "has_tin_ore",
       "has_the_recipe"
     ]
   ]

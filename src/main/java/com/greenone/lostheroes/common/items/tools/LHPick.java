@@ -2,16 +2,13 @@ package com.greenone.lostheroes.common.items.tools;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.enums.Metal;
-import net.minecraft.item.HoeItem;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.*;
 
 public class LHPick extends PickaxeItem {
     private Metal metal = null;
 
     public LHPick(IItemTier itemTier, int attackDamageIn, float attackSpeedIn, Metal metalIn) {
-        this(itemTier, attackDamageIn, attackSpeedIn, new Properties().tab(LostHeroes.lh_group), metalIn);
+        this(itemTier, attackDamageIn, attackSpeedIn, new Properties().tab(ItemGroup.TAB_TOOLS), metalIn);
     }
 
     public LHPick(IItemTier itemTier, int attackDamageIn, float attackSpeedIn, Properties properties, Metal metalIn) {

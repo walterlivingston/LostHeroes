@@ -105,47 +105,47 @@ public class LHItems {
         return registerVanillaItem(name, item);
     }
     private static Item registerSword(String name, IItemTier tier, int damage, float speed, Metal metal) {
-        Item item = new LHSword(tier, damage, speed, new Item.Properties().tab(LostHeroes.lh_group), metal);
+        Item item = new LHSword(tier, damage, speed, new Item.Properties().tab(ItemGroup.TAB_COMBAT), metal);
         return registerItem(name, item);
     }
     private static Item registerPick(String name, IItemTier tier, int damage, float speed, Metal metal) {
-        Item item = new LHPick(tier, damage, speed, new Item.Properties().tab(LostHeroes.lh_group), metal);
+        Item item = new LHPick(tier, damage, speed, new Item.Properties().tab(ItemGroup.TAB_TOOLS), metal);
         return registerItem(name, item);
     }
     private static Item registerAxe(String name, IItemTier tier, float damage, float speed, Metal metal) {
-        Item item = new LHAxe(tier, damage, speed, new Item.Properties().tab(LostHeroes.lh_group), metal);
+        Item item = new LHAxe(tier, damage, speed, new Item.Properties().tab(ItemGroup.TAB_TOOLS), metal);
         return registerItem(name, item);
     }
     private static Item registerShovel(String name, IItemTier tier, float damage, float speed, Metal metal) {
-        Item item = new LHShovel(tier, damage, speed, new Item.Properties().tab(LostHeroes.lh_group), metal);
+        Item item = new LHShovel(tier, damage, speed, new Item.Properties().tab(ItemGroup.TAB_TOOLS), metal);
         return registerItem(name, item);
     }
     private static Item registerHoe(String name, IItemTier tier, int damage, float speed, Metal metal) {
-        Item item = new LHHoe(tier, damage, speed, new Item.Properties().tab(LostHeroes.lh_group), metal);
+        Item item = new LHHoe(tier, damage, speed, new Item.Properties().tab(ItemGroup.TAB_TOOLS), metal);
         return registerItem(name, item);
     }
     private static Item registerBow(String name, Metal metal) {
-        Item item = new LHBow(metal, new Item.Properties().tab(LostHeroes.lh_group));
+        Item item = new LHBow(metal, new Item.Properties().tab(ItemGroup.TAB_COMBAT));
         return registerItem(name, item);
     }
     private static Item registerSpear(String name, Metal metal) {
-        Item item = new LHSpear(metal, new Item.Properties().tab(LostHeroes.lh_group).setISTER(()-> LHItemStackTileEntityRenderer::new));
+        Item item = new LHSpear(metal, new Item.Properties().tab(ItemGroup.TAB_COMBAT).setISTER(()-> LHItemStackTileEntityRenderer::new));
         return registerItem(name, item);
     }
     private static Item registerShield(String name, Metal metal) {
-        Item item = new LHShield(metal, new Item.Properties().tab(LostHeroes.lh_group).setISTER(()-> ShieldRenderer::new));
+        Item item = new LHShield(metal, new Item.Properties().tab(ItemGroup.TAB_COMBAT).setISTER(()-> ShieldRenderer::new));
         return registerItem(name, item);
     }
     private static Item registerKnife(String name, IItemTier tier, int damage, float speed, Metal metal) {
-        Item item = new LHKnife(tier, damage, speed, new Item.Properties().tab(LostHeroes.lh_group), metal);
+        Item item = new LHKnife(tier, damage, speed, new Item.Properties().tab(ItemGroup.TAB_COMBAT), metal);
         return registerItem(name, item);
     }
     private static Item registerArmor(String name, IArmorMaterial material, EquipmentSlotType slot, Metal metal) {
-        Item item = new LHArmorItem(material, slot, new Item.Properties().tab(LostHeroes.lh_group), metal);
+        Item item = new LHArmorItem(material, slot, new Item.Properties().tab(ItemGroup.TAB_COMBAT), metal);
         return registerItem(name, item);
     }
     private static Item registerArmor(String name, IArmorMaterial material, EquipmentSlotType slot) {
-        Item item = new LHArmorItem(material, slot, new Item.Properties().tab(LostHeroes.lh_group));
+        Item item = new LHArmorItem(material, slot, new Item.Properties().tab(ItemGroup.TAB_COMBAT));
         return registerItem(name, item);
     }
 }

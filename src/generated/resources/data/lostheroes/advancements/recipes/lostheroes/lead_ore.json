@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "lostheroes:silver_ingot"
+      "lostheroes:lead_ore"
     ]
   },
   "criteria": {
-    "has_silver_ore": {
+    "has_lead_ore": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "lostheroes:silver_ore"
+            "item": "lostheroes:lead_ore"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "lostheroes:silver_ingot"
+        "recipe": "lostheroes:lead_ore"
       }
     }
   },
   "requirements": [
     [
-      "has_silver_ore",
+      "has_lead_ore",
       "has_the_recipe"
     ]
   ]

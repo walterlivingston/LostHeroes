@@ -243,6 +243,10 @@
         },
         {
           "type": "minecraft:item",
+          "name": "lostheroes:ambrosia"
+        },
+        {
+          "type": "minecraft:item",
           "functions": [
             {
               "function": "minecraft:set_count",

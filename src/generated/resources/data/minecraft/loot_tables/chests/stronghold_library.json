@@ -48,6 +48,10 @@
         },
         {
           "type": "minecraft:item",
+          "name": "lostheroes:invisibility_cap"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 10,
           "functions": [
             {

@@ -69,6 +69,10 @@
         },
         {
           "type": "minecraft:item",
+          "name": "lostheroes:katoptris"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 10,
           "functions": [
             {

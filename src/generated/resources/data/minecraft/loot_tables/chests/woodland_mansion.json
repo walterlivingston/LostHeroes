@@ -25,6 +25,14 @@
         },
         {
           "type": "minecraft:item",
+          "name": "lostheroes:ambrosia"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "lostheroes:nectar"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 15,
           "name": "minecraft:music_disc_13"
         },
@@ -52,6 +60,15 @@
           "type": "minecraft:item",
           "weight": 5,
           "name": "minecraft:diamond_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "lostheroes:backbiter"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "name": "lostheroes:celestial_bronze_ingot"
         },
         {
           "type": "minecraft:item",
@@ -89,6 +106,36 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "lostheroes:copper_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "lostheroes:tin_ingot"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 5,
           "functions": [
             {
@@ -101,6 +148,36 @@
             }
           ],
           "name": "minecraft:gold_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "lostheroes:lead_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 3.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "lostheroes:silver_ingot"
         },
         {
           "type": "minecraft:item",

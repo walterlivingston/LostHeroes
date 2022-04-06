@@ -70,6 +70,17 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ],
+          "name": "lostheroes:imperial_gold_ingot"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 10,
           "functions": [
             {

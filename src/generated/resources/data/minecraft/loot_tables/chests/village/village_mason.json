@@ -61,6 +61,14 @@
         },
         {
           "type": "minecraft:item",
+          "name": "lostheroes:marble"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "lostheroes:black_marble"
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:emerald"
         }
       ]

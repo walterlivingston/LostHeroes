@@ -120,7 +120,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
+          "weight": 3,
           "name": "lostheroes:pearl_of_persephone"
         },
         {

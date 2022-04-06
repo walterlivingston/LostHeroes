@@ -15,6 +15,14 @@
         },
         {
           "type": "minecraft:item",
+          "name": "lostheroes:ambrosia"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "lostheroes:nectar"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 30,
           "name": "minecraft:name_tag"
         },
@@ -198,7 +206,7 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:set_count",

@@ -23,6 +23,32 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "lostheroes:copper_bow"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 2.0,
+        "max": 5.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lostheroes:tin_bow"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 2.0,
+        "max": 5.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
           "weight": 7,
           "functions": [
             {
@@ -105,6 +131,10 @@
         },
         {
           "type": "minecraft:item",
+          "name": "lostheroes:nectar"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 4,
           "functions": [
             {
@@ -162,6 +192,36 @@
             }
           ],
           "name": "minecraft:iron_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 3.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "lostheroes:copper_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 3.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "lostheroes:tin_ingot"
         },
         {
           "type": "minecraft:item",

@@ -23,6 +23,11 @@ public class LHLangProvider extends LanguageProvider {
     }
 
     @Override
+    public String getName() {
+        return "LostHeroes - Languages";
+    }
+
+    @Override
     protected void addTranslations() {
         if(this.locale.equals("en_us")){
             for(Metal m : Metal.values()){

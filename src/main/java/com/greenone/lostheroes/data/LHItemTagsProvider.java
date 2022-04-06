@@ -18,6 +18,11 @@ public class LHItemTagsProvider extends ItemTagsProvider {
     }
 
     @Override
+    public String getName() {
+        return "LostHeroes - Item Tags";
+    }
+
+    @Override
     protected void addTags() {
         for(Metal m : Metal.values()){
             if(m.isVanilla()){

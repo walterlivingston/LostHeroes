@@ -17,6 +17,11 @@ public class LHBlockTagsProvider extends BlockTagsProvider {
     }
 
     @Override
+    public String getName() {
+        return "LostHeroes - Block Tags";
+    }
+
+    @Override
     protected void addTags() {
         for(Metal m : Metal.values()) {
             if(m.isVanilla()){

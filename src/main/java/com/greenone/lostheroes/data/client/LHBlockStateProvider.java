@@ -27,7 +27,7 @@ public class LHBlockStateProvider extends BlockStateProvider {
 
     @Override
     public String getName() {
-        return "LostHeroes - Block States/Models";
+        return "LostHeroes - Block States";
     }
 
     @Override

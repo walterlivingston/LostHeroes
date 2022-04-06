@@ -20,6 +20,11 @@ public class LHRecipeProvider extends RecipeProvider {
     }
 
     @Override
+    public String getName() {
+        return "LostHeroes - Recipes";
+    }
+
+    @Override
     protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
         for(Metal m : Metal.values()){
             if(m.isVanilla()){

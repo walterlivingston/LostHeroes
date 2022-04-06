@@ -20,7 +20,7 @@ public class LHItemModelProvider extends ItemModelProvider {
     @Nonnull
     @Override
     public String getName() {
-        return super.getName();
+        return "LostHeroes - Item Models";
     }
 
     @Override

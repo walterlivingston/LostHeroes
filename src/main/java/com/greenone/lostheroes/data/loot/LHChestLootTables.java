@@ -19,6 +19,8 @@ import java.util.function.BiConsumer;
 
 public class LHChestLootTables extends ChestLootTables {
 
+
+
     @Override
     public void accept(BiConsumer<ResourceLocation, LootTable.Builder> p_accept_1_) {
         p_accept_1_.accept(LootTables.ABANDONED_MINESHAFT, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1))

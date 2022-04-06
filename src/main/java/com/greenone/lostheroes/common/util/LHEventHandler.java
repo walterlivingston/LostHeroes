@@ -72,9 +72,9 @@ public class LHEventHandler {
     }
 
     @SubscribeEvent
-    public void attachCapabilities(final AttachCapabilitiesEvent<PlayerEntity> event) {
+    public void attachCapabilities(final AttachCapabilitiesEvent event) {
         if ((event.getObject()) == null) return;
-        event.addCapability(new ResourceLocation(LostHeroes.MOD_ID, "player_cap"), new PlayerCap());
+        if (event.getObject() instanceof PlayerEntity) event.addCapability(new ResourceLocation(LostHeroes.MOD_ID, "player_cap"), new PlayerCap());
     }
 
     @SubscribeEvent

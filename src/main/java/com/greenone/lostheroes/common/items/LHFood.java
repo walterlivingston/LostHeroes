@@ -11,7 +11,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class LHFood extends LHItem{
-    private boolean isGodly;
+    private final boolean isGodly;
 
     public LHFood(FoodProperties food, boolean isGodlyIn) {
         this(new Item.Properties().tab(LostHeroes.lh_group).food(food), isGodlyIn);
@@ -31,9 +31,8 @@ public class LHFood extends LHItem{
             if (stack.getItem() == LHItems.nectar) {
                 if (stack.isEmpty()) {
                     return new ItemStack(Items.GLASS_BOTTLE);
-                }else if (entityLiving instanceof Player && !((Player) entityLiving).isCreative()) {
+                }else if (entityLiving instanceof Player player && !((Player) entityLiving).isCreative()) {
                     ItemStack itemStack = new ItemStack(Items.GLASS_BOTTLE);
-                    Player player = (Player) entityLiving;
                     stack.shrink(1);
                     if(!player.getInventory().add(itemStack)){
                         player.drop(itemStack, false);

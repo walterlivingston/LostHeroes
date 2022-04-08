@@ -54,8 +54,7 @@ public class LHBow extends BowItem {
 
     @Override
     public void releaseUsing(ItemStack stack, Level world, LivingEntity entityLiving, int p_77615_4_) {
-        if (entityLiving instanceof Player) {
-            Player playerentity = (Player)entityLiving;
+        if (entityLiving instanceof Player playerentity) {
             boolean flag = playerentity.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0;
             IPlayerCap playerCap = playerentity.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
             boolean flag2 = playerCap.getParent() == Deities.APOLLO || playerCap.getParent() == Deities.ARTEMIS;

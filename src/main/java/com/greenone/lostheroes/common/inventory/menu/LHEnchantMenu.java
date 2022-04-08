@@ -57,7 +57,7 @@ public class LHEnchantMenu extends AbstractContainerMenu {
         });
         this.addSlot(new Slot(this.enchantSlots, 1, 35, 47) {
             public boolean mayPlace(ItemStack p_39517_) {
-                return net.minecraftforge.common.Tags.Items.GEMS_LAPIS.contains(p_39517_.getItem());
+                return p_39517_.is(net.minecraftforge.common.Tags.Items.ENCHANTING_FUELS);
             }
         });
 

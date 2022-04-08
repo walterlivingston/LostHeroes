@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 
 public class LHHoe extends HoeItem {
-    private Metal metal = null;
+    private final Metal metal;
 
     public LHHoe(Tier itemTier, int attackDamageIn, float attackSpeedIn, Metal metalIn) {
         this(itemTier, attackDamageIn, attackSpeedIn, new Properties().tab(LostHeroes.lh_group), metalIn);

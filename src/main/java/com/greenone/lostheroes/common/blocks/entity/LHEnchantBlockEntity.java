@@ -33,13 +33,12 @@ public class LHEnchantBlockEntity extends BlockEntity implements Nameable {
         super(LHBlockEntities.ENCHANT, p_155501_, p_155502_);
     }
 
-    public CompoundTag save(CompoundTag p_59271_) {
-        super.save(p_59271_);
+    protected void saveAdditional(CompoundTag p_187500_) {
+        super.saveAdditional(p_187500_);
         if (this.hasCustomName()) {
-            p_59271_.putString("CustomName", Component.Serializer.toJson(this.name));
+            p_187500_.putString("CustomName", Component.Serializer.toJson(this.name));
         }
 
-        return p_59271_;
     }
 
     public void load(CompoundTag p_155509_) {

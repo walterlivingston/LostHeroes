@@ -17,7 +17,7 @@ public class UnderworldBiomeSource extends BiomeSource {
 
     //TODO Change biomes
     public UnderworldBiomeSource(Registry<Biome> biomesIn) {
-        this(biomesIn, biomesIn.getOrThrow(Biomes.THE_END), biomesIn.getOrThrow(Biomes.END_HIGHLANDS), biomesIn.getOrThrow(Biomes.END_MIDLANDS), biomesIn.getOrThrow(Biomes.SMALL_END_ISLANDS), biomesIn.getOrThrow(Biomes.END_BARRENS));
+        this(biomesIn, biomesIn.get(Biomes.THE_END), biomesIn.get(Biomes.END_HIGHLANDS), biomesIn.get(Biomes.END_MIDLANDS), biomesIn.get(Biomes.SMALL_END_ISLANDS), biomesIn.get(Biomes.END_BARRENS));
     }
 
     private UnderworldBiomeSource(Registry<Biome> biomesIn, Biome b1, Biome b2, Biome b3, Biome b4, Biome b5) {

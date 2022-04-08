@@ -7,7 +7,7 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Tier;
 
 public class LHShovel extends ShovelItem {
-    private Metal metal = null;
+    private final Metal metal;
 
     public LHShovel(Tier itemTier, float attackDamageIn, float attackSpeedIn, Metal metalIn) {
         this(itemTier, attackDamageIn, attackSpeedIn, new Properties().tab(LostHeroes.lh_group), metalIn);

@@ -44,8 +44,7 @@ public class LHSpear extends TridentItem {
 
     @Override
     public void releaseUsing(ItemStack stack, Level world, LivingEntity entityLiving, int timeLeft) {
-        if (entityLiving instanceof Player) {
-            Player playerentity = (Player)entityLiving;
+        if (entityLiving instanceof Player playerentity) {
             int i = this.getUseDuration(stack) - timeLeft;
             if (i >= 10) {
                 int j = EnchantmentHelper.getRiptide(stack);

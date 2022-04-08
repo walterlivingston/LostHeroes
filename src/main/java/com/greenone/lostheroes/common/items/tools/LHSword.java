@@ -12,7 +12,7 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 
 public class LHSword extends SwordItem {
-    private Metal metal = null;
+    private final Metal metal;
 
     public LHSword(Tier itemTier, int attackDamageIn, float attackSpeedIn, Metal metalIn) {
         this(itemTier, attackDamageIn, attackSpeedIn, new Properties().tab(LostHeroes.lh_group), metalIn);

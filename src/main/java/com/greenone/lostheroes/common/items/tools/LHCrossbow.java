@@ -44,7 +44,7 @@ public class LHCrossbow extends CrossbowItem {
 
     public LHCrossbow(Tier itemTier, Properties properties) {
         super(properties.defaultDurability(itemTier.getUses()));
-        this.tier = itemTier;
+        tier = itemTier;
     }
 
     public static Tier getTier() {
@@ -131,7 +131,7 @@ public class LHCrossbow extends CrossbowItem {
             ItemStack itemstack;
             if (!flag && !isCreative && !hasMultishot && !hasInfinity((Player) livingEntity)) {
                 itemstack = projectile.split(1);
-                if (projectile.isEmpty() && livingEntity instanceof Player) {
+                if (projectile.isEmpty()) {
                     ((Player)livingEntity).getInventory().removeItem(projectile);
                 }
             } else {
@@ -173,11 +173,9 @@ public class LHCrossbow extends CrossbowItem {
         CompoundTag compoundnbt = stack.getTag();
         if (compoundnbt != null && compoundnbt.contains("ChargedProjectiles", 9)) {
             ListTag listnbt = compoundnbt.getList("ChargedProjectiles", 10);
-            if (listnbt != null) {
-                for(int i = 0; i < listnbt.size(); ++i) {
-                    CompoundTag compoundnbt1 = listnbt.getCompound(i);
-                    list.add(ItemStack.of(compoundnbt1));
-                }
+            for(int i = 0; i < listnbt.size(); ++i) {
+                CompoundTag compoundnbt1 = listnbt.getCompound(i);
+                list.add(ItemStack.of(compoundnbt1));
             }
         }
 
@@ -208,13 +206,12 @@ public class LHCrossbow extends CrossbowItem {
                 projectileentity = new FireworkRocketEntity(world, projectile, livingEntity, livingEntity.getX(), livingEntity.getEyeY() - (double)0.15F, livingEntity.getZ(), true);
             } else {
                 projectileentity = getArrow(world, livingEntity, stack, projectile);
-                if (flag || p_220016_9_ != 0.0F) {
+                if (p_220016_9_ != 0.0F) {
                     ((AbstractArrow)projectileentity).pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                 }
             }
 
-            if (livingEntity instanceof CrossbowAttackMob) {
-                CrossbowAttackMob icrossbowuser = (CrossbowAttackMob)livingEntity;
+            if (livingEntity instanceof CrossbowAttackMob icrossbowuser) {
                 icrossbowuser.shootCrossbowProjectile(icrossbowuser.getTarget(), stack, projectileentity, p_220016_9_);
             } else {
                 Vec3 vector3d1 = livingEntity.getUpVector(1.0F);
@@ -282,8 +279,7 @@ public class LHCrossbow extends CrossbowItem {
     }
 
     private static void onCrossbowShot(Level world, LivingEntity livingEntity, ItemStack stack) {
-        if (livingEntity instanceof ServerPlayer) {
-            ServerPlayer serverplayerentity = (ServerPlayer)livingEntity;
+        if (livingEntity instanceof ServerPlayer serverplayerentity) {
             if (!world.isClientSide) {
                 CriteriaTriggers.SHOT_CROSSBOW.trigger(serverplayerentity, stack);
             }

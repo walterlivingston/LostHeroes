@@ -7,7 +7,7 @@ import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Tier;
 
 public class LHPick extends PickaxeItem {
-    private Metal metal = null;
+    private final Metal metal;
 
     public LHPick(Tier itemTier, int attackDamageIn, float attackSpeedIn, Metal metalIn) {
         this(itemTier, attackDamageIn, attackSpeedIn, new Properties().tab(LostHeroes.lh_group), metalIn);

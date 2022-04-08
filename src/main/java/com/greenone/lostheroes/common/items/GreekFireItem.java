@@ -79,14 +79,11 @@ public class GreekFireItem extends Item {
     }
 
     public int getModifier(ItemStack stack){
-        switch(stack.getOrCreateTag().getInt("Level")){
-            case 1:
-                return 3;
-            case 2:
-                return 7;
-            default:
-                return 3;
-        }
+        return switch (stack.getOrCreateTag().getInt("Level")) {
+            case 1 -> 3;
+            case 2 -> 7;
+            default -> 3;
+        };
     }
 
     public boolean isExplosive(ItemStack stack){

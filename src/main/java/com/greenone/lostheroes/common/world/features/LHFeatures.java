@@ -35,17 +35,17 @@ public class LHFeatures {
     public static final List<OreConfiguration.TargetBlockState> ORE_LEAD_TARGET_LIST = List.of(OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES, LHBlocks.ores.get(Metal.LEAD).defaultBlockState()), OreConfiguration.target(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, LHBlocks.ores.get(Metal.LEAD).defaultBlockState()));
     public static final List<OreConfiguration.TargetBlockState> ORE_SILVER_TARGET_LIST = List.of(OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES, LHBlocks.ores.get(Metal.SILVER).defaultBlockState()), OreConfiguration.target(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, LHBlocks.ores.get(Metal.SILVER).defaultBlockState()));
     
-    public static final ConfiguredFeature<?, ?> ORE_TIN_SMALL = FeatureUtils.register("ore_tin_small", Feature.ORE.configured(new OreConfiguration(ORE_TIN_TARGET_LIST, 10)));
-    public static final ConfiguredFeature<?, ?> ORE_TIN_LARGE = FeatureUtils.register("ore_tin_large", Feature.ORE.configured(new OreConfiguration(ORE_TIN_TARGET_LIST, 20)));
-    public static final ConfiguredFeature<?, ?> ORE_LEAD = FeatureUtils.register("ore_lead", Feature.ORE.configured(new OreConfiguration(ORE_LEAD_TARGET_LIST, 8)));
-    public static final ConfiguredFeature<?, ?> ORE_LEAD_SMALL = FeatureUtils.register("ore_lead_small", Feature.ORE.configured(new OreConfiguration(ORE_LEAD_TARGET_LIST, 4)));
-    public static final ConfiguredFeature<?, ?> ORE_SILVER = FeatureUtils.register("ore_silver", Feature.ORE.configured(new OreConfiguration(ORE_SILVER_TARGET_LIST, 9)));
-    public static final ConfiguredFeature<?, ?> ORE_SILVER_BURIED = FeatureUtils.register("ore_silver_buried", Feature.ORE.configured(new OreConfiguration(ORE_SILVER_TARGET_LIST, 9, 0.5F)));
+    public static final ConfiguredFeature<OreConfiguration, ?> ORE_TIN_SMALL = FeatureUtils.register("ore_tin_small", Feature.ORE.configured(new OreConfiguration(ORE_TIN_TARGET_LIST, 10)));
+    public static final ConfiguredFeature<OreConfiguration, ?> ORE_TIN_LARGE = FeatureUtils.register("ore_tin_large", Feature.ORE.configured(new OreConfiguration(ORE_TIN_TARGET_LIST, 20)));
+    public static final ConfiguredFeature<OreConfiguration, ?> ORE_LEAD = FeatureUtils.register("ore_lead", Feature.ORE.configured(new OreConfiguration(ORE_LEAD_TARGET_LIST, 8)));
+    public static final ConfiguredFeature<OreConfiguration, ?> ORE_LEAD_SMALL = FeatureUtils.register("ore_lead_small", Feature.ORE.configured(new OreConfiguration(ORE_LEAD_TARGET_LIST, 4)));
+    public static final ConfiguredFeature<OreConfiguration, ?> ORE_SILVER = FeatureUtils.register("ore_silver", Feature.ORE.configured(new OreConfiguration(ORE_SILVER_TARGET_LIST, 9)));
+    public static final ConfiguredFeature<OreConfiguration, ?> ORE_SILVER_BURIED = FeatureUtils.register("ore_silver_buried", Feature.ORE.configured(new OreConfiguration(ORE_SILVER_TARGET_LIST, 9, 0.5F)));
 
-    public static final ConfiguredFeature<?, ?> ORE_METEORIC_IRON = FeatureUtils.register("ore_meteoric_iron", Feature.LAKE.configured(new LakeFeature.Configuration(BlockStateProvider.simple(LHBlocks.storageBlocks.get(Metal.METEORIC_IRON)), BlockStateProvider.simple(Blocks.STONE.defaultBlockState()))));
+    public static final ConfiguredFeature<LakeFeature.Configuration, ?> ORE_METEORIC_IRON = FeatureUtils.register("ore_meteoric_iron", Feature.LAKE.configured(new LakeFeature.Configuration(BlockStateProvider.simple(LHBlocks.storageBlocks.get(Metal.METEORIC_IRON)), BlockStateProvider.simple(Blocks.STONE.defaultBlockState()))));
 
-    public static final ConfiguredFeature<?, ?> ORE_MARBLE = FeatureUtils.register("ore_marble", Feature.ORE.configured(new OreConfiguration(OreFeatures.NATURAL_STONE, LHBlocks.stoneBlocks.get(Stone.MARBLE).defaultBlockState(), 64)));
-    public static final ConfiguredFeature<?, ?> ORE_BLACK_MARBLE = FeatureUtils.register("ore_black_marble", Feature.ORE.configured(new OreConfiguration(OreFeatures.NATURAL_STONE, LHBlocks.stoneBlocks.get(Stone.BLACK_MARBLE).defaultBlockState(), 24)));
+    public static final ConfiguredFeature<OreConfiguration, ?> ORE_MARBLE = FeatureUtils.register("ore_marble", Feature.ORE.configured(new OreConfiguration(OreFeatures.NATURAL_STONE, LHBlocks.stoneBlocks.get(Stone.MARBLE).defaultBlockState(), 64)));
+    public static final ConfiguredFeature<OreConfiguration, ?> ORE_BLACK_MARBLE = FeatureUtils.register("ore_black_marble", Feature.ORE.configured(new OreConfiguration(OreFeatures.NATURAL_STONE, LHBlocks.stoneBlocks.get(Stone.BLACK_MARBLE).defaultBlockState(), 24)));
 
     public static void setupFeatures() {
         for (Map.Entry<ResourceKey<Biome>, Biome> biome : BuiltinRegistries.BIOME.entrySet()) {
@@ -73,7 +73,7 @@ public class LHFeatures {
                 //addFeatureToBiome(biome.getValue(), OLIVE_TREE_FEATURE, GenerationStep.Decoration.SURFACE_STRUCTURES);
             }
             if(biome.getValue().getBiomeCategory().equals(Biome.BiomeCategory.SAVANNA)){
-                addFeatureToBiome(biome.getValue(), GenerationStep.Decoration.SURFACE_STRUCTURES, TreeFeatures.Placements.POMEGRANATE_NATURAL);
+                addFeatureToBiome(biome.getValue(), GenerationStep.Decoration.SURFACE_STRUCTURES, TreeFeatures.Placements.POMEGRANATE_CHECKED);
             }
         }
     }

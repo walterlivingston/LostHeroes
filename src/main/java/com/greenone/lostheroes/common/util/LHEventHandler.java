@@ -64,10 +64,9 @@ public class LHEventHandler {
     @SubscribeEvent
     public void onPlayerTick(final TickEvent.PlayerTickEvent event) {
         Player player = event.player;
-        player.level.updateSkyBrightness();
         IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if (!player.isDeadOrDying()) {
-            if (playerCap.getMana() < playerCap.getMaxMana()) playerCap.setMana(playerCap.getMana() + 0.0008F);
+            if (playerCap.getMana() < playerCap.getMaxMana()) playerCap.setMana(playerCap.getMana() + 0.00001F);
             if (playerCap != null && playerCap.getParent() != null) {
                 if (playerCap.getHadesCooldown() > 0) playerCap.decreaseHadesCooldown();
                 if (!player.hasEffect(Blessings.ZEUS) && !player.isCreative() && player.getAbilities().mayfly) {

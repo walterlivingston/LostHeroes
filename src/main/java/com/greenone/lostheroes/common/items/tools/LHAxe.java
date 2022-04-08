@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 
 public class LHAxe extends AxeItem {
-    private Metal metal = null;
+    private final Metal metal;
 
     public LHAxe(Tier itemTier, float attackDamageIn, float attackSpeedIn, Metal metalIn) {
         this(itemTier, attackDamageIn, attackSpeedIn, new Item.Properties().tab(LostHeroes.lh_group), metalIn);

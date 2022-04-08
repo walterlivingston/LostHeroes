@@ -127,8 +127,8 @@ public class ForgeBlockEntity extends BaseContainerBlockEntity implements Worldl
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag) {
-        super.save(tag);
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.putInt("BurnTime", this.litTime);
         tag.putInt("CookTime", this.cookingProgress);
         tag.putInt("CookTimeTotal", this.cookingTotalTime);
@@ -138,7 +138,6 @@ public class ForgeBlockEntity extends BaseContainerBlockEntity implements Worldl
             compoundtag.putInt(p_58382_.toString(), p_58383_);
         });
         tag.put("RecipesUsed", compoundtag);
-        return tag;
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, ForgeBlockEntity tile) {

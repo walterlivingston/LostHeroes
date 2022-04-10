@@ -19,7 +19,6 @@ public class LHNetworkHandler {
 
         INSTANCE.registerMessage(nextID(), AbilityPacket.class, AbilityPacket::toBytes, AbilityPacket::new, AbilityPacket::handle);
         INSTANCE.registerMessage(nextID(), RiptidePacket.class, RiptidePacket::toBytes, RiptidePacket::new, RiptidePacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-        INSTANCE.registerMessage(nextID(), SetParentPacket.class, SetParentPacket::toBytes, SetParentPacket::new, SetParentPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         INSTANCE.registerMessage(nextID(), CapSyncPacket.class, CapSyncPacket::toBytes, CapSyncPacket::new, CapSyncPacket::handle);
     }
 }

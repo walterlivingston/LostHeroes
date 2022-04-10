@@ -25,7 +25,7 @@ public class AltarTile extends TileEntity implements ITickableTileEntity {
     }
 
     private void addEffectsToPlayers(Effect primaryEffect, PlayerEntity player){
-        player.addEffect(new EffectInstance(primaryEffect, 120));
+        player.addEffect(new EffectInstance(primaryEffect, 1800));
     }
 
     public void addItem(ItemStack item, PlayerEntity player){

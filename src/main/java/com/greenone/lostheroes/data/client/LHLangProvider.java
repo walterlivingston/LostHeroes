@@ -29,7 +29,7 @@ public class LHLangProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        if(this.locale.equals("en_us")){
+        if(this.locale.equals("en_US")){
             for(Metal m : Metal.values()){
                 if(m.isVanilla()){
 

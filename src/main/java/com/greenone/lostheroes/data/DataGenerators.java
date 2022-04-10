@@ -26,11 +26,11 @@ public final class DataGenerators {
         gen.addProvider(new LHBlockStateProvider(gen, existingFileHelper));
 
         gen.addProvider(new LHLootTableProvider(gen));
+        gen.addProvider(new LHLangProvider(gen, "en_US"));
 
         LHBlockTagsProvider blockTags = new LHBlockTagsProvider(gen, existingFileHelper);
         gen.addProvider(new LHItemTagsProvider(gen, blockTags, existingFileHelper));
 
         gen.addProvider(new LHRecipeProvider(gen));
-        gen.addProvider(new LHLangProvider(gen, "en_us"));
     }
 }

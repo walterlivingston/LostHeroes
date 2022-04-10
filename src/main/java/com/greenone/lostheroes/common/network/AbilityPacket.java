@@ -8,10 +8,10 @@ import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class PacketAbility extends AbstractPacket{
+public class AbilityPacket extends AbstractPacket{
     Type type;
 
-    public PacketAbility(PacketBuffer buf){
+    public AbilityPacket(PacketBuffer buf){
         this.type = buf.readEnum(Type.class);
     }
 
@@ -20,7 +20,7 @@ public class PacketAbility extends AbstractPacket{
         buf.writeEnum(this.type);
     }
 
-    public PacketAbility(Type typeIn){
+    public AbilityPacket(Type typeIn){
         this.type = typeIn;
     }
 

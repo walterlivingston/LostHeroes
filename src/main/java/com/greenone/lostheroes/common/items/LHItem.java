@@ -23,14 +23,16 @@ public class LHItem extends Item {
 
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        if(this == LHItems.ivlivs_coin){
-            int rand = (int) Math.round(Math.random());
-            if(rand==1) player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.ivlivs_sword));
-            else player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.ivlivs_spear));
-            return ActionResult.pass(player.getItemInHand(hand));
+        if(world.isClientSide()){
+            if(this == LHItems.ivlivs_coin){
+                int rand = (int) Math.round(Math.random());
+                if(rand==1) player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.ivlivs_sword));
+                else player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.ivlivs_spear));
+                return ActionResult.pass(player.getItemInHand(hand));
+            }
+            if(this == LHItems.anaklusmos_pen) player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.anaklusmos_sword));
+            if(this == LHItems.pearl_of_persephone) LHUtils.pearlTP(world, player, hand);
         }
-        if(this == LHItems.anaklusmos_pen) player.setSlot(player.inventory.findSlotMatchingItem(new ItemStack(this)), new ItemStack(LHItems.anaklusmos_sword));
-        if(this == LHItems.pearl_of_persephone) LHUtils.pearlTP(world, player, hand);
         return super.use(world, player, hand);
     }
 

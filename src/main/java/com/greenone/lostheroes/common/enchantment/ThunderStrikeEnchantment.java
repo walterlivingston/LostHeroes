@@ -28,13 +28,15 @@ public class ThunderStrikeEnchantment extends GodlyEnchantment{
 
     @Override
     public void doPostAttack(LivingEntity player, Entity victim, int level) {
-        Random rand = new Random();
-        if(rand.nextFloat() <= level*0.05f){
-            Vector3d vec = victim.getPosition(0.1f);
-            LightningBoltEntity lightningBoltEntity = EntityType.LIGHTNING_BOLT.create(player.level);
-            lightningBoltEntity.moveTo(vec);
-            lightningBoltEntity.setCause(player instanceof ServerPlayerEntity ? (ServerPlayerEntity) player : null);
-            player.level.addFreshEntity(lightningBoltEntity);
+        if(player.level.isClientSide()){
+            Random rand = new Random();
+            if(rand.nextFloat() <= level*0.05f){
+                Vector3d vec = victim.getPosition(0.1f);
+                LightningBoltEntity lightningBoltEntity = EntityType.LIGHTNING_BOLT.create(player.level);
+                lightningBoltEntity.moveTo(vec);
+                lightningBoltEntity.setCause(player instanceof ServerPlayerEntity ? (ServerPlayerEntity) player : null);
+                player.level.addFreshEntity(lightningBoltEntity);
+            }
         }
     }
 }

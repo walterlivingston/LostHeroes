@@ -2,7 +2,7 @@ package com.greenone.lostheroes.common;
 
 import com.google.common.collect.Maps;
 import com.greenone.lostheroes.common.entities.abilities.AbstractAbility;
-import com.greenone.lostheroes.common.network.PacketAbility;
+import com.greenone.lostheroes.common.network.AbilityPacket;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -52,9 +52,9 @@ public class Deity {
         return blessing;
     }
 
-    public void getAbilities(PacketAbility.Type type, PlayerEntity player) {
-        if(type == PacketAbility.Type.MAIN) abilities.mainAbility(player);
-        else if(type == PacketAbility.Type.MINOR) abilities.minorAbility(player);
+    public void getAbilities(AbilityPacket.Type type, PlayerEntity player) {
+        if(type == AbilityPacket.Type.MAIN) abilities.mainAbility(player);
+        else if(type == AbilityPacket.Type.MINOR) abilities.minorAbility(player);
     }
 
     public AbstractAbility getAbilities(){

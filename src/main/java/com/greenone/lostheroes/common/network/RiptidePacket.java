@@ -16,9 +16,9 @@ import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class PacketRiptide extends AbstractPacket{
+public class RiptidePacket extends AbstractPacket{
 
-    public PacketRiptide(PacketBuffer buf){
+    public RiptidePacket(PacketBuffer buf){
 
     }
 
@@ -27,7 +27,7 @@ public class PacketRiptide extends AbstractPacket{
 
     }
 
-    public PacketRiptide(){
+    public RiptidePacket(){
 
     }
 

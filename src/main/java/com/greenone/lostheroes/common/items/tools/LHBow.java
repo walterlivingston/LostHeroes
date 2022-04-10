@@ -110,7 +110,7 @@ public class LHBow extends BowItem {
                     }
 
                     world.playSound((PlayerEntity)null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-                    if (!flag1 && !playerentity.abilities.instabuild) {
+                    if (!flag1 && !playerentity.abilities.instabuild && !flag2) {
                         itemstack.shrink(1);
                         if (itemstack.isEmpty()) {
                             playerentity.inventory.removeItem(itemstack);

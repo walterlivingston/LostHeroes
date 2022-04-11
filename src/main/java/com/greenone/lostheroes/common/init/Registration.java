@@ -28,7 +28,7 @@ public class Registration {
         LHRecipes.register(eventBus);
         LHTileEntities.register(eventBus);
         LHContainers.register(eventBus);
-        LHPotions.register(eventBus);
+        //LHPotions.register(eventBus);
         Deities.init();
         LHTags.register();
         LHEnchants.register(eventBus);

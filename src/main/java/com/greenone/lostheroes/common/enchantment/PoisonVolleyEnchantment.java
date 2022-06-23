@@ -6,7 +6,7 @@ import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
 
 public class PoisonVolleyEnchantment extends GodlyEnchantment{
-    protected PoisonVolleyEnchantment(Rarity rarity, EnchantmentType enchantmentType, EquipmentSlotType... slotTypes) {
+    public PoisonVolleyEnchantment(Rarity rarity, EnchantmentType enchantmentType, EquipmentSlotType... slotTypes) {
         super(rarity, enchantmentType, Deities.APOLLO, slotTypes);
     }
 

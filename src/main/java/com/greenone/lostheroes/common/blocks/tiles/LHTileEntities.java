@@ -1,7 +1,7 @@
 package com.greenone.lostheroes.common.blocks.tiles;
 
 import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.common.blocks.LHBlocks;
+import com.greenone.lostheroes.common.init.LHBlocks;
 import com.greenone.lostheroes.common.enums.Stone;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;

@@ -7,7 +7,7 @@ import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.inventory.EquipmentSlotType;
 
 public class BrutishEnchantment extends GodlyEnchantment{
-    protected BrutishEnchantment(Rarity rarity, EnchantmentType enchantmentType, EquipmentSlotType... slotTypes) {
+    public BrutishEnchantment(Rarity rarity, EnchantmentType enchantmentType, EquipmentSlotType... slotTypes) {
         super(rarity, enchantmentType, Deities.ARES, slotTypes);
     }
 

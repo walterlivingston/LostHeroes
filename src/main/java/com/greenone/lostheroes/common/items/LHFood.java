@@ -1,15 +1,13 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.common.enums.Metal;
+import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class LHFood extends LHItem{

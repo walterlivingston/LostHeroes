@@ -11,7 +11,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import java.util.Map;
 
 public class FleetEnchantment extends GodlyEnchantment{
-    protected FleetEnchantment(Rarity rarity, EnchantmentType enchantmentType, EquipmentSlotType... slotTypes) {
+    public FleetEnchantment(Rarity rarity, EnchantmentType enchantmentType, EquipmentSlotType... slotTypes) {
         super(rarity, enchantmentType, Deities.HERMES, slotTypes);
     }
 

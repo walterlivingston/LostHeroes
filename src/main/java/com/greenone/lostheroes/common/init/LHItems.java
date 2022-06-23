@@ -1,9 +1,10 @@
-package com.greenone.lostheroes.common.items;
+package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.client.render.LHItemStackTileEntityRenderer;
 import com.greenone.lostheroes.client.render.ShieldRenderer;
 import com.greenone.lostheroes.common.enums.Metal;
+import com.greenone.lostheroes.common.items.*;
 import com.greenone.lostheroes.common.items.tools.*;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;

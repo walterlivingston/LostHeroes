@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.entities;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.init.LHEntities;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

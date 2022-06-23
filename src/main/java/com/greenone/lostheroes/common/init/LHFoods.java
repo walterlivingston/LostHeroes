@@ -1,4 +1,4 @@
-package com.greenone.lostheroes.common.items;
+package com.greenone.lostheroes.common.init;
 
 import net.minecraft.item.Food;
 import net.minecraft.potion.EffectInstance;

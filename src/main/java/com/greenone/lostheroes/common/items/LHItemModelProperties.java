@@ -1,11 +1,10 @@
 package com.greenone.lostheroes.common.items;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
 
 public class LHItemModelProperties {
     public static void registerProperties(){

@@ -33,7 +33,7 @@ public class ForgeBlock extends ContainerBlock {
     public static DirectionProperty FACING = HorizontalBlock.FACING;
     public static BooleanProperty LIT = BlockStateProperties.LIT;
 
-    protected ForgeBlock(Properties properties) {
+    public ForgeBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }

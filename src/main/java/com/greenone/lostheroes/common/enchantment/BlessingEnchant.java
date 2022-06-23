@@ -1,5 +1,6 @@
 package com.greenone.lostheroes.common.enchantment;
 
+import com.greenone.lostheroes.common.init.LHEnchants;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.EquipmentSlotType;
 

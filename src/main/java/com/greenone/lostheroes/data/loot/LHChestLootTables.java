@@ -1,9 +1,9 @@
 package com.greenone.lostheroes.data.loot;
 
-import com.greenone.lostheroes.common.blocks.LHBlocks;
+import com.greenone.lostheroes.common.init.LHBlocks;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
-import com.greenone.lostheroes.common.items.LHItems;
+import com.greenone.lostheroes.common.init.LHItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.loot.ChestLootTables;
 import net.minecraft.enchantment.Enchantments;
@@ -18,8 +18,6 @@ import net.minecraft.world.storage.MapDecoration;
 import java.util.function.BiConsumer;
 
 public class LHChestLootTables extends ChestLootTables {
-
-
 
     @Override
     public void accept(BiConsumer<ResourceLocation, LootTable.Builder> p_accept_1_) {

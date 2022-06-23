@@ -1,6 +1,6 @@
 package com.greenone.lostheroes.common.util.pattern;
 
-import com.greenone.lostheroes.common.blocks.LHBlocks;
+import com.greenone.lostheroes.common.init.LHBlocks;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.enums.Stone;
 import net.minecraft.block.Block;

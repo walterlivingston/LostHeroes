@@ -1,9 +1,8 @@
 package com.greenone.lostheroes.common.items.tools;
 
-import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
-import com.greenone.lostheroes.common.enchantment.LHEnchants;
+import com.greenone.lostheroes.common.init.LHEnchants;
 import com.greenone.lostheroes.common.enums.Metal;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.items.LHItemTier;

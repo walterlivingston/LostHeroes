@@ -17,7 +17,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import java.util.Random;
 
 public class ThunderStrikeEnchantment extends GodlyEnchantment{
-    protected ThunderStrikeEnchantment(Rarity p_i46731_1_, EnchantmentType p_i46731_2_, EquipmentSlotType... p_i46731_3_) {
+    public ThunderStrikeEnchantment(Rarity p_i46731_1_, EnchantmentType p_i46731_2_, EquipmentSlotType... p_i46731_3_) {
         super(p_i46731_1_, p_i46731_2_, Deities.ZEUS, p_i46731_3_);
     }
 

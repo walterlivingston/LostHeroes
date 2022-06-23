@@ -1,59 +1,31 @@
 package com.greenone.lostheroes.common.util;
 
 import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.client.gui.ManaHUD;
-import com.greenone.lostheroes.client.utils.LHClientUtils;
-import com.greenone.lostheroes.common.Blessing;
 import com.greenone.lostheroes.common.Deity;
 import com.greenone.lostheroes.common.capabilities.CapabilityRegistry;
 import com.greenone.lostheroes.common.capabilities.IPlayerCap;
 import com.greenone.lostheroes.common.capabilities.PlayerCap;
-import com.greenone.lostheroes.common.commands.LHCommands;
-import com.greenone.lostheroes.common.enchantment.BrilliantRiposteEnchantment;
-import com.greenone.lostheroes.common.enchantment.LHEnchants;
+import com.greenone.lostheroes.common.init.LHCommands;
 import com.greenone.lostheroes.common.init.Blessings;
 import com.greenone.lostheroes.common.init.Deities;
 import com.greenone.lostheroes.common.potions.LHEffects;
-import net.minecraft.block.CropsBlock;
-import net.minecraft.client.Minecraft;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.AbstractRaiderEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectType;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
-import net.minecraftforge.event.entity.living.PotionEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.ArrayList;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = LostHeroes.MOD_ID)
 public class LHEventHandler {

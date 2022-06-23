@@ -1,5 +1,6 @@
-package com.greenone.lostheroes.common.commands;
+package com.greenone.lostheroes.common.init;
 
+import com.greenone.lostheroes.common.commands.*;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;

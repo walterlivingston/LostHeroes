@@ -30,4 +30,9 @@ public abstract class GodlyEnchantment extends Enchantment {
     public static Deity getDeity() {
         return deity;
     }
+
+    @Override
+    protected boolean checkCompatibility(Enchantment p_77326_1_) {
+        return !(p_77326_1_ instanceof GodlyEnchantment) && super.checkCompatibility(p_77326_1_);
+    }
 }

@@ -14,12 +14,13 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 
 public class HermesAbilities extends AbstractAbility{
+    int maxTPDist = 32;
+
     @Override
     public void mainAbility(PlayerEntity playerIn) {
         player = playerIn;
         playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
         if((player.isCreative() || playerCap.getMana()>=getMainManaReq()) && teleport(player)){
-            playerCap.consumeMana(getMainManaReq());
             if(!player.isCreative()) success();
         }
     }
@@ -42,25 +43,24 @@ public class HermesAbilities extends AbstractAbility{
 
     private boolean teleport(PlayerEntity player) {
         if (!player.level.isClientSide) {
-            Vector3d lookPos = LHUtils.getLookingAt(player, 32);
+            Vector3d lookPos = LHUtils.getLookingAt(player, maxTPDist);
             if (player instanceof ServerPlayerEntity) {
                 ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) player;
-                if (serverplayerentity.connection.getConnection().isConnected() && serverplayerentity.level == player.level && !serverplayerentity.isSleeping()) {
+                if (serverplayerentity.connection.getConnection().isConnected() && !serverplayerentity.isSleeping()) {
                     net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(serverplayerentity, lookPos.x(), lookPos.y(), lookPos.z(), 0.0F);
                     if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) { // Don't indent to lower patch size
                         if (player.isPassenger()) {
                             player.stopRiding();
                         }
-
+                        playerCap.consumeMana((float) ((lookPos.distanceTo(player.position())/maxTPDist)*getMainManaReq()));
                         player.teleportTo(event.getTargetX(), event.getTargetY(), event.getTargetZ());
-                        //player.fallDistance = 0.0F;
-                        //player.hurt(DamageSource.FALL, event.getAttackDamage());
+
                         return true;
-                    } //Forge: End
+                    }
                 }
             } else if (player != null) {
+                playerCap.consumeMana((float) ((lookPos.distanceTo(player.position())/maxTPDist)*getMainManaReq()));
                 player.teleportTo(lookPos.x(), lookPos.y(), lookPos.z());
-                //player.fallDistance = 0.0F;
             }
         }
         return false;

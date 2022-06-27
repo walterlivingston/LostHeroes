@@ -2,6 +2,7 @@ package com.greenone.lostheroes.common.init;
 
 import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.blocks.ForgeBlock;
+import com.greenone.lostheroes.common.blocks.GreekFireBlock;
 import com.greenone.lostheroes.common.blocks.LHEnchantmentTable;
 import com.greenone.lostheroes.common.blocks.PillarBlock;
 import com.greenone.lostheroes.common.enums.Metal;
@@ -39,7 +40,7 @@ public class LHBlocks {
     public static final Block enchanting_table = registerVanilla("enchanting_table", new LHEnchantmentTable(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_RED).requiresCorrectToolForDrops().strength(5.0F, 1200.0F)), ItemGroup.TAB_DECORATIONS);
     public static final Block forge = register("forge", new ForgeBlock(stone_prop));
 
-    //public static final Block greek_fire = registerNoItem("greek_fire", new GreekFireBlock(AbstractBlock.Properties.of(Material.FIRE, MaterialColor.COLOR_LIGHT_GREEN).noCollission().instabreak().lightLevel((p_235468_0_) -> 15).sound(SoundType.WOOL)));
+    public static final Block greek_fire = registerNoItem("greek_fire", new GreekFireBlock(AbstractBlock.Properties.of(Material.FIRE, MaterialColor.COLOR_LIGHT_GREEN).noCollission().instabreak().lightLevel((p_235468_0_) -> 15).sound(SoundType.WOOL)));
 
     public static void register(IEventBus eventBus) {
         for(Metal m : Metal.values()){
@@ -70,11 +71,11 @@ public class LHBlocks {
     }
     public static Block register(String name, Block block){
         BLOCKS.register(name, () -> block);
-        LHItems.ITEMS.register(name, () -> new LHItemBlock(block, new Item.Properties().tab(LostHeroes.lh_group)));
+        LHItems.ITEMS.register(name, () -> new LHItemBlock(block, new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
         return block;
     }
     public static Block register(String name, Block block, Metal metal){
-        LHItems.ITEMS.register(name, () -> new LHItemBlock(block, new Item.Properties().tab(LostHeroes.lh_group), metal));
+        LHItems.ITEMS.register(name, () -> new LHItemBlock(block, new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS), metal));
         return registerNoItem(name, block);
     }
     private static Block registerVanilla(String name, Block block, ItemGroup group, Metal m) {

@@ -38,18 +38,18 @@ public class LHItems {
     public static Item invisibility_cap = registerArmor("invisibility_cap", LHArmorMaterial.LEATHER, EquipmentSlotType.HEAD);
 
     public static Item adamantine_ingot_dull = registerItem("adamantine_ingot_dull");
-    public static Item ivlivs_coin = registerItem("ivlivs_coin", new LHItem(Metal.IMPERIAL_GOLD, new Item.Properties().tab(LostHeroes.lh_group).stacksTo(1)));
-    public static Item ivlivs_sword = registerItem("ivlivs_sword", new LHSword(LHItemTier.IMPERIAL_GOLD, 3, -2.4F, new Item.Properties(), Metal.IMPERIAL_GOLD));
-    public static Item ivlivs_spear = registerItem("ivlivs_spear", new LHSpear(Metal.IMPERIAL_GOLD, new Item.Properties()));
-    public static Item anaklusmos_pen = registerItem("anaklusmos_pen", new LHItem(new Item.Properties().tab(LostHeroes.lh_group).stacksTo(1)));
-    public static Item anaklusmos_sword = registerItem("anaklusmos_sword", new LHSword(LHItemTier.CELESTIAL_BRONZE, 3, -2.4F, new Item.Properties(), Metal.CELESTIAL_BRONZE));
+    public static Item ivlivs_coin = registerItem("ivlivs_coin", new LHItem(Metal.IMPERIAL_GOLD, new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1)));
+    public static Item ivlivs_sword = registerItem("ivlivs_sword", new LHSword(LHItemTier.IMPERIAL_GOLD, 3, -2.4F, new Item.Properties().tab(ItemGroup.TAB_COMBAT), Metal.IMPERIAL_GOLD));
+    public static Item ivlivs_spear = registerItem("ivlivs_spear", new LHSpear(Metal.IMPERIAL_GOLD, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+    public static Item anaklusmos_pen = registerItem("anaklusmos_pen", new LHItem(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1)));
+    public static Item anaklusmos_sword = registerItem("anaklusmos_sword", new LHSword(LHItemTier.CELESTIAL_BRONZE, 3, -2.4F, new Item.Properties().tab(ItemGroup.TAB_COMBAT), Metal.CELESTIAL_BRONZE));
     public static Item pearl_of_persephone = registerItem("pearl_of_persephone");
     public static Item aegis = registerShield("aegis", Metal.IMPERIAL_GOLD);
     public static Item katoptris = registerKnife("katoptris", LHItemTier.CELESTIAL_BRONZE, 3, -2.4F, Metal.CELESTIAL_BRONZE);
     public static Item backbiter = registerSword("backbiter", LHItemTier.CELESTIAL_BRONZE, 3, -2.4F, Metal.CELESTIAL_BRONZE);
 
     public static Item ambrosia = registerFood("ambrosia", LHFoods.AMBROSIA, true);
-    public static Item nectar = registerItem("nectar", new LHFood(new Item.Properties().tab(LostHeroes.lh_group).food(LHFoods.NECTAR), true));
+    public static Item nectar = registerItem("nectar", new LHFood(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(LHFoods.NECTAR), true));
 
     public static Item vanilla_bow = registerVanillaItem("bow", new LHBow(ItemTier.WOOD, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
@@ -86,15 +86,15 @@ public class LHItems {
         return item;
     }
     private static Item registerItem(String name){
-        Item item = new LHItem(new Item.Properties().tab(LostHeroes.lh_group));
+        Item item = new LHItem(new Item.Properties().tab(ItemGroup.TAB_MISC));
         return registerItem(name, item);
     }
     private static Item registerItem(String name, Metal metal){
-        Item item = new LHItem(metal, new Item.Properties().tab(LostHeroes.lh_group));
+        Item item = new LHItem(metal, new Item.Properties().tab(ItemGroup.TAB_MISC));
         return registerItem(name, item);
     }
     private static Item registerFood(String name, Food food, boolean isGodly){
-        Item item = new LHFood(food, isGodly);
+        Item item = new LHFood(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(food), isGodly);
         return registerItem(name, item);
     }
     private static Item registerVanillaItem(String name, Item item){

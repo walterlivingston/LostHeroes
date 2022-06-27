@@ -33,8 +33,8 @@ public class AltarTile extends TileEntity implements ITickableTileEntity {
         boolean flag2 = Deities.getDeity(item.getItem())==Deities.ARTEMIS && player.getCommandSenderWorld().isNight();
         boolean flag3 = !(Deities.getDeity(item.getItem())==Deities.APOLLO) && !(Deities.getDeity(item.getItem())==Deities.ARTEMIS);
         if(flag1 || flag2 || flag3){
-            player.getCommandSenderWorld().setBlock(this.getBlockPos().above(), Blocks.FIRE.defaultBlockState(), 2);
             addEffectsToPlayers(Deities.getDeity(item.getItem()).getBlessing(), player);
+            player.getCommandSenderWorld().setBlock(this.getBlockPos().above(), Blocks.FIRE.defaultBlockState(), 2);
             if(!player.isCreative()) item.shrink(1);
             resetCooldown();
             IPlayerCap playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);

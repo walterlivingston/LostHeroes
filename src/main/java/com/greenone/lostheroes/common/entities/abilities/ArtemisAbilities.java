@@ -15,7 +15,7 @@ public class ArtemisAbilities extends AbstractAbility{
     public void mainAbility(PlayerEntity playerIn) {
         player = playerIn;
         playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(LHUtils.getLookingAt(player, 5)!=null && (player.isCreative() | playerCap.consumeMana(getMainManaReq()))){
+        if(LHUtils.getLookingAt(player, 5)!=null && (player.isCreative() || playerCap.consumeMana(getMainManaReq()))){
             Vector3d spawnVec = LHUtils.getLookingAt(player, 5);
             WolfEntity wolf = new WolfEntity(EntityType.WOLF, player.level);
             wolf.tame(player);

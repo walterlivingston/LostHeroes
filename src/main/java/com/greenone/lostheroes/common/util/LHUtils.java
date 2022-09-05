@@ -47,7 +47,7 @@ public class LHUtils {
             case "ares":
                 break;
             case "aphrodite":
-                if(!player.isSpectator() && player.isSteppingCarefully() && playerCap.consumeMana(0.008F)){
+                if(!player.isSpectator() && player.isSteppingCarefully() && (playerCap.consumeMana(0.008F) || player.isCreative())){
                     List<CreatureEntity> mobs = player.level.getNearbyEntities(CreatureEntity.class, new EntityPredicate().range(10), player, new AxisAlignedBB(player.blockPosition()).inflate(10));
                     mobs.stream().filter(mob -> !(mob instanceof MonsterEntity)).forEach(mob -> {
                         mob.getLookControl().setLookAt(mob, (float) (mob.getHeadRotSpeed() + 20), (float) mob.getHeadRotSpeed());
@@ -56,7 +56,7 @@ public class LHUtils {
                 }
                 break;
             case "apollo":
-                if(player.level.isDay())
+                if(player.level.dayTime() < 13000 && player.level.dayTime() > 22300)
                     playerCap.getParent().applyAttributesModifiersToEntity(player, player.getAttributes(), 0);
                 else
                     playerCap.getParent().removeAttributeModifiers(player, player.getAttributes(), 0);

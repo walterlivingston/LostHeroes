@@ -13,7 +13,7 @@ public class DemeterAbilities extends AbstractAbility{
     public void mainAbility(PlayerEntity playerIn) {
         player = playerIn;
         playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(player.isCreative() | playerCap.consumeMana(getMainManaReq())) {
+        if(player.isCreative() | playerCap.getMana() >= getMainManaReq()) {
             harvestAndReplant(player);
             if(!player.isCreative()) success();
         }
@@ -36,6 +36,7 @@ public class DemeterAbilities extends AbstractAbility{
     }
 
     private void harvestAndReplant(PlayerEntity player) {
+        boolean harvested = false;
         for(int y = (int)(player.getY()-2); y < (player.getY()+2); y++){
             for(int x = (int)(player.getX()-4); x < (player.getX()+4); x++){
                 for(int z = (int)(player.getZ()-4); z < (player.getZ()+4); z++){
@@ -43,6 +44,7 @@ public class DemeterAbilities extends AbstractAbility{
                     Block block = player.level.getBlockState(pos).getBlock();
                     if(block instanceof CropsBlock){
                         CropsBlock crop = (CropsBlock) block;
+                        harvested = true;
                         if(crop.isMaxAge(player.level.getBlockState(pos))){
                             player.level.destroyBlock(pos, true);
                             if(LHUtils.isItemInInventory(player, crop.getPlant(player.level, pos).getBlock().asItem())){
@@ -52,6 +54,7 @@ public class DemeterAbilities extends AbstractAbility{
                     }
                 }
             }
+            if(harvested && !player.isCreative()) playerCap.consumeMana(getMainManaReq());
         }
     }
 }

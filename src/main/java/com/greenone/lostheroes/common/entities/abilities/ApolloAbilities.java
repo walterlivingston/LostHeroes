@@ -17,23 +17,23 @@ public class ApolloAbilities extends AbstractAbility{
     public void mainAbility(PlayerEntity playerIn) {
         player = playerIn;
         playerCap = player.getCapability(CapabilityRegistry.PLAYERCAP, null).orElse(null);
-        if(player.isSteppingCarefully() && playerCap.getMana()>0){
+        if(player.isSteppingCarefully() && (player.isCreative() || playerCap.getMana()>0)){
             float healthDiff = player.getMaxHealth()-player.getHealth();
-            if(playerCap.consumeMana(healthDiff/2)){
+            if(player.isCreative() || playerCap.consumeMana(healthDiff/2)){
                 player.setHealth(player.getMaxHealth());
             }else{
                 player.setHealth(player.getHealth()+playerCap.getMana());
                 playerCap.setMana(0);
             }
             if(!player.isCreative()) success();
-        }else if(playerCap.getMana()>0){
+        }else if(player.isCreative() || playerCap.getMana()>0){
             Vector3d entityVec = LHUtils.getLookingAt(player, 0);
             BlockPos entityPos = new BlockPos(entityVec.x, entityVec.y, entityVec.z);
             List<LivingEntity> list = player.level.getNearbyEntities(LivingEntity.class, new EntityPredicate().range(2), player, new AxisAlignedBB(entityPos).inflate(2));
             if(!list.isEmpty()){
                 LivingEntity entity = list.get(0);
                 float healthDiff = entity.getMaxHealth() - entity.getHealth();
-                if(playerCap.consumeMana(healthDiff/2)){
+                if(player.isCreative() || playerCap.consumeMana(healthDiff/2)){
                     entity.setHealth(entity.getMaxHealth());
                 }else{
                     entity.setHealth(entity.getHealth()+playerCap.getMana());

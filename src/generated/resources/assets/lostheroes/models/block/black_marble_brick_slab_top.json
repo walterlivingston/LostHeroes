@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "side": "lostheroes:block/black_marble_brick",
-    "bottom": "lostheroes:block/black_marble_brick",
-    "top": "lostheroes:block/black_marble_brick"
-  }
-}

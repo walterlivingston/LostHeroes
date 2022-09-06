@@ -1,6 +1,0 @@
-{
-  "parent": "lostheroes:item/silver_bow",
-  "textures": {
-    "layer0": "lostheroes:item/silver_bow_pulling_0"
-  }
-}

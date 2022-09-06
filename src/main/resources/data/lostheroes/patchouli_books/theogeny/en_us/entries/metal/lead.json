@@ -1,0 +1,17 @@
+{
+  "name": "Lead",
+  "icon": "lostheroes:lead_ingot",
+  "category": "metals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Lead is a heavy metal that is great for powerful weapons.  Due to its weight, attack speed can be greatly decreased with lead weapons, while damage is significantly increased."
+    },
+    {
+      "type": "spotlight",
+      "item": "lostheroes:lead_ingot",
+      "title": "Lead",
+      "text": "Lead can be found naturally in the depths of the world."
+    }
+  ]
+}

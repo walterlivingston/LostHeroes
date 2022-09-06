@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "lostheroes:copper_shovel",
+    "lostheroes:tin_shovel",
+    "lostheroes:lead_shovel",
+    "lostheroes:silver_shovel",
+    "lostheroes:bronze_shovel",
+    "lostheroes:celestial_bronze_shovel",
+    "lostheroes:imperial_gold_shovel",
+    "lostheroes:bone_steel_shovel",
+    "lostheroes:meteoric_iron_shovel",
+    "lostheroes:adamantine_shovel"
+  ]
+}

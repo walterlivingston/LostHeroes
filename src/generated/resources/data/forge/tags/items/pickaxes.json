@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "lostheroes:copper_pickaxe",
+    "lostheroes:tin_pickaxe",
+    "lostheroes:lead_pickaxe",
+    "lostheroes:silver_pickaxe",
+    "lostheroes:bronze_pickaxe",
+    "lostheroes:celestial_bronze_pickaxe",
+    "lostheroes:imperial_gold_pickaxe",
+    "lostheroes:bone_steel_pickaxe",
+    "lostheroes:meteoric_iron_pickaxe",
+    "lostheroes:adamantine_pickaxe"
+  ]
+}

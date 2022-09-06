@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "lostheroes:marble"
+    }
+  },
+  "result": {
+    "item": "lostheroes:marble_slab",
+    "count": 6
+  }
+}

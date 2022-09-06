@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lostheroes:black_marble_stair"
+    ]
+  },
+  "criteria": {
+    "has_black_marble": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lostheroes:black_marble"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lostheroes:black_marble_stair"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_black_marble",
+      "has_the_recipe"
+    ]
+  ]
+}

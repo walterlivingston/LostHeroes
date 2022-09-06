@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe1a87a3-4ffe-476c-afe7-4a2ca9108858" name="Changes" comment="Fresh Forge Environment" />
+    <list default="true" id="fe1a87a3-4ffe-476c-afe7-4a2ca9108858" name="Changes" comment="Merge remote-tracking branch 'origin/dev' into dev&#10;&#10;# Conflicts:&#10;#&#9;build.gradle&#10;#&#9;src/main/java/com/greenone/lostheroes/LostHeroes.java&#10;#&#9;src/main/resources/META-INF/mods.toml&#10;#&#9;src/main/resources/pack.mcmeta">
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +44,7 @@
     </system>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="1.18.1" />
@@ -52,17 +56,20 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2AxXycDbDsfOrysRH6lbZCO4h8y" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;X:/Games/Modding/Minecraft/LostHeroes/src/main/resources/assets/lostheroes/textures&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "X:/Games/Modding/Minecraft/LostHeroes/src/main/resources/assets/lostheroes/textures"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="X:\Games\Modding\Minecraft\LostHeroes\src\main\resources\assets\lostheroes\textures" />
@@ -173,7 +180,21 @@
       <option name="project" value="LOCAL" />
       <updated>1662505989528</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fresh Forge Environment">
+      <created>1662506366943</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1662506366943</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Merge remote-tracking branch 'origin/dev' into dev&#10;&#10;# Conflicts:&#10;#&#9;build.gradle&#10;#&#9;src/main/java/com/greenone/lostheroes/LostHeroes.java&#10;#&#9;src/main/resources/META-INF/mods.toml&#10;#&#9;src/main/resources/pack.mcmeta">
+      <created>1662506422646</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1662506422646</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -188,6 +209,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Fixed 1.16.5 Build Issues" />
     <MESSAGE value="Reorganized File Structure" />
     <MESSAGE value="Fixed Multiple Godly Enchantment Issue" />
@@ -195,6 +217,7 @@
     <MESSAGE value="Updated Textures" />
     <MESSAGE value="Updated CreativeTabs; Readded Greek Fire" />
     <MESSAGE value="Fresh Forge Environment" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fresh Forge Environment" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/dev' into dev&#10;&#10;# Conflicts:&#10;#&#9;build.gradle&#10;#&#9;src/main/java/com/greenone/lostheroes/LostHeroes.java&#10;#&#9;src/main/resources/META-INF/mods.toml&#10;#&#9;src/main/resources/pack.mcmeta" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/dev' into dev&#10;&#10;# Conflicts:&#10;#&#9;build.gradle&#10;#&#9;src/main/java/com/greenone/lostheroes/LostHeroes.java&#10;#&#9;src/main/resources/META-INF/mods.toml&#10;#&#9;src/main/resources/pack.mcmeta" />
   </component>
 </project>

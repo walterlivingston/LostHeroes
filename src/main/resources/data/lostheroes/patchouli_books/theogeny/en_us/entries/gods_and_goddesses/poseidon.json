@@ -1,0 +1,12 @@
+{
+  "name": "Poseidon",
+  "icon": "lostheroes:textures/mob_effect/blessing_of_poseidon.png",
+  "category": "gods_and_goddesses",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "text": "This is a test entry, but it should show up!"
+    }
+  ]
+}

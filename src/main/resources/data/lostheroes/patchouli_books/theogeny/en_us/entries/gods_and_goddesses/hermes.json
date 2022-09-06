@@ -1,0 +1,12 @@
+{
+  "name": "Hermes",
+  "icon": "lostheroes:textures/mob_effect/blessing_of_hermes.png",
+  "category": "gods_and_goddesses",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "text",
+      "text": "This is a test entry, but it should show up!"
+    }
+  ]
+}

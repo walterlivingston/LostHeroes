@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "lostheroes:copper_spear",
+    "lostheroes:tin_spear",
+    "lostheroes:lead_spear",
+    "lostheroes:silver_spear",
+    "lostheroes:bronze_spear",
+    "lostheroes:celestial_bronze_spear",
+    "lostheroes:imperial_gold_spear",
+    "lostheroes:bone_steel_spear",
+    "lostheroes:meteoric_iron_spear",
+    "lostheroes:adamantine_spear"
+  ]
+}

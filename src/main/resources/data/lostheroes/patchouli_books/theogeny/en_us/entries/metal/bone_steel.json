@@ -1,0 +1,17 @@
+{
+  "name": "Bone Steel",
+  "icon": "lostheroes:bone_steel_ingot",
+  "category": "metals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Bone Steel is an enchanted metal commonly used by the Norse.  It is known to be harmful to both mortal and supernatural creatures alike."
+    },
+    {
+      "type": "spotlight",
+      "item": "lostheroes:bone_steel_ingot",
+      "title": "Bone Steel",
+      "text": "Bone Steel can be crafted in a Forge as the combination of Bone and Iron."
+    }
+  ]
+}

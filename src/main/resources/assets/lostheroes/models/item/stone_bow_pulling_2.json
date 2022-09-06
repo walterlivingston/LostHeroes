@@ -1,0 +1,6 @@
+{
+  "parent": "lostheroes:item/stone_bow",
+  "textures": {
+    "layer0": "lostheroes:item/bronze_bow_pulling_2"
+  }
+}

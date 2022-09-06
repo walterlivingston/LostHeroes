@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lostheroes:bronze_chestplate"
+    ]
+  },
+  "criteria": {
+    "has_bronze": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "lostheroes:bronze_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lostheroes:bronze_chestplate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bronze",
+      "has_the_recipe"
+    ]
+  ]
+}

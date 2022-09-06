@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "lostheroes:copper_ingot",
+    "lostheroes:tin_ingot",
+    "lostheroes:lead_ingot",
+    "lostheroes:silver_ingot",
+    "lostheroes:bronze_ingot",
+    "lostheroes:celestial_bronze_ingot",
+    "lostheroes:imperial_gold_ingot",
+    "lostheroes:bone_steel_ingot",
+    "lostheroes:meteoric_iron_ingot",
+    "lostheroes:adamantine_ingot"
+  ]
+}

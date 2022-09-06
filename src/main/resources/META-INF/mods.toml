@@ -1,28 +1,31 @@
-modLoader="javafml"
-license="All Rights Reserved"
-loaderVersion="[36,)"
+modLoader="javafml" #mandatory
+loaderVersion="[36,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All rights reserved"
 issueTrackerURL="https://github.com/TheGreenOne/LostHeroes/issues"
-logoFile="logo.png"
 
-[[mods]]
-modId="lostheroes"
-displayName="LostHeroes"
+[[mods]] #mandatory
+modId="lostheroes" #mandatory
+version="${file.jarVersion}" #mandatory
+displayName="LostHeroes" #mandatory
 updateJSONURL="https://github.com/TheGreenOne/LostHeroes/blob/master/update.json" #optional
-version="2.2.2"
-authors="GreenOne"
+displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+logoFile="examplemod.png" #optional
 credits='Thanks to Rick Riordan for a wonderful book series and to CrazyOtters for gorgeous textures.'
+authors="GreenOne"
 description='''
 This mod is based on Rick Riordan's Heroes of Olympus book series.  This is a mod that adds the magic of Greek Mythology to Minecraft.
 '''
 
-[[dependencies.lostheroes]]
-modId="forge"
-mandatory=true
-versionRange="[36,)"
+[[dependencies.lostheroes]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[36,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
 
 [[dependencies.lostheroes]]
-modId="minecraft"
-mandatory=true
-versionRange="[1.16.5,1.17)"
-ordering="NONE"
-side="BOTH"
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,1.17)"
+    ordering="NONE"
+    side="BOTH"

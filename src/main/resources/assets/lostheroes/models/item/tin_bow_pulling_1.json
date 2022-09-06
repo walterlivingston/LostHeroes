@@ -1,6 +1,0 @@
-{
-  "parent": "lostheroes:item/tin_bow",
-  "textures": {
-    "layer0": "lostheroes:item/tin_bow_pulling_1"
-  }
-}

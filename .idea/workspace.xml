@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b092c35d-bc15-47b2-8265-54415e3e05f7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/greenone/lostheroes/common/LHContent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/greenone/lostheroes/common/deity/Deities.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/greenone/lostheroes/common/deity/Deity.java" afterDir="false" />
+    <list default="true" id="b092c35d-bc15-47b2-8265-54415e3e05f7" name="Changes" comment="Added Deity Class">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/greenone/lostheroes/common/deity/Blessing.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/greenone/lostheroes/common/deity/Blessings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/greenone/lostheroes/LostHeroes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/greenone/lostheroes/LostHeroes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/greenone/lostheroes/common/deity/Deities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/greenone/lostheroes/common/deity/Deities.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +110,14 @@
       <option name="presentableId" value="Default" />
       <updated>1662506662504</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added Deity Class">
+      <created>1662508739769</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1662508739769</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -123,5 +130,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Deity Class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Deity Class" />
   </component>
 </project>

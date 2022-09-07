@@ -14,6 +14,6 @@ public class LHPotions {
     public static void register(IEventBus eventBus){
         EFFECTS.register(eventBus);
         POTIONS.register(eventBus);
-        LostHeroes.LOGGER.info("Registered Potions & Effects XD");
+        LostHeroes.LOGGER.info("Registered Potions & Effects");
     }
 }

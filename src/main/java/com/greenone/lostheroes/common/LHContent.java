@@ -2,6 +2,7 @@ package com.greenone.lostheroes.common;
 
 import com.greenone.lostheroes.common.deity.Blessings;
 import com.greenone.lostheroes.common.deity.Deities;
+import com.greenone.lostheroes.common.player.capability.PlayerCapabilities;
 import com.greenone.lostheroes.common.potion.LHPotions;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
@@ -18,6 +19,6 @@ public class LHContent {
     }
 
     public static void init(ParallelDispatchEvent event){
-
+        PlayerCapabilities.register();
     }
 }

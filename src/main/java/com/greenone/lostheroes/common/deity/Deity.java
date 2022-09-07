@@ -13,9 +13,9 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Deity {
-    private static String name;
-    private static Item sacrifice;
-    private static Effect blessing;
+    private final String name;
+    private final Item sacrifice;
+    private final Effect blessing;
     private final Map<Attribute, AttributeModifier> attributeModifiers = Maps.newHashMap();
 
     Deity(String name_, Item sacrifice_, Effect blessing_){
@@ -24,7 +24,7 @@ public class Deity {
         blessing = blessing_;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
@@ -32,11 +32,11 @@ public class Deity {
         return getName().substring(0,1).toUpperCase() + getName().substring(1);
     }
 
-    public static Item getSacrifice() {
+    public Item getSacrifice() {
         return sacrifice;
     }
 
-    public static Effect getBlessing() {
+    public Effect getBlessing() {
         return blessing;
     }
 

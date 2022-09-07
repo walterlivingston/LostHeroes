@@ -1,6 +1,7 @@
 package com.greenone.lostheroes;
 
 import com.greenone.lostheroes.common.LHContent;
+import com.greenone.lostheroes.common.LHEventHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -41,6 +42,8 @@ public class LostHeroes
     }
 
     public void setup(FMLCommonSetupEvent event){
+        MinecraftForge.EVENT_BUS.register(new LHEventHandler());
+
         LHContent.init(event);
     }
 }

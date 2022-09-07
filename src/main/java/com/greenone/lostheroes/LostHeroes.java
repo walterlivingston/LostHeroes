@@ -35,6 +35,8 @@ public class LostHeroes
     public LostHeroes() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
+        LHContent.modConstruction();
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 

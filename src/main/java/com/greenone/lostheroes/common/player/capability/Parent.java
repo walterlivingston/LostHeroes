@@ -15,7 +15,6 @@ public class Parent implements IParent, ICapabilityProvider {
 
     private final LazyOptional<IParent> instance = LazyOptional.of(PlayerCapabilities.PARENT_CAPABILITY::getDefaultInstance);
 
-
     public Parent(){}
 
     @Override

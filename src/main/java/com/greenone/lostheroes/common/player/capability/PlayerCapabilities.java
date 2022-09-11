@@ -1,5 +1,6 @@
 package com.greenone.lostheroes.common.player.capability;
 
+import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.deity.Deities;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -17,7 +18,7 @@ public class PlayerCapabilities {
 
     public static void register()
     {
-        CapabilityManager.INSTANCE.register(IMana.class, new DefaultManaStorage<>(), () -> new Mana(10.0f));
+        CapabilityManager.INSTANCE.register(IMana.class, new DefaultManaStorage<>(), () -> new Mana(LHConfig.getMaxMana()));
         CapabilityManager.INSTANCE.register(IParent.class, new DefaultParentStorage<>(), Parent::new);
     }
 

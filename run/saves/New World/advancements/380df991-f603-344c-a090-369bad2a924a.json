@@ -23,6 +23,12 @@
     },
     "done": true
   },
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_by_something": "2022-09-12 05:26:03 -0500"
+    },
+    "done": true
+  },
   "minecraft:recipes/transportation/jungle_boat": {
     "criteria": {
       "in_water": "2022-09-11 20:05:31 -0500"
@@ -37,6 +43,7 @@
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
+      "minecraft:forest": "2022-09-12 05:26:05 -0500",
       "minecraft:river": "2022-09-11 20:09:36 -0500",
       "minecraft:savanna": "2022-09-11 20:08:08 -0500",
       "minecraft:plains": "2022-09-11 20:03:29 -0500"

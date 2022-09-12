@@ -1,14 +1,22 @@
 package com.greenone.lostheroes.common.player.capability;
 
+import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.deity.Deities;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber(modid = LostHeroes.MODID)
 public class PlayerCapabilities {
     @CapabilityInject(IMana.class)
     public static Capability<IMana> MANA_CAPABILITY = null;
@@ -19,6 +27,17 @@ public class PlayerCapabilities {
     public static void register() {
         CapabilityManager.INSTANCE.register(IMana.class, new DefaultManaStorage<>(), () -> new Mana(LHConfig.getMaxMana()));
         CapabilityManager.INSTANCE.register(IParent.class, new DefaultParentStorage<>(), Parent::new);
+    }
+
+    @SubscribeEvent
+    public void onCapabilitiesAttachEntity(AttachCapabilitiesEvent<Entity> event) {
+        if(event.getObject() == null) return;
+        if(event.getObject() instanceof PlayerEntity) {
+            event.addCapability(new ResourceLocation("mana", LostHeroes.MODID),
+                    new Mana(10.0f));
+            event.addCapability(new ResourceLocation("parent", LostHeroes.MODID),
+                    new Parent());
+        }
     }
 
     private static class DefaultManaStorage<T extends IMana> implements Capability.IStorage<T> {

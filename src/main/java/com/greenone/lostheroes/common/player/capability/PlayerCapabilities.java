@@ -16,16 +16,14 @@ public class PlayerCapabilities {
     @CapabilityInject(IParent.class)
     public static Capability<IParent> PARENT_CAPABILITY = null;
 
-    public static void register()
-    {
+    public static void register() {
         CapabilityManager.INSTANCE.register(IMana.class, new DefaultManaStorage<>(), () -> new Mana(LHConfig.getMaxMana()));
         CapabilityManager.INSTANCE.register(IParent.class, new DefaultParentStorage<>(), Parent::new);
     }
 
     private static class DefaultManaStorage<T extends IMana> implements Capability.IStorage<T> {
         @Override
-        public INBT writeNBT(Capability<T> capability, T instance, Direction side)
-        {
+        public INBT writeNBT(Capability<T> capability, T instance, Direction side) {
             if (!(instance instanceof Mana))
                 throw new RuntimeException("Cannot serialize to an instance that isn't the default implementation");
             CompoundNBT nbt = new CompoundNBT();
@@ -35,8 +33,7 @@ public class PlayerCapabilities {
         }
 
         @Override
-        public void readNBT(Capability<T> capability, T instance, Direction side, INBT nbt)
-        {
+        public void readNBT(Capability<T> capability, T instance, Direction side, INBT nbt) {
             if (!(instance instanceof Mana))
                 throw new RuntimeException("Cannot deserialize to an instance that isn't the default implementation");
             CompoundNBT tags = (CompoundNBT) nbt;
@@ -47,8 +44,7 @@ public class PlayerCapabilities {
 
     private static class DefaultParentStorage<T extends IParent> implements Capability.IStorage<T> {
         @Override
-        public INBT writeNBT(Capability<T> capability, T instance, Direction side)
-        {
+        public INBT writeNBT(Capability<T> capability, T instance, Direction side) {
             if (!(instance instanceof Parent))
                 throw new RuntimeException("Cannot serialize to an instance that isn't the default implementation");
             CompoundNBT nbt = new CompoundNBT();
@@ -58,8 +54,7 @@ public class PlayerCapabilities {
         }
 
         @Override
-        public void readNBT(Capability<T> capability, T instance, Direction side, INBT nbt)
-        {
+        public void readNBT(Capability<T> capability, T instance, Direction side, INBT nbt) {
             if (!(instance instanceof Parent))
                 throw new RuntimeException("Cannot deserialize to an instance that isn't the default implementation");
             CompoundNBT tags = (CompoundNBT) nbt;

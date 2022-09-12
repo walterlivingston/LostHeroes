@@ -13,8 +13,8 @@ public class LHContent {
     public static void modConstruction(){
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        Blessings.register();
         Deities.register();
+        Blessings.register();
         LHPotions.register(eventBus);
     }
 

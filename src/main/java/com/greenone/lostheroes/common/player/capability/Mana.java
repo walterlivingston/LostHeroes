@@ -33,8 +33,17 @@ public class Mana implements IMana, ICapabilityProvider {
         if(mana_ < maxMana) {
             mana = mana_;
             return true;
-        }else
-            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean consumeMana(float amount_){
+        if((mana - amount_) >= 0) {
+            mana -= amount_;
+            return true;
+        }
+        return false;
     }
 
     @Override

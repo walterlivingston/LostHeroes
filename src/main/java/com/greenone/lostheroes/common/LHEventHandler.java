@@ -25,8 +25,11 @@ public class LHEventHandler {
 
         abilityCheck(player, parentCap, manaCap);
 
-        player.abilities.mayfly = player.abilities.mayfly && !player.hasEffect(Blessings.ZEUS) && !player.isCreative() &&
-                !player.isSpectator();
+        if (!player.hasEffect(Blessings.ZEUS) && !player.isCreative() && !player.isSpectator() && player.abilities.mayfly) {
+            player.abilities.mayfly = false;
+            player.abilities.flying = false;
+            player.onUpdateAbilities();
+        }
     }
     @SubscribeEvent
     public void onCapabilitiesAttachEntity(AttachCapabilitiesEvent<Entity> event) {

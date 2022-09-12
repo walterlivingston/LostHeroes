@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class Parent implements IParent, ICapabilityProvider {
-    private Deity parent = Deities.ZEUS;
+    private Deity parent = Deities.HADES;
 
     private final LazyOptional<IParent> instance = LazyOptional.of(PlayerCapabilities.PARENT_CAPABILITY::getDefaultInstance);
 

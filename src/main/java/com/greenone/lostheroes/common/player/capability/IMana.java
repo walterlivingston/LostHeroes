@@ -7,4 +7,5 @@ public interface IMana {
     boolean consumeMana(float amount_);
     void addMana(float amount_);
     void fillMana();
+    void copy(IMana manaCap);
 }

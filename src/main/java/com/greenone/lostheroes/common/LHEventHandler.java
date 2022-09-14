@@ -15,6 +15,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -36,6 +37,20 @@ public class LHEventHandler {
     }
 
     @SubscribeEvent
+    public void onPlayerClone(final PlayerEvent.Clone event) {
+        PlayerEntity originalPlayer = event.getOriginal();
+        PlayerEntity newPlayer = event.getPlayer();
+
+        IParent oldParent = originalPlayer.getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElse(null);
+        IParent newParent = newPlayer.getCapability(PlayerCapabilities.PARENT_CAPABILITY, null).orElse(null);
+        IMana oldMana = originalPlayer.getCapability(PlayerCapabilities.MANA_CAPABILITY).orElse(null);
+        IMana newMana = newPlayer.getCapability(PlayerCapabilities.MANA_CAPABILITY, null).orElse(null);
+
+        newParent.copy(oldParent);
+        newMana.copy(oldMana);
+    }
+
+    @SubscribeEvent
     public static void registerCommands(RegisterCommandsEvent event) {
         LHCommands.register(event.getDispatcher());
     }
@@ -48,7 +63,7 @@ public class LHEventHandler {
     }
 
     private void abilityCheck(PlayerEntity player, IParent parentCap, IMana manaCap){
-        if(player != null && parentCap != null && manaCap != null){
+        if(player != null && parentCap != null && manaCap != null && parentCap.getParent() != null){
             parentCap.getParent().applyAttributeModifiers(player, player.getAttributes(), 1);
             player.addEffect(new EffectInstance(parentCap.getParent().getBlessing(), 1));
             switch(parentCap.getParent().getName()){

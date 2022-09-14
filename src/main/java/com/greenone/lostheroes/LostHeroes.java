@@ -55,8 +55,8 @@ public class LostHeroes
     }
 
     public void setup(FMLCommonSetupEvent event){
-        MinecraftForge.EVENT_BUS.register(new LHEventHandler());
         MinecraftForge.EVENT_BUS.register(new PlayerCapabilities());
+        MinecraftForge.EVENT_BUS.register(new LHEventHandler());
 
         LHContent.init(event);
     }

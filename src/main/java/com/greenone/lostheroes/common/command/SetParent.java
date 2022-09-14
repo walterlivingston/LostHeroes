@@ -34,8 +34,10 @@ public class SetParent{
     private static int setParent(CommandContext<CommandSource> source, Collection<ServerPlayerEntity> players, Deity parent) {
         for(ServerPlayerEntity player : players){
             IParent parentCap = player.getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElse(null);
-            parentCap.getParent().removeAttributeModifiers(player, player.getAttributes());
-            player.removeEffect(parentCap.getParent().getBlessing());
+            if(parentCap.getParent() != null){
+                parentCap.getParent().removeAttributeModifiers(player, player.getAttributes());
+                player.removeEffect(parentCap.getParent().getBlessing());
+            }
             parentCap.setParent(parent);
             sendFeedback(source, player, parent);
         }
@@ -45,8 +47,10 @@ public class SetParent{
     private static int setParent(CommandContext<CommandSource> source, Deity parent) throws CommandSyntaxException {
         ServerPlayerEntity player = source.getSource().getPlayerOrException();
         IParent parentCap = player.getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElse(null);
-        parentCap.getParent().removeAttributeModifiers(player, player.getAttributes());
-        player.removeEffect(parentCap.getParent().getBlessing());
+        if(parentCap.getParent() != null){
+            parentCap.getParent().removeAttributeModifiers(player, player.getAttributes());
+            player.removeEffect(parentCap.getParent().getBlessing());
+        }
         parentCap.setParent(parent);
         sendFeedback(source, parent);
         return 0;

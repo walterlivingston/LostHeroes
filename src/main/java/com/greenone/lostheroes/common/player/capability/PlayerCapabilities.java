@@ -25,7 +25,7 @@ public class PlayerCapabilities {
     public static Capability<IParent> PARENT_CAPABILITY = null;
 
     public static void register() {
-        CapabilityManager.INSTANCE.register(IMana.class, new DefaultManaStorage<>(), () -> new Mana(LHConfig.getMaxMana()));
+        CapabilityManager.INSTANCE.register(IMana.class, new DefaultManaStorage<>(), Mana::new);
         CapabilityManager.INSTANCE.register(IParent.class, new DefaultParentStorage<>(), Parent::new);
     }
 
@@ -33,9 +33,9 @@ public class PlayerCapabilities {
     public void onCapabilitiesAttachEntity(AttachCapabilitiesEvent<Entity> event) {
         if(event.getObject() == null) return;
         if(event.getObject() instanceof PlayerEntity) {
-            event.addCapability(new ResourceLocation("mana", LostHeroes.MODID),
-                    new Mana(10.0f));
-            event.addCapability(new ResourceLocation("parent", LostHeroes.MODID),
+            event.addCapability(new ResourceLocation(LostHeroes.MODID, "mana"),
+                    new Mana());
+            event.addCapability(new ResourceLocation(LostHeroes.MODID, "parent"),
                     new Parent());
         }
     }
@@ -48,6 +48,7 @@ public class PlayerCapabilities {
             CompoundNBT nbt = new CompoundNBT();
             Mana manaCap = (Mana) instance;
             nbt.putFloat("mana", manaCap.getMana());
+            nbt.putFloat("maxMana", manaCap.getMaxMana());
             return nbt;
         }
 

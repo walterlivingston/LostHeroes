@@ -1,5 +1,6 @@
 package com.greenone.lostheroes.common.player.capability;
 
+import com.greenone.lostheroes.common.config.LHConfig;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -10,13 +11,9 @@ import javax.annotation.Nullable;
 
 public class Mana implements IMana, ICapabilityProvider {
     private float mana;
-    private final float maxMana;
+    private final float maxMana = LHConfig.getMaxMana();
 
     private final LazyOptional<IMana> instance = LazyOptional.of(PlayerCapabilities.MANA_CAPABILITY::getDefaultInstance);
-
-    public Mana(float maxMana_){
-        maxMana = maxMana_;
-    }
 
     @Override
     public float getMana() {
@@ -57,6 +54,11 @@ public class Mana implements IMana, ICapabilityProvider {
     @Override
     public void fillMana() {
         mana = maxMana;
+    }
+
+    @Override
+    public void copy(IMana manaCap) {
+        this.mana = manaCap.getMana();
     }
 
     @Nonnull

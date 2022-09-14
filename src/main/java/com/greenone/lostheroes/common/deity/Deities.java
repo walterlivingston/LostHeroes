@@ -18,7 +18,7 @@ public class Deities {
 
     public static Deity getDeity(String name){
         for(Deity d : list){
-            if(Objects.equals(d.getName(), name))
+            if(d.getName().equalsIgnoreCase(name))
                 return d;
         }
         return null;

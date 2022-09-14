@@ -11,11 +11,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class Parent implements IParent, ICapabilityProvider {
-    private Deity parent = Deities.HADES;
+    private Deity parent = null;
 
     private final LazyOptional<IParent> instance = LazyOptional.of(PlayerCapabilities.PARENT_CAPABILITY::getDefaultInstance);
-
-    public Parent(){}
 
     @Override
     public Deity getParent() {
@@ -25,6 +23,11 @@ public class Parent implements IParent, ICapabilityProvider {
     @Override
     public void setParent(Deity parent_) {
         parent = parent_;
+    }
+
+    @Override
+    public void copy(IParent parentCap) {
+        this.parent = parentCap.getParent();
     }
 
     @Nonnull

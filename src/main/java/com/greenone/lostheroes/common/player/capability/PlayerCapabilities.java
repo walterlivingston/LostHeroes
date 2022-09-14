@@ -65,21 +65,21 @@ public class PlayerCapabilities {
     private static class DefaultParentStorage<T extends IParent> implements Capability.IStorage<T> {
         @Override
         public INBT writeNBT(Capability<T> capability, T instance, Direction side) {
-            if (!(instance instanceof Parent))
+            if (instance == null)
                 throw new RuntimeException("Cannot serialize to an instance that isn't the default implementation");
             CompoundNBT nbt = new CompoundNBT();
-            Parent parentCap = (Parent) instance;
-            nbt.putString("parent", parentCap.getParent().getName());
+//            Parent parentCap = (Parent) instance;
+            nbt.putString("parent", instance.getParent().getName());
             return nbt;
         }
 
         @Override
         public void readNBT(Capability<T> capability, T instance, Direction side, INBT nbt) {
-            if (!(instance instanceof Parent))
+            if (instance == null)
                 throw new RuntimeException("Cannot deserialize to an instance that isn't the default implementation");
             CompoundNBT tags = (CompoundNBT) nbt;
-            Parent parentCap = (Parent) instance;
-            parentCap.setParent(Deities.getDeity(tags.getString("parent")));
+//            Parent parentCap = (Parent) instance;
+            instance.setParent(Deities.getDeity(tags.getString("parent")));
         }
     }
 }

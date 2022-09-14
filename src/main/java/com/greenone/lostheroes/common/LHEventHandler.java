@@ -4,6 +4,7 @@ import com.greenone.lostheroes.LostHeroes;
 import com.greenone.lostheroes.common.command.LHCommands;
 import com.greenone.lostheroes.common.deity.Blessings;
 import com.greenone.lostheroes.common.deity.Deities;
+import com.greenone.lostheroes.common.deity.Deity;
 import com.greenone.lostheroes.common.player.capability.*;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
@@ -11,6 +12,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -19,8 +21,23 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Random;
+
 @Mod.EventBusSubscriber(modid = LostHeroes.MODID)
 public class LHEventHandler {
+
+    @SubscribeEvent
+    public void onPlayerJoined(final PlayerEvent.PlayerLoggedInEvent event) {
+        IParent parentCap = event.getPlayer().getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElseThrow(() -> new IllegalArgumentException("No Capability at Login"));
+        if (parentCap.getParent() == null) {
+            Random rand = new Random();
+            Object[] values = Deities.list.toArray();
+            parentCap.setParent((Deity) values[rand.nextInt(values.length)]);
+            event.getPlayer().sendMessage(new StringTextComponent("You have been claimed by " + parentCap.getParent().getFormattedName()), event.getPlayer().getUUID());
+//            playerCap.sync(event.getPlayer());
+        }
+    }
+
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event){
         PlayerEntity player = event.player;
@@ -42,9 +59,9 @@ public class LHEventHandler {
         PlayerEntity newPlayer = event.getPlayer();
 
         IParent oldParent = originalPlayer.getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElse(null);
-        IParent newParent = newPlayer.getCapability(PlayerCapabilities.PARENT_CAPABILITY, null).orElse(null);
+        IParent newParent = newPlayer.getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElse(null);
         IMana oldMana = originalPlayer.getCapability(PlayerCapabilities.MANA_CAPABILITY).orElse(null);
-        IMana newMana = newPlayer.getCapability(PlayerCapabilities.MANA_CAPABILITY, null).orElse(null);
+        IMana newMana = newPlayer.getCapability(PlayerCapabilities.MANA_CAPABILITY).orElse(null);
 
         newParent.copy(oldParent);
         newMana.copy(oldMana);

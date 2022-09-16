@@ -1,5 +1,6 @@
 package com.greenone.lostheroes;
 
+import com.greenone.lostheroes.client.util.LHKeybindings;
 import com.greenone.lostheroes.common.LHContent;
 import com.greenone.lostheroes.common.LHEventHandler;
 import com.greenone.lostheroes.common.config.Config;
@@ -39,7 +40,8 @@ public class LostHeroes
     public static final Logger LOGGER = LogManager.getLogger();
 
     public LostHeroes() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
         // register configs
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.client_config);
@@ -54,10 +56,15 @@ public class LostHeroes
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    public void setup(FMLCommonSetupEvent event){
+    public void commonSetup(FMLCommonSetupEvent event){
         MinecraftForge.EVENT_BUS.register(new PlayerCapabilities());
         MinecraftForge.EVENT_BUS.register(new LHEventHandler());
 
         LHContent.init(event);
+    }
+
+    public void clientSetup(FMLClientSetupEvent event){
+        MinecraftForge.EVENT_BUS.register(new LHKeybindings());
+        LHKeybindings.register();
     }
 }

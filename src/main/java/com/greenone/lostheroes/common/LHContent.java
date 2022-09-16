@@ -2,6 +2,7 @@ package com.greenone.lostheroes.common;
 
 import com.greenone.lostheroes.common.deity.Blessings;
 import com.greenone.lostheroes.common.deity.Deities;
+import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.player.capability.PlayerCapabilities;
 import com.greenone.lostheroes.common.potion.LHPotions;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,5 +23,7 @@ public class LHContent {
         LHPotions.register(eventBus);
 
         PlayerCapabilities.register();
+
+        LHNetworkHandler.registerMessages();
     }
 }

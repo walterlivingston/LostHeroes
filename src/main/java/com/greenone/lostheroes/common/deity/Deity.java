@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.deity;
 
 import com.google.common.collect.Maps;
+import com.greenone.lostheroes.common.deity.abilities.AbstractAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -9,6 +10,7 @@ import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Effect;
 
+import java.lang.reflect.Constructor;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,12 +18,14 @@ public class Deity {
     private final String name;
     private final Item sacrifice;
     private final Effect blessing;
+    private final AbstractAbility abilities;
     private final Map<Attribute, AttributeModifier> attributeModifiers = Maps.newHashMap();
 
-    Deity(String name_, Item sacrifice_, Effect blessing_){
+    Deity(String name_, Item sacrifice_, Effect blessing_, AbstractAbility abilities_){
         name = name_;
         sacrifice = sacrifice_;
         blessing = blessing_;
+        abilities = abilities_;
     }
 
     public String getName() {
@@ -38,6 +42,10 @@ public class Deity {
 
     public Effect getBlessing() {
         return blessing;
+    }
+
+    public AbstractAbility getAbilities() {
+        return abilities;
     }
 
     public Deity addAttributeModifier(Attribute attribute, String uuid, double amount, AttributeModifier.Operation operation) {

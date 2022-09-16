@@ -1,13 +1,16 @@
 package com.greenone.lostheroes.common.deity;
 
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.Items;
+import net.minecraftforge.common.ForgeMod;
 
 import java.util.*;
 
 public class Deities {
     public static final List<Deity> list = new ArrayList<>();
     public static final Deity ZEUS = new Deity("zeus", Items.OAK_SAPLING, Blessings.ZEUS);
-    public static final Deity POSEIDON = new Deity("poseidon", Items.TRIDENT, Blessings.POSEIDON);
+    public static final Deity POSEIDON = new Deity("poseidon", Items.TRIDENT, Blessings.POSEIDON)
+            .addAttributeModifier(ForgeMod.SWIM_SPEED.get(), "772a0873-a9ad-4ddd-a282-46704542b4d3", 1.2, AttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final Deity HADES = new Deity("hades", Items.SKELETON_SKULL, Blessings.HADES);
 
     public static void register(){

@@ -11,14 +11,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class LHContent {
 
     public static void modConstruction(){
+
+    }
+
+    public static void init(ParallelDispatchEvent event){
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         Deities.register();
         Blessings.register();
         LHPotions.register(eventBus);
-    }
 
-    public static void init(ParallelDispatchEvent event){
         PlayerCapabilities.register();
     }
 }

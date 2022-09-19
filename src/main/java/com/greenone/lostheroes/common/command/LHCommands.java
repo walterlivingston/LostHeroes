@@ -8,6 +8,7 @@ public class LHCommands {
     public static void register(CommandDispatcher<CommandSource> dispatcher){
         dispatcher.register(Commands.literal("lh")
                 .then(SetParent.register(dispatcher))
+                .then(SetMana.register(dispatcher))
         );
     }
 }

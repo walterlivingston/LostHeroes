@@ -1,12 +1,17 @@
 package com.greenone.lostheroes;
 
+import com.greenone.lostheroes.client.renderer.entity.LHSpriteRenderer;
 import com.greenone.lostheroes.client.util.LHKeybindings;
 import com.greenone.lostheroes.common.LHContent;
 import com.greenone.lostheroes.common.LHEventHandler;
 import com.greenone.lostheroes.common.config.Config;
+import com.greenone.lostheroes.common.entity.LHEntities;
+import com.greenone.lostheroes.common.entity.projectile.WaterBallProjectile;
 import com.greenone.lostheroes.common.player.capability.PlayerCapabilities;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.EventBus;
@@ -14,6 +19,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -64,6 +70,8 @@ public class LostHeroes
     }
 
     public void clientSetup(FMLClientSetupEvent event){
+        RenderingRegistry.registerEntityRenderingHandler(LHEntities.WATER_BALL, new LHSpriteRenderer.RenderFactory<>());
+
         MinecraftForge.EVENT_BUS.register(new LHKeybindings());
         LHKeybindings.register();
     }

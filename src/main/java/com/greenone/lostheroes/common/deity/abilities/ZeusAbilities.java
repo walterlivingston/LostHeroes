@@ -18,7 +18,7 @@ public class ZeusAbilities extends AbstractAbility{
         BlockPos pos = new BlockPos(player.getX(), player.getY(), player.getZ());
         if(player.level.canSeeSky(pos) && (player.isCreative() || manaCap.consumeMana(majorManaReq(manaCap.getMaxMana())))){
             LightningBoltEntity lightningBoltEntity = EntityType.LIGHTNING_BOLT.create(player.level);
-            lightningBoltEntity.moveTo(LHUtils.getLookingAt(player, 64));
+            lightningBoltEntity.moveTo(LHUtils.getLookingAt(player, 64).getLocation());
             lightningBoltEntity.setCause(player instanceof ServerPlayerEntity ? (ServerPlayerEntity) player : null);
             player.level.addFreshEntity(lightningBoltEntity);
             SoundEvent soundEvent = SoundEvents.TRIDENT_THUNDER;

@@ -8,7 +8,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 public class LHUtils {
-    public static Vector3d getLookingAt(PlayerEntity player, int distance) {
+    public static RayTraceResult getLookingAt(PlayerEntity player, int distance) {
         Vector3d output;
         World world = player.level;
         float f = player.xRot; // Pitch
@@ -21,8 +21,6 @@ public class LHUtils {
         float f6 = f3 * f4;
         float f7 = f2 * f4;
         Vector3d vec3d1 = vec3d.add((double) f6*distance, (double) f5 * distance, (double) f7 * distance);
-        RayTraceResult trace = world.clip(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player));
-        output = trace.getLocation();
-        return output;
+        return world.clip(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player));
     }
 }

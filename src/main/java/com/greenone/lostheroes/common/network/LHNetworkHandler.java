@@ -2,8 +2,11 @@ package com.greenone.lostheroes.common.network;
 
 import com.greenone.lostheroes.LostHeroes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
+
+import java.util.Optional;
 
 public class LHNetworkHandler {
     public static SimpleChannel INSTANCE;

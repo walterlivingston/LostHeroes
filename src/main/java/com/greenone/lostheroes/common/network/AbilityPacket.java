@@ -16,13 +16,13 @@ public class AbilityPacket extends AbstractPacket{
         this.type = buf.readEnum(Type.class);
     }
 
+    public AbilityPacket(Type typeIn){
+        this.type = typeIn;
+    }
+
     @Override
     public void toBytes(PacketBuffer buf) {
         buf.writeEnum(this.type);
-    }
-
-    public AbilityPacket(Type typeIn){
-        this.type = typeIn;
     }
 
     @Override

@@ -1,19 +1,24 @@
 package com.greenone.lostheroes.common;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.client.gui.HUD;
 import com.greenone.lostheroes.common.command.LHCommands;
+import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.deity.Blessings;
 import com.greenone.lostheroes.common.deity.Deities;
 import com.greenone.lostheroes.common.deity.Deity;
-import com.greenone.lostheroes.common.player.capability.*;
+import com.greenone.lostheroes.common.player.capability.IMana;
+import com.greenone.lostheroes.common.player.capability.IParent;
+import com.greenone.lostheroes.common.player.capability.PlayerCapabilities;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
@@ -25,24 +30,30 @@ import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = LostHeroes.MODID)
 public class LHEventHandler {
+    public static HUD hud;
 
     @SubscribeEvent
     public void onPlayerJoined(final PlayerEvent.PlayerLoggedInEvent event) {
-        IParent parentCap = event.getPlayer().getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElseThrow(() -> new IllegalArgumentException("No Capability at Login"));
+        IParent parentCap = event.getPlayer().getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElseThrow(() -> new IllegalArgumentException("No Parent Capability at Login"));
+
         if (parentCap.getParent() == null) {
             Random rand = new Random();
             Object[] values = Deities.list.toArray();
             parentCap.setParent((Deity) values[rand.nextInt(values.length)]);
             event.getPlayer().sendMessage(new StringTextComponent("You have been claimed by " + parentCap.getParent().getFormattedName()), event.getPlayer().getUUID());
-//            playerCap.sync(event.getPlayer());
+            parentCap.sync(event.getPlayer());
         }
+        hud = new HUD(Minecraft.getInstance());
     }
 
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event){
         PlayerEntity player = event.player;
+
         IMana manaCap = player.getCapability(PlayerCapabilities.MANA_CAPABILITY).orElse(null);
         IParent parentCap = player.getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElse(null);
+        manaCap.sync(player);
+        parentCap.sync(player);
 
         abilityCheck(player, parentCap, manaCap);
 
@@ -77,6 +88,20 @@ public class LHEventHandler {
         if(event.getTarget() != null && event.getTarget().hasEffect(Blessings.HADES))
             if (event.getEntityLiving().getMobType() == CreatureAttribute.UNDEAD)
                 ((MobEntity) event.getEntityLiving()).setTarget(null);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public void onRenderPost(RenderGameOverlayEvent.Post event){
+        if(event.getType() == RenderGameOverlayEvent.ElementType.VIGNETTE){
+
+        }
+        if(event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE){
+            new HUD(Minecraft.getInstance()).render(event.getMatrixStack(), (float) LHConfig.getHUDScale());
+//            if(Minecraft.getInstance().player.hasEffect(LHEffects.RAGE)){
+//                LHUtils.renderRageOverlay();
+//            }
+        }
     }
 
     private void abilityCheck(PlayerEntity player, IParent parentCap, IMana manaCap){

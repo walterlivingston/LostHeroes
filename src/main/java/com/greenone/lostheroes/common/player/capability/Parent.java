@@ -1,18 +1,20 @@
 package com.greenone.lostheroes.common.player.capability;
 
-import com.greenone.lostheroes.common.deity.Deities;
 import com.greenone.lostheroes.common.deity.Deity;
+import com.greenone.lostheroes.common.network.CapSyncPacket;
+import com.greenone.lostheroes.common.network.LHNetworkHandler;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class Parent implements IParent, ICapabilitySerializable<CompoundNBT> {
+public class Parent implements IParent {
     private Deity parent = null;
 
     private final LazyOptional<IParent> instance = LazyOptional.of(PlayerCapabilities.PARENT_CAPABILITY::getDefaultInstance);
@@ -30,6 +32,14 @@ public class Parent implements IParent, ICapabilitySerializable<CompoundNBT> {
     @Override
     public void copy(IParent parentCap) {
         this.parent = parentCap.getParent();
+    }
+
+    @Override
+    public void sync(PlayerEntity player) {
+        if (!player.getCommandSenderWorld().isClientSide()){
+            LHNetworkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+                    new CapSyncPacket(player, (CompoundNBT) PlayerCapabilities.PARENT_CAPABILITY.writeNBT(this, null), CapSyncPacket.Type.PARENT));
+        }
     }
 
     @Nonnull

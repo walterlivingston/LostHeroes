@@ -1,6 +1,10 @@
 package com.greenone.lostheroes.common.player.capability;
 
-public interface IMana {
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+
+public interface IMana extends ICapabilitySerializable<CompoundNBT> {
     float getMana();
     float getMaxMana();
     boolean setMana(float mana_);
@@ -8,4 +12,5 @@ public interface IMana {
     void addMana(float amount_);
     void fillMana();
     void copy(IMana manaCap);
+    void sync(PlayerEntity player);
 }

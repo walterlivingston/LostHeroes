@@ -1,7 +1,6 @@
 package com.greenone.lostheroes.common.player.capability;
 
 import com.greenone.lostheroes.LostHeroes;
-import com.greenone.lostheroes.common.config.LHConfig;
 import com.greenone.lostheroes.common.deity.Deities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -69,7 +68,7 @@ public class PlayerCapabilities {
                 throw new RuntimeException("Cannot serialize to an instance that isn't the default implementation");
             CompoundNBT nbt = new CompoundNBT();
 //            Parent parentCap = (Parent) instance;
-            nbt.putString("parent", instance.getParent().getName());
+            if(instance.getParent() != null) nbt.putString("parent", instance.getParent().getName());
             return nbt;
         }
 

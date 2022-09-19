@@ -14,6 +14,7 @@ public class LHContent {
 
     public static void modConstruction(){
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        LHNetworkHandler.registerMessages();
 
         LHEntities.register(eventBus);
     }
@@ -26,7 +27,5 @@ public class LHContent {
         LHPotions.register(eventBus);
 
         PlayerCapabilities.register();
-
-        LHNetworkHandler.registerMessages();
     }
 }

@@ -11,7 +11,8 @@ import java.util.*;
 
 public class Deities {
     public static final List<Deity> list = new ArrayList<>();
-    public static final Deity ZEUS = new Deity("zeus", Items.OAK_SAPLING, Blessings.ZEUS, new ZeusAbilities());
+    public static final Deity ZEUS = new Deity("zeus", Items.OAK_SAPLING, Blessings.ZEUS, new ZeusAbilities())
+            .addAttributeModifier(ForgeMod.ENTITY_GRAVITY.get(), "99fdff7c-314c-4899-81ce-2c3277b46387", -0.01, AttributeModifier.Operation.ADDITION);
     public static final Deity POSEIDON = new Deity("poseidon", Items.TRIDENT, Blessings.POSEIDON, new PoseidonAbilities())
             .addAttributeModifier(ForgeMod.SWIM_SPEED.get(), "772a0873-a9ad-4ddd-a282-46704542b4d3", 1.2, AttributeModifier.Operation.MULTIPLY_TOTAL);
     public static final Deity HADES = new Deity("hades", Items.SKELETON_SKULL, Blessings.HADES, new HadesAbilities());

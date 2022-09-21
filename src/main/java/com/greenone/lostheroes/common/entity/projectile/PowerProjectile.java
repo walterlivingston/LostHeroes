@@ -24,6 +24,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+// (TODO) Add Attack Damage and Particle Modifiers
 public abstract class PowerProjectile extends DamagingProjectileEntity implements IRendersAsItem {
     private static final DataParameter<ItemStack> DATA_ITEM_STACK = EntityDataManager.defineId(WaterBallProjectile.class, DataSerializers.ITEM_STACK);
 

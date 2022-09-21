@@ -1,6 +1,7 @@
 package com.greenone.lostheroes.common.entity;
 
 import com.greenone.lostheroes.LostHeroes;
+import com.greenone.lostheroes.common.entity.projectile.GustProjectile;
 import com.greenone.lostheroes.common.entity.projectile.LightRayProjectile;
 import com.greenone.lostheroes.common.entity.projectile.WaterBallProjectile;
 import net.minecraft.entity.EntityClassification;
@@ -14,10 +15,13 @@ public class LHEntities {
 
     public static EntityType<WaterBallProjectile> WATER_BALL = EntityType.Builder.<WaterBallProjectile>of(WaterBallProjectile::new, EntityClassification.MISC).sized(0.25F, 0.25F).build(LostHeroes.MODID+":water_ball");
     public static EntityType<LightRayProjectile> LIGHT_RAY = EntityType.Builder.<LightRayProjectile>of(LightRayProjectile::new, EntityClassification.MISC).sized(0.25F, 0.25F).build(LostHeroes.MODID+":light_ray");
+    public static EntityType<GustProjectile> GUST = EntityType.Builder.<GustProjectile>of(GustProjectile::new, EntityClassification.MISC).sized(1.0F, 1.0F).build(LostHeroes.MODID+":gust");
+
 
     public static void register(IEventBus eventBus) {
         ENTITIES.register("water_ball", () -> WATER_BALL);
         ENTITIES.register("light_ray", () -> LIGHT_RAY);
+        ENTITIES.register("gust", () -> GUST);
 
         ENTITIES.register(eventBus);
     }

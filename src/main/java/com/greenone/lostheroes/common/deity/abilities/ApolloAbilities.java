@@ -34,7 +34,7 @@ public class ApolloAbilities extends AbstractAbility {
 
     @Override
     public float majorManaReq(float maxMana) {
-        return 0;
+        return maxMana / 4;
     }
 
     @Override

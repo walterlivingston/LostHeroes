@@ -10,14 +10,17 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
 
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_C;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_V;
 
 @Mod.EventBusSubscriber(modid = LostHeroes.MODID)
 public class LHKeybindings {
     public static KeyBinding MAJOR_ABILITY = new KeyBinding(LostHeroes.MODID + "key.major_ability", GLFW_KEY_V, "key.categories" + LostHeroes.MODID);
+    public static KeyBinding MINOR_ABILITY = new KeyBinding(LostHeroes.MODID + "key.minor_ability", GLFW_KEY_C, "key.categories" + LostHeroes.MODID);
 
     public static void register(){
         ClientRegistry.registerKeyBinding(MAJOR_ABILITY);
+        ClientRegistry.registerKeyBinding(MINOR_ABILITY);
     }
 
     @SubscribeEvent
@@ -25,6 +28,9 @@ public class LHKeybindings {
         if(event.getAction() == GLFW.GLFW_PRESS) {
             if (LHKeybindings.MAJOR_ABILITY.isDown()) {
                 LHNetworkHandler.INSTANCE.sendToServer(new AbilityPacket(AbilityPacket.Type.MAJOR));
+            }
+            if (LHKeybindings.MINOR_ABILITY.isDown()) {
+                LHNetworkHandler.INSTANCE.sendToServer(new AbilityPacket(AbilityPacket.Type.MINOR));
             }
         }
     }

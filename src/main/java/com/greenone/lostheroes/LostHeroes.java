@@ -55,6 +55,8 @@ public class LostHeroes
 
     public void clientSetup(FMLClientSetupEvent event){
         RenderingRegistry.registerEntityRenderingHandler(LHEntities.WATER_BALL, new LHSpriteRenderer.RenderFactory<>());
+        RenderingRegistry.registerEntityRenderingHandler(LHEntities.LIGHT_RAY, new LHSpriteRenderer.RenderFactory<>());
+
 
         MinecraftForge.EVENT_BUS.register(new LHKeybindings());
         LHKeybindings.register();

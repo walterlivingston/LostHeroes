@@ -27,16 +27,16 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public abstract class PowerProjectile extends DamagingProjectileEntity implements IRendersAsItem {
     private static final DataParameter<ItemStack> DATA_ITEM_STACK = EntityDataManager.defineId(WaterBallProjectile.class, DataSerializers.ITEM_STACK);
 
-    public PowerProjectile(EntityType<? extends WaterBallProjectile> p_i50147_1_, World p_i50147_2_) {
+    public PowerProjectile(EntityType<? extends PowerProjectile> p_i50147_1_, World p_i50147_2_) {
         super(p_i50147_1_, p_i50147_2_);
     }
 
-    public PowerProjectile(EntityType<? extends DamagingProjectileEntity> p_i50174_1_, double p_i50174_2_, double p_i50174_4_, double p_i50174_6_, double p_i50174_8_, double p_i50174_10_, double p_i50174_12_, World p_i50174_14_) {
+    public PowerProjectile(EntityType<? extends PowerProjectile> p_i50174_1_, double p_i50174_2_, double p_i50174_4_, double p_i50174_6_, double p_i50174_8_, double p_i50174_10_, double p_i50174_12_, World p_i50174_14_) {
         super(p_i50174_1_, p_i50174_2_, p_i50174_4_, p_i50174_6_, p_i50174_8_, p_i50174_10_, p_i50174_12_, p_i50174_14_);
 
     }
 
-    public PowerProjectile(EntityType<? extends DamagingProjectileEntity> p_i50175_1_, LivingEntity p_i50175_2_, double p_i50175_3_, double p_i50175_5_, double p_i50175_7_, World p_i50175_9_) {
+    public PowerProjectile(EntityType<? extends PowerProjectile> p_i50175_1_, LivingEntity p_i50175_2_, double p_i50175_3_, double p_i50175_5_, double p_i50175_7_, World p_i50175_9_) {
         super(p_i50175_1_, p_i50175_2_, p_i50175_3_, p_i50175_5_, p_i50175_7_, p_i50175_9_);
     }
 

@@ -39,6 +39,7 @@ public class SetParent{
                 player.removeEffect(parentCap.getParent().getBlessing());
             }
             parentCap.setParent(parent);
+            parentCap.sync(player);
             sendFeedback(source, player, parent);
         }
         return 0;
@@ -52,6 +53,7 @@ public class SetParent{
             player.removeEffect(parentCap.getParent().getBlessing());
         }
         parentCap.setParent(parent);
+        parentCap.sync(player);
         sendFeedback(source, parent);
         return 0;
     }

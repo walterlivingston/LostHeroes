@@ -31,12 +31,12 @@ public class Mana implements IMana {
     }
 
     @Override
-    public boolean setMana(float mana_) {
-        if(mana_ < maxMana) {
+    public void setMana(float mana_) {
+        if(mana_ <= maxMana)
             mana = mana_;
-            return true;
-        }
-        return false;
+        else
+            mana = maxMana;
+
     }
 
     @Override

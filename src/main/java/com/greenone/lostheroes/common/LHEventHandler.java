@@ -52,17 +52,20 @@ public class LHEventHandler {
 
         IMana manaCap = player.getCapability(PlayerCapabilities.MANA_CAPABILITY).orElse(null);
         IParent parentCap = player.getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElse(null);
-        manaCap.sync(player);
-        parentCap.sync(player);
+        if(!player.isDeadOrDying()) {
+            manaCap.sync(player);
+            parentCap.sync(player);
 
-        if (manaCap.getMana() < manaCap.getMaxMana()) manaCap.setMana(manaCap.getMana() + 0.00001F);
 
-        abilityCheck(player, parentCap, manaCap);
+            if (manaCap.getMana() < manaCap.getMaxMana()) manaCap.setMana(manaCap.getMana() + 0.00001F);
 
-        if (!player.hasEffect(Blessings.ZEUS) && !player.isCreative() && !player.isSpectator() && player.abilities.mayfly) {
-            player.abilities.mayfly = false;
-            player.abilities.flying = false;
-            player.onUpdateAbilities();
+            abilityCheck(player, parentCap, manaCap);
+
+            if (!player.hasEffect(Blessings.ZEUS) && !player.isCreative() && !player.isSpectator() && player.abilities.mayfly) {
+                player.abilities.mayfly = false;
+                player.abilities.flying = false;
+                player.onUpdateAbilities();
+            }
         }
     }
 

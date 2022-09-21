@@ -7,7 +7,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 public interface IMana extends ICapabilitySerializable<CompoundNBT> {
     float getMana();
     float getMaxMana();
-    boolean setMana(float mana_);
+    void setMana(float mana_);
     boolean consumeMana(float amount_);
     void addMana(float amount_);
     void fillMana();

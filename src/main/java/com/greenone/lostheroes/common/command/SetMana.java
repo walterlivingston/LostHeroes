@@ -29,6 +29,7 @@ public class SetMana {
         for(ServerPlayerEntity player : players){
             IMana manaCap = player.getCapability(PlayerCapabilities.MANA_CAPABILITY).orElse(null);
             manaCap.setMana(mana);
+            manaCap.sync(player);
             sendFeedback(source, player, mana);
         }
         return 0;
@@ -38,6 +39,7 @@ public class SetMana {
         ServerPlayerEntity player = source.getSource().getPlayerOrException();
         IMana manaCap = player.getCapability(PlayerCapabilities.MANA_CAPABILITY).orElse(null);
         manaCap.setMana(mana);
+        manaCap.sync(player);
         sendFeedback(source, mana);
         return 0;
     }

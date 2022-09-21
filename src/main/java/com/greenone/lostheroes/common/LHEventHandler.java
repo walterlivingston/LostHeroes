@@ -55,6 +55,8 @@ public class LHEventHandler {
         manaCap.sync(player);
         parentCap.sync(player);
 
+        if (manaCap.getMana() < manaCap.getMaxMana()) manaCap.setMana(manaCap.getMana() + 0.00001F);
+
         abilityCheck(player, parentCap, manaCap);
 
         if (!player.hasEffect(Blessings.ZEUS) && !player.isCreative() && !player.isSpectator() && player.abilities.mayfly) {

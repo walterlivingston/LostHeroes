@@ -18,7 +18,7 @@ import java.util.Collection;
 public class SetMana {
     public static ArgumentBuilder<CommandSource, ?> register(CommandDispatcher<CommandSource> dispatcher) {
         return Commands
-                .literal("setparent").requires(cs -> cs.hasPermission(2))
+                .literal("setmana").requires(cs -> cs.hasPermission(2))
                 .then(Commands.argument("amount", FloatArgumentType.floatArg()).executes(cs ->
                                 setMana(cs, FloatArgumentType.getFloat(cs, "amount")))
                 .then(Commands.argument("player", EntityArgument.players()).executes((cs) ->

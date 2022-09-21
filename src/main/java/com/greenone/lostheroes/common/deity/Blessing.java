@@ -43,6 +43,9 @@ public class Blessing extends Effect {
             if (this == Blessings.HADES){
 
             }
+            if (this == Blessings.APOLLO){
+
+            }
         }
     }
 

@@ -72,13 +72,17 @@ public class Deity {
     }
 
     public void applyAttributeModifiers(LivingEntity p_111185_1_, AttributeModifierManager attModManager, int amount) {
-        for(Map.Entry<Attribute, AttributeModifier> entry : this.attributeModifiers.entrySet()) {
-            ModifiableAttributeInstance modifiableattributeinstance = attModManager.getInstance(entry.getKey());
-            if (modifiableattributeinstance != null) {
-                AttributeModifier attributemodifier = entry.getValue();
-                modifiableattributeinstance.removeModifier(attributemodifier);
-                modifiableattributeinstance.addPermanentModifier(new AttributeModifier(attributemodifier.getId(), entry.getValue().getId() + " " + amount, this.getAttributeModifierValue(amount, attributemodifier), attributemodifier.getOperation()));
+        if(this != Deities.APOLLO || p_111185_1_.level.getDayTime() < 13000){
+            for(Map.Entry<Attribute, AttributeModifier> entry : this.attributeModifiers.entrySet()) {
+                ModifiableAttributeInstance modifiableattributeinstance = attModManager.getInstance(entry.getKey());
+                if (modifiableattributeinstance != null) {
+                    AttributeModifier attributemodifier = entry.getValue();
+                    modifiableattributeinstance.removeModifier(attributemodifier);
+                    modifiableattributeinstance.addPermanentModifier(new AttributeModifier(attributemodifier.getId(), entry.getValue().getId() + " " + amount, this.getAttributeModifierValue(amount, attributemodifier), attributemodifier.getOperation()));
+                }
             }
+        }else{
+            removeAttributeModifiers(p_111185_1_, attModManager);
         }
     }
 }

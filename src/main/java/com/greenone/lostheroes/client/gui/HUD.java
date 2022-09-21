@@ -108,6 +108,9 @@ public class HUD extends AbstractGui {
         if (player.hasEffect(Blessings.HADES) && Blessings.HADES != parentCap.getParent().getBlessing()) {
             this.blit(matrixStack, hudWidthOffset + hud_width / 2 - small_icon_width / 2 - 37, hudHeightOffset + hud_height / 2 + small_icon_height / 2 + 15, 212 + 2 * small_icon_width - 2, 201, small_icon_width - 2, small_icon_height - 2);
         }
+        if(player.hasEffect(Blessings.APOLLO) && Blessings.APOLLO!=parentCap.getParent().getBlessing()){
+            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 52, hudHeightOffset + hud_height/2 + small_icon_height/2 + 63,  212 + 2*small_icon_height-2, 201 + small_icon_height-1, small_icon_width - 2, small_icon_height - 2);
+        }
 //        if(player.hasEffect(Blessings.ATHENA) && Blessings.ATHENA!=parentCap.getParent().getBlessing()){
 //            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 41, hudHeightOffset + hud_height/2 + small_icon_height/2 + 15,  212 + 3*small_icon_width-3, 201, small_icon_width - 2, small_icon_height - 2);
 //        }
@@ -116,9 +119,6 @@ public class HUD extends AbstractGui {
 //        }
 //        if(player.hasEffect(Blessings.APHRODITE) && Blessings.APHRODITE!=parentCap.getParent().getBlessing()){
 //            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 55, hudHeightOffset + hud_height/2 + small_icon_height/2 + 41,  212 + small_icon_width-1, 201 + small_icon_height-1, small_icon_width - 2, small_icon_height - 2);
-//        }
-//        if(player.hasEffect(Blessings.APOLLO) && Blessings.APOLLO!=parentCap.getParent().getBlessing()){
-//            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 - 52, hudHeightOffset + hud_height/2 + small_icon_height/2 + 63,  212 + 2*small_icon_height-2, 201 + small_icon_height-1, small_icon_width - 2, small_icon_height - 2);
 //        }
 //        if(player.hasEffect(Blessings.ARTEMIS) && Blessings.ARTEMIS!=parentCap.getParent().getBlessing()){
 //            this.blit(matrixStack, hudWidthOffset + hud_width/2 - small_icon_width/2 + 55, hudHeightOffset + hud_height/2 + small_icon_height/2 + 63,  212 + 3*small_icon_height-3, 201 + small_icon_height-1, small_icon_width - 2, small_icon_height - 2);

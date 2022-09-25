@@ -10,6 +10,7 @@ import com.greenone.lostheroes.common.deity.Deity;
 import com.greenone.lostheroes.common.player.capability.IMana;
 import com.greenone.lostheroes.common.player.capability.IParent;
 import com.greenone.lostheroes.common.player.capability.PlayerCapabilities;
+import com.greenone.lostheroes.common.potion.LHEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.MobEntity;
@@ -98,14 +99,10 @@ public class LHEventHandler {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void onRenderPost(RenderGameOverlayEvent.Post event){
-        if(event.getType() == RenderGameOverlayEvent.ElementType.VIGNETTE){
-
-        }
         if(event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE){
             new HUD(Minecraft.getInstance()).render(event.getMatrixStack(), (float) LHConfig.getHUDScale());
-//            if(Minecraft.getInstance().player.hasEffect(LHEffects.RAGE)){
-//                LHUtils.renderRageOverlay();
-//            }
+            if(Minecraft.getInstance().player.hasEffect(LHEffects.RAGE))
+                LHUtils.renderRageOverlay();
         }
     }
 

@@ -5,7 +5,9 @@ import com.greenone.lostheroes.common.deity.Deities;
 import com.greenone.lostheroes.common.entity.LHEntities;
 import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.player.capability.PlayerCapabilities;
+import com.greenone.lostheroes.common.potion.LHEffects;
 import com.greenone.lostheroes.common.potion.LHPotions;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -16,15 +18,18 @@ public class LHContent {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         LHNetworkHandler.registerMessages();
 
+        LHEffects.register();
+        Blessings.register();
+        LHPotions.register(eventBus);
+
         LHEntities.register(eventBus);
     }
 
     public static void init(ParallelDispatchEvent event){
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        Deities.register();
-        Blessings.register();
-        LHPotions.register(eventBus);
+        Deities.init();
+        Blessings.init();
 
         PlayerCapabilities.register();
     }

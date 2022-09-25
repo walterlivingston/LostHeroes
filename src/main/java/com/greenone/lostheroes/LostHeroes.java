@@ -42,13 +42,12 @@ public class LostHeroes
         Config.loadConfig(Config.client_config, FMLPaths.CONFIGDIR.get().resolve(MODID + "-client.toml").toString());
         Config.loadConfig(Config.server_config, FMLPaths.CONFIGDIR.get().resolve(MODID + "-server.toml").toString());
 
-        LHContent.modConstruction();
-
         MinecraftForge.EVENT_BUS.register(this);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(LHEntities::onEntityAttributeCreation);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
+        LHContent.modConstruction();
     }
 
     public void commonSetup(FMLCommonSetupEvent event){
@@ -66,4 +65,5 @@ public class LostHeroes
         MinecraftForge.EVENT_BUS.register(new LHKeybindings());
         LHKeybindings.register();
     }
+
 }

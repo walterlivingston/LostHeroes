@@ -33,6 +33,5 @@ public class LHEntities {
     @SubscribeEvent
     public static void onEntityAttributeCreation(EntityAttributeCreationEvent event){
         event.put(WITHER_WARRIOR, WitherSkeletonWarrior.createAttributes().build());
-        System.out.println("CRITICAL ROLE");
     }
 }

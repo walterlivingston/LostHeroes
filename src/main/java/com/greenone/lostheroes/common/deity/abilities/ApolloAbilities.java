@@ -2,7 +2,6 @@ package com.greenone.lostheroes.common.deity.abilities;
 
 import com.greenone.lostheroes.common.LHUtils;
 import com.greenone.lostheroes.common.entity.projectile.LightRayProjectile;
-import com.greenone.lostheroes.common.entity.projectile.WaterBallProjectile;
 import com.greenone.lostheroes.common.player.capability.IMana;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;

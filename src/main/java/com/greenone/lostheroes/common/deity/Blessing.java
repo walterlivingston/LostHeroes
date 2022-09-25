@@ -2,14 +2,14 @@ package com.greenone.lostheroes.common.deity;
 
 import com.greenone.lostheroes.common.player.capability.IParent;
 import com.greenone.lostheroes.common.player.capability.PlayerCapabilities;
+import com.greenone.lostheroes.common.potion.LHEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
 
-public class Blessing extends Effect {
-    private boolean render = true;
+public class Blessing extends LHEffect {
     private Deity deity = null;
 
     protected Blessing() {
@@ -47,25 +47,5 @@ public class Blessing extends Effect {
 
             }
         }
-    }
-
-    @Override
-    public boolean isDurationEffectTick(int p_76397_1_, int p_76397_2_) {
-        return true;
-    }
-
-    @Override
-    public boolean shouldRenderHUD(EffectInstance effect) {
-        return render;
-    }
-
-    @Override
-    public boolean shouldRenderInvText(EffectInstance effect) {
-        return render;
-    }
-
-    @Override
-    public boolean shouldRender(EffectInstance effect) {
-        return render;
     }
 }

@@ -1,6 +1,5 @@
 package com.greenone.lostheroes.common.entity.projectile;
 
-import com.greenone.lostheroes.common.entity.projectile.WaterBallProjectile;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRendersAsItem;
@@ -26,7 +25,8 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 // (TODO) Add Attack Damage and Particle Modifiers
 public abstract class PowerProjectile extends DamagingProjectileEntity implements IRendersAsItem {
-    private static final DataParameter<ItemStack> DATA_ITEM_STACK = EntityDataManager.defineId(WaterBallProjectile.class, DataSerializers.ITEM_STACK);
+    private static final DataParameter<ItemStack> DATA_ITEM_STACK = EntityDataManager.defineId(PowerProjectile.class, DataSerializers.ITEM_STACK);
+    protected static int numParticles = 0;
 
     public PowerProjectile(EntityType<? extends PowerProjectile> p_i50147_1_, World p_i50147_2_) {
         super(p_i50147_1_, p_i50147_2_);
@@ -95,7 +95,7 @@ public abstract class PowerProjectile extends DamagingProjectileEntity implement
             }
 
             this.setDeltaMovement(vector3d.add(this.xPower, this.yPower, this.zPower).scale((double)f));
-            for(int i = 0; i < 30; i++){
+            for(int i = 0; i < getNumParticles(); i++){
 //                this.level.addParticle(this.getTrailParticle(), d0 + 0.25*(random.nextDouble() - 0.5d), d1 + 0.25*(random.nextDouble() - 0.5d), d2 + 0.25*(random.nextDouble() - 0.5d), 0.0D, 0.0D, 0.0D);
                 this.level.addParticle(this.getTrailParticle(), d0 - vector3d.x * random.nextDouble(), d1 - vector3d.y * random.nextDouble(), d2 - vector3d.z * random.nextDouble(), vector3d.x, vector3d.y, vector3d.z);
             }
@@ -129,18 +129,6 @@ public abstract class PowerProjectile extends DamagingProjectileEntity implement
     }
 
     @Override
-    protected void onHit(RayTraceResult p_70227_1_) {
-        super.onHit(p_70227_1_);
-        if (!this.level.isClientSide) {
-            for(int i = 0; i < 10; i++){
-                this.level.addParticle(ParticleTypes.SPLASH, p_70227_1_.getLocation().x() + random.nextDouble(), p_70227_1_.getLocation().y() + random.nextDouble(), p_70227_1_.getLocation().z() + random.nextDouble(), 0, 0, 0);
-            }
-            this.remove();
-        }
-
-    }
-
-    @Override
     public boolean isPickable() {
         return false;
     }
@@ -157,6 +145,10 @@ public abstract class PowerProjectile extends DamagingProjectileEntity implement
 
     @Override
     protected abstract IParticleData getTrailParticle();
+
+    public static int getNumParticles() {
+        return numParticles;
+    }
 
     @Override
     public void addAdditionalSaveData(CompoundNBT p_213281_1_) {

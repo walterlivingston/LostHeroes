@@ -15,8 +15,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class Mana implements IMana {
-    private float mana;
     private final float maxMana = LHConfig.getMaxMana();
+    private float mana = maxMana;
 
     private final LazyOptional<IMana> instance = LazyOptional.of(PlayerCapabilities.MANA_CAPABILITY::getDefaultInstance);
 

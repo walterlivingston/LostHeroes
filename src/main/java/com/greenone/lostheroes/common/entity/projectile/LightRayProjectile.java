@@ -18,6 +18,7 @@ public class LightRayProjectile extends PowerProjectile{
 
     public LightRayProjectile(World p_i1794_1_, LivingEntity p_i1794_2_, double p_i1794_3_, double p_i1794_5_, double p_i1794_7_) {
         super(LHEntities.LIGHT_RAY, p_i1794_2_, p_i1794_3_, p_i1794_5_, p_i1794_7_, p_i1794_1_);
+        numParticles = 30;
     }
 
     @OnlyIn(Dist.CLIENT)

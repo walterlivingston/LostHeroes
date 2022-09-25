@@ -4,6 +4,7 @@ import com.greenone.lostheroes.common.entity.LHEntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
@@ -18,7 +19,7 @@ public class LightRayProjectile extends PowerProjectile{
 
     public LightRayProjectile(World p_i1794_1_, LivingEntity p_i1794_2_, double p_i1794_3_, double p_i1794_5_, double p_i1794_7_) {
         super(LHEntities.LIGHT_RAY, p_i1794_2_, p_i1794_3_, p_i1794_5_, p_i1794_7_, p_i1794_1_);
-        numParticles = 30;
+        numParticles = 1;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -28,7 +29,7 @@ public class LightRayProjectile extends PowerProjectile{
 
     @Override
     protected Item getDefaultItem() {
-        return Items.END_ROD;
+        return ItemStack.EMPTY.getItem();
     }
 
     @Override

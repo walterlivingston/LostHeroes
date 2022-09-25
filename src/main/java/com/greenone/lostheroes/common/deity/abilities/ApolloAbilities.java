@@ -4,8 +4,14 @@ import com.greenone.lostheroes.common.LHUtils;
 import com.greenone.lostheroes.common.entity.projectile.LightRayProjectile;
 import com.greenone.lostheroes.common.entity.projectile.WaterBallProjectile;
 import com.greenone.lostheroes.common.player.capability.IMana;
+import net.minecraft.entity.EntityPredicate;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
+
+import java.util.List;
 
 public class ApolloAbilities extends AbstractAbility {
     @Override
@@ -29,7 +35,29 @@ public class ApolloAbilities extends AbstractAbility {
 
     @Override
     public void minorAbility(PlayerEntity player, IMana manaCap) {
-
+        if(player.isSteppingCarefully() && (player.isCreative() || manaCap.getMana()>0)){
+            float healthDiff = player.getMaxHealth()-player.getHealth();
+            if(player.isCreative() || manaCap.consumeMana(healthDiff/2)){
+                player.setHealth(player.getMaxHealth());
+            }else{
+                player.setHealth(player.getHealth()+manaCap.getMana());
+                manaCap.setMana(0);
+            }
+        }else if(player.isCreative() || manaCap.getMana()>0){
+            Vector3d entityVec = LHUtils.getLookingAt(player, 0).getLocation();
+            BlockPos entityPos = new BlockPos(entityVec.x, entityVec.y, entityVec.z);
+            List<LivingEntity> list = player.level.getNearbyEntities(LivingEntity.class, new EntityPredicate().range(2), player, new AxisAlignedBB(entityPos).inflate(2));
+            if(!list.isEmpty()){
+                LivingEntity entity = list.get(0);
+                float healthDiff = entity.getMaxHealth() - entity.getHealth();
+                if(player.isCreative() || manaCap.consumeMana(healthDiff/2)){
+                    entity.setHealth(entity.getMaxHealth());
+                }else{
+                    entity.setHealth(entity.getHealth()+manaCap.getMana());
+                    manaCap.setMana(0);
+                }
+            }
+        }
     }
 
     @Override

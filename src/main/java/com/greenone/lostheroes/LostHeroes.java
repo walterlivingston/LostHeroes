@@ -1,12 +1,15 @@
 package com.greenone.lostheroes;
 
 import com.greenone.lostheroes.client.renderer.entity.LHSpriteRenderer;
+import com.greenone.lostheroes.client.renderer.entity.LHWitherSkeletonRenderer;
 import com.greenone.lostheroes.client.util.LHKeybindings;
 import com.greenone.lostheroes.common.LHContent;
 import com.greenone.lostheroes.common.LHEventHandler;
 import com.greenone.lostheroes.common.config.Config;
 import com.greenone.lostheroes.common.entity.LHEntities;
+import com.greenone.lostheroes.common.entity.monster.WitherSkeletonWarrior;
 import com.greenone.lostheroes.common.player.capability.PlayerCapabilities;
+import net.minecraft.client.renderer.entity.WitherSkeletonRenderer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -42,8 +45,10 @@ public class LostHeroes
         LHContent.modConstruction();
 
         MinecraftForge.EVENT_BUS.register(this);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(LHEntities::onEntityAttributeCreation);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+
     }
 
     public void commonSetup(FMLCommonSetupEvent event){
@@ -56,6 +61,7 @@ public class LostHeroes
     public void clientSetup(FMLClientSetupEvent event){
         RenderingRegistry.registerEntityRenderingHandler(LHEntities.WATER_BALL, new LHSpriteRenderer.RenderFactory<>());
         RenderingRegistry.registerEntityRenderingHandler(LHEntities.LIGHT_RAY, new LHSpriteRenderer.RenderFactory<>());
+        RenderingRegistry.registerEntityRenderingHandler(LHEntities.WITHER_WARRIOR, LHWitherSkeletonRenderer::new);
 
         MinecraftForge.EVENT_BUS.register(new LHKeybindings());
         LHKeybindings.register();

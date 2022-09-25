@@ -2,9 +2,15 @@ package com.greenone.lostheroes.common.deity.abilities;
 
 import com.greenone.lostheroes.common.LHUtils;
 import com.greenone.lostheroes.common.entity.projectile.WaterBallProjectile;
+import com.greenone.lostheroes.common.network.LHNetworkHandler;
+import com.greenone.lostheroes.common.network.RiptidePacket;
 import com.greenone.lostheroes.common.player.capability.IMana;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraftforge.fml.network.NetworkDirection;
 
 public class PoseidonAbilities extends AbstractAbility{
 
@@ -29,7 +35,11 @@ public class PoseidonAbilities extends AbstractAbility{
 
     @Override
     public void minorAbility(PlayerEntity player, IMana manaCap) {
+        if(player.isCreative() || manaCap.consumeMana(minorManaReq(manaCap.getMaxMana()))) {
+            if(player.isInWaterOrRain())
+                LHNetworkHandler.INSTANCE.sendTo(new RiptidePacket(), ((ServerPlayerEntity)player).connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
 
+        }
     }
 
     @Override
@@ -39,6 +49,6 @@ public class PoseidonAbilities extends AbstractAbility{
 
     @Override
     public float minorManaReq(float maxMana) {
-        return 0;
+        return maxMana / 5;
     }
 }

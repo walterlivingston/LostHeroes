@@ -13,6 +13,8 @@ public class Blessings {
             .addAttributeModifier(Attributes.MAX_HEALTH, "5D6F0BA2-1186-46AC-B896-C61C5CEE99CC", 4.0D, AttributeModifier.Operation.ADDITION);
     public static final Blessing ARES = (Blessing) new Blessing()
             .addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 1.5D, AttributeModifier.Operation.MULTIPLY_BASE);
+    public static final Blessing ATHENA = (Blessing) new Blessing()
+            .addAttributeModifier(Attributes.ATTACK_SPEED, "AF8B6E3F-3328-4C0A-AA36-5BA2BB9DBEF3", 1.5D, AttributeModifier.Operation.MULTIPLY_BASE);
 
     public static void register(){
         LHPotions.EFFECTS.register("blessing_of_zeus", () -> ZEUS);
@@ -20,6 +22,7 @@ public class Blessings {
         LHPotions.EFFECTS.register("blessing_of_hades", () -> HADES);
         LHPotions.EFFECTS.register("blessing_of_apollo", () -> APOLLO);
         LHPotions.EFFECTS.register("blessing_of_ares", () -> ARES);
+        LHPotions.EFFECTS.register("blessing_of_athena", () -> ATHENA);
     }
 
     public static void init(){
@@ -28,5 +31,6 @@ public class Blessings {
         HADES.setDeity(Deities.HADES);
         APOLLO.setDeity(Deities.APOLLO);
         ARES.setDeity(Deities.ARES);
+        ATHENA.setDeity(Deities.ATHENA);
     }
 }

@@ -40,12 +40,6 @@ public class Blessing extends LHEffect {
                         player.setAirSupply(Math.min(player.getAirSupply() + 4, player.getMaxAirSupply()));
                 }
             }
-            if (this == Blessings.HADES){
-
-            }
-            if (this == Blessings.APOLLO){
-
-            }
         }
     }
 }

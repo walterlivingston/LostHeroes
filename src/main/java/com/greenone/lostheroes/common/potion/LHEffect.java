@@ -15,6 +15,11 @@ public class LHEffect extends Effect {
 
     LHEffect(){ super(EffectType.BENEFICIAL, 0); }
 
+    LHEffect(boolean renderIn) {
+        super(EffectType.BENEFICIAL, 0);
+        this.render = renderIn;
+    }
+
     @Override
     public void applyEffectTick(LivingEntity p_76394_1_, int p_76394_2_) {
         if(this == LHEffects.RAGE && p_76394_1_.level.isClientSide()) {

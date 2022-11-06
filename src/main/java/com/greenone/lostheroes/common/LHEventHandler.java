@@ -22,6 +22,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -94,6 +96,16 @@ public class LHEventHandler {
         if(event.getTarget() != null && event.getTarget().hasEffect(Blessings.HADES))
             if (event.getEntityLiving().getMobType() == CreatureAttribute.UNDEAD)
                 ((MobEntity) event.getEntityLiving()).setTarget(null);
+    }
+
+    @SubscribeEvent
+    public static void onAttacked(LivingAttackEvent event){
+        if (event.getEntityLiving() instanceof PlayerEntity){
+            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+            if(player.hasEffect(LHEffects.AEGIS_AURA)){
+                event.setCanceled(true);
+            }
+        }
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -19,6 +19,8 @@ public class Deities {
             .addAttributeModifier(Attributes.MAX_HEALTH, "5D6F0BA2-1186-46AC-B896-C61C5CEE99CC", 4.0D, AttributeModifier.Operation.ADDITION);
     public static final Deity ARES = new Deity("ares", Items.IRON_SWORD, Blessings.ARES, new AresAbilities())
             .addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 1.5D, AttributeModifier.Operation.MULTIPLY_BASE);
+    public static final Deity ATHENA = new Deity("athena", Items.SHIELD, Blessings.ATHENA, new AthenaAbilities())
+            .addAttributeModifier(Attributes.ATTACK_SPEED, "AF8B6E3F-3328-4C0A-AA36-5BA2BB9DBEF3", 1.5D, AttributeModifier.Operation.MULTIPLY_BASE);
 
     public static void init(){
         list.add(ZEUS);
@@ -26,6 +28,7 @@ public class Deities {
         list.add(HADES);
         list.add(APOLLO);
         list.add(ARES);
+        list.add(ATHENA);
     }
 
     public static Deity getDeity(String name){

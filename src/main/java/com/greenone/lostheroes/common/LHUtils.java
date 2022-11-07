@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceContext;
@@ -56,5 +58,15 @@ public class LHUtils {
         RenderSystem.enableDepthTest();
         RenderSystem.enableAlphaTest();
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+
+    public static boolean isItemInInventory(PlayerEntity player, Item item) {
+        ItemStack itemStack = null;
+        for(ItemStack i : player.inventory.items){
+            if(i != null && i.getItem()==item){
+                return true;
+            }
+        }
+        return false;
     }
 }

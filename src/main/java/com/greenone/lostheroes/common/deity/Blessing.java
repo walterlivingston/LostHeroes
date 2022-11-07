@@ -4,6 +4,8 @@ import com.greenone.lostheroes.common.player.capability.IMana;
 import com.greenone.lostheroes.common.player.capability.IParent;
 import com.greenone.lostheroes.common.player.capability.PlayerCapabilities;
 import com.greenone.lostheroes.common.potion.LHEffect;
+import net.minecraft.block.Block;
+import net.minecraft.block.CropsBlock;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
@@ -13,8 +15,10 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
+import java.util.Random;
 
 public class Blessing extends LHEffect {
     private Deity deity = null;
@@ -56,6 +60,24 @@ public class Blessing extends LHEffect {
                             mob.getLookControl().setLookAt(mob, (float) (mob.getHeadRotSpeed() + 20), (float) mob.getHeadRotSpeed());
                             mob.getNavigation().moveTo(player, 1.25D);
                         });
+                    }
+                }
+            }
+            if (this == Blessings.DEMETER){
+                if (!player.level.isClientSide) {
+                    player.getFoodData().eat(p_76394_2_ + 1, 1.0F);
+                }
+                for(int y = (int)(player.getY()-2); y < (player.getY()+2); y++){
+                    for(int x = (int)(player.getX()-4); x < (player.getX()+4); x++){
+                        for(int z = (int)(player.getZ()-4); z < (player.getZ()+4); z++){
+                            BlockPos pos = new BlockPos(x,y,z);
+                            Block block = player.level.getBlockState(pos).getBlock();
+                            if(block instanceof CropsBlock){
+                                Random rand = new Random();
+                                CropsBlock crop = (CropsBlock) block;
+                                if(rand.nextInt(5 + 1) > 4) crop.growCrops(player.level, pos, player.level.getBlockState(pos));
+                            }
+                        }
                     }
                 }
             }

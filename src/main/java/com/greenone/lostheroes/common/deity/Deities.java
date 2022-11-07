@@ -23,6 +23,7 @@ public class Deities {
             .addAttributeModifier(Attributes.ATTACK_SPEED, "AF8B6E3F-3328-4C0A-AA36-5BA2BB9DBEF3", 1.5D, AttributeModifier.Operation.MULTIPLY_BASE);
     public static final Deity APHRODITE = new Deity("aphrodite", Items.ROSE_BUSH, Blessings.APHRODITE, new AphroditeAbilities())
             .addAttributeModifier(Attributes.LUCK, "CC5AF142-2BD2-4215-B636-2605AED11727", 1.0D, AttributeModifier.Operation.ADDITION);
+    public static final Deity DEMETER = new Deity("demeter", Items.WHEAT, Blessings.DEMETER, new DemeterAbilities());
 
     public static void init(){
         list.add(ZEUS);
@@ -32,6 +33,7 @@ public class Deities {
         list.add(ARES);
         list.add(ATHENA);
         list.add(APHRODITE);
+        list.add(DEMETER);
     }
 
     public static Deity getDeity(String name){

@@ -23,18 +23,19 @@ public class DemeterAbilities extends AbstractAbility{
             areaeffectcloudentity.setParticle(ParticleTypes.SNEEZE);
             areaeffectcloudentity.setRadiusOnUse(0f);
             areaeffectcloudentity.setWaitTime(0);
-            areaeffectcloudentity.setDuration(7);
-            areaeffectcloudentity.setRadiusPerTick(2.0f);
+            areaeffectcloudentity.setDuration(5);
+            areaeffectcloudentity.setRadiusPerTick(1.0f);
 
             if(!list.isEmpty()){
                 for(LivingEntity entity : list){
                     if(entity != player){
                         entity.addEffect(new EffectInstance(Effects.HUNGER, 600));
                         entity.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 600));
-                        entity.addEffect(new EffectInstance(Effects.HARM, 600));
+                        //entity.addEffect(new EffectInstance(Effects.HARM, 600));
                     }
                 }
             }
+            player.level.addFreshEntity(areaeffectcloudentity);
         }
     }
 

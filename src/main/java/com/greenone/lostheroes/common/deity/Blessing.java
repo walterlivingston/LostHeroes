@@ -75,7 +75,8 @@ public class Blessing extends LHEffect {
                             if(block instanceof CropsBlock){
                                 Random rand = new Random();
                                 CropsBlock crop = (CropsBlock) block;
-                                if(rand.nextInt(5 + 1) > 4) crop.growCrops(player.level, pos, player.level.getBlockState(pos));
+                                if(!crop.isMaxAge(player.level.getBlockState(pos)) && rand.nextInt(500 + 1) > 499)
+                                    crop.growCrops(player.level, pos, player.level.getBlockState(pos));
                             }
                         }
                     }

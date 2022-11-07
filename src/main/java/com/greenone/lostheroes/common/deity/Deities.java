@@ -21,6 +21,8 @@ public class Deities {
             .addAttributeModifier(Attributes.ATTACK_DAMAGE, "648D7064-6A60-4F59-8ABE-C2C23A6DD7A9", 1.5D, AttributeModifier.Operation.MULTIPLY_BASE);
     public static final Deity ATHENA = new Deity("athena", Items.SHIELD, Blessings.ATHENA, new AthenaAbilities())
             .addAttributeModifier(Attributes.ATTACK_SPEED, "AF8B6E3F-3328-4C0A-AA36-5BA2BB9DBEF3", 1.5D, AttributeModifier.Operation.MULTIPLY_BASE);
+    public static final Deity APHRODITE = new Deity("aphrodite", Items.ROSE_BUSH, Blessings.APHRODITE, new AphroditeAbilities())
+            .addAttributeModifier(Attributes.LUCK, "CC5AF142-2BD2-4215-B636-2605AED11727", 1.0D, AttributeModifier.Operation.ADDITION);
 
     public static void init(){
         list.add(ZEUS);
@@ -29,6 +31,7 @@ public class Deities {
         list.add(APOLLO);
         list.add(ARES);
         list.add(ATHENA);
+        list.add(APHRODITE);
     }
 
     public static Deity getDeity(String name){

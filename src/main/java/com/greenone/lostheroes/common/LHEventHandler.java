@@ -96,6 +96,8 @@ public class LHEventHandler {
         if(event.getTarget() != null && event.getTarget().hasEffect(Blessings.HADES))
             if (event.getEntityLiving().getMobType() == CreatureAttribute.UNDEAD)
                 ((MobEntity) event.getEntityLiving()).setTarget(null);
+        if(event.getTarget() != null && event.getEntityLiving().hasEffect(LHEffects.APATHY))
+            ((MobEntity) event.getEntityLiving()).setTarget(null);
     }
 
     @SubscribeEvent

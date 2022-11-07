@@ -29,7 +29,7 @@ public class AthenaAbilities extends AbstractAbility{
 
     @Override
     public void minorAbility(PlayerEntity player, IMana manaCap) {
-    if(player.isCreative() || player.isCreative() || manaCap.consumeMana(majorManaReq(manaCap.getMaxMana()))){
+    if(player.isCreative() || player.isCreative() || manaCap.consumeMana(minorManaReq(manaCap.getMaxMana()))){
             Vector3d entityVec = LHUtils.getLookingAt(player, 3).getLocation();
             BlockPos entityPos = new BlockPos(entityVec.x, entityVec.y, entityVec.z);
             List<LivingEntity> list = player.level.getNearbyEntities(LivingEntity.class, new EntityPredicate().range(3), player, new AxisAlignedBB(entityPos).inflate(2));

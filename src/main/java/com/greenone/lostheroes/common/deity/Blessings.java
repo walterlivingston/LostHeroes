@@ -17,6 +17,7 @@ public class Blessings {
             .addAttributeModifier(Attributes.ATTACK_SPEED, "AF8B6E3F-3328-4C0A-AA36-5BA2BB9DBEF3", 1.5D, AttributeModifier.Operation.MULTIPLY_BASE);
     public static final Blessing APHRODITE = new Blessing();
     public static final Blessing DEMETER = new Blessing();
+    public static final Blessing HEPHAESTUS = new Blessing();
 
     public static void register(){
         LHPotions.EFFECTS.register("blessing_of_zeus", () -> ZEUS);
@@ -27,6 +28,7 @@ public class Blessings {
         LHPotions.EFFECTS.register("blessing_of_athena", () -> ATHENA);
         LHPotions.EFFECTS.register("blessing_of_aphrodite", () -> APHRODITE);
         LHPotions.EFFECTS.register("blessing_of_demeter", () -> DEMETER);
+        LHPotions.EFFECTS.register("blessing_of_hephaestus", () -> HEPHAESTUS);
     }
 
     public static void init(){
@@ -38,5 +40,6 @@ public class Blessings {
         ATHENA.setDeity(Deities.ATHENA);
         APHRODITE.setDeity(Deities.APHRODITE);
         DEMETER.setDeity(Deities.DEMETER);
+        HEPHAESTUS.setDeity(Deities.HEPHAESTUS);
     }
 }

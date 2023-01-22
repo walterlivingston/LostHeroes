@@ -7,6 +7,7 @@ import com.greenone.lostheroes.common.network.LHNetworkHandler;
 import com.greenone.lostheroes.common.player.capability.PlayerCapabilities;
 import com.greenone.lostheroes.common.potion.LHEffects;
 import com.greenone.lostheroes.common.potion.LHPotions;
+import com.greenone.lostheroes.common.world.LHDimensions;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.ParallelDispatchEvent;
@@ -30,6 +31,7 @@ public class LHContent {
 
         Deities.init();
         Blessings.init();
+        LHDimensions.init();
 
         PlayerCapabilities.register();
     }

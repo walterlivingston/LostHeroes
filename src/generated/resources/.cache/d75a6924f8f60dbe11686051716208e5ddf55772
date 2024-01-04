@@ -1,0 +1,7 @@
+// 1.19.4	2024-01-03T17:34:58.527101	Block States: lostheroes
+5fb8432aa6986848673dd8aa44e63050df6ec31d assets/lostheroes/blockstates/tin_block.json
+47c71f2ea8ee97439f25896c3dc29ba2a79ab177 assets/lostheroes/blockstates/tin_ore.json
+da909f7129b7fbab79f726b7a604e0aeb5bb24e1 assets/lostheroes/models/block/tin_block.json
+dc6345c3191d18e532c60ba9cfae9d8f9ce3f276 assets/lostheroes/models/block/tin_ore.json
+3bd065eb268f8eb41b595c568c8592296ff34903 assets/lostheroes/models/item/tin_block.json
+fcf5aae343abb20685ac374dc4909fc868d2aa9f assets/lostheroes/models/item/tin_ore.json

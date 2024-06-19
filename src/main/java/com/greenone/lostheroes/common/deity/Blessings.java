@@ -19,7 +19,7 @@ public class Blessings {
     public static final Blessing DEMETER = new Blessing();
     public static final Blessing HEPHAESTUS = new Blessing();
     public static final Blessing HERMES = (Blessing) new Blessing()
-            .addAttributeModifier(Attributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", 1.2D, AttributeModifier.Operation.MULTIPLY_BASE);
+            .addAttributeModifier(Attributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", 0.5D, AttributeModifier.Operation.MULTIPLY_BASE);
 
     public static void register(){
         LHPotions.EFFECTS.register("blessing_of_zeus", () -> ZEUS);

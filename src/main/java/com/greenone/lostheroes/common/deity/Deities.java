@@ -27,7 +27,7 @@ public class Deities {
     public static final Deity HEPHAESTUS = new Deity("hephaestus", Items.IRON_INGOT, Blessings.HEPHAESTUS, new HephaestusAbilities())
             .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, "9f1e7656-2158-4a93-91cf-09706cad90d4", 1.5D, AttributeModifier.Operation.MULTIPLY_BASE);
     public static final Deity HERMES = new Deity("hermes", Items.SCUTE, Blessings.HERMES, new HermesAbilities())
-            .addAttributeModifier(Attributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", 1.2D, AttributeModifier.Operation.MULTIPLY_BASE);
+            .addAttributeModifier(Attributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", 0.5D, AttributeModifier.Operation.MULTIPLY_BASE);
 
     public static void init(){
         list.add(ZEUS);

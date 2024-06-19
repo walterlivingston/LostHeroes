@@ -26,6 +26,7 @@ public class ApolloAbilities extends AbstractAbility {
             double d5 = lookVec.z() - d2;
             LightRayProjectile lightRay = new LightRayProjectile(player.level, player, d3, d4, d5);
             lightRay.setOwner(player);
+            lightRay.setBoundingBox(lightRay.getBoundingBox().inflate(10));
 
             lightRay.setPosRaw(d0, d1, d2);
             player.level.addFreshEntity(lightRay);

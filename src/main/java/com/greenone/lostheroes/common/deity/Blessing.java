@@ -38,11 +38,20 @@ public class Blessing extends LHEffect {
         PlayerEntity player = (PlayerEntity) entity;
         IParent parentCap = player.getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElse(null);
         IMana manaCap = player.getCapability(PlayerCapabilities.MANA_CAPABILITY).orElse(null);
-        if(getDeity() != null && parentCap != null){
+        if(getDeity() != null){
             if (getDeity() == parentCap.getParent()) this.render = false;
 
             if (this == Blessings.ZEUS){
-                player.abilities.mayfly = true;
+                if(!(player.isCreative() || player.isSpectator())){
+                    if(manaCap.getMana() > 0.5F || parentCap.getParent() != Deities.ZEUS){
+                        player.abilities.mayfly = true;
+                    }else{
+                        player.abilities.mayfly = false;
+                        player.abilities.flying = false;
+                        player.onUpdateAbilities();
+                    }
+                    if(player.abilities.flying) manaCap.consumeMana(0.006F);
+                }
             }
             if (this == Blessings.POSEIDON) {
                 if (player.isInWater()) {

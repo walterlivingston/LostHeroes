@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Random;
 
 public class AthenaAbilities extends AbstractAbility{
-
+    // Aegis Aura
     @Override
     public void majorAbility(PlayerEntity player, IMana manaCap) {
         if(!player.hasEffect(LHEffects.AEGIS_AURA)){
@@ -27,6 +27,7 @@ public class AthenaAbilities extends AbstractAbility{
         }
     }
 
+    // Parry
     @Override
     public void minorAbility(PlayerEntity player, IMana manaCap) {
     if(player.isCreative() || player.isCreative() || manaCap.consumeMana(minorManaReq(manaCap.getMaxMana()))){

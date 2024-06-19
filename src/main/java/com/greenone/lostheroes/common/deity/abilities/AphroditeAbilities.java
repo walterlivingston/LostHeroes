@@ -17,6 +17,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import java.util.List;
 
 public class AphroditeAbilities extends AbstractAbility{
+    // Charmspeak
     @Override
     public void majorAbility(PlayerEntity player, IMana manaCap) {
         if (player.isCreative() || manaCap.consumeMana(minorManaReq(manaCap.getMaxMana()))) {
@@ -38,6 +39,7 @@ public class AphroditeAbilities extends AbstractAbility{
         }
     }
 
+    // Death by Roses
     @Override
     public void minorAbility(PlayerEntity player, IMana manaCap) {
         if (player.isCreative() || manaCap.consumeMana(minorManaReq(manaCap.getMaxMana()))) {

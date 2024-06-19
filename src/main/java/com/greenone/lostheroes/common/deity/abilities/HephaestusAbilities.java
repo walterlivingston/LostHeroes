@@ -15,6 +15,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class HephaestusAbilities extends AbstractAbility{
+    // Fireball
     @Override
     public void majorAbility(PlayerEntity player, IMana manaCap) {
         if(player.isCreative() || manaCap.consumeMana(majorManaReq(manaCap.getMaxMana()))) {
@@ -27,6 +28,7 @@ public class HephaestusAbilities extends AbstractAbility{
         }
     }
 
+    // Weaponsmith
     @Override
     public void minorAbility(PlayerEntity player, IMana manaCap) {
         if(player.isCreative() || manaCap.consumeMana(minorManaReq(manaCap.getMaxMana()))) {

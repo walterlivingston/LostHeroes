@@ -10,6 +10,8 @@ import net.minecraft.util.math.vector.Vector3d;
 
 public class HermesAbilities extends AbstractAbility{
     int maxTPDist = 32;
+
+    // Invisibility
     @Override
     public void majorAbility(PlayerEntity player, IMana manaCap) {
         if(player.isCreative() || manaCap.consumeMana(majorManaReq(manaCap.getMaxMana()))) {
@@ -17,6 +19,7 @@ public class HermesAbilities extends AbstractAbility{
         }
     }
 
+    // Teleport
     @Override
     public void minorAbility(PlayerEntity player, IMana manaCap) {
         if((player.isCreative() || manaCap.getMana()>=minorManaReq(manaCap.getMaxMana()))){

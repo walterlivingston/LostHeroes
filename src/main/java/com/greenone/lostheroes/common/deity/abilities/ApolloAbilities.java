@@ -13,6 +13,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import java.util.List;
 
 public class ApolloAbilities extends AbstractAbility {
+    // Light Ray
     @Override
     public void majorAbility(PlayerEntity player, IMana manaCap) {
         if(player.isCreative() || manaCap.consumeMana(majorManaReq(manaCap.getMaxMana()))) {
@@ -33,6 +34,7 @@ public class ApolloAbilities extends AbstractAbility {
         }
     }
 
+    // Vitakinesis
     @Override
     public void minorAbility(PlayerEntity player, IMana manaCap) {
         if(player.isSteppingCarefully() && (player.isCreative() || manaCap.getMana()>0)){

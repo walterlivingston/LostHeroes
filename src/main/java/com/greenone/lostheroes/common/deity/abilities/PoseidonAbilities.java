@@ -13,7 +13,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.fml.network.NetworkDirection;
 
 public class PoseidonAbilities extends AbstractAbility{
-
+    // Water Jet
     @Override
     public void majorAbility(PlayerEntity player, IMana manaCap) {
         if(player.isCreative() || manaCap.consumeMana(majorManaReq(manaCap.getMaxMana()))) {
@@ -33,6 +33,7 @@ public class PoseidonAbilities extends AbstractAbility{
         }
     }
 
+    // Riptide
     @Override
     public void minorAbility(PlayerEntity player, IMana manaCap) {
         if(player.isCreative() || manaCap.consumeMana(minorManaReq(manaCap.getMaxMana()))) {

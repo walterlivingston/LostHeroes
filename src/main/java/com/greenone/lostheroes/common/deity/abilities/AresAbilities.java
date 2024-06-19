@@ -13,6 +13,7 @@ import net.minecraft.util.math.MathHelper;
 import java.util.List;
 
 public class AresAbilities extends AbstractAbility {
+    // Rage
     @Override
     public void majorAbility(PlayerEntity player, IMana manaCap) {
         if(!player.hasEffect(LHEffects.RAGE)){
@@ -22,6 +23,7 @@ public class AresAbilities extends AbstractAbility {
         }
     }
 
+    // Battle Cry
     @Override
     public void minorAbility(PlayerEntity player, IMana manaCap) {
         if (player.isCreative() || manaCap.consumeMana(minorManaReq(manaCap.getMaxMana()))) {

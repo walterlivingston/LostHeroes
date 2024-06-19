@@ -61,7 +61,6 @@ public class LHEventHandler {
             manaCap.sync(player);
             parentCap.sync(player);
 
-
             if (manaCap.getMana() < manaCap.getMaxMana()) manaCap.setMana(manaCap.getMana() + 0.00001F);
 
             abilityCheck(player, parentCap, manaCap);
@@ -127,6 +126,7 @@ public class LHEventHandler {
     public void onRenderPost(RenderGameOverlayEvent.Post event){
         if(event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE){
             new HUD(Minecraft.getInstance()).render(event.getMatrixStack(), (float) LHConfig.getHUDScale());
+            assert Minecraft.getInstance().player != null;
             if(Minecraft.getInstance().player.hasEffect(LHEffects.RAGE))
                 LHUtils.renderRageOverlay();
         }
@@ -142,6 +142,20 @@ public class LHEventHandler {
                 case "poseidon":
                     break;
                 case "hades":
+                    break;
+                case "apollo":
+                    break;
+                case "ares":
+                    break;
+                case "athena":
+                    break;
+                case "aphrodite":
+                    break;
+                case "demeter":
+                    break;
+                case "hephaestus":
+                    break;
+                case "hermes":
                     break;
                 default:
                     break;

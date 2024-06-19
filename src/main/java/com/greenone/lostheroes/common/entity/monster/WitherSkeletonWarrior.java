@@ -42,11 +42,6 @@ public class WitherSkeletonWarrior extends AbstractSkeletonWarrior{
     }
 
     @Override
-    protected void registerGoals() {
-        super.registerGoals();
-    }
-
-    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_REMAINING_ANGER_TIME, 0);

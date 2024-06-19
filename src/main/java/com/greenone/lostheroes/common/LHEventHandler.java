@@ -137,7 +137,7 @@ public class LHEventHandler {
     private void abilityCheck(PlayerEntity player, IParent parentCap, IMana manaCap){
         if(player != null && parentCap != null && manaCap != null && parentCap.getParent() != null){
             parentCap.getParent().applyAttributeModifiers(player, player.getAttributes(), 1);
-            if (parentCap.getParent() != Deities.HERMES) player.addEffect(new EffectInstance(parentCap.getParent().getBlessing(), 1));
+            player.addEffect(new EffectInstance(parentCap.getParent().getBlessing(), 1));
             switch(parentCap.getParent().getName()){
                 case "zeus":
                     break;

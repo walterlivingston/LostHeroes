@@ -9,6 +9,7 @@ import net.minecraft.block.CropsBlock;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.AttributeModifierManager;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effect;
@@ -63,7 +64,7 @@ public class Blessing extends LHEffect {
             }
             if (this == Blessings.APHRODITE){
                 if(!player.isSpectator() && player.isSteppingCarefully()){
-                    if((this.deity == parentCap.getParent() && (player.isCreative() || manaCap.consumeMana(0.008f))) || this.deity != parentCap.getParent()) {
+                    if((getDeity() == parentCap.getParent() && (player.isCreative() || manaCap.consumeMana(0.008f))) || this.deity != parentCap.getParent()) {
                         List<CreatureEntity> mobs = player.level.getNearbyEntities(CreatureEntity.class, new EntityPredicate().range(10), player, new AxisAlignedBB(player.blockPosition()).inflate(10));
                         mobs.stream().filter(mob -> !(mob instanceof MonsterEntity)).forEach(mob -> {
                             mob.getLookControl().setLookAt(mob, (float) (mob.getHeadRotSpeed() + 20), (float) mob.getHeadRotSpeed());
@@ -92,5 +93,13 @@ public class Blessing extends LHEffect {
                 }
             }
         }
+    }
+
+    @Override
+    public void addAttributeModifiers(LivingEntity entity, AttributeModifierManager p_111185_2_, int p_111185_3_) {
+        PlayerEntity player = (PlayerEntity) entity;
+        IParent parentCap = player.getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElse(null);
+        IMana manaCap = player.getCapability(PlayerCapabilities.MANA_CAPABILITY).orElse(null);
+        if (parentCap.getParent() != getDeity()) super.addAttributeModifiers(entity, p_111185_2_, p_111185_3_);
     }
 }

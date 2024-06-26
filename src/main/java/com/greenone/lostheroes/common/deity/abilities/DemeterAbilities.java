@@ -43,8 +43,9 @@ public class DemeterAbilities extends AbstractAbility{
     // Harvest
     @Override
     public void minorAbility(PlayerEntity player, IMana manaCap) {
-        if(player.isCreative() || manaCap.consumeMana(minorManaReq(manaCap.getMaxMana()))) {
-            for (int y = (int) (player.getY() - 5); y < (player.getY() + 5); y++) {
+        boolean flag = false;
+        if(player.isCreative() || manaCap.getMana() >= minorManaReq(manaCap.getMaxMana())) {
+            for (int y = (int) (player.getY() - 2); y < (player.getY() + 2); y++) {
                 for (int x = (int) (player.getX() - 5); x < (player.getX() + 5); x++) {
                     for (int z = (int) (player.getZ() - 5); z < (player.getZ() + 5); z++) {
                         BlockPos pos = new BlockPos(x, y, z);
@@ -53,15 +54,36 @@ public class DemeterAbilities extends AbstractAbility{
                             CropsBlock crop = (CropsBlock) block;
                             if(crop.isMaxAge(player.level.getBlockState(pos))){
                                 player.level.destroyBlock(pos, true);
-                                if(LHUtils.isItemInInventory(player, crop.getPlant(player.level, pos).getBlock().asItem())){
-                                    player.level.setBlock(pos, crop.defaultBlockState(), 0);
-                                }
+//                                if(LHUtils.isItemInInventory(player, crop.getPlant(player.level, pos).getBlock().asItem())){
+//                                    player.level.setBlock(pos, crop.defaultBlockState(), 1);
+//                                    flag = true;
+//                                }
                             }
                         }
                     }
                 }
             }
+            if (flag) manaCap.consumeMana(minorManaReq(manaCap.getMaxMana()));
         }
+//        if(player.isCreative() || manaCap.consumeMana(minorManaReq(manaCap.getMaxMana()))) {
+//            for (int y = (int) (player.getY() - 5); y < (player.getY() + 5); y++) {
+//                for (int x = (int) (player.getX() - 5); x < (player.getX() + 5); x++) {
+//                    for (int z = (int) (player.getZ() - 5); z < (player.getZ() + 5); z++) {
+//                        BlockPos pos = new BlockPos(x, y, z);
+//                        Block block = player.level.getBlockState(pos).getBlock();
+//                        if (block instanceof CropsBlock) {
+//                            CropsBlock crop = (CropsBlock) block;
+//                            if(crop.isMaxAge(player.level.getBlockState(pos))){
+//                                player.level.destroyBlock(pos, true);
+//                                if(LHUtils.isItemInInventory(player, crop.getPlant(player.level, pos).getBlock().asItem())){
+//                                    player.level.setBlock(pos, crop.defaultBlockState(), 0);
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
     @Override

@@ -17,6 +17,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.List;
 import java.util.Random;
@@ -75,18 +76,20 @@ public class Blessing extends LHEffect {
             }
             if (this == Blessings.DEMETER){
                 if (!player.level.isClientSide) {
-                    player.getFoodData().eat(p_76394_2_ + 1, 1.0F);
+//                    player.getFoodData().eat(p_76394_2_ + 1, 1.0F);
+                    player.getFoodData().setSaturation(Math.min(player.getFoodData().getSaturationLevel() + (float)player.getFoodData().getFoodLevel() * 2.0F, (float)player.getFoodData().getFoodLevel()));
                 }
                 for(int y = (int)(player.getY()-2); y < (player.getY()+2); y++){
-                    for(int x = (int)(player.getX()-4); x < (player.getX()+4); x++){
-                        for(int z = (int)(player.getZ()-4); z < (player.getZ()+4); z++){
+                    for(int x = (int)(player.getX()-5); x < (player.getX()+5); x++){
+                        for(int z = (int)(player.getZ()-5); z < (player.getZ()+5); z++){
                             BlockPos pos = new BlockPos(x,y,z);
                             Block block = player.level.getBlockState(pos).getBlock();
                             if(block instanceof CropsBlock){
                                 Random rand = new Random();
                                 CropsBlock crop = (CropsBlock) block;
-                                if(!crop.isMaxAge(player.level.getBlockState(pos)) && rand.nextInt(500 + 1) > 499)
-                                    crop.growCrops(player.level, pos, player.level.getBlockState(pos));
+                                if(!crop.isMaxAge(player.level.getBlockState(pos)) && rand.nextInt(1000 + 1) > 999)
+//                                    crop.growCrops(player.level, pos, player.level.getBlockState(pos));
+                                    crop.performBonemeal((ServerWorld)player.level, player.level.random, pos, player.level.getBlockState(pos));
                             }
                         }
                     }
@@ -99,7 +102,6 @@ public class Blessing extends LHEffect {
     public void addAttributeModifiers(LivingEntity entity, AttributeModifierManager p_111185_2_, int p_111185_3_) {
         PlayerEntity player = (PlayerEntity) entity;
         IParent parentCap = player.getCapability(PlayerCapabilities.PARENT_CAPABILITY).orElse(null);
-        IMana manaCap = player.getCapability(PlayerCapabilities.MANA_CAPABILITY).orElse(null);
         if (parentCap.getParent() != getDeity()) super.addAttributeModifiers(entity, p_111185_2_, p_111185_3_);
     }
 }

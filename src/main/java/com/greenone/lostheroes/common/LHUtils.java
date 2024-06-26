@@ -61,7 +61,6 @@ public class LHUtils {
     }
 
     public static boolean isItemInInventory(PlayerEntity player, Item item) {
-        ItemStack itemStack = null;
         for(ItemStack i : player.inventory.items){
             if(i != null && i.getItem()==item){
                 return true;

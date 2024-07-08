@@ -208,6 +208,7 @@ Sacrificing specific items will grant the player blessings from the gods.
 
 - Rick Riordan for a wonderful book series.
 - [@crazyotters](https://www.twitch.tv/crazyotters) for textures and logos.
+- All of those in the [Discord](https://discord.gg/rgm62Pt2Wt) who have supported the development.
 
 ## Downloads <a name = "downloads"></a>
 
